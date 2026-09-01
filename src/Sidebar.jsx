@@ -19,6 +19,8 @@ const PALETTE = [
   { kind: 'decision', name: '判定' },
   { kind: 'fail', name: '异常' },
   { kind: 'text', name: '文字' },
+  { kind: 'band', name: '色块' },
+  { kind: 'pill', name: '标签块' },
 ];
 
 export default function Sidebar({ files, cur, status, collapsed,

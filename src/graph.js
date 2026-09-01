@@ -1,5 +1,5 @@
-/* X6 引擎胶水层:黑白矩形主题。
- * 继承 X6 全量编辑能力;对外暴露纯函数接口,UI 层(React)不直接碰 X6。 */
+/* X6 引擎胶水层。编辑器壳黑白;图内元素颜色/形状全是可改属性(默认圆角矩形)。
+ * 对外暴露纯函数接口,UI 层(React)不直接碰 X6。 */
 import { Graph } from '@antv/x6';
 import { History } from '@antv/x6-plugin-history';
 import { Selection } from '@antv/x6-plugin-selection';
@@ -22,10 +22,22 @@ function clean(o) {
   return r;
 }
 
+// 各类元素的默认外观(未显式设置属性时)
+const KIND_DEFAULTS = {
+  pill: { fill: '#246bfd', stroke: '', text: WHITE },
+  text: { fill: 'none', stroke: '', text: '#172033' },
+  band: { fill: '#f0f3fa', stroke: '', text: '#172033' },
+  decision: { fill: '#fff5cc', stroke: '#c8952d', text: '#5c4408' },
+  fail: { fill: '#fdecec', stroke: '#c74444', text: '#c74444' },
+  step: { fill: WHITE, stroke: '#cbd3e1', text: '#172033' },
+};
+
 export function createFlowEngine(container, cb) {
-  // cb: { onChange(), onNodeDblclick(node), onEdgeDblclick(edge), onKeyToggleSidebar() }
+  // cb: { onChange, onNodeDblclick, onEdgeDblclick, onNodeContextMenu,
+  //       onEdgeContextMenu, onKeyToggleSidebar, onLinkDone }
   let meta = { W: 1600, H: 900, fs: { title: 16, body: 13 } };
   let loading = false;
+  let linkFrom = null;   // 连线模式:待连的源节点 id
 
   const graph = new Graph({
     container,
@@ -60,46 +72,74 @@ export function createFlowEngine(container, cb) {
     getDropNode: node => node.clone({ keepId: false }) });
 
   function sw() { return meta.W > 3000 ? 3.5 : 2; }
+  function scale() { return meta.W > 3000 ? 1.6 : 1; }
   function connectable(k) { return !['band', 'pill', 'text'].includes(k); }
-  function zOf(kind) {
+  function zOf(kind) {   // 默认层级(未显式设置 z 时)
     return kind === 'band' ? 1 : kind === 'pill' ? 2 : kind === 'text' ? 3 : 10;
   }
-  function edgeAttrs(dashed) {
+  function zOfNode(n) {
+    return n.z !== undefined && n.z !== null && n.z !== '' ? +n.z : zOf(n.kind);
+  }
+  const DASH = { solid: null, dashed: '8 6', dotted: '2 6' };
+  function dashOf(v) {            // 线型归一:兼容旧字段 dashed:true
+    if (v === true) return 'dashed';
+    return (typeof v === 'string' && DASH[v] !== undefined) ? v : 'solid';
+  }
+  function routerOf(v) { return v === 'normal' ? 'normal' : 'orth'; }
+  function edgeAttrs(dash, color, width) {
+    const c = color || '#526078';
+    const w = width || sw();
+    const st = dashOf(dash);
     return { line: {
-      stroke: BLACK, strokeWidth: sw(), sourceMarker: null,
-      strokeDasharray: dashed ? '8 6' : null,
-      targetMarker: { name: 'block', size: 6 + sw() * 2 },
+      stroke: c, strokeWidth: w, sourceMarker: null,
+      strokeDasharray: DASH[st],
+      strokeLinecap: st === 'dotted' ? 'round' : 'butt',
+      targetMarker: { name: 'block', size: 6 + w * 2 },
     } };
   }
-  function mkLabel(text) {
+  function mkLabel(text, color) {
     return { position: 0.5, attrs: {
-      label: { text, fill: BLACK, fontSize: meta.fs.body },
+      label: { text, fill: color || '#526078', fontSize: meta.fs.body },
       body: { fill: WHITE, fillOpacity: 0.96, stroke: 'none' },
     } };
   }
+
+  /* ---------- 节点外观(形状/颜色全为属性) ---------- */
+  function shapeOf(n) {
+    return n.shape || ((n.kind === 'decision') ? 'diamond' : 'rounded');
+  }
+  function defaultRx() { return Math.round(8 * scale()) + 6; }
   function nodeBody(n) {
     const kind = n.kind || 'step';
-    if (kind === 'pill') return { fill: BLACK, stroke: BLACK, strokeWidth: 1 };
-    if (kind === 'text') return { fill: 'none', stroke: 'none' };
-    if (kind === 'band') return { fill: WHITE, stroke: BLACK, strokeWidth: 1 };
-    return { fill: WHITE, stroke: BLACK, strokeWidth: sw() };
+    const dfl = KIND_DEFAULTS[kind] || KIND_DEFAULTS.step;
+    const body = {
+      fill: n.fill || dfl.fill,
+      stroke: n.stroke || dfl.stroke || 'none',
+      strokeWidth: kind === 'band' || kind === 'pill' ? 1 : sw(),
+    };
+    const sh = shapeOf(n);
+    if (sh !== 'diamond') {
+      const rx = sh === 'rect' ? 0 : (n.rx !== undefined ? n.rx : defaultRx());
+      body.rx = rx; body.ry = rx;
+    }
+    return body;
   }
   function nodeLabel(n) {
     const kind = n.kind || 'step';
+    const dfl = KIND_DEFAULTS[kind] || KIND_DEFAULTS.step;
     return {
       text: (n.lines || []).join('\n'),
-      fill: kind === 'pill' ? WHITE : BLACK,
+      fill: n.textColor || dfl.text,
       fontSize: n.fontSize || meta.fs.body,
       fontWeight: n.bold ? 600 : 400,
       textWrap: { width: -16, height: '80%', breakWord: true, ellipsis: false },
     };
   }
   function portConf() {
-    const r = meta.W > 3000 ? 10 : 6;
+    const r = Math.round(6 * scale()) + 2;
     const g = pos => ({ position: pos,
       attrs: { rect: { magnet: true, stroke: BLACK, fill: WHITE,
-        strokeWidth: 1.5, width: r * 2, height: r * 2,
-        x: -r, y: -r } } });
+        strokeWidth: 1.5, width: r * 2, height: r * 2, x: -r, y: -r } } });
     return {
       groups: { l: g('left'), r: g('right'), t: g('top'), b: g('bottom') },
       items: [{ group: 'l', id: 'pl' }, { group: 'r', id: 'pr' },
@@ -107,39 +147,56 @@ export function createFlowEngine(container, cb) {
     };
   }
   function nodeConfig(n) {
+    const sh = shapeOf(n);
     return clean({
-      id: n.id, shape: 'rect',
+      id: n.id,
+      shape: sh === 'diamond' ? 'polygon' : 'rect',
       x: n.x, y: n.y, width: n.w, height: n.h,
-      zIndex: zOf(n.kind),
-      attrs: { body: nodeBody(n), label: nodeLabel(n) },
-      data: { kind: n.kind || 'step', lines: n.lines || [],
-        fontSize: n.fontSize, bold: n.bold, vertical: n.vertical, rx: n.rx,
+      zIndex: zOfNode(n),
+      attrs: {
+        body: sh === 'diamond'
+          ? { ...nodeBody(n), refPoints: '0,10 10,0 20,10 10,20' }
+          : nodeBody(n),
+        label: nodeLabel(n),
+      },
+      data: { kind: n.kind || 'step', shape: sh, lines: n.lines || [],
+        z: n.z, fontSize: n.fontSize, bold: n.bold, vertical: n.vertical, rx: n.rx,
         fill: n.fill, stroke: n.stroke, textColor: n.textColor,
-        bodyColor: n.bodyColor },   // 原色彩字段随 data 透传,JSON 往返不丢
+        bodyColor: n.bodyColor },
       ports: connectable(n.kind || 'step') ? portConf() : undefined,
     });
   }
-  function refreshNodeView(node) {
+  function nodeToJSON(node) {
     const d = node.getData() || {};
-    node.setAttrs({ body: nodeBody(d), label: nodeLabel(d) });
+    const p = node.getPosition(), s = node.getSize();
+    return clean({ id: node.id, kind: d.kind, shape: d.shape, z: d.z,
+      x: Math.round(p.x), y: Math.round(p.y),
+      w: Math.round(s.width), h: Math.round(s.height),
+      fill: d.fill, stroke: d.stroke, textColor: d.textColor,
+      bodyColor: d.bodyColor, lines: d.lines, fontSize: d.fontSize,
+      bold: d.bold, vertical: d.vertical, rx: d.rx });
   }
 
   /* ---------- 构建/序列化 ---------- */
   function buildFrom(doc) {
     loading = true;
     meta = doc.meta;
+    linkFrom = null;
     graph.disableHistory();
     graph.clearCells();
     for (const n of doc.nodes) graph.addNode(nodeConfig(n));
     for (const e of doc.edges) {
+      const dash = dashOf(e.dash !== undefined ? e.dash : e.dashed);
+      const router = routerOf(e.router);
       graph.addEdge({
-        id: e.id, zIndex: 5,
+        id: e.id,
+        zIndex: (e.z !== undefined && e.z !== null && e.z !== '') ? +e.z : 5,
         source: { cell: e.from }, target: { cell: e.to },
         vertices: e.vertices || [],
-        router: { name: 'orth' },
-        attrs: edgeAttrs(!!e.dashed),
-        labels: e.label ? [mkLabel(e.label)] : [],
-        data: { dashed: !!e.dashed, color: e.color },
+        router: { name: router },
+        attrs: edgeAttrs(dash, e.color, e.width),
+        labels: e.label ? [mkLabel(e.label, e.color)] : [],
+        data: { dash, color: e.color, width: e.width, router },
       });
     }
     graph.enableHistory();
@@ -151,25 +208,22 @@ export function createFlowEngine(container, cb) {
   function serialize() {
     const nodes = [], edges = [];
     for (const c of graph.getCells()) {
-      if (c.isNode()) {
-        const d = c.getData() || {};
-        const p = c.getPosition(), s = c.getSize();
-        nodes.push(clean({ id: c.id, kind: d.kind,
-          x: Math.round(p.x), y: Math.round(p.y),
-          w: Math.round(s.width), h: Math.round(s.height),
-          fill: d.fill, stroke: d.stroke, textColor: d.textColor,
-          bodyColor: d.bodyColor, lines: d.lines, fontSize: d.fontSize,
-          bold: d.bold, vertical: d.vertical, rx: d.rx }));
-      } else if (c.isEdge()) {
+      if (c.isNode()) nodes.push(nodeToJSON(c));
+      else if (c.isEdge()) {
         const d = c.getData() || {};
         let label = '';
         for (const l of (c.getLabels() || [])) {
           const t = l.attrs && l.attrs.label && l.attrs.label.text;
           if (t) { label = t; break; }
         }
+        const z = c.getZIndex();
         edges.push(clean({ id: c.id,
           from: c.getSourceCellId(), to: c.getTargetCellId(),
-          color: d.color, label, dashed: d.dashed,
+          color: d.color, width: d.width, label,
+          dash: dashOf(d.dash !== undefined ? d.dash : d.dashed) === 'solid'
+            ? undefined : dashOf(d.dash !== undefined ? d.dash : d.dashed),
+          router: routerOf(d.router) === 'normal' ? 'normal' : undefined,
+          z: (z !== undefined && z !== null && z !== 5) ? z : undefined,
           vertices: (c.getVertices() || []).map(v =>
             ({ x: Math.round(v.x), y: Math.round(v.y) })) }));
       }
@@ -198,10 +252,13 @@ export function createFlowEngine(container, cb) {
     const s = node.getSize();
     if (d.baseW === undefined) { d.baseW = s.width; d.baseH = s.height; }
     const fsz = d.fontSize || meta.fs.body;
+    const isD = (d.shape || '') === 'diamond';
     const MAXW = meta.W * 0.42;
     let w = Math.max(s.width, d.baseW), needH = 0;
     for (let i = 0; i < 10; i++) {
-      needH = measure(d.lines || [], w - 24, fsz) + 24;
+      const availW = isD ? w * 0.55 : w - 24;
+      const textH = measure(d.lines || [], availW, fsz);
+      needH = isD ? textH / 0.55 : textH + 24;
       if (needH <= Math.max(d.baseH, w * 0.85) || w >= MAXW) break;
       w = Math.min(MAXW, Math.round(w * 1.4));
     }
@@ -225,11 +282,9 @@ export function createFlowEngine(container, cb) {
       { name: 'segments', args: { threshold: 40,
         attrs: { width: vr * 2, height: vr * 0.9, fill: WHITE, stroke: BLACK } } },
       { name: 'source-arrowhead', args: { attrs: {
-        d: `M -${ar} -${ar * 0.75} ${ar} 0 -${ar} ${ar * 0.75} Z`,
-        fill: BLACK } } },
+        d: `M -${ar} -${ar * 0.75} ${ar} 0 -${ar} ${ar * 0.75} Z`, fill: BLACK } } },
       { name: 'target-arrowhead', args: { attrs: {
-        d: `M -${ar} -${ar * 0.75} ${ar} 0 -${ar} ${ar * 0.75} Z`,
-        fill: BLACK } } },
+        d: `M -${ar} -${ar * 0.75} ${ar} 0 -${ar} ${ar * 0.75} Z`, fill: BLACK } } },
     ]);
   }
 
@@ -247,16 +302,9 @@ export function createFlowEngine(container, cb) {
       graph.getSelectedCells().forEach(c => { if (c.isEdge()) edgeTools(c); });
     }, 120);
   });
-  graph.on('edge:contextmenu', ({ edge, e, x, y }) => {
-    e.preventDefault();
+  /* 控制点:按图坐标插入到最近的折线段上 / 删除第 idx 个 */
+  function addEdgeVertex(edge, x, y) {
     const vs = (edge.getVertices() || []).slice();
-    const scale = graph.zoom();
-    const hitIdx = vs.findIndex(v => Math.hypot(v.x - x, v.y - y) * scale <= 14);
-    if (hitIdx >= 0) {
-      vs.splice(hitIdx, 1);
-      edge.setVertices(vs);
-      return;
-    }
     const chain = [edge.getSourcePoint(), ...vs, edge.getTargetPoint()];
     let best = 0, bd = Infinity;
     for (let i = 0; i < chain.length - 1; i++) {
@@ -271,9 +319,45 @@ export function createFlowEngine(container, cb) {
     vs.splice(best, 0, { x: Math.round(x), y: Math.round(y) });
     edge.setVertices(vs);
     graph.select(edge);
+  }
+  function removeEdgeVertex(edge, idx) {
+    const vs = (edge.getVertices() || []).slice();
+    if (idx < 0 || idx >= vs.length) return;
+    vs.splice(idx, 1);
+    edge.setVertices(vs);
+  }
+  // 连线:右键出菜单(UI 层渲染);命中已有控制点时菜单多一项「删除控制点」
+  graph.on('edge:contextmenu', ({ edge, e, x, y }) => {
+    e.preventDefault();
+    const vs = edge.getVertices() || [];
+    const z = graph.zoom();
+    const hitIdx = vs.findIndex(v => Math.hypot(v.x - x, v.y - y) * z <= 14);
+    cb.onEdgeContextMenu(edge, { x: e.clientX, y: e.clientY },
+      { gx: x, gy: y, hitIdx });
+  });
+  // 节点:右键出菜单(UI 层渲染)
+  graph.on('node:contextmenu', ({ node, e }) => {
+    e.preventDefault();
+    cb.onNodeContextMenu(node, { x: e.clientX, y: e.clientY });
   });
   graph.on('blank:contextmenu', ({ e }) => e.preventDefault());
-  graph.on('node:contextmenu', ({ e }) => e.preventDefault());
+  // 连线模式:点目标节点完成;点空白/Esc 取消
+  graph.on('node:click', ({ node }) => {
+    if (!linkFrom) return;
+    if (node.id !== linkFrom && connectable((node.getData() || {}).kind)) {
+      graph.addEdge({
+        zIndex: 5,
+        source: { cell: linkFrom }, target: { cell: node.id },
+        router: { name: 'orth' },   // 正交路由自动挑上下左右最优锚边
+        attrs: edgeAttrs(false), data: {},
+      });
+    }
+    linkFrom = null;
+    cb.onLinkDone();
+  });
+  graph.on('blank:click', () => {
+    if (linkFrom) { linkFrom = null; cb.onLinkDone(); }
+  });
   graph.on('node:dblclick', ({ node }) => cb.onNodeDblclick(node));
   graph.on('edge:dblclick', ({ edge }) => cb.onEdgeDblclick(edge));
   graph.bindKey(['meta+z', 'ctrl+z'], () => { graph.undo(); return false; });
@@ -283,45 +367,148 @@ export function createFlowEngine(container, cb) {
     graph.removeCells(graph.getSelectedCells());
     return false;
   });
+  graph.bindKey('esc', () => {
+    if (linkFrom) { linkFrom = null; cb.onLinkDone(); }
+    return false;
+  });
   graph.bindKey(['meta+b', 'ctrl+b'], () => { cb.onKeyToggleSidebar(); return false; });
 
+  /* 空格 = 纯拖动画布(按住期间不会选中/拖动元素) */
+  const panOverlay = document.createElement('div');
+  panOverlay.className = 'pan-overlay';
+  panOverlay.style.display = 'none';
+  container.style.position = 'relative';
+  container.appendChild(panOverlay);
+  let panDrag = null;
+  const typingNow = () => {
+    const el = document.activeElement;
+    return el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' ||
+      el.tagName === 'SELECT' || el.isContentEditable);
+  };
+  const onSpaceDown = e => {
+    if (e.code !== 'Space' || typingNow() || e.repeat) return;
+    e.preventDefault();
+    panOverlay.style.display = 'block';
+  };
+  const onSpaceUp = e => {
+    if (e.code !== 'Space') return;
+    panOverlay.style.display = 'none';
+    panDrag = null;
+  };
+  panOverlay.addEventListener('mousedown', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    panDrag = { x: e.clientX, y: e.clientY };
+    panOverlay.classList.add('grabbing');
+  });
+  window.addEventListener('mousemove', e => {
+    if (!panDrag) return;
+    graph.translateBy(e.clientX - panDrag.x, e.clientY - panDrag.y);
+    panDrag = { x: e.clientX, y: e.clientY };
+  });
+  window.addEventListener('mouseup', () => {
+    panDrag = null;
+    panOverlay.classList.remove('grabbing');
+  });
+  document.addEventListener('keydown', onSpaceDown);
+  document.addEventListener('keyup', onSpaceUp);
+
   /* ---------- 对外 API ---------- */
-  function fit() { graph.zoomToFit({ padding: 24, maxScale: 1.5 }); }
+  let fitTries = 0;
+  function fit() {
+    // 容器还没排好版(0 尺寸)时 zoomToFit 会钳到极小,守卫重试
+    if ((!container.clientWidth || !container.clientHeight) && fitTries < 15) {
+      fitTries += 1;
+      setTimeout(fit, 200);
+      return;
+    }
+    fitTries = 0;
+    graph.zoomToFit({ padding: 24, maxScale: 1.5 });
+    if (graph.zoom() <= 0.011) setTimeout(() =>
+      graph.zoomToFit({ padding: 24, maxScale: 1.5 }), 400);
+  }
   function paletteNode(kind) {
-    const k = meta.W > 3000 ? 1.6 : 1;
-    const w = 210 * k, h = 80 * k;
-    const n = { kind, w, h,
+    const k = scale();
+    const n = { kind, w: 210 * k, h: kind === 'decision' ? 100 * k : 80 * k,
+      x: 0, y: 0,
       lines: [kind === 'decision' ? '新判定?' : kind === 'fail' ? '新异常'
               : kind === 'text' ? '双击编辑文字' : '新步骤'],
       fontSize: kind === 'text' ? meta.fs.title : undefined };
-    return graph.createNode(nodeConfig({ ...n, x: 0, y: 0 }));
+    return graph.createNode(nodeConfig(n));
   }
-  function applyNodeEdit(node, { lines, w, h }) {
+  /* 弹窗提交:一切属性可改。形状类别变了(rect/polygon)就原位重建并保留连线。 */
+  function applyNodeEdit(node, draft) {
     const d = node.getData() || {};
-    const sizeTouched = w && h &&
-      (Math.round(w) !== Math.round(node.getSize().width) ||
-       Math.round(h) !== Math.round(node.getSize().height));
-    node.setData({ ...d, lines }, { deep: false });
+    const next = { ...d,
+      lines: draft.lines,
+      shape: draft.shape,
+      z: draft.z === '' || draft.z === undefined ? undefined : +draft.z,
+      rx: draft.rx === '' || draft.rx === undefined ? undefined : +draft.rx,
+      fill: draft.fill || undefined,
+      stroke: draft.stroke || undefined,
+      textColor: draft.textColor || undefined,
+      fontSize: draft.fontSize ? +draft.fontSize : undefined,
+      bold: !!draft.bold,
+    };
+    const sizeTouched = draft.w && draft.h &&
+      (Math.round(+draft.w) !== Math.round(node.getSize().width) ||
+       Math.round(+draft.h) !== Math.round(node.getSize().height));
+    const wasPolygon = (d.shape === 'diamond');
+    const willPolygon = (next.shape === 'diamond');
+    if (wasPolygon !== willPolygon) {
+      // X6 的 shape 不能原位切换:摘下相关连线→删旧建新(同 id)→接回连线
+      const p = node.getPosition(), s = node.getSize();
+      const edges = (graph.getConnectedEdges(node) || []).map(eg => ({
+        id: eg.id,
+        source: eg.getSource(), target: eg.getTarget(),
+        vertices: eg.getVertices(), labels: eg.getLabels(),
+        data: eg.getData(), attrs: eg.getAttrs(),
+      }));
+      graph.removeCell(node);
+      const json = { ...next, id: node.id,
+        x: Math.round(p.x), y: Math.round(p.y),
+        w: Math.round(sizeTouched ? +draft.w : s.width),
+        h: Math.round(sizeTouched ? +draft.h : s.height) };
+      const nn = graph.addNode(nodeConfig(json));
+      for (const eg of edges)
+        graph.addEdge({ ...eg, zIndex: 5, router: { name: 'orth' } });
+      autoSize(nn);
+      return;
+    }
+    node.setData(next, { deep: false });
+    node.setZIndex(zOfNode(next));
     if (sizeTouched) {
       const dd = node.getData();
-      dd.baseW = Math.round(w); dd.baseH = Math.round(h);
-      node.resize(Math.round(w), Math.round(h));
+      dd.baseW = Math.round(+draft.w); dd.baseH = Math.round(+draft.h);
+      node.resize(Math.round(+draft.w), Math.round(+draft.h));
     }
-    refreshNodeView(node);
+    const body = willPolygon
+      ? { ...nodeBody(next), refPoints: '0,10 10,0 20,10 10,20' }
+      : nodeBody(next);
+    node.setAttrs({ body, label: nodeLabel(next) });
     autoSize(node);
-    refreshNodeView(node);
   }
-  function applyEdgeEdit(edge, { label, dashed }) {
+  function applyEdgeEdit(edge, draft) {
     const d = edge.getData() || {};
-    edge.setData({ ...d, dashed: !!dashed }, { deep: false });
-    edge.setAttrs(edgeAttrs(!!dashed));
-    edge.setLabels(label ? [mkLabel(label)] : []);
+    const color = draft.color || undefined;
+    const width = draft.width ? +draft.width : undefined;
+    const dash = dashOf(draft.dash);
+    const router = routerOf(draft.router);
+    edge.setData({ ...d, dash, dashed: undefined, color, width, router },
+      { deep: false });
+    edge.setAttrs(edgeAttrs(dash, color, width));
+    edge.setLabels(draft.label ? [mkLabel(draft.label, color)] : []);
+    edge.setRouter({ name: router });
+    if (draft.z !== undefined && draft.z !== '') edge.setZIndex(+draft.z);
   }
   return {
     graph,
     buildFrom, serialize, fit,
     startDnd: (kind, e) => dnd.start(paletteNode(kind), e),
     applyNodeEdit, applyEdgeEdit,
+    addEdgeVertex, removeEdgeVertex,
+    startLinkFrom: node => { linkFrom = node.id; },
+    removeCell: cell => graph.removeCells([cell]),
     undo: () => graph.undo(), redo: () => graph.redo(),
     removeSelected: () => graph.removeCells(graph.getSelectedCells()),
     exportSVG: name => graph.exportSVG(name, { copyStyles: true }),

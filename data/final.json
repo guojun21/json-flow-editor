@@ -13,8 +13,9 @@
   {
    "id": "bg1",
    "kind": "band",
+   "shape": "rounded",
    "x": 92,
-   "y": 300,
+   "y": 309,
    "w": 4217,
    "h": 511,
    "fill": "#eaf1ff",
@@ -23,6 +24,7 @@
   {
    "id": "bg2",
    "kind": "band",
+   "shape": "rounded",
    "x": 92,
    "y": 850,
    "w": 4217,
@@ -33,6 +35,7 @@
   {
    "id": "bg3",
    "kind": "band",
+   "shape": "rounded",
    "x": 92,
    "y": 1400,
    "w": 4217,
@@ -43,6 +46,7 @@
   {
    "id": "bg4",
    "kind": "band",
+   "shape": "rounded",
    "x": 92,
    "y": 2100,
    "w": 4217,
@@ -53,6 +57,7 @@
   {
    "id": "bg5",
    "kind": "band",
+   "shape": "rounded",
    "x": 92,
    "y": 2710,
    "w": 4217,
@@ -63,8 +68,9 @@
   {
    "id": "bg6",
    "kind": "pill",
+   "shape": "rounded",
    "x": 118,
-   "y": 394,
+   "y": 379,
    "w": 213,
    "h": 377,
    "fill": "#246bfd",
@@ -73,6 +79,7 @@
   {
    "id": "bg7",
    "kind": "pill",
+   "shape": "rounded",
    "x": 118,
    "y": 890,
    "w": 213,
@@ -83,6 +90,7 @@
   {
    "id": "bg8",
    "kind": "pill",
+   "shape": "rounded",
    "x": 118,
    "y": 1440,
    "w": 213,
@@ -93,6 +101,7 @@
   {
    "id": "bg9",
    "kind": "pill",
+   "shape": "rounded",
    "x": 118,
    "y": 2140,
    "w": 213,
@@ -103,6 +112,7 @@
   {
    "id": "bg10",
    "kind": "pill",
+   "shape": "rounded",
    "x": 118,
    "y": 2710,
    "w": 213,
@@ -113,276 +123,265 @@
   {
    "id": "tx11",
    "kind": "text",
+   "shape": "rounded",
    "x": 172,
    "y": 420,
    "w": 106,
    "h": 87,
+   "textColor": "#ffffff",
    "lines": [
     "1"
    ],
-   "textColor": "#ffffff",
    "fontSize": 46,
-   "bold": true,
-   "vertical": false
+   "bold": true
   },
   {
    "id": "tx12",
    "kind": "text",
+   "shape": "rounded",
    "x": 166,
    "y": 512,
    "w": 117,
    "h": 65,
+   "textColor": "#ffffff",
    "lines": [
     "需求"
    ],
-   "textColor": "#ffffff",
-   "fontSize": 34,
-   "bold": false,
-   "vertical": false
+   "fontSize": 34
   },
   {
    "id": "tx13",
    "kind": "text",
+   "shape": "rounded",
    "x": 166,
    "y": 567,
    "w": 117,
    "h": 65,
+   "textColor": "#ffffff",
    "lines": [
     "立项"
    ],
-   "textColor": "#ffffff",
-   "fontSize": 34,
-   "bold": false,
-   "vertical": false
+   "fontSize": 34
   },
   {
    "id": "tx14",
    "kind": "text",
+   "shape": "rounded",
    "x": 172,
    "y": 916,
    "w": 106,
    "h": 87,
+   "textColor": "#ffffff",
    "lines": [
     "2"
    ],
-   "textColor": "#ffffff",
    "fontSize": 46,
-   "bold": true,
-   "vertical": false
+   "bold": true
   },
   {
    "id": "tx15",
    "kind": "text",
+   "shape": "rounded",
    "x": 166,
    "y": 1008,
    "w": 117,
    "h": 65,
+   "textColor": "#ffffff",
    "lines": [
     "试采"
    ],
-   "textColor": "#ffffff",
-   "fontSize": 34,
-   "bold": false,
-   "vertical": false
+   "fontSize": 34
   },
   {
    "id": "tx16",
    "kind": "text",
+   "shape": "rounded",
    "x": 166,
    "y": 1063,
    "w": 117,
    "h": 65,
+   "textColor": "#ffffff",
    "lines": [
     "定版"
    ],
-   "textColor": "#ffffff",
-   "fontSize": 34,
-   "bold": false,
-   "vertical": false
+   "fontSize": 34
   },
   {
    "id": "tx17",
    "kind": "text",
+   "shape": "rounded",
    "x": 172,
    "y": 1466,
    "w": 106,
    "h": 87,
+   "textColor": "#ffffff",
    "lines": [
     "3"
    ],
-   "textColor": "#ffffff",
    "fontSize": 46,
-   "bold": true,
-   "vertical": false
+   "bold": true
   },
   {
    "id": "tx18",
    "kind": "text",
+   "shape": "rounded",
    "x": 166,
    "y": 1558,
    "w": 117,
    "h": 65,
+   "textColor": "#ffffff",
    "lines": [
     "排产"
    ],
-   "textColor": "#ffffff",
-   "fontSize": 34,
-   "bold": false,
-   "vertical": false
+   "fontSize": 34
   },
   {
    "id": "tx19",
    "kind": "text",
+   "shape": "rounded",
    "x": 166,
    "y": 1613,
    "w": 117,
    "h": 65,
+   "textColor": "#ffffff",
    "lines": [
     "采集"
    ],
-   "textColor": "#ffffff",
-   "fontSize": 34,
-   "bold": false,
-   "vertical": false
+   "fontSize": 34
   },
   {
    "id": "tx20",
    "kind": "text",
+   "shape": "rounded",
    "x": 172,
    "y": 2166,
    "w": 106,
    "h": 87,
+   "textColor": "#ffffff",
    "lines": [
     "4"
    ],
-   "textColor": "#ffffff",
    "fontSize": 46,
-   "bold": true,
-   "vertical": false
+   "bold": true
   },
   {
    "id": "tx21",
    "kind": "text",
+   "shape": "rounded",
    "x": 166,
    "y": 2258,
    "w": 117,
    "h": 65,
+   "textColor": "#ffffff",
    "lines": [
     "质检"
    ],
-   "textColor": "#ffffff",
-   "fontSize": 34,
-   "bold": false,
-   "vertical": false
+   "fontSize": 34
   },
   {
    "id": "tx22",
    "kind": "text",
+   "shape": "rounded",
    "x": 166,
    "y": 2313,
    "w": 117,
    "h": 65,
+   "textColor": "#ffffff",
    "lines": [
     "标注"
    ],
-   "textColor": "#ffffff",
-   "fontSize": 34,
-   "bold": false,
-   "vertical": false
+   "fontSize": 34
   },
   {
    "id": "tx23",
    "kind": "text",
+   "shape": "rounded",
    "x": 172,
    "y": 2736,
    "w": 106,
    "h": 87,
+   "textColor": "#ffffff",
    "lines": [
     "5"
    ],
-   "textColor": "#ffffff",
    "fontSize": 46,
-   "bold": true,
-   "vertical": false
+   "bold": true
   },
   {
    "id": "tx24",
    "kind": "text",
+   "shape": "rounded",
    "x": 166,
    "y": 2828,
    "w": 117,
    "h": 65,
+   "textColor": "#ffffff",
    "lines": [
     "训练"
    ],
-   "textColor": "#ffffff",
-   "fontSize": 34,
-   "bold": false,
-   "vertical": false
+   "fontSize": 34
   },
   {
    "id": "tx25",
    "kind": "text",
+   "shape": "rounded",
    "x": 166,
    "y": 2883,
    "w": 117,
    "h": 65,
+   "textColor": "#ffffff",
    "lines": [
     "交付"
    ],
-   "textColor": "#ffffff",
-   "fontSize": 34,
-   "bold": false,
-   "vertical": false
+   "fontSize": 34
   },
   {
    "id": "tx26",
    "kind": "text",
+   "shape": "rounded",
    "x": 5,
    "y": 85,
    "w": 1214,
    "h": 125,
+   "textColor": "#172033",
    "lines": [
     "机器人数据采集工厂端到端全流程"
    ],
-   "textColor": "#172033",
    "fontSize": 66,
-   "bold": true,
-   "vertical": false
+   "bold": true
   },
   {
    "id": "tx27",
    "kind": "text",
+   "shape": "rounded",
    "x": -99,
    "y": 180,
    "w": 1518,
    "h": 57,
+   "textColor": "#526078",
    "lines": [
     "从需求立项到训练消费｜以 Episode 为最小可追溯单元｜补采、返工、训练反馈全闭环"
    ],
-   "textColor": "#526078",
-   "fontSize": 30,
-   "bold": false,
-   "vertical": false
+   "fontSize": 30
   },
   {
    "id": "tx28",
    "kind": "text",
+   "shape": "rounded",
    "x": 2658,
    "y": 3257,
    "w": 2063,
    "h": 49,
+   "textColor": "#c86d12",
    "lines": [
     "核心追溯链：需求 → 任务版本 → 批次/工单 → Session → Episode → QC/标注 → Dataset → 训练消费"
    ],
-   "textColor": "#c86d12",
-   "fontSize": 26,
-   "bold": false,
-   "vertical": false
+   "fontSize": 26
   },
   {
    "id": "A1",
    "kind": "step",
+   "shape": "rounded",
    "x": 393,
    "y": 433,
    "w": 680,
@@ -400,6 +399,7 @@
   {
    "id": "A2",
    "kind": "step",
+   "shape": "rounded",
    "x": 1863,
    "y": 433,
    "w": 680,
@@ -417,6 +417,7 @@
   {
    "id": "B4",
    "kind": "step",
+   "shape": "rounded",
    "x": 1613,
    "y": 973,
    "w": 555,
@@ -434,6 +435,7 @@
   {
    "id": "B3",
    "kind": "step",
+   "shape": "rounded",
    "x": 2223,
    "y": 973,
    "w": 555,
@@ -451,6 +453,7 @@
   {
    "id": "B2",
    "kind": "step",
+   "shape": "rounded",
    "x": 2833,
    "y": 973,
    "w": 555,
@@ -468,6 +471,7 @@
   {
    "id": "B1",
    "kind": "step",
+   "shape": "rounded",
    "x": 3443,
    "y": 973,
    "w": 555,
@@ -485,6 +489,7 @@
   {
    "id": "C1",
    "kind": "step",
+   "shape": "rounded",
    "x": 393,
    "y": 1508,
    "w": 475,
@@ -502,6 +507,7 @@
   {
    "id": "C2",
    "kind": "step",
+   "shape": "rounded",
    "x": 918,
    "y": 1508,
    "w": 475,
@@ -519,6 +525,7 @@
   {
    "id": "C3",
    "kind": "step",
+   "shape": "rounded",
    "x": 1443,
    "y": 1508,
    "w": 475,
@@ -536,6 +543,7 @@
   {
    "id": "C4",
    "kind": "step",
+   "shape": "rounded",
    "x": 1968,
    "y": 1508,
    "w": 475,
@@ -553,6 +561,7 @@
   {
    "id": "C5",
    "kind": "step",
+   "shape": "rounded",
    "x": 2493,
    "y": 1508,
    "w": 475,
@@ -570,6 +579,7 @@
   {
    "id": "E3",
    "kind": "step",
+   "shape": "rounded",
    "x": 1003,
    "y": 2208,
    "w": 555,
@@ -587,6 +597,7 @@
   {
    "id": "E2",
    "kind": "step",
+   "shape": "rounded",
    "x": 1613,
    "y": 2208,
    "w": 555,
@@ -604,6 +615,7 @@
   {
    "id": "E1",
    "kind": "step",
+   "shape": "rounded",
    "x": 3443,
    "y": 2208,
    "w": 555,
@@ -621,6 +633,7 @@
   {
    "id": "G2",
    "kind": "step",
+   "shape": "rounded",
    "x": 1128,
    "y": 2828,
    "w": 680,
@@ -638,6 +651,7 @@
   {
    "id": "G3",
    "kind": "step",
+   "shape": "rounded",
    "x": 1863,
    "y": 2828,
    "w": 680,
@@ -655,6 +669,7 @@
   {
    "id": "G4",
    "kind": "step",
+   "shape": "rounded",
    "x": 2598,
    "y": 2828,
    "w": 680,
@@ -672,6 +687,7 @@
   {
    "id": "D1",
    "kind": "decision",
+   "shape": "diamond",
    "x": 1133,
    "y": 433,
    "w": 670,
@@ -688,6 +704,7 @@
   {
    "id": "D2",
    "kind": "decision",
+   "shape": "diamond",
    "x": 2603,
    "y": 433,
    "w": 670,
@@ -704,6 +721,7 @@
   {
    "id": "D3",
    "kind": "decision",
+   "shape": "diamond",
    "x": 1006,
    "y": 973,
    "w": 549,
@@ -720,6 +738,7 @@
   {
    "id": "D4",
    "kind": "decision",
+   "shape": "diamond",
    "x": 3020,
    "y": 1508,
    "w": 471,
@@ -736,6 +755,7 @@
   {
    "id": "D7",
    "kind": "decision",
+   "shape": "diamond",
    "x": 396,
    "y": 2208,
    "w": 549,
@@ -752,6 +772,7 @@
   {
    "id": "D6",
    "kind": "decision",
+   "shape": "diamond",
    "x": 2226,
    "y": 2208,
    "w": 549,
@@ -768,6 +789,7 @@
   {
    "id": "D5",
    "kind": "decision",
+   "shape": "diamond",
    "x": 2836,
    "y": 2208,
    "w": 549,
@@ -784,6 +806,7 @@
   {
    "id": "F1",
    "kind": "fail",
+   "shape": "rounded",
    "x": 1223,
    "y": 669,
    "w": 490,
@@ -799,6 +822,7 @@
   {
    "id": "F2",
    "kind": "fail",
+   "shape": "rounded",
    "x": 2658,
    "y": 669,
    "w": 560,
@@ -814,6 +838,7 @@
   {
    "id": "F3",
    "kind": "fail",
+   "shape": "rounded",
    "x": 1028,
    "y": 1208,
    "w": 505,
@@ -829,6 +854,7 @@
   {
    "id": "F4",
    "kind": "fail",
+   "shape": "rounded",
    "x": 2993,
    "y": 1793,
    "w": 525,
@@ -845,6 +871,7 @@
   {
    "id": "F6",
    "kind": "fail",
+   "shape": "rounded",
    "x": 413,
    "y": 2463,
    "w": 283,
@@ -861,6 +888,7 @@
   {
    "id": "F5",
    "kind": "fail",
+   "shape": "rounded",
    "x": 681,
    "y": 2463,
    "w": 247,
@@ -877,6 +905,7 @@
   {
    "id": "A3",
    "kind": "step",
+   "shape": "rounded",
    "x": 3280,
    "y": 430,
    "w": 736,
@@ -894,6 +923,7 @@
   {
    "id": "B5",
    "kind": "step",
+   "shape": "rounded",
    "x": 396,
    "y": 973,
    "w": 550,
@@ -911,6 +941,7 @@
   {
    "id": "C6",
    "kind": "step",
+   "shape": "rounded",
    "x": 3495,
    "y": 1505,
    "w": 526,
@@ -928,6 +959,7 @@
   {
    "id": "G1",
    "kind": "step",
+   "shape": "rounded",
    "x": 390,
    "y": 2825,
    "w": 736,
@@ -945,6 +977,7 @@
   {
    "id": "G5",
    "kind": "step",
+   "shape": "rounded",
    "x": 3335,
    "y": 2826,
    "w": 678,
@@ -966,342 +999,250 @@
    "from": "A1",
    "to": "D1",
    "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "width": 3.5,
+   "dash": "dotted",
+   "router": "normal"
   },
   {
    "id": "e1",
    "from": "D1",
    "to": "F1",
    "color": "#c74444",
-   "label": "否",
-   "dashed": false,
-   "vertices": []
+   "label": "否"
   },
   {
    "id": "e2",
    "from": "D1",
    "to": "A2",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e3",
    "from": "A2",
    "to": "D2",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e4",
    "from": "D2",
    "to": "F2",
    "color": "#c74444",
-   "label": "否",
-   "dashed": false,
-   "vertices": []
+   "label": "否"
   },
   {
    "id": "e5",
    "from": "D2",
    "to": "A3",
    "color": "#246bfd",
-   "label": "是",
-   "dashed": false,
-   "vertices": []
+   "label": "是"
   },
   {
    "id": "e6",
    "from": "A3",
    "to": "B1",
    "color": "#246bfd",
-   "label": "进入试采",
-   "dashed": false,
-   "vertices": []
+   "label": "进入试采"
   },
   {
    "id": "e7",
    "from": "B1",
    "to": "B2",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e8",
    "from": "B2",
    "to": "B3",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e9",
    "from": "B3",
    "to": "B4",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e10",
    "from": "B4",
    "to": "D3",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e11",
    "from": "D3",
    "to": "F3",
    "color": "#c74444",
-   "label": "否",
-   "dashed": false,
-   "vertices": []
+   "label": "否"
   },
   {
    "id": "e12",
    "from": "F3",
    "to": "B2",
    "color": "#c74444",
-   "label": "重新试采",
-   "dashed": false,
-   "vertices": []
+   "label": "重新试采"
   },
   {
    "id": "e13",
    "from": "D3",
    "to": "B5",
    "color": "#0b8fac",
-   "label": "是",
-   "dashed": false,
-   "vertices": []
+   "label": "是"
   },
   {
    "id": "e14",
    "from": "B5",
    "to": "C1",
    "color": "#0b8fac",
-   "label": "版本生效",
-   "dashed": false,
-   "vertices": []
+   "label": "版本生效"
   },
   {
    "id": "e15",
    "from": "C1",
    "to": "C2",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e16",
    "from": "C2",
    "to": "C3",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e17",
    "from": "C3",
    "to": "C4",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e18",
    "from": "C4",
    "to": "C5",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e19",
    "from": "C5",
    "to": "D4",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e20",
    "from": "D4",
    "to": "F4",
    "color": "#c74444",
-   "label": "失败",
-   "dashed": false,
-   "vertices": []
+   "label": "失败"
   },
   {
    "id": "e21",
    "from": "F4",
    "to": "C5",
    "color": "#c74444",
-   "label": "重采",
-   "dashed": false,
-   "vertices": []
+   "label": "重采"
   },
   {
    "id": "e22",
    "from": "D4",
    "to": "C6",
    "color": "#0b8fac",
-   "label": "合格/存疑",
-   "dashed": false,
-   "vertices": []
+   "label": "合格/存疑"
   },
   {
    "id": "e23",
    "from": "C6",
    "to": "E1",
    "color": "#7656d8",
-   "label": "云端回执",
-   "dashed": false,
-   "vertices": []
+   "label": "云端回执"
   },
   {
    "id": "e24",
    "from": "E1",
    "to": "D5",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e25",
    "from": "D5",
    "to": "F5",
    "color": "#c74444",
-   "label": "否",
-   "dashed": false,
-   "vertices": []
+   "label": "否"
   },
   {
    "id": "e26",
    "from": "D5",
    "to": "D6",
    "color": "#c86d12",
-   "label": "是",
-   "dashed": false,
-   "vertices": []
+   "label": "是"
   },
   {
    "id": "e27",
    "from": "D6",
    "to": "E2",
    "color": "#c86d12",
-   "label": "是",
-   "dashed": false,
-   "vertices": []
+   "label": "是"
   },
   {
    "id": "e28",
    "from": "E2",
    "to": "E3",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e29",
    "from": "D6",
    "to": "E3",
    "color": "#c86d12",
-   "label": "无需标注",
-   "dashed": false,
-   "vertices": []
+   "label": "无需标注"
   },
   {
    "id": "e30",
    "from": "E3",
    "to": "D7",
-   "color": "#526078",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#526078"
   },
   {
    "id": "e31",
    "from": "D7",
    "to": "F6",
    "color": "#c74444",
-   "label": "否",
-   "dashed": false,
-   "vertices": []
+   "label": "否"
   },
   {
    "id": "e32",
    "from": "D7",
    "to": "G1",
    "color": "#c86d12",
-   "label": "全部达标",
-   "dashed": false,
-   "vertices": []
+   "label": "全部达标"
   },
   {
    "id": "e33",
    "from": "G1",
    "to": "G2",
-   "color": "#17885b",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#17885b"
   },
   {
    "id": "e34",
    "from": "G2",
    "to": "G3",
-   "color": "#17885b",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#17885b"
   },
   {
    "id": "e35",
    "from": "G3",
    "to": "G4",
-   "color": "#17885b",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#17885b"
   },
   {
    "id": "e36",
    "from": "G4",
    "to": "G5",
-   "color": "#17885b",
-   "label": "",
-   "dashed": false,
-   "vertices": []
+   "color": "#17885b"
   },
   {
    "id": "e37",
    "from": "G5",
    "to": "A1",
    "color": "#17885b",
-   "label": "训练难例与偏差，进入下一轮需求",
-   "dashed": false,
-   "vertices": []
+   "label": "训练难例与偏差，进入下一轮需求"
   },
   {
    "id": "ed0",
@@ -1309,8 +1250,7 @@
    "to": "C3",
    "color": "#c74444",
    "label": "补采工单",
-   "dashed": true,
-   "vertices": []
+   "dash": "dashed"
   },
   {
    "id": "ed1",
@@ -1318,8 +1258,7 @@
    "to": "C3",
    "color": "#c74444",
    "label": "定向补采工单",
-   "dashed": true,
-   "vertices": []
+   "dash": "dashed"
   }
  ]
 }
