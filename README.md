@@ -2,13 +2,18 @@
 
 **一个 JSON 完整表达一张流程图；渲染吃 JSON，一切编辑实时写回 JSON。**
 
-画布引擎用 [AntV X6](https://github.com/antvis/X6)（MIT，已 vendor 离线包），全量继承其成熟编辑能力，本仓库只做「规范 JSON ⇄ 画布」的双向同步层。零构建、零 CDN 依赖，克隆即用。
+**React + AntV X6**。画布引擎 [AntV X6](https://github.com/antvis/X6)（MIT）全量继承其成熟编辑能力，UI 为 React 18，esbuild 打包，**构建产物已入库**——部署侧不需要 node。
+
+设计规范：**只有黑白两色，所有元素一律矩形**；参数编辑一律弹窗（确认/取消）。
 
 ## 起步
 
 ```bash
 python3 server.py 4244       # 静态托管 + POST /api/save 写回 data/*.json
 # 打开 http://localhost:4244
+
+# 改前端源码后重新打包(仅开发机需要 node):
+npm install && npm run build   # src/*.jsx → dist/app.js
 ```
 
 纯静态托管（GitHub Pages 等）也能跑：编辑存浏览器 localStorage，用「导出JSON」取数据，只是「保存到服务器」不可用。
@@ -49,7 +54,7 @@ python3 server.py 4244       # 静态托管 + POST /api/save 写回 data/*.json
 }
 ```
 
-同步链路：`X6 模型 → serialize() → 规范 JSON → localStorage + 防抖 POST /api/save + 实时 JSON 面板`。撤销/删除/重接/控制点一切变更都会体现在 JSON 里；「JSON面板」按钮可实时看、可复制；导入 JSON 即整图替换。
+同步链路：`X6 模型 → serialize() → 规范 JSON → localStorage(即时) + 每 10 秒自动 POST /api/save(切后台/关页 sendBeacon 兜底) + 实时 JSON 面板`。撤销/删除/重接/控制点一切变更都会体现在 JSON 里；「JSON面板」可实时看、可复制；导入 JSON 即整图替换。
 
 ## 预置图
 
@@ -71,10 +76,11 @@ python3 server.py 4244       # 静态托管 + POST /api/save 写回 data/*.json
 ## 结构
 
 ```
-index.html  style.css  app.js   # 应用(无构建)
-server.py                        # 静态托管 + /api/save 落盘
+index.html                       # 壳(加载 dist/)
+src/                             # React 源码(App/Sidebar/Modal/graph 引擎胶水/黑白样式)
+dist/                            # esbuild 产物(已入库,部署零依赖)
+server.py                        # 静态托管 + /api/list + /api/save 落盘
 start.sh    deploy.sh            # 自愈启动(挂 cron) / 一键部署到 108
-vendor/                          # X6 + 5 插件 UMD(离线)
 data/                            # 规范 JSON(唯一数据源)
 tools/convert.py                 # 旧格式→规范 JSON 转换器
 ```

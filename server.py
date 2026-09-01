@@ -15,9 +15,31 @@ class H(SimpleHTTPRequestHandler):
         super().__init__(*a, directory=ROOT, **kw)
 
     def end_headers(self):
-        if self.path.startswith('/data/'):
+        if self.path.startswith('/data/') or self.path.startswith('/api/'):
             self.send_header('Cache-Control', 'no-store')
         super().end_headers()
+
+    def do_GET(self):
+        if self.path.split('?')[0].rstrip('/') == '/api/list':
+            out = []
+            ddir = os.path.join(ROOT, 'data')
+            for f in sorted(os.listdir(ddir)):
+                if not f.endswith('.json'):
+                    continue
+                fid = f[:-5]
+                try:
+                    meta = json.load(open(os.path.join(ddir, f))).get('meta', {})
+                    out.append({'id': fid, 'title': meta.get('title', fid)})
+                except Exception:
+                    out.append({'id': fid, 'title': fid})
+            body = json.dumps(out, ensure_ascii=False).encode()
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.send_header('Content-Length', str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+        super().do_GET()
 
     def do_POST(self):
         if self.path.rstrip('/') != '/api/save':
