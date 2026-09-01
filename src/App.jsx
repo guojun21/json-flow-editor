@@ -23,6 +23,10 @@ export default function App() {
   const [cur, setCur] = useState('final');
   const [status, setStatus] = useState('');
   const [collapsed, setCollapsed] = useState(false);
+  const [sideW, setSideW] = useState(() => {
+    const v = +localStorage.getItem('jfe:sidew');
+    return v >= 160 && v <= 640 ? v : 224;
+  });
   const [showJSON, setShowJSON] = useState(false);
   const [jsonText, setJsonText] = useState('');
   const [modal, setModal] = useState(null);     // {type, cell, draft}
@@ -241,12 +245,40 @@ export default function App() {
 
   const upd = patch => setModal(m => ({ ...m, draft: { ...m.draft, ...patch } }));
 
+  /* 侧栏右缘拖拽改宽度(160~640,记在 localStorage;画布同步重算尺寸) */
+  const [dragging, setDragging] = useState(false);
+  function startSideDrag(ev) {
+    ev.preventDefault();
+    setDragging(true);
+    const move = e => {
+      const w = Math.max(160, Math.min(640, e.clientX));
+      setSideW(w);
+      if (engineRef.current) engineRef.current.resize();
+    };
+    const up = e => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+      setDragging(false);
+      const w = Math.max(160, Math.min(640, e.clientX));
+      setSideW(w);                     // 松手时把状态和存盘值对齐(夹紧后可能与最后一次 move 不同)
+      localStorage.setItem('jfe:sidew', String(w));
+      if (engineRef.current) engineRef.current.resize();
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  }
+
   return (
-    <div className={'app' + (collapsed ? ' side-collapsed' : '')}>
+    <div className={'app' + (collapsed ? ' side-collapsed' : '') + (dragging ? ' resizing' : '')}
+      style={{ '--side-w': sideW + 'px' }}>
       <Sidebar files={files} cur={cur} status={status} collapsed={collapsed}
         onOpenFile={id => { if (id !== cur) load(id); }}
         onDragElement={(kind, e) => engineRef.current.startDnd(kind, e.nativeEvent || e)}
         onAction={onAction} />
+      <div className={'side-resizer' + (dragging ? ' dragging' : '')}
+        title="左右拖动改变侧栏宽度(双击复位)" onMouseDown={startSideDrag}
+        onDoubleClick={() => { setSideW(224); localStorage.setItem('jfe:sidew', '224');
+          if (engineRef.current) engineRef.current.resize(); }} />
       <div className="sidebar-toggle" title="收起/展开侧栏 (⌘B)"
         onClick={() => setCollapsed(v => !v)}>{collapsed ? '⟩' : '⟨'}</div>
       <div className={'canvas' + (linking ? ' linking' : '')} ref={canvasRef} />

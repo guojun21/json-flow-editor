@@ -525,6 +525,7 @@ export function createFlowEngine(container, cb) {
     undo: () => graph.undo(), redo: () => graph.redo(),
     removeSelected: () => graph.removeCells(graph.getSelectedCells()),
     exportSVG: name => graph.exportSVG(name, { copyStyles: true }),
+    resize: () => graph.resize(),
     dispose: () => graph.dispose(),
   };
 }

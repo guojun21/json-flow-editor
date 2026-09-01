@@ -1,0 +1,19 @@
+# 容器化部署(替代原来的裸进程 + crontab 看门狗)。
+# restart: unless-stopped 就是自愈:进程挂了 / 机器重启,docker 自己拉回来。
+services:
+  json-flow-editor:
+    build: .
+    image: json-flow-editor:latest
+    container_name: json-flow-editor
+    restart: unless-stopped
+    # 用宿主用户身份跑(108 的 guruicheng=1003):挂载卷里写出来的 JSON 归宿主用户,
+    # 否则 root 写的文件会给后续 rsync / 手工编辑添堵
+    user: "1003:1003"
+    ports:
+      - "4244:4244"
+    volumes:
+      # 图数据落宿主盘:UI 里 /api/save 写的 JSON 不会随镜像重建蒸发
+      - ./data:/app/data
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }

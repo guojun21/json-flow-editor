@@ -61,17 +61,24 @@ npm install && npm run build   # src/*.jsx → dist/app.js
 数采工厂两张全流程图（像素级矢量重绘管线产出的语义数据）：
 
 - `data/final.json` —— 终版五阶段（08-31 会中版，63 节点/40 边）
+- `data/optimized.json` —— 优化版五阶段（09-01 版，54 节点/38 边，每框带主责/协同）
 - `data/swimlane.json` —— 早版六泳道（08-27 版，47 节点/24 边）
 
-## 部署与自愈
+## 部署与自愈（容器化）
 
 ```bash
-./deploy.sh      # 一键:同步代码到 108 → 重启 → 双向健康检查
+./deploy.sh      # 一键:同步代码到 108 → docker compose up -d --build → 双向健康检查
 ```
 
-108 上已挂 crontab 看门狗：每分钟 `start.sh` 幂等拉活（进程在就不动），`@reboot` 开机自启，日志超 10MB 自动截断——服务挂了/机器重启都会自己爬起来，无需人工干预。
+108 上跑的是容器 `json-flow-editor`（compose 服务同名）：
 
-> 坑注：`pkill -f "python3 server.py"` 会匹配到 ssh 会话自身命令行把自己杀掉，脚本里用 `[s]erver.py` 括号技巧规避。
+- **自愈靠 `restart: unless-stopped`**，不再用 crontab 看门狗。宿主侧 `kill -9` 掉主进程，docker 立刻重开一个（实测 `RestartCount` 从 0 变 1，服务秒回 200）；机器重启也会自己起来。
+- **数据在宿主盘**：`./data` 以 volume 挂进 `/app/data`，UI 里 `/api/save` 写的 JSON 不随镜像重建蒸发。
+- **容器以宿主用户身份跑**（`user: "1003:1003"`），挂载卷里新写的文件归 `guruicheng`，不会给后续 rsync 添堵。
+- **基础镜像 `python:3.11-alpine`**：108 没有 registry 出网，只能用它本地已有的 tag；服务本身零依赖（纯标准库）。
+- 日志走 json-file，单文件 10MB × 3 轮转。
+
+> `docker kill` / `docker stop` 属于「显式停止」，restart 策略故意不管——验证自愈要从宿主侧 kill 主进程，别用 docker kill 自证。
 
 ## 结构
 
@@ -80,9 +87,11 @@ index.html                       # 壳(加载 dist/)
 src/                             # React 源码(App/Sidebar/Modal/graph 引擎胶水/黑白样式)
 dist/                            # esbuild 产物(已入库,部署零依赖)
 server.py                        # 静态托管 + /api/list + /api/save 落盘
-start.sh    deploy.sh            # 自愈启动(挂 cron) / 一键部署到 108
+Dockerfile  docker-compose.yml   # 容器化运行时(自愈=restart 策略, data/ 挂宿主盘)
+deploy.sh                        # 一键部署到 108(rsync + compose up --build + 健康检查)
 data/                            # 规范 JSON(唯一数据源)
-tools/convert.py                 # 旧格式→规范 JSON 转换器
+tools/convert.py  convert_opt.py # 旧格式→规范 JSON / 优化版流程图生成器
+tools/stamp.py                   # 构建后给 dist 资源打内容指纹(防浏览器缓存旧版)
 ```
 
 ## License
