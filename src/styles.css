@@ -135,3 +135,7 @@ html, body, #root { height: 100%; overflow: hidden;
 .side-resizer:hover::after, .side-resizer.dragging::after { background: #000; }
 .app.side-collapsed .side-resizer { display: none; }
 .app.resizing { cursor: col-resize; user-select: none; }
+
+/* ---------- 嵌入模式(?embed=1):给 iframe 用,只留画布 ---------- */
+.app.embed .sidebar-toggle, .app.embed .side-resizer { display: none; }
+.app.embed .sidebar { display: none; }

@@ -429,16 +429,25 @@ export function createFlowEngine(container, cb) {
   /* ---------- 对外 API ---------- */
   let fitTries = 0;
   function fit() {
-    // 容器还没排好版(0 尺寸)时 zoomToFit 会钳到极小,守卫重试
-    if ((!container.clientWidth || !container.clientHeight) && fitTries < 15) {
+    // 两种情况 zoomToFit 会钳到 minScale(0.01)看起来一片空白:
+    // ① 容器还没排好版(0 尺寸);② 页面/iframe 尚不可见(hidden 标签页、懒加载 iframe),SVG 没排版,内容 bbox 为 0。
+    // 都用守卫重试;并在页面重新可见 / iframe 滚进视口时再 fit 一次。
+    const bad = !container.clientWidth || !container.clientHeight;
+    if (!bad) graph.zoomToFit({ padding: 24, maxScale: 1.5 });
+    if ((bad || graph.zoom() <= 0.02) && fitTries < 40) {
       fitTries += 1;
-      setTimeout(fit, 200);
+      setTimeout(fit, 120);
       return;
     }
-    fitTries = 0;
-    graph.zoomToFit({ padding: 24, maxScale: 1.5 });
-    if (graph.zoom() <= 0.011) setTimeout(() =>
-      graph.zoomToFit({ padding: 24, maxScale: 1.5 }), 400);
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) { fitTries = 0; fit(); }
+  });
+  if (typeof IntersectionObserver !== 'undefined') {
+    let seen = false;
+    new IntersectionObserver(entries => {
+      if (!seen && entries.some(e => e.isIntersecting)) { seen = true; fitTries = 0; fit(); }
+    }).observe(container);
   }
   function paletteNode(kind) {
     const k = scale();

@@ -16,13 +16,17 @@ export default function App() {
   const canvasRef = useRef(null);
   const engineRef = useRef(null);
   const docRef = useRef(null);
-  const curRef = useRef('final');
+  // URL 参数:?file=<id> 打开指定图;?embed=1 嵌入模式(给方案/文档 iframe 用:侧栏收起,不露编辑器壳)
+  const params = new URLSearchParams(location.search);
+  const embed = params.get('embed') === '1';
+  const initFile = /^[a-z0-9_-]{1,40}$/.test(params.get('file') || '') ? params.get('file') : 'final';
+  const curRef = useRef(initFile);
   const dirtyRef = useRef(false);
 
   const [files, setFiles] = useState(FALLBACK_FILES);
-  const [cur, setCur] = useState('final');
+  const [cur, setCur] = useState(initFile);
   const [status, setStatus] = useState('');
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(embed);
   const [sideW, setSideW] = useState(() => {
     const v = +localStorage.getItem('jfe:sidew');
     return v >= 160 && v <= 640 ? v : 224;
@@ -227,7 +231,7 @@ export default function App() {
   }
 
   return (
-    <div className={'app' + (collapsed ? ' side-collapsed' : '') + (dragging ? ' resizing' : '')}
+    <div className={'app' + (collapsed ? ' side-collapsed' : '') + (dragging ? ' resizing' : '') + (embed ? ' embed' : '')}
       style={{ '--side-w': sideW + 'px' }}>
       <Sidebar files={files} cur={cur} status={status} collapsed={collapsed}
         onOpenFile={id => { if (id !== cur) load(id); }}
