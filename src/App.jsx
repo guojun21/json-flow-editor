@@ -49,7 +49,9 @@ export default function App() {
     }, 120);
   }, [refreshJSON]);
 
+  const autosaveRef = useRef(true);   // 自动化测试可用 __jfe.autosave(false) 关掉,防止把测试涂改写进 data/
   const pushServer = useCallback(silent => {
+    if (!autosaveRef.current) { setStatus('自动保存已关(测试模式)'); return Promise.resolve(); }
     return fetch('api/save', { method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: curRef.current, data: docRef.current }) })
@@ -69,7 +71,7 @@ export default function App() {
     };
     const t = setInterval(flush, 10000);   // 前台:10 秒一次自动保存
     const onVis = () => {                  // 后台节流兜底:切后台/关页立即保存
-      if (document.hidden && dirtyRef.current && docRef.current) {
+      if (document.hidden && dirtyRef.current && docRef.current && autosaveRef.current) {
         dirtyRef.current = false;
         navigator.sendBeacon('api/save', new Blob(
           [JSON.stringify({ id: curRef.current, data: docRef.current })],
@@ -100,7 +102,8 @@ export default function App() {
       onKeyToggleSidebar: () => setCollapsed(v => !v),
     });
     engineRef.current = eng;
-    window.__jfe = { graph: () => eng.graph, doc: () => docRef.current };
+    window.__jfe = { graph: () => eng.graph, doc: () => docRef.current,
+      autosave: v => { autosaveRef.current = v !== false; return autosaveRef.current; } };
     Object.keys(localStorage).filter(k => k.startsWith('jfe:') && !k.startsWith(DRAFT_V))
       .forEach(k => localStorage.removeItem(k));   // 清理上一代草稿
     load(curRef.current);

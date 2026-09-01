@@ -15,7 +15,7 @@
    "kind": "band",
    "shape": "rounded",
    "x": 92,
-   "y": 309,
+   "y": 300,
    "w": 4217,
    "h": 511,
    "fill": "#eaf1ff",
@@ -70,7 +70,7 @@
    "kind": "pill",
    "shape": "rounded",
    "x": 118,
-   "y": 379,
+   "y": 394,
    "w": 213,
    "h": 377,
    "fill": "#246bfd",
@@ -998,10 +998,7 @@
    "id": "e0",
    "from": "A1",
    "to": "D1",
-   "color": "#526078",
-   "width": 3.5,
-   "dash": "dotted",
-   "router": "normal"
+   "color": "#526078"
   },
   {
    "id": "e1",
