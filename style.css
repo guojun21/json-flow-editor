@@ -1,0 +1,51 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+#toolbar { display: flex; align-items: center; gap: 12px; height: 44px;
+  padding: 0 10px; background: #1f2430; color: #e8ebf2; user-select: none;
+  overflow-x: auto; white-space: nowrap; }
+.tabs { display: flex; gap: 4px; flex-shrink: 0; }
+.tab { background: #2a3040; color: #aab3c5; border: 1px solid #3a4154;
+  padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 13px;
+  white-space: nowrap; }
+.tab.active { background: #3d68d8; color: #fff; border-color: #3d68d8; }
+.tools { display: flex; gap: 5px; align-items: center; flex-shrink: 0; }
+.tools button { background: #2a3040; color: #dde2ec; border: 1px solid #3a4154;
+  padding: 5px 9px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+.tools button:hover { background: #354056; }
+.sep { width: 1px; height: 20px; background: #3a4154; }
+#status { font-size: 11px; color: #8fd18f; min-width: 70px; }
+#hint { height: 24px; line-height: 24px; padding: 0 10px; font-size: 11px;
+  color: #6b7385; background: #171b24; overflow: hidden; white-space: nowrap;
+  text-overflow: ellipsis; }
+#hint b { color: #9db4e8; }
+#main { position: absolute; top: 68px; bottom: 0; left: 0; right: 0;
+  display: flex; }
+#canvas { flex: 1; min-width: 0; background: #f6f8fc; }
+#json-panel { width: 380px; border-left: 1px solid #d8dce6; display: flex;
+  flex-direction: column; background: #fbfcfe; }
+#json-panel.hidden { display: none; }
+.jp-head { padding: 6px 10px; font-size: 12px; color: #444; background: #eef1f7;
+  display: flex; justify-content: space-between; align-items: center; }
+.jp-head button { font-size: 11px; padding: 2px 8px; }
+#json-view { flex: 1; overflow: auto; font-size: 11px; padding: 8px;
+  font-family: Menlo, monospace; color: #26314a; }
+
+/* 节点 HTML 内容 */
+.jfe-node { width: 100%; height: 100%; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  line-height: 1.45; border-radius: 12px; border-style: solid;
+  overflow: hidden; cursor: grab; }
+.jfe-node.kind-decision { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  border: none; }
+.jfe-node.kind-band { border: none; border-radius: 18px; }
+.jfe-node.kind-pill { border: none; border-radius: 26px; }
+.jfe-node.kind-text { border: none; background: transparent !important; }
+.jfe-node .ln { width: 100%; overflow-wrap: anywhere; word-break: break-word; }
+.jfe-node.editing { outline: 2px solid #3d68d8; background: rgba(255,255,255,.95);
+  cursor: text; overflow: auto; justify-content: flex-start; white-space: pre-wrap; }
+.jfe-vtext { writing-mode: vertical-rl; letter-spacing: 2px; }
+
+/* X6 端口:默认藏,悬停节点才显 */
+.x6-port-body { visibility: hidden; }
+.x6-node:hover .x6-port-body { visibility: visible; }

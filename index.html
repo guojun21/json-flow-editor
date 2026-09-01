@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON Flow Editor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="toolbar">
+  <div class="tabs" id="tabs"></div>
+  <div class="tools">
+    <button id="btn-undo" title="⌘Z">撤销</button>
+    <button id="btn-redo" title="⇧⌘Z">重做</button>
+    <span class="sep"></span>
+    <button id="btn-add-step">+步骤</button>
+    <button id="btn-add-decision">+判定</button>
+    <button id="btn-add-fail">+异常</button>
+    <button id="btn-add-text">+文字</button>
+    <button id="btn-del">删除所选</button>
+    <span class="sep"></span>
+    <button id="btn-fit">适配</button>
+    <button id="btn-json">JSON面板</button>
+    <span class="sep"></span>
+    <button id="btn-save">保存到服务器</button>
+    <button id="btn-reset">重置</button>
+    <button id="btn-export">导出JSON</button>
+    <button id="btn-import">导入JSON</button>
+    <button id="btn-svg">导出SVG</button>
+    <span id="status"></span>
+  </div>
+</div>
+<div id="hint">双击改字（长文自动扩容） · 拖框移动 · 选中线出控制点，<b>右键线上任意处加控制点</b>，右键控制点删除 · 拖线两端箭头柄重接 · 悬停框四个端口拉新线 · <b>⌘/Ctrl+滚轮=放大镜缩放</b>，滚轮/拖空白=平移 · Shift+框选多选 · ⌘Z 撤销</div>
+<div id="main">
+  <div id="canvas"></div>
+  <div id="json-panel" class="hidden">
+    <div class="jp-head">实时 JSON（编辑即更新）<button id="btn-json-copy">复制</button></div>
+    <pre id="json-view"></pre>
+  </div>
+</div>
+<input type="file" id="file-import" accept=".json" style="display:none">
+<script src="vendor/x6.js"></script>
+<script src="vendor/x6-plugin-history.js"></script>
+<script src="vendor/x6-plugin-selection.js"></script>
+<script src="vendor/x6-plugin-keyboard.js"></script>
+<script src="vendor/x6-plugin-snapline.js"></script>
+<script src="vendor/x6-plugin-export.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

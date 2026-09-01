@@ -1,0 +1,894 @@
+{
+ "meta": {
+  "id": "swimlane",
+  "title": "早版六泳道（08-27）",
+  "W": 1406,
+  "H": 788,
+  "fs": {
+   "title": 12,
+   "body": 11
+  }
+ },
+ "nodes": [
+  {
+   "id": "bg1",
+   "kind": "pill",
+   "x": 88,
+   "y": 28,
+   "w": 207,
+   "h": 717,
+   "fill": "#647585",
+   "rx": 0
+  },
+  {
+   "id": "bg2",
+   "kind": "band",
+   "x": 88,
+   "y": 5,
+   "w": 207,
+   "h": 23,
+   "fill": "#dde9ff",
+   "rx": 4
+  },
+  {
+   "id": "bg3",
+   "kind": "pill",
+   "x": 297,
+   "y": 28,
+   "w": 207,
+   "h": 717,
+   "fill": "#f3f9f5",
+   "rx": 0
+  },
+  {
+   "id": "bg4",
+   "kind": "band",
+   "x": 297,
+   "y": 5,
+   "w": 207,
+   "h": 23,
+   "fill": "#ddf1e5",
+   "rx": 4
+  },
+  {
+   "id": "bg5",
+   "kind": "pill",
+   "x": 506,
+   "y": 28,
+   "w": 207,
+   "h": 717,
+   "fill": "#f8f5fe",
+   "rx": 0
+  },
+  {
+   "id": "bg6",
+   "kind": "band",
+   "x": 506,
+   "y": 5,
+   "w": 207,
+   "h": 23,
+   "fill": "#e8deff",
+   "rx": 4
+  },
+  {
+   "id": "bg7",
+   "kind": "pill",
+   "x": 716,
+   "y": 27,
+   "w": 205,
+   "h": 718,
+   "fill": "#f2edff",
+   "rx": 0
+  },
+  {
+   "id": "bg8",
+   "kind": "band",
+   "x": 716,
+   "y": 5,
+   "w": 205,
+   "h": 22,
+   "fill": "#ffe8bc",
+   "rx": 4
+  },
+  {
+   "id": "bg9",
+   "kind": "pill",
+   "x": 925,
+   "y": 28,
+   "w": 206,
+   "h": 717,
+   "fill": "#fff5f3",
+   "rx": 0
+  },
+  {
+   "id": "bg10",
+   "kind": "band",
+   "x": 925,
+   "y": 5,
+   "w": 206,
+   "h": 23,
+   "fill": "#ffdcd8",
+   "rx": 4
+  },
+  {
+   "id": "bg11",
+   "kind": "pill",
+   "x": 1134,
+   "y": 28,
+   "w": 207,
+   "h": 717,
+   "fill": "#dfefee",
+   "rx": 0
+  },
+  {
+   "id": "bg12",
+   "kind": "band",
+   "x": 1134,
+   "y": 5,
+   "w": 207,
+   "h": 23,
+   "fill": "#d8f1ee",
+   "rx": 4
+  },
+  {
+   "id": "bg13",
+   "kind": "band",
+   "x": 93,
+   "y": 746,
+   "w": 1245,
+   "h": 26,
+   "fill": "#fef7e5",
+   "rx": 6
+  },
+  {
+   "id": "tx14",
+   "kind": "text",
+   "x": 124,
+   "y": 4,
+   "w": 135,
+   "h": 25,
+   "lines": [
+    "算法 / 需求方"
+   ],
+   "textColor": "#2f3b4c",
+   "fontSize": 13,
+   "bold": true,
+   "vertical": false
+  },
+  {
+   "id": "tx15",
+   "kind": "text",
+   "x": 318,
+   "y": 4,
+   "w": 164,
+   "h": 25,
+   "lines": [
+    "工厂负责人 / 产品"
+   ],
+   "textColor": "#2f3b4c",
+   "fontSize": 13,
+   "bold": true,
+   "vertical": false
+  },
+  {
+   "id": "tx16",
+   "kind": "text",
+   "x": 587,
+   "y": 4,
+   "w": 45,
+   "h": 25,
+   "lines": [
+    "组长"
+   ],
+   "textColor": "#2f3b4c",
+   "fontSize": 13,
+   "bold": true,
+   "vertical": false
+  },
+  {
+   "id": "tx17",
+   "kind": "text",
+   "x": 706,
+   "y": 4,
+   "w": 224,
+   "h": 25,
+   "lines": [
+    "数采员 + 监控员 / AI"
+   ],
+   "textColor": "#2f3b4c",
+   "fontSize": 13,
+   "bold": true,
+   "vertical": false
+  },
+  {
+   "id": "tx18",
+   "kind": "text",
+   "x": 968,
+   "y": 4,
+   "w": 120,
+   "h": 25,
+   "lines": [
+    "质检 / 标注"
+   ],
+   "textColor": "#2f3b4c",
+   "fontSize": 13,
+   "bold": true,
+   "vertical": false
+  },
+  {
+   "id": "tx19",
+   "kind": "text",
+   "x": 1125,
+   "y": 4,
+   "w": 224,
+   "h": 25,
+   "lines": [
+    "平台 / 数据中心 / 训练"
+   ],
+   "textColor": "#2f3b4c",
+   "fontSize": 13,
+   "bold": true,
+   "vertical": false
+  },
+  {
+   "id": "tx20",
+   "kind": "text",
+   "x": 41,
+   "y": 26,
+   "w": 29,
+   "h": 97,
+   "lines": [
+    "需求与承接"
+   ],
+   "textColor": "#4a5568",
+   "fontSize": 12,
+   "bold": true,
+   "vertical": true
+  },
+  {
+   "id": "tx21",
+   "kind": "text",
+   "x": 41,
+   "y": 125,
+   "w": 29,
+   "h": 130,
+   "lines": [
+    "试采与标准冻结"
+   ],
+   "textColor": "#4a5568",
+   "fontSize": 12,
+   "bold": true,
+   "vertical": true
+  },
+  {
+   "id": "tx22",
+   "kind": "text",
+   "x": 41,
+   "y": 280,
+   "w": 29,
+   "h": 130,
+   "lines": [
+    "任务发布与生产"
+   ],
+   "textColor": "#4a5568",
+   "fontSize": 12,
+   "bold": true,
+   "vertical": true
+  },
+  {
+   "id": "tx23",
+   "kind": "text",
+   "x": 41,
+   "y": 419,
+   "w": 29,
+   "h": 178,
+   "lines": [
+    "预检、质检与动态控量"
+   ],
+   "textColor": "#4a5568",
+   "fontSize": 12,
+   "bold": true,
+   "vertical": true
+  },
+  {
+   "id": "tx24",
+   "kind": "text",
+   "x": 41,
+   "y": 583,
+   "w": 29,
+   "h": 178,
+   "lines": [
+    "标注、交付与训练闭环"
+   ],
+   "textColor": "#4a5568",
+   "fontSize": 12,
+   "bold": true,
+   "vertical": true
+  },
+  {
+   "id": "tx25",
+   "kind": "text",
+   "x": 246,
+   "y": 748,
+   "w": 938,
+   "h": 23,
+   "lines": [
+    "动态控量：85%预警 → 90%限流 → 保守预计达到100%时暂停领取 → 质检收敛后按缺口补采 → 全分桶达标且交付验收完成才关闭"
+   ],
+   "textColor": "#8a5a00",
+   "fontSize": 12,
+   "bold": true,
+   "vertical": false
+  },
+  {
+   "id": "n1",
+   "kind": "step",
+   "x": 105,
+   "y": 39,
+   "w": 170,
+   "h": 48,
+   "fill": "#eaf2ff",
+   "stroke": "#7aa0dc",
+   "textColor": "#3b5aa8",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "提交数采需求单",
+    "目标有效时长 / 分桶 / 交期 / 验收"
+   ]
+  },
+  {
+   "id": "n2",
+   "kind": "decision",
+   "x": 315,
+   "y": 37,
+   "w": 170,
+   "h": 56,
+   "fill": "#eaf7ee",
+   "stroke": "#7cbd94",
+   "textColor": "#2c7a4b",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "资源、成本、风险",
+    "是否承接?"
+   ]
+  },
+  {
+   "id": "n3",
+   "kind": "fail",
+   "x": 525,
+   "y": 39,
+   "w": 170,
+   "h": 48,
+   "fill": "#ffe8e6",
+   "stroke": "#d98b85",
+   "textColor": "#b8433c",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "退回补充 / 拒绝",
+    "保留评审依据"
+   ]
+  },
+  {
+   "id": "n4",
+   "kind": "step",
+   "x": 315,
+   "y": 135,
+   "w": 170,
+   "h": 48,
+   "fill": "#eaf7ee",
+   "stroke": "#7cbd94",
+   "textColor": "#2c7a4b",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "生成试采单",
+    "限定参与组长、样本数与截止时间"
+   ]
+  },
+  {
+   "id": "n5",
+   "kind": "step",
+   "x": 525,
+   "y": 134,
+   "w": 170,
+   "h": 48,
+   "fill": "#f2eeff",
+   "stroke": "#a48ede",
+   "textColor": "#5f47a8",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "组长领取并试采",
+    "高风险任务可多组、每组3-5条"
+   ]
+  },
+  {
+   "id": "n6",
+   "kind": "decision",
+   "x": 944,
+   "y": 132,
+   "w": 170,
+   "h": 54,
+   "fill": "#fff2d8",
+   "stroke": "#d9a441",
+   "textColor": "#8a5a00",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "技术完整性 + SOP合规",
+    "+ 可训练性是否通过?"
+   ]
+  },
+  {
+   "id": "n7",
+   "kind": "step",
+   "x": 105,
+   "y": 202,
+   "w": 170,
+   "h": 48,
+   "fill": "#eaf2ff",
+   "stroke": "#7aa0dc",
+   "textColor": "#3b5aa8",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "需求方从合格候选中选Demo",
+    "冻结SOP / 标准 / 版本"
+   ]
+  },
+  {
+   "id": "n8",
+   "kind": "step",
+   "x": 315,
+   "y": 205,
+   "w": 170,
+   "h": 48,
+   "fill": "#eaf7ee",
+   "stroke": "#7cbd94",
+   "textColor": "#2c7a4b",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "产能与配额计划",
+    "按有效时长、分桶和滚动通过率测算"
+   ]
+  },
+  {
+   "id": "n9",
+   "kind": "step",
+   "x": 1152,
+   "y": 294,
+   "w": 170,
+   "h": 48,
+   "fill": "#e8f6f6",
+   "stroke": "#78bcbc",
+   "textColor": "#1f7a7a",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "发布任务广场",
+    "展示Demo、SOP、资质和有限配额"
+   ]
+  },
+  {
+   "id": "n10",
+   "kind": "step",
+   "x": 734,
+   "y": 294,
+   "w": 170,
+   "h": 48,
+   "fill": "#f2eeff",
+   "stroke": "#a48ede",
+   "textColor": "#5f47a8",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "数采员领取采集令牌",
+    "绑定班次、工位、机器人与监控员"
+   ]
+  },
+  {
+   "id": "n11",
+   "kind": "step",
+   "x": 734,
+   "y": 349,
+   "w": 170,
+   "h": 48,
+   "fill": "#f2eeff",
+   "stroke": "#a48ede",
+   "textColor": "#5f47a8",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "工位自检后采集",
+    "生成Session / Episode / 设备血缘"
+   ]
+  },
+  {
+   "id": "n12",
+   "kind": "decision",
+   "x": 734,
+   "y": 426,
+   "w": 170,
+   "h": 54,
+   "fill": "#fff2d8",
+   "stroke": "#d9a441",
+   "textColor": "#8a5a00",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "人工监控 / AI预检",
+    "通过、待复核或硬失败?"
+   ]
+  },
+  {
+   "id": "n13",
+   "kind": "decision",
+   "x": 944,
+   "y": 424,
+   "w": 170,
+   "h": 56,
+   "fill": "#fff2d8",
+   "stroke": "#d9a441",
+   "textColor": "#8a5a00",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "人工质检",
+    "是否通过?"
+   ]
+  },
+  {
+   "id": "n14",
+   "kind": "step",
+   "x": 1152,
+   "y": 429,
+   "w": 170,
+   "h": 48,
+   "fill": "#e8f6f6",
+   "stroke": "#78bcbc",
+   "textColor": "#1f7a7a",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "工厂数据中心暂存（最长7天）",
+    "分片上传 / checksum / WIP与TTL告警"
+   ]
+  },
+  {
+   "id": "n15",
+   "kind": "fail",
+   "x": 525,
+   "y": 496,
+   "w": 170,
+   "h": 48,
+   "fill": "#ffe8e6",
+   "stroke": "#d98b85",
+   "textColor": "#b8433c",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "硬失败 / 低置信度隔离",
+    "短期留原始数据，长期留元数据证据"
+   ]
+  },
+  {
+   "id": "n16",
+   "kind": "fail",
+   "x": 734,
+   "y": 496,
+   "w": 170,
+   "h": 48,
+   "fill": "#ffe8e6",
+   "stroke": "#d98b85",
+   "textColor": "#b8433c",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "不通过：原因码 / 仲裁 / 返工",
+    "仅针对缺口分桶生成补采"
+   ]
+  },
+  {
+   "id": "n17",
+   "kind": "decision",
+   "x": 315,
+   "y": 492,
+   "w": 170,
+   "h": 59,
+   "fill": "#eaf7ee",
+   "stroke": "#7cbd94",
+   "textColor": "#2c7a4b",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "保守预计有效量",
+    "及必选分桶是否达标?"
+   ]
+  },
+  {
+   "id": "n18",
+   "kind": "step",
+   "x": 1152,
+   "y": 496,
+   "w": 170,
+   "h": 48,
+   "fill": "#e8f6f6",
+   "stroke": "#78bcbc",
+   "textColor": "#1f7a7a",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "通过：写入有效样本事实账本",
+    "更新有效时长、分桶和人员设备指标"
+   ]
+  },
+  {
+   "id": "n19",
+   "kind": "step",
+   "x": 944,
+   "y": 614,
+   "w": 170,
+   "h": 48,
+   "fill": "#fff8db",
+   "stroke": "#d9b441",
+   "textColor": "#8a5a00",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "有标注需求：标注 + 标注质检",
+    "无标注需求：直接进入交付"
+   ]
+  },
+  {
+   "id": "n20",
+   "kind": "step",
+   "x": 1152,
+   "y": 614,
+   "w": 170,
+   "h": 48,
+   "fill": "#e8f6f6",
+   "stroke": "#78bcbc",
+   "textColor": "#1f7a7a",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "生成交付批次与Manifest",
+    "转为训练格式并上传阿里云"
+   ]
+  },
+  {
+   "id": "n21",
+   "kind": "step",
+   "x": 1152,
+   "y": 678,
+   "w": 170,
+   "h": 48,
+   "fill": "#e8f6f6",
+   "stroke": "#78bcbc",
+   "textColor": "#1f7a7a",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "云端校验 / 需求方验收 / 训练使用",
+    "反馈质量与模型边际收益"
+   ]
+  },
+  {
+   "id": "n22",
+   "kind": "step",
+   "x": 315,
+   "y": 678,
+   "w": 170,
+   "h": 48,
+   "fill": "#eaf7ee",
+   "stroke": "#7cbd94",
+   "textColor": "#2c7a4b",
+   "bodyColor": "#6b7984",
+   "lines": [
+    "任务关闭归档",
+    "交付验收完成后清理工厂热数据"
+   ]
+  }
+ ],
+ "edges": [
+  {
+   "id": "e0",
+   "from": "n1",
+   "to": "n2",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e1",
+   "from": "n2",
+   "to": "n3",
+   "color": "#c0504d",
+   "label": "否",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e2",
+   "from": "n2",
+   "to": "n4",
+   "color": "#2c7a4b",
+   "label": "是",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e3",
+   "from": "n4",
+   "to": "n5",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e4",
+   "from": "n5",
+   "to": "n6",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e5",
+   "from": "n6",
+   "to": "n7",
+   "color": "#6b7984",
+   "label": "通过",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e6",
+   "from": "n7",
+   "to": "n8",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e7",
+   "from": "n8",
+   "to": "n9",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e8",
+   "from": "n9",
+   "to": "n10",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e9",
+   "from": "n10",
+   "to": "n11",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e10",
+   "from": "n11",
+   "to": "n12",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e11",
+   "from": "n12",
+   "to": "n15",
+   "color": "#c0504d",
+   "label": "硬失败",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e12",
+   "from": "n12",
+   "to": "n13",
+   "color": "#6b7984",
+   "label": "通过 / 待复核",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e13",
+   "from": "n13",
+   "to": "n16",
+   "color": "#c0504d",
+   "label": "不通过",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e14",
+   "from": "n16",
+   "to": "n10",
+   "color": "#c0504d",
+   "label": "补采缺口回流",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e15",
+   "from": "n13",
+   "to": "n14",
+   "color": "#6b7984",
+   "label": "通过",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e16",
+   "from": "n14",
+   "to": "n18",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e17",
+   "from": "n18",
+   "to": "n17",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e18",
+   "from": "n17",
+   "to": "n9",
+   "color": "#4472c4",
+   "label": "未达标：按质检产能小批量释放令牌",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e19",
+   "from": "n17",
+   "to": "n19",
+   "color": "#6b7984",
+   "label": "已达标：冻结新领取",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e20",
+   "from": "n19",
+   "to": "n20",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e21",
+   "from": "n20",
+   "to": "n21",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e22",
+   "from": "n21",
+   "to": "n22",
+   "color": "#6b7984",
+   "label": "",
+   "dashed": false,
+   "vertices": []
+  },
+  {
+   "id": "e23",
+   "from": "n21",
+   "to": "n1",
+   "color": "#2c7a4b",
+   "label": "训练反馈触发标准升级或新需求",
+   "dashed": false,
+   "vertices": []
+  }
+ ]
+}
