@@ -58,11 +58,22 @@ python3 server.py 4244       # 静态托管 + POST /api/save 写回 data/*.json
 - `data/final.json` —— 终版五阶段（08-31 会中版，63 节点/40 边）
 - `data/swimlane.json` —— 早版六泳道（08-27 版，47 节点/24 边）
 
+## 部署与自愈
+
+```bash
+./deploy.sh      # 一键:同步代码到 108 → 重启 → 双向健康检查
+```
+
+108 上已挂 crontab 看门狗：每分钟 `start.sh` 幂等拉活（进程在就不动），`@reboot` 开机自启，日志超 10MB 自动截断——服务挂了/机器重启都会自己爬起来，无需人工干预。
+
+> 坑注：`pkill -f "python3 server.py"` 会匹配到 ssh 会话自身命令行把自己杀掉，脚本里用 `[s]erver.py` 括号技巧规避。
+
 ## 结构
 
 ```
 index.html  style.css  app.js   # 应用(无构建)
 server.py                        # 静态托管 + /api/save 落盘
+start.sh    deploy.sh            # 自愈启动(挂 cron) / 一键部署到 108
 vendor/                          # X6 + 5 插件 UMD(离线)
 data/                            # 规范 JSON(唯一数据源)
 tools/convert.py                 # 旧格式→规范 JSON 转换器
