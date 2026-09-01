@@ -121,3 +121,21 @@ html, body, #root { height: 100%; overflow: hidden;
 .pan-overlay { position: absolute; inset: 0; z-index: 50; cursor: grab;
   background: transparent; }
 .pan-overlay.grabbing { cursor: grabbing; }
+
+/* ---------- 选中态:一点点描边 + 四个角点(可拖改大小) ---------- */
+.x6-widget-selection-inner { border: 1px solid rgba(0, 0, 0, .45); box-shadow: none; }
+.x6-widget-selection-box { display: none; }          /* 逐个 cell 的蓝色蒙层不要 */
+.x6-widget-transform {
+  border: 1px dashed rgba(0, 0, 0, .45);
+  border-radius: 0; margin: -1px 0 0 -1px; padding: 0;
+}
+.x6-widget-transform > div {                          /* 四个角点 */
+  width: 9px; height: 9px; margin: 0; border-radius: 0;
+  background: #fff; border: 1.5px solid #000;
+}
+.x6-widget-transform > div:hover { background: #000; }
+.x6-widget-transform-resize:hover { background: #000; }
+.x6-widget-transform-cursor-nw { cursor: nwse-resize; }
+.x6-widget-transform-cursor-ne { cursor: nesw-resize; }
+.x6-widget-transform-cursor-se { cursor: nwse-resize; }
+.x6-widget-transform-cursor-sw { cursor: nesw-resize; }

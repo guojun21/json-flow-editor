@@ -5,6 +5,7 @@ import { History } from '@antv/x6-plugin-history';
 import { Selection } from '@antv/x6-plugin-selection';
 import { Keyboard } from '@antv/x6-plugin-keyboard';
 import { Snapline } from '@antv/x6-plugin-snapline';
+import { Transform } from '@antv/x6-plugin-transform';
 import { Export } from '@antv/x6-plugin-export';
 import { Dnd } from '@antv/x6-plugin-dnd';
 
@@ -67,6 +68,12 @@ export function createFlowEngine(container, cb) {
     rubberband: true, modifiers: ['shift'] }));
   graph.use(new Keyboard({ enabled: true }));
   graph.use(new Snapline({ enabled: true }));
+  // 选中即可拖角改大小:orthogonal:false → 只留四个角点(不出四条边中点)
+  graph.use(new Transform({
+    resizing: { enabled: true, orthogonal: false, preserveAspectRatio: false,
+      minWidth: 24, minHeight: 20, autoScroll: true },
+    rotating: false,
+  }));
   graph.use(new Export());
   const dnd = new Dnd({ target: graph, scaled: false,
     getDropNode: node => node.clone({ keepId: false }) });
@@ -293,6 +300,12 @@ export function createFlowEngine(container, cb) {
   graph.on('cell:changed', emitChange);
   graph.on('cell:added', emitChange);
   graph.on('cell:removed', emitChange);
+  graph.on('node:resized', ({ node }) => {
+    const s2 = node.getSize();
+    const d = node.getData() || {};
+    node.setData({ ...d, baseW: Math.round(s2.width), baseH: Math.round(s2.height) },
+      { deep: false });
+  });
   graph.on('edge:selected', ({ edge }) => edgeTools(edge));
   graph.on('edge:unselected', ({ edge }) => edge.removeTools());
   let scaleTimer = null;
