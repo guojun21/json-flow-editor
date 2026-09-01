@@ -4,7 +4,7 @@
   "description": "**一个 JSON 完整表达一张流程图；渲染吃 JSON，一切编辑实时写回 JSON。**",
   "main": "app.js",
   "scripts": {
-    "build": "esbuild src/main.jsx --bundle --minify --jsx=automatic --outfile=dist/app.js",
+    "build": "esbuild src/main.jsx --bundle --minify --jsx=automatic --outfile=dist/app.js && python3 tools/stamp.py",
     "dev": "esbuild src/main.jsx --bundle --jsx=automatic --outfile=dist/app.js --watch"
   },
   "repository": {

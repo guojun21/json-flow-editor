@@ -15,8 +15,11 @@ class H(SimpleHTTPRequestHandler):
         super().__init__(*a, directory=ROOT, **kw)
 
     def end_headers(self):
-        if self.path.startswith('/data/') or self.path.startswith('/api/'):
-            self.send_header('Cache-Control', 'no-store')
+        # 全站禁缓存:没有 Cache-Control 时 Chrome 会按 Last-Modified 做「启发式缓存」,
+        # 导致部署了新版用户刷新也看不到(实测踩过:侧栏还是旧的四个元素)。
+        self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
+        self.send_header('Pragma', 'no-cache')
+        self.send_header('Expires', '0')
         super().end_headers()
 
     def do_GET(self):
