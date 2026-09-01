@@ -196,6 +196,7 @@ link(D5, G1, GREEN, '内部')
 link(D5, H1, ORANGE, '商业')
 
 doc = {'meta': {'id': 'optimized', 'title': '优化版五阶段（09-01）',
+                'date': '2026-09-01',
                 'W': W, 'H': H, 'fs': {'title': 36, 'body': 26}},
        'nodes': nodes, 'edges': edges}
 out = os.path.join(ROOT, 'data', 'optimized.json')

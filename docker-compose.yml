@@ -1,19 +1,22 @@
-# 容器化部署(替代原来的裸进程 + crontab 看门狗)。
-# restart: unless-stopped 就是自愈:进程挂了 / 机器重启,docker 自己拉回来。
+# json-flow-editor 的 pod。两件事和普通容器不一样:
+#   1. 整个工程目录挂进去(/app),改代码不用重建镜像;在 pod 里改的东西也直接落宿主盘
+#   2. 带 sshd,可以 `ssh jfe-pod` 直接进去干活(端口 4245 → 容器 22)
 services:
   json-flow-editor:
     build: .
     image: json-flow-editor:latest
     container_name: json-flow-editor
     restart: unless-stopped
-    # 用宿主用户身份跑(108 的 guruicheng=1003):挂载卷里写出来的 JSON 归宿主用户,
-    # 否则 root 写的文件会给后续 rsync / 手工编辑添堵
-    user: "1003:1003"
+    environment:
+      APP_UID: "1003"      # 服务以宿主用户身份跑,写出来的 JSON 属主正常
+      APP_GID: "1003"
     ports:
-      - "4244:4244"
+      - "4244:4244"        # 网页
+      - "4245:22"          # SSH 进 pod
     volumes:
-      # 图数据落宿主盘:UI 里 /api/save 写的 JSON 不会随镜像重建蒸发
-      - ./data:/app/data
+      - .:/app                                              # 代码 + 数据,单一真源
+      - ./.pod-ssh:/etc/ssh/keys                            # sshd host key,重启指纹不变
+      - /home/guruicheng/.ssh/authorized_keys:/tmp/authorized_keys.host:ro
     logging:
       driver: json-file
       options: { max-size: "10m", max-file: "3" }

@@ -30,11 +30,19 @@ class H(SimpleHTTPRequestHandler):
                 if not f.endswith('.json'):
                     continue
                 fid = f[:-5]
+                path = os.path.join(ddir, f)
+                mtime = os.path.getmtime(path)
                 try:
-                    meta = json.load(open(os.path.join(ddir, f))).get('meta', {})
-                    out.append({'id': fid, 'title': meta.get('title', fid)})
+                    meta = json.load(open(path)).get('meta', {})
+                    out.append({'id': fid, 'title': meta.get('title', fid),
+                                'date': meta.get('date', ''), '_m': mtime})
                 except Exception:
-                    out.append({'id': fid, 'title': fid})
+                    out.append({'id': fid, 'title': fid, 'date': '', '_m': mtime})
+            # 最新的排最前:先按 meta.date 倒序(语义日期,重新部署不会乱),
+            # 没写 date 的退回文件 mtime 倒序
+            out.sort(key=lambda x: (x['date'] or '', x['_m']), reverse=True)
+            for x in out:
+                x.pop('_m', None)
             body = json.dumps(out, ensure_ascii=False).encode()
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')

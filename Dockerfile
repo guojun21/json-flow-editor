@@ -1,16 +1,21 @@
-# json-flow-editor 运行时:只用 Python 标准库,不装任何依赖。
-# 基础镜像固定用 108 本地已有的 tag(那台机器没有 registry 出网,拉不了新镜像)。
+# json-flow-editor 的 pod:一个能直接 SSH 进去干活的容器,不是只会跑进程的黑盒。
+# 里面有 python(跑服务)、node/npm(在 pod 里就能重新构建)、git、openssh。
 FROM python:3.11-alpine
 
-WORKDIR /app
-# 代码进镜像;data/ 由 compose 挂载宿主目录,改图不随镜像重建丢
-COPY server.py ./
-COPY index.html ./
-COPY dist ./dist
-COPY data ./data
+RUN apk add --no-cache openssh nodejs npm git su-exec rsync \
+ && ssh-keygen -A \
+ && sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config \
+ && sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config \
+ && echo "HostKey /etc/ssh/keys/ssh_host_ed25519_key" >> /etc/ssh/sshd_config \
+ && echo "HostKey /etc/ssh/keys/ssh_host_rsa_key" >> /etc/ssh/sshd_config
 
-EXPOSE 4244
+WORKDIR /app
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# 代码不再烤进镜像:/app 由 compose 挂宿主目录,改完文件立刻生效,不用重建镜像
+EXPOSE 4244 22
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
   CMD wget -qO- http://127.0.0.1:4244/api/list >/dev/null || exit 1
 
-CMD ["python3", "server.py", "4244"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

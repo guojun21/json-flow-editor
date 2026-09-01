@@ -70,11 +70,21 @@ npm install && npm run build   # src/*.jsx → dist/app.js
 ./deploy.sh      # 一键:同步代码到 108 → docker compose up -d --build → 双向健康检查
 ```
 
-108 上跑的是容器 `json-flow-editor`（compose 服务同名）：
+108 上跑的是 pod `json-flow-editor`（compose 服务同名）。**它是能直接登进去干活的容器，不是黑盒**：
+
+```bash
+ssh jfe-pod                 # 直接进 pod(4245 → 容器 22),root 身份,/app 就是工程目录
+ssh jfe-pod 'cd /app && npm run build'   # pod 里自带 node/npm/git,能自己构建
+```
+
+要点：
 
 - **自愈靠 `restart: unless-stopped`**，不再用 crontab 看门狗。宿主侧 `kill -9` 掉主进程，docker 立刻重开一个（实测 `RestartCount` 从 0 变 1，服务秒回 200）；机器重启也会自己起来。
-- **数据在宿主盘**：`./data` 以 volume 挂进 `/app/data`，UI 里 `/api/save` 写的 JSON 不随镜像重建蒸发。
-- **容器以宿主用户身份跑**（`user: "1003:1003"`），挂载卷里新写的文件归 `guruicheng`，不会给后续 rsync 添堵。
+- **整个工程目录挂进 pod**（`.:/app`）：代码不再烤进镜像，**改文件立刻生效，不用重建镜像**；在 pod 里改的东西也直接落宿主盘，两边是同一份。数据同理，UI 保存的 JSON 不会蒸发。
+- **pod 里有 python / node / npm / git / rsync**，`npm install && npm run build` 在 pod 内跑得通（产物指纹与 Mac 上构建一致）。
+- **sshd host key 落在 `.pod-ssh/`**（gitignore，且 deploy 的 rsync 明确 `--exclude`）——否则每次部署都会把 key 删掉，客户端一直报 REMOTE HOST IDENTIFICATION HAS CHANGED。
+- **authorized_keys 要复制不能直挂**：sshd 的 StrictModes 要求属主 root、权限 600，直接挂宿主文件会被拒（实测 Permission denied），entrypoint 里从只读挂载点 cp 一份再 chown。
+- **服务以宿主用户身份跑**（entrypoint 里 `su-exec 1003:1003`，sshd 需要 root 所以容器本身是 root 起的），写出来的文件归 `guruicheng`。
 - **基础镜像 `python:3.11-alpine`**：108 没有 registry 出网，只能用它本地已有的 tag；服务本身零依赖（纯标准库）。
 - 日志走 json-file，单文件 10MB × 3 轮转。
 

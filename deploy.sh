@@ -6,7 +6,7 @@ DIR='~/apps/json-flow-editor'
 PORT=4244
 
 ssh "$HOST" "mkdir -p $DIR"
-rsync -a --delete --exclude .git --exclude node_modules --exclude server.log \
+rsync -a --delete --exclude .git --exclude node_modules --exclude server.log --exclude .pod-ssh \
   "$(dirname "$0")/" "$HOST:$DIR/"
 ssh "$HOST" "cd $DIR && docker compose up -d --build 2>&1 | tail -3 && \
   sleep 2 && docker ps --filter name=json-flow-editor --format '容器:{{.Names}} {{.Status}}' && \

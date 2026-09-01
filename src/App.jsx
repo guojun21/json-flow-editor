@@ -6,7 +6,8 @@ import Modal from './Modal.jsx';
 
 const DRAFT_V = 'jfe:v2:';   // 改版即失效旧草稿(黑白版草稿丢了颜色)
 
-const FALLBACK_FILES = [
+const FALLBACK_FILES = [          // 兜底列表也按新→旧
+  { id: 'optimized', title: '优化版五阶段' },
   { id: 'final', title: '终版五阶段' },
   { id: 'swimlane', title: '早版六泳道' },
 ];
@@ -17,7 +18,6 @@ export default function App() {
   const docRef = useRef(null);
   const curRef = useRef('final');
   const dirtyRef = useRef(false);
-  const fileInputRef = useRef(null);
 
   const [files, setFiles] = useState(FALLBACK_FILES);
   const [cur, setCur] = useState('final');
@@ -27,17 +27,11 @@ export default function App() {
     const v = +localStorage.getItem('jfe:sidew');
     return v >= 160 && v <= 640 ? v : 224;
   });
-  const [showJSON, setShowJSON] = useState(false);
-  const [jsonText, setJsonText] = useState('');
   const [modal, setModal] = useState(null);     // {type, cell, draft}
   const [ctxMenu, setCtxMenu] = useState(null); // {x,y,kind,cell,gx,gy,hitIdx}
   const [linking, setLinking] = useState(false);
   const modalRef = useRef(null);
   modalRef.current = modal;
-
-  const refreshJSON = useCallback(() => {
-    if (docRef.current) setJsonText(JSON.stringify(docRef.current, null, 1));
-  }, []);
 
   const commitTimer = useRef(null);
   const commit = useCallback(() => {
@@ -49,9 +43,8 @@ export default function App() {
       localStorage.setItem(DRAFT_V + curRef.current, JSON.stringify(docRef.current));
       dirtyRef.current = true;
       setStatus('已改(本地,待自动保存)');
-      refreshJSON();
     }, 120);
-  }, [refreshJSON]);
+  }, []);
 
   const autosaveRef = useRef(true);   // 自动化测试可用 __jfe.autosave(false) 关掉,防止把测试涂改写进 data/
   const pushServer = useCallback(silent => {
@@ -166,7 +159,6 @@ export default function App() {
       docRef.current = JSON.parse(draft);
       eng.buildFrom(docRef.current);
       setStatus('本地草稿');
-      refreshJSON();
       return;
     }
     fetch('data/' + id + '.json?t=' + Date.now())
@@ -175,7 +167,6 @@ export default function App() {
         docRef.current = d;
         eng.buildFrom(d);
         setStatus('已加载');
-        refreshJSON();
       })
       .catch(() => setStatus('数据加载失败'));
   }
@@ -191,39 +182,6 @@ export default function App() {
       eng.applyEdgeEdit(m.cell, { ...m.draft, label: m.draft.label.trim() });
     }
     setModal(null);
-  }
-
-  function onAction(act) {
-    const eng = engineRef.current;
-    if (act === 'fit') eng.fit();
-    else if (act === 'json') { setShowJSON(v => !v); refreshJSON(); }
-    else if (act === 'export') {
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(new Blob(
-        [JSON.stringify(docRef.current, null, 1)], { type: 'application/json' }));
-      a.download = curRef.current + '.json';
-      a.click();
-      URL.revokeObjectURL(a.href);
-    } else if (act === 'import') fileInputRef.current.click();
-    else if (act === 'svg') eng.exportSVG(curRef.current + '-flow.svg');
-    else if (act === 'reset') {
-      if (!confirm('丢弃本图全部修改,重置为服务器上的版本?')) return;
-      localStorage.removeItem(DRAFT_V + curRef.current);
-      load(curRef.current);
-    }
-  }
-  function onImportFile(ev) {
-    const f = ev.target.files[0];
-    if (!f) return;
-    f.text().then(txt => {
-      const d = JSON.parse(txt);
-      if (!d.meta || !d.nodes || !d.edges) throw new Error('缺 meta/nodes/edges');
-      docRef.current = d;
-      localStorage.setItem(DRAFT_V + curRef.current, JSON.stringify(d));
-      engineRef.current.buildFrom(d);
-      commit();
-    }).catch(e => alert('导入失败: ' + e.message));
-    ev.target.value = '';
   }
 
   /* 右键菜单动作(节点与连线共用一套) */
@@ -273,8 +231,7 @@ export default function App() {
       style={{ '--side-w': sideW + 'px' }}>
       <Sidebar files={files} cur={cur} status={status} collapsed={collapsed}
         onOpenFile={id => { if (id !== cur) load(id); }}
-        onDragElement={(kind, e) => engineRef.current.startDnd(kind, e.nativeEvent || e)}
-        onAction={onAction} />
+        onDragElement={(kind, e) => engineRef.current.startDnd(kind, e.nativeEvent || e)} />
       <div className={'side-resizer' + (dragging ? ' dragging' : '')}
         title="左右拖动改变侧栏宽度(双击复位)" onMouseDown={startSideDrag}
         onDoubleClick={() => { setSideW(224); localStorage.setItem('jfe:sidew', '224');
@@ -282,16 +239,6 @@ export default function App() {
       <div className="sidebar-toggle" title="收起/展开侧栏 (⌘B)"
         onClick={() => setCollapsed(v => !v)}>{collapsed ? '⟩' : '⟨'}</div>
       <div className={'canvas' + (linking ? ' linking' : '')} ref={canvasRef} />
-      {showJSON && (
-        <div className="json-panel">
-          <div className="jp-head">实时 JSON(编辑即更新)
-            <button className="btn btn-ghost btn-xs" onClick={() =>
-              navigator.clipboard.writeText(jsonText).then(() => setStatus('JSON 已复制'))}>
-              复制</button>
-          </div>
-          <pre className="jp-view">{jsonText}</pre>
-        </div>
-      )}
       {ctxMenu && (
         <div className="ctx-menu" style={{ left: ctxMenu.x, top: ctxMenu.y }}
           onMouseDown={e => e.stopPropagation()}>
@@ -415,8 +362,6 @@ export default function App() {
           </div>
         </Modal>
       )}
-      <input ref={fileInputRef} type="file" accept=".json"
-        style={{ display: 'none' }} onChange={onImportFile} />
     </div>
   );
 }
