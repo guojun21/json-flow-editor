@@ -304,7 +304,8 @@ export function createFlowEngine(container, cb) {
       graph.addEdge({
         id: e.id,
         zIndex: (e.z !== undefined && e.z !== null && e.z !== '') ? +e.z : 5,
-        source: { cell: e.from }, target: { cell: e.to },
+        source: e.fromPort ? { cell: e.from, port: e.fromPort } : { cell: e.from },
+        target: e.toPort ? { cell: e.to, port: e.toPort } : { cell: e.to },
         vertices: e.vertices || [],
         router: { name: router },
         attrs: edgeAttrs(dash, e.color, e.width, e.arrow),
@@ -334,6 +335,7 @@ export function createFlowEngine(container, cb) {
         const z = c.getZIndex();
         edges.push(clean({ id: c.id,
           from: c.getSourceCellId(), to: c.getTargetCellId(),
+          fromPort: c.getSourcePortId() || undefined, toPort: c.getTargetPortId() || undefined,
           color: d.color, width: d.width, label, labels: extra.length ? extra : undefined,
           dash: dashOf(d.dash !== undefined ? d.dash : d.dashed) === 'solid'
             ? undefined : dashOf(d.dash !== undefined ? d.dash : d.dashed),
@@ -654,6 +656,7 @@ export function createFlowEngine(container, cb) {
     graph,
     buildFrom, serialize, fit,
     startDnd: (kind, e) => dnd.start(paletteNode(kind), e),
+    serializeNow: serialize,
     applyNodeEdit, applyEdgeEdit,
     addEdgeVertex, removeEdgeVertex,
     setNewEdgeStyle,

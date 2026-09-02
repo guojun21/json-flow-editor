@@ -15,29 +15,31 @@
   {
    "id": "title",
    "kind": "text",
+   "shape": "rounded",
    "x": 40,
    "y": 30,
    "w": 1500,
    "h": 52,
+   "textColor": "#0b1220",
    "lines": [
     "排产采集 · 一期数据模型（类图 / 实体关系）v4"
    ],
    "fontSize": 32,
-   "bold": true,
-   "textColor": "#0b1220"
+   "bold": true
   },
   {
    "id": "legend",
    "kind": "text",
+   "shape": "rounded",
    "x": 40,
    "y": 86,
    "w": 1600,
    "h": 34,
+   "textColor": "#48586a",
    "lines": [
     "方框 = 实体(表):标题带为实体名,下面是字段 [PK 主键 | FK→表 外键 | NN 非空];两端标基数(1 / 0..1 / 0..* / 1..*);实线 = 外键关系,虚线 = 血缘快照(派生);清理前置 = 云端回执 + 批次对账通过 + 无未关闭隔离;来源 = factory-core/db.mjs,与线上库一致"
    ],
-   "fontSize": 16,
-   "textColor": "#48586a"
+   "fontSize": 16
   },
   {
    "id": "req",
@@ -47,6 +49,8 @@
    "y": 150,
    "w": 330,
    "h": 282,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "lines": [
     "需求单  «requirements»",
     "id PK 需求单号",
@@ -59,9 +63,7 @@
     "concurrent_limit 并发上限",
     "version 需求版本"
    ],
-   "fontSize": 15,
-   "fill": "#ffffff",
-   "stroke": "#48586a"
+   "fontSize": 15
   },
   {
    "id": "tok",
@@ -71,6 +73,8 @@
    "y": 150,
    "w": 330,
    "h": 282,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "lines": [
     "任务令牌  «tokens»",
     "id PK 令牌号",
@@ -83,9 +87,7 @@
     "status NN 待开工|在采|已收工|已超时回收|已拒绝",
     "expires_at 过期时间"
    ],
-   "fontSize": 15,
-   "fill": "#ffffff",
-   "stroke": "#48586a"
+   "fontSize": 15
   },
   {
    "id": "ses",
@@ -95,6 +97,8 @@
    "y": 150,
    "w": 330,
    "h": 210,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "lines": [
     "采集会话  «sessions»",
     "id PK 会话号",
@@ -104,9 +108,7 @@
     "reconnects / max_reconnect_seconds",
     "started_at / ended_at"
    ],
-   "fontSize": 15,
-   "fill": "#ffffff",
-   "stroke": "#48586a"
+   "fontSize": 15
   },
   {
    "id": "ep",
@@ -116,6 +118,8 @@
    "y": 150,
    "w": 330,
    "h": 330,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "lines": [
     "Episode  «episodes»",
     "id PK Episode 号(包内 meta 同值)",
@@ -130,9 +134,7 @@
     "cloud_receipt_at · cleanup_deadline(回执+对账通过+非隔离才置)",
     "batch_id FK→batches 0..1"
    ],
-   "fontSize": 15,
-   "fill": "#ffffff",
-   "stroke": "#48586a"
+   "fontSize": 15
   },
   {
    "id": "file",
@@ -142,6 +144,8 @@
    "y": 150,
    "w": 330,
    "h": 186,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "lines": [
     "Episode 文件  «episode_files»",
     "PK(episode_id, rel_path)",
@@ -150,9 +154,7 @@
     "bytes",
     "sha256 NN"
    ],
-   "fontSize": 15,
-   "fill": "#ffffff",
-   "stroke": "#48586a"
+   "fontSize": 15
   },
   {
    "id": "pc",
@@ -162,6 +164,8 @@
    "y": 934,
    "w": 330,
    "h": 234,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "lines": [
     "预检结果  «precheck_results»",
     "PK(episode_id, rule)",
@@ -172,9 +176,7 @@
     "reason_code",
     "detail · checked_at"
    ],
-   "fontSize": 15,
-   "fill": "#ffffff",
-   "stroke": "#48586a"
+   "fontSize": 15
   },
   {
    "id": "q",
@@ -184,6 +186,8 @@
    "y": 590,
    "w": 330,
    "h": 234,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "lines": [
     "隔离记录  «episode_quarantines»",
     "id PK",
@@ -194,9 +198,7 @@
     "released_at(未关闭不得进批次/清理)",
     "reviewer / disposition 复核人 / 处置"
    ],
-   "fontSize": 15,
-   "fill": "#ffffff",
-   "stroke": "#48586a"
+   "fontSize": 15
   },
   {
    "id": "bat",
@@ -206,6 +208,8 @@
    "y": 590,
    "w": 330,
    "h": 210,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "lines": [
     "交付批次  «batches»",
     "id PK 批次号",
@@ -215,9 +219,7 @@
     "cloud_receipt NN 未确认|已确认",
     "created_at / verified_at"
    ],
-   "fontSize": 15,
-   "fill": "#ffffff",
-   "stroke": "#48586a"
+   "fontSize": 15
   },
   {
    "id": "ev",
@@ -227,6 +229,8 @@
    "y": 590,
    "w": 330,
    "h": 210,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "lines": [
     "事件流  «events»",
     "seq PK",
@@ -236,9 +240,7 @@
     "actor 操作人",
     "detail 明细"
    ],
-   "fontSize": 15,
-   "fill": "#ffffff",
-   "stroke": "#48586a"
+   "fontSize": 15
   }
  ],
  "edges": [
@@ -248,7 +250,6 @@
    "to": "tok",
    "color": "#1f6389",
    "width": 2,
-   "arrow": "none",
    "labels": [
     {
      "text": "1",
@@ -259,7 +260,7 @@
      "position": 0.88
     }
    ],
-   "router": "orth"
+   "arrow": "none"
   },
   {
    "id": "r1",
@@ -267,7 +268,6 @@
    "to": "ses",
    "color": "#1f6389",
    "width": 2,
-   "arrow": "none",
    "labels": [
     {
      "text": "1",
@@ -278,7 +278,7 @@
      "position": 0.88
     }
    ],
-   "router": "orth"
+   "arrow": "none"
   },
   {
    "id": "r2",
@@ -286,7 +286,6 @@
    "to": "ep",
    "color": "#1f6389",
    "width": 2,
-   "arrow": "none",
    "labels": [
     {
      "text": "1",
@@ -297,7 +296,7 @@
      "position": 0.88
     }
    ],
-   "router": "orth"
+   "arrow": "none"
   },
   {
    "id": "r3",
@@ -305,7 +304,6 @@
    "to": "file",
    "color": "#1f6389",
    "width": 2,
-   "arrow": "none",
    "labels": [
     {
      "text": "1",
@@ -316,7 +314,7 @@
      "position": 0.88
     }
    ],
-   "router": "orth"
+   "arrow": "none"
   },
   {
    "id": "r4",
@@ -324,7 +322,6 @@
    "to": "pc",
    "color": "#1f6389",
    "width": 2,
-   "arrow": "none",
    "labels": [
     {
      "text": "1",
@@ -335,7 +332,8 @@
      "position": 0.88
     }
    ],
-   "router": "manhattan"
+   "router": "manhattan",
+   "arrow": "none"
   },
   {
    "id": "r5",
@@ -343,7 +341,7 @@
    "to": "q",
    "color": "#1f6389",
    "width": 2,
-   "arrow": "none",
+   "label": "隔离",
    "labels": [
     {
      "text": "1",
@@ -354,16 +352,16 @@
      "position": 0.88
     }
    ],
-   "router": "orth",
-   "label": "隔离"
+   "arrow": "none"
   },
   {
    "id": "r6",
    "from": "bat",
    "to": "ep",
+   "toPort": "pr",
    "color": "#1f6389",
    "width": 2,
-   "arrow": "none",
+   "label": "batch_id",
    "labels": [
     {
      "text": "0..1",
@@ -374,8 +372,7 @@
      "position": 0.88
     }
    ],
-   "router": "orth",
-   "label": "batch_id"
+   "arrow": "none"
   },
   {
    "id": "r7",
@@ -383,7 +380,7 @@
    "to": "ep",
    "color": "#1f6389",
    "width": 2,
-   "arrow": "none",
+   "label": "血缘快照(虚线)",
    "labels": [
     {
      "text": "1",
@@ -394,9 +391,9 @@
      "position": 0.96
     }
    ],
+   "dash": "dashed",
    "router": "manhattan",
-   "label": "血缘快照(虚线)",
-   "dash": "dashed"
+   "arrow": "none"
   },
   {
    "id": "r8",
@@ -404,7 +401,7 @@
    "to": "ep",
    "color": "#1f6389",
    "width": 2,
-   "arrow": "none",
+   "label": "ref_type=episode",
    "labels": [
     {
      "text": "0..*",
@@ -416,7 +413,7 @@
     }
    ],
    "router": "manhattan",
-   "label": "ref_type=episode"
+   "arrow": "none"
   }
  ]
 }

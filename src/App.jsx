@@ -106,7 +106,7 @@ export default function App() {
       onKeyToggleSidebar: () => setCollapsed(v => !v),
     });
     engineRef.current = eng;
-    window.__jfe = { graph: () => eng.graph, doc: () => docRef.current,
+    window.__jfe = { graph: () => eng.graph, doc: () => docRef.current, serialize: () => eng.serializeNow(),
       autosave: v => { autosaveRef.current = v !== false; return autosaveRef.current; } };
     Object.keys(localStorage).filter(k => k.startsWith('jfe:') && !k.startsWith(DRAFT_V))
       .forEach(k => localStorage.removeItem(k));   // 清理上一代草稿
