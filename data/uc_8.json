@@ -3,8 +3,8 @@
   "id": "uc_8",
   "title": "用例·横切·平台基础（09-02）",
   "date": "2026-09-02",
-  "W": 1600,
-  "H": 812,
+  "W": 1590,
+  "H": 764,
   "fs": {
    "title": 24,
    "body": 18
@@ -17,11 +17,11 @@
    "x": 40,
    "y": 40,
    "w": 1500,
-   "h": 50,
+   "h": 52,
    "lines": [
-    "排产采集 · 横切·平台基础 · 用例图（7 个用例）"
+    "排产采集 · 横切·平台基础 · 用例图"
    ],
-   "fontSize": 30,
+   "fontSize": 32,
    "bold": true,
    "textColor": "#0b1220"
   },
@@ -29,11 +29,11 @@
    "id": "legend",
    "kind": "text",
    "x": 40,
-   "y": 94,
-   "w": 1600,
+   "y": 96,
+   "w": 1700,
    "h": 34,
    "lines": [
-    "左列=主责角色,实线=主责;椭圆第二行=协同角色;绿=已实现 橙=部分 白=待做 灰=不入一期;选中用例右侧看规约,双击可编辑"
+    "火柴人=真人角色 · «system»=外部系统 · «timer»=定时触发 · 实线=主责关联(一对一) · 绿=已实现 橙=部分实现 白=待做 灰=不入一期 · 协同角色/触发/前置/主流程在右侧规约面板(选中即显示)"
    ],
    "fontSize": 16,
    "textColor": "#48586a"
@@ -41,20 +41,90 @@
   {
    "id": "b",
    "kind": "boundary",
-   "x": 300,
-   "y": 144,
-   "w": 1240,
-   "h": 638,
+   "x": 290,
+   "y": 150,
+   "w": 1010,
+   "h": 574,
    "lines": [
-    "《系统》排产采集 · 横切·平台基础"
+    "«system» 排产采集 · 横切·平台基础"
    ],
    "fontSize": 22
   },
   {
-   "id": "actor0",
+   "id": "a0_0",
+   "kind": "pill",
+   "x": 70,
+   "y": 283.0,
+   "w": 190,
+   "h": 68,
+   "lines": [
+    "«system»",
+    "平台任务中心"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "H2",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 330,
+   "y": 214,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "事件流与操作日志",
+    "已实现"
+   ],
+   "fontSize": 19,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "H2",
+    "trigger": "任何状态变化",
+    "pre": "—",
+    "flow": "每个状态变化一条事件,可追溯",
+    "alt": "—",
+    "priority": "P0",
+    "status": "done",
+    "co": ""
+   }
+  },
+  {
+   "id": "H4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 330,
+   "y": 328,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "通知与告警(飞书)",
+    "待做"
+   ],
+   "fontSize": 19,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "H4",
+    "trigger": "告警触发",
+    "pre": "—",
+    "flow": "水位/离线/积压/SLA 推送",
+    "alt": "—",
+    "priority": "P1",
+    "status": "todo",
+    "co": "组长 / 设备运维 / IT/云运维"
+   }
+  },
+  {
+   "id": "a0_1",
    "kind": "actor",
    "x": 130,
-   "y": 217.0,
+   "y": 521.0,
    "w": 64,
    "h": 84,
    "lines": [
@@ -66,15 +136,15 @@
    "id": "H3",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 464,
+   "w": 400,
+   "h": 92,
    "lines": [
     "MVP 验收看板(五项指标)",
-    "协同 工厂管理员/运营"
+    "已实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#e3f1ec",
    "stroke": "#1e755d",
    "textColor": "#17212d",
@@ -85,22 +155,23 @@
     "flow": "落盘成功率/软件丢帧/断连恢复/会话失败率/废因归因",
     "alt": "只读、单角色、不做控制塔",
     "priority": "P0",
-    "status": "done"
+    "status": "done",
+    "co": "工厂管理员/运营"
    }
   },
   {
    "id": "H5",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 740,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 578,
+   "w": 400,
+   "h": 92,
    "lines": [
     "系统配置(原因码/阈值/配额/班次)",
-    "协同 工厂管理员/运营"
+    "部分实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#f8eedc",
    "stroke": "#a1691a",
    "textColor": "#17212d",
@@ -111,14 +182,85 @@
     "flow": "版本化配置,变更留痕",
     "alt": "—",
     "priority": "P0",
-    "status": "part"
+    "status": "part",
+    "co": "工厂管理员/运营"
    }
   },
   {
-   "id": "actor1",
+   "id": "a1_0",
+   "kind": "pill",
+   "x": 1330,
+   "y": 283.0,
+   "w": 190,
+   "h": 68,
+   "lines": [
+    "«system»",
+    "数据平台\n(云端)"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "H6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 214,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "与数据层网关/Registry 对接",
+    "待做"
+   ],
+   "fontSize": 19,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "H6",
+    "trigger": "入库/交付",
+    "pre": "嘉涛 M1 就绪",
+    "flow": "走他的 STS 分片上传、三点对账、Registry",
+    "alt": "—",
+    "priority": "P0",
+    "status": "todo",
+    "co": ""
+   }
+  },
+  {
+   "id": "H7",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 328,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "导出/交付 manifest 供验收",
+    "已实现"
+   ],
+   "fontSize": 19,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "H7",
+    "trigger": "批次形成",
+    "pre": "—",
+    "flow": "manifest + 四关验收脚本",
+    "alt": "—",
+    "priority": "P0",
+    "status": "done",
+    "co": "工厂管理员/运营"
+   }
+  },
+  {
+   "id": "a1_1",
    "kind": "actor",
-   "x": 130,
-   "y": 359.0,
+   "x": 1390,
+   "y": 464.0,
    "w": 64,
    "h": 84,
    "lines": [
@@ -130,14 +272,15 @@
    "id": "H1",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 346,
-   "w": 360,
-   "h": 96,
+   "x": 860,
+   "y": 464,
+   "w": 400,
+   "h": 92,
    "lines": [
-    "账号/权限/审计"
+    "账号/权限/审计",
+    "部分实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#f8eedc",
    "stroke": "#a1691a",
    "textColor": "#17212d",
@@ -148,205 +291,74 @@
     "flow": "角色与权限、操作审计",
     "alt": "—",
     "priority": "P0",
-    "status": "part"
-   }
-  },
-  {
-   "id": "actor2",
-   "kind": "pill",
-   "x": 60,
-   "y": 515.0,
-   "w": 200,
-   "h": 72,
-   "lines": [
-    "平台任务中心"
-   ],
-   "fontSize": 16,
-   "fill": "#edf1f4",
-   "textColor": "#17212d",
-   "stroke": "#48586a"
-  },
-  {
-   "id": "H2",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 340,
-   "y": 488,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "事件流与操作日志"
-   ],
-   "fontSize": 17,
-   "fill": "#e3f1ec",
-   "stroke": "#1e755d",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "H2",
-    "trigger": "任何状态变化",
-    "pre": "—",
-    "flow": "每个状态变化一条事件,可追溯",
-    "alt": "—",
-    "priority": "P0",
-    "status": "done"
-   }
-  },
-  {
-   "id": "H4",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 740,
-   "y": 488,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "通知与告警(飞书)",
-    "协同 组长 / 设备运维 / IT/云运维"
-   ],
-   "fontSize": 17,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "H4",
-    "trigger": "告警触发",
-    "pre": "—",
-    "flow": "水位/离线/积压/SLA 推送",
-    "alt": "—",
-    "priority": "P1",
-    "status": "todo"
-   }
-  },
-  {
-   "id": "actor3",
-   "kind": "pill",
-   "x": 60,
-   "y": 657.0,
-   "w": 200,
-   "h": 72,
-   "lines": [
-    "数据平台\n(云端)"
-   ],
-   "fontSize": 16,
-   "fill": "#edf1f4",
-   "textColor": "#17212d",
-   "stroke": "#48586a"
-  },
-  {
-   "id": "H6",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 340,
-   "y": 630,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "与数据层网关/Registry 对接"
-   ],
-   "fontSize": 17,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "H6",
-    "trigger": "入库/交付",
-    "pre": "嘉涛 M1 就绪",
-    "flow": "走他的 STS 分片上传、三点对账、Registry",
-    "alt": "—",
-    "priority": "P0",
-    "status": "todo"
-   }
-  },
-  {
-   "id": "H7",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 740,
-   "y": 630,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "导出/交付 manifest 供验收",
-    "协同 工厂管理员/运营"
-   ],
-   "fontSize": 17,
-   "fill": "#e3f1ec",
-   "stroke": "#1e755d",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "H7",
-    "trigger": "批次形成",
-    "pre": "—",
-    "flow": "manifest + 四关验收脚本",
-    "alt": "—",
-    "priority": "P0",
-    "status": "done"
+    "status": "part",
+    "co": ""
    }
   }
  ],
  "edges": [
   {
    "id": "e0",
-   "from": "actor0",
-   "to": "H3",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e1",
-   "from": "actor0",
-   "to": "H5",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e2",
-   "from": "actor1",
-   "to": "H1",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e3",
-   "from": "actor2",
+   "from": "a0_0",
    "to": "H2",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
-   "id": "e4",
-   "from": "actor2",
+   "id": "e1",
+   "from": "a0_0",
    "to": "H4",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
-   "id": "e5",
-   "from": "actor3",
+   "id": "e2",
+   "from": "a0_1",
+   "to": "H3",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e3",
+   "from": "a0_1",
+   "to": "H5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e4",
+   "from": "a1_0",
    "to": "H6",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
-   "id": "e6",
-   "from": "actor3",
+   "id": "e5",
+   "from": "a1_0",
    "to": "H7",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
+  },
+  {
+   "id": "e6",
+   "from": "a1_1",
+   "to": "H1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
   }
  ]
 }

@@ -3,8 +3,8 @@
   "id": "uc_1",
   "title": "用例·派发/领取工单（09-02）",
   "date": "2026-09-02",
-  "W": 1600,
-  "H": 1206,
+  "W": 1590,
+  "H": 1356,
   "fs": {
    "title": 24,
    "body": 18
@@ -17,11 +17,11 @@
    "x": 40,
    "y": 40,
    "w": 1500,
-   "h": 50,
+   "h": 52,
    "lines": [
-    "排产采集 · 派发/领取工单 · 用例图（17 个用例）"
+    "排产采集 · 派发/领取工单 · 用例图"
    ],
-   "fontSize": 30,
+   "fontSize": 32,
    "bold": true,
    "textColor": "#0b1220"
   },
@@ -29,11 +29,11 @@
    "id": "legend",
    "kind": "text",
    "x": 40,
-   "y": 94,
-   "w": 1600,
+   "y": 96,
+   "w": 1700,
    "h": 34,
    "lines": [
-    "左列=主责角色,实线=主责;椭圆第二行=协同角色;绿=已实现 橙=部分 白=待做 灰=不入一期;选中用例右侧看规约,双击可编辑"
+    "火柴人=真人角色 · «system»=外部系统 · «timer»=定时触发 · 实线=主责关联(一对一) · 绿=已实现 橙=部分实现 白=待做 灰=不入一期 · 协同角色/触发/前置/主流程在右侧规约面板(选中即显示)"
    ],
    "fontSize": 16,
    "textColor": "#48586a"
@@ -41,20 +41,20 @@
   {
    "id": "b",
    "kind": "boundary",
-   "x": 300,
-   "y": 144,
-   "w": 1240,
-   "h": 1032,
+   "x": 290,
+   "y": 150,
+   "w": 1010,
+   "h": 1166,
    "lines": [
-    "《系统》排产采集 · 派发/领取工单"
+    "«system» 排产采集 · 派发/领取工单"
    ],
    "fontSize": 22
   },
   {
-   "id": "actor0",
+   "id": "a0_0",
    "kind": "actor",
    "x": 130,
-   "y": 280.0,
+   "y": 499.0,
    "w": 64,
    "h": 84,
    "lines": [
@@ -66,15 +66,15 @@
    "id": "A2",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 214,
+   "w": 400,
+   "h": 92,
    "lines": [
     "浏览任务广场",
-    "协同 平台任务中心"
+    "已实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#e3f1ec",
    "stroke": "#1e755d",
    "textColor": "#17212d",
@@ -85,22 +85,23 @@
     "flow": "看 Demo/SOP 版本/资质/两个池子各自的剩余令牌",
     "alt": "任务限流/暂停/冻结时按钮禁用",
     "priority": "P0",
-    "status": "done"
+    "status": "done",
+    "co": "平台任务中心"
    }
   },
   {
    "id": "A3",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 740,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 328,
+   "w": 400,
+   "h": 92,
    "lines": [
-    "【抢单池】自主领取工单",
-    "协同 平台任务中心"
+    "自主领取工单",
+    "已实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#e3f1ec",
    "stroke": "#1e755d",
    "textColor": "#17212d",
@@ -111,22 +112,23 @@
     "flow": "四项绑定:人/任务/工位/SOP 版本→令牌(来源=抢单)",
     "alt": "抢单池已发完 409;并发超限 409;工位被占 409",
     "priority": "P0",
-    "status": "done"
+    "status": "done",
+    "co": "平台任务中心"
    }
   },
   {
    "id": "A8",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 1140,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 442,
+   "w": 400,
+   "h": 92,
    "lines": [
-    "放弃/退回工单",
-    "协同 平台任务中心 / 组长"
+    "放弃或退回工单",
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -137,22 +139,23 @@
     "flow": "释放令牌、回补所属池、记录原因",
     "alt": "在采中放弃→本会话 Episode 照常入库",
     "priority": "P1",
-    "status": "todo"
+    "status": "todo",
+    "co": "平台任务中心 / 组长"
    }
   },
   {
    "id": "A9",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 330,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 556,
+   "w": 400,
+   "h": 92,
    "lines": [
-    "查看我的令牌(含来源与接受状态)",
-    "协同 平台任务中心"
+    "查看我的令牌",
+    "已实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#e3f1ec",
    "stroke": "#1e755d",
    "textColor": "#17212d",
@@ -163,22 +166,23 @@
     "flow": "列出有效令牌:来源(抢单/分配)、接受状态、倒计时",
     "alt": "—",
     "priority": "P0",
-    "status": "done"
+    "status": "done",
+    "co": "平台任务中心"
    }
   },
   {
    "id": "A11",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 740,
-   "y": 330,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 670,
+   "w": 400,
+   "h": 92,
    "lines": [
-    "更换工位/机器人重新绑定",
-    "协同 组长 / 设备运维"
+    "变更工位/机器人",
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -189,22 +193,23 @@
     "flow": "重绑工位/机器人,保留任务与 SOP 版本",
     "alt": "目标工位被占→拒绝",
     "priority": "P1",
-    "status": "todo"
+    "status": "todo",
+    "co": "组长 / 设备运维"
    }
   },
   {
    "id": "A13",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 1140,
-   "y": 330,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 784,
+   "w": 400,
+   "h": 92,
    "lines": [
-    "【分配池】被分配人接受/拒绝",
-    "协同 组长 / 平台任务中心"
+    "被分配人接受/拒绝",
+    "已实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#e3f1ec",
    "stroke": "#1e755d",
    "textColor": "#17212d",
@@ -215,104 +220,85 @@
     "flow": "接受→待开工(开工即视为接受);拒绝须填理由→名额转入抢单池并通知组长",
     "alt": "拒绝率计入绩效口径(待运营定)",
     "priority": "P0",
-    "status": "done"
+    "status": "done",
+    "co": "组长 / 平台任务中心"
    }
   },
   {
-   "id": "actor1",
-   "kind": "actor",
-   "x": 130,
-   "y": 485.0,
-   "w": 64,
-   "h": 84,
+   "id": "a0_1",
+   "kind": "pill",
+   "x": 70,
+   "y": 989.0,
+   "w": 190,
+   "h": 68,
    "lines": [
-    "工厂管理员/运营"
+    "«timer»",
+    "调度器"
    ],
-   "fontSize": 17
-  },
-  {
-   "id": "A12",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 340,
-   "y": 472,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "定向补采工单发放",
-    "协同 平台任务中心 / 算法(需求方)"
-   ],
-   "fontSize": 17,
-   "fill": "#f8eedc",
-   "stroke": "#a1691a",
+   "fontSize": 15,
+   "fill": "#edf1f4",
    "textColor": "#17212d",
-   "spec": {
-    "id": "A12",
-    "trigger": "质检缺口/达标缺口",
-    "pre": "需求单状态=补采",
-    "flow": "只对缺口分桶放行,默认走分配池",
-    "alt": "—",
-    "priority": "P0",
-    "status": "part"
-   }
+   "stroke": "#48586a"
   },
   {
-   "id": "A15",
+   "id": "A7",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 740,
-   "y": 472,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 920,
+   "w": 400,
+   "h": 92,
    "lines": [
-    "两池配额划分(运营可调)",
-    "协同 平台任务中心 / 数据运营"
+    "超时回收令牌",
+    "已实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#e3f1ec",
    "stroke": "#1e755d",
    "textColor": "#17212d",
    "spec": {
-    "id": "A15",
-    "trigger": "排产/需求单开放",
-    "pre": "日配额已定",
-    "flow": "按任务设 分配池 X 张 / 抢单池 Y 张(X+Y=日配额),可按天调",
+    "id": "A7",
+    "trigger": "到期定时",
+    "pre": "令牌待开工或待接受且超过 TTL(45 分钟)",
+    "flow": "状态置为已超时回收;抢单令牌回补抢单池,分配令牌的名额转入抢单池",
     "alt": "—",
     "priority": "P0",
-    "status": "done"
+    "status": "done",
+    "co": ""
    }
   },
   {
-   "id": "A17",
+   "id": "A14",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 1140,
-   "y": 472,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 1034,
+   "w": 400,
+   "h": 92,
    "lines": [
-    "分配策略配置(可靠性/设备状态/资质)",
-    "协同 平台任务中心 / 数据运营"
+    "分配池余量回流抢单池",
+    "已实现"
    ],
-   "fontSize": 17,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
+   "fontSize": 19,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
    "textColor": "#17212d",
    "spec": {
-    "id": "A17",
-    "trigger": "策略变更",
+    "id": "A14",
+    "trigger": "分配未接受超时 / 被拒绝 / 分配池当日未用完",
     "pre": "—",
-    "flow": "维护可靠性评分口径、设备状态源、资质匹配规则,版本化",
+    "flow": "把名额转入抢单池,广场剩余令牌相应增加",
     "alt": "—",
-    "priority": "P1",
-    "status": "todo"
+    "priority": "P0",
+    "status": "done",
+    "co": ""
    }
   },
   {
-   "id": "actor2",
+   "id": "a0_2",
    "kind": "actor",
    "x": 130,
-   "y": 627.0,
+   "y": 1170.0,
    "w": 64,
    "h": 84,
    "lines": [
@@ -324,15 +310,15 @@
    "id": "A6",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 614,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 1170,
+   "w": 400,
+   "h": 92,
    "lines": [
-    "【分配池】组长手工定向分配",
-    "协同 数采员 / 平台任务中心"
+    "组长手工定向分配",
+    "已实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#e3f1ec",
    "stroke": "#1e755d",
    "textColor": "#17212d",
@@ -343,14 +329,232 @@
     "flow": "以指定组员身份发「待接受」令牌,可附说明",
     "alt": "组员并发超限→拒绝",
     "priority": "P0",
-    "status": "done"
+    "status": "done",
+    "co": "数采员 / 平台任务中心"
    }
   },
   {
-   "id": "actor3",
+   "id": "a1_0",
+   "kind": "pill",
+   "x": 1330,
+   "y": 397.0,
+   "w": 190,
+   "h": 68,
+   "lines": [
+    "«system»",
+    "平台任务中心"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "A1",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 214,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "系统定向派发",
+    "部分实现"
+   ],
+   "fontSize": 19,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "A1",
+    "trigger": "排产计划生效 / 需求单开放",
+    "pre": "需求单开放;分配池配额>0;人员可靠性/设备状态/资质数据可得",
+    "flow": "按可靠性评分、设备状态、资质把工单定向分给指定人,发「待接受」令牌",
+    "alt": "无匹配人员→挂起并告警;分配池配额用尽→余量进抢单池",
+    "priority": "P0",
+    "status": "part",
+    "co": "工厂管理员/运营 / 组长"
+   }
+  },
+  {
+   "id": "A4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 328,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "校验资质准入",
+    "待做"
+   ],
+   "fontSize": 19,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "A4",
+    "trigger": "领取或分配时",
+    "pre": "人员资质档案存在",
+    "flow": "比对任务要求资质(L1/L2/专项)",
+    "alt": "不满足→拒绝并提示去培训;分配时跳过不合格人员",
+    "priority": "P0",
+    "status": "todo",
+    "co": "组长"
+   }
+  },
+  {
+   "id": "A5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 442,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "两池配额与并发控制",
+    "已实现"
+   ],
+   "fontSize": 19,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "A5",
+    "trigger": "领取或分配时",
+    "pre": "日配额已按 分配池/抢单池 划分",
+    "flow": "分配池、抢单池各自递减;个人并发、持有上限两池合计",
+    "alt": "超限→拒绝",
+    "priority": "P0",
+    "status": "done",
+    "co": "工厂管理员/运营"
+   }
+  },
+  {
+   "id": "A10",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 556,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "任务状态联动两池",
+    "已实现"
+   ],
+   "fontSize": 19,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "A10",
+    "trigger": "需求单流转",
+    "pre": "需求单状态机",
+    "flow": "开放/限流/暂停/冻结/补采/关闭→两池按钮与配额联动",
+    "alt": "—",
+    "priority": "P0",
+    "status": "done",
+    "co": "数据运营"
+   }
+  },
+  {
+   "id": "a1_1",
    "kind": "actor",
-   "x": 130,
-   "y": 769.0,
+   "x": 1390,
+   "y": 806.0,
+   "w": 64,
+   "h": 84,
+   "lines": [
+    "工厂管理员/运营"
+   ],
+   "fontSize": 17
+  },
+  {
+   "id": "A12",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 692,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "定向补采工单发放",
+    "部分实现"
+   ],
+   "fontSize": 19,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "A12",
+    "trigger": "质检缺口/达标缺口",
+    "pre": "需求单状态=补采",
+    "flow": "只对缺口分桶放行,默认走分配池",
+    "alt": "—",
+    "priority": "P0",
+    "status": "part",
+    "co": "平台任务中心 / 算法(需求方)"
+   }
+  },
+  {
+   "id": "A15",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 806,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "划分两池配额",
+    "已实现"
+   ],
+   "fontSize": 19,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "A15",
+    "trigger": "排产/需求单开放",
+    "pre": "日配额已定",
+    "flow": "按任务设 分配池 X 张 / 抢单池 Y 张(X+Y=日配额),可按天调",
+    "alt": "—",
+    "priority": "P0",
+    "status": "done",
+    "co": "平台任务中心 / 数据运营"
+   }
+  },
+  {
+   "id": "A17",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 920,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "配置分配策略",
+    "待做"
+   ],
+   "fontSize": 19,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "A17",
+    "trigger": "策略变更",
+    "pre": "—",
+    "flow": "维护可靠性评分口径、设备状态源、资质匹配规则,版本化",
+    "alt": "—",
+    "priority": "P1",
+    "status": "todo",
+    "co": "平台任务中心 / 数据运营"
+   }
+  },
+  {
+   "id": "a1_2",
+   "kind": "actor",
+   "x": 1390,
+   "y": 1056.0,
    "w": 64,
    "h": 84,
    "lines": [
@@ -362,15 +566,15 @@
    "id": "A16",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 756,
-   "w": 360,
-   "h": 96,
+   "x": 860,
+   "y": 1056,
+   "w": 400,
+   "h": 92,
    "lines": [
-    "难度/优先级权重挂绩效",
-    "协同 工厂管理员/运营 / 组长"
+    "配置难度/优先级权重",
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -381,332 +585,164 @@
     "flow": "难任务/高优先级任务给权重,让人愿意接",
     "alt": "绩效模块(M13)不入一期,一期只记录权重",
     "priority": "P1",
-    "status": "todo"
-   }
-  },
-  {
-   "id": "actor4",
-   "kind": "pill",
-   "x": 60,
-   "y": 988.0,
-   "w": 200,
-   "h": 72,
-   "lines": [
-    "平台任务中心"
-   ],
-   "fontSize": 16,
-   "fill": "#edf1f4",
-   "textColor": "#17212d",
-   "stroke": "#48586a"
-  },
-  {
-   "id": "A1",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 340,
-   "y": 898,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "【分配池】系统定向派发",
-    "协同 工厂管理员/运营 / 组长"
-   ],
-   "fontSize": 17,
-   "fill": "#f8eedc",
-   "stroke": "#a1691a",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "A1",
-    "trigger": "排产计划生效 / 需求单开放",
-    "pre": "需求单开放;分配池配额>0;人员可靠性/设备状态/资质数据可得",
-    "flow": "按可靠性评分、设备状态、资质把工单定向分给指定人,发「待接受」令牌",
-    "alt": "无匹配人员→挂起并告警;分配池配额用尽→余量进抢单池",
-    "priority": "P0",
-    "status": "part"
-   }
-  },
-  {
-   "id": "A4",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 740,
-   "y": 898,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "资质准入校验(两池通用)",
-    "协同 组长"
-   ],
-   "fontSize": 17,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "A4",
-    "trigger": "领取或分配时",
-    "pre": "人员资质档案存在",
-    "flow": "比对任务要求资质(L1/L2/专项)",
-    "alt": "不满足→拒绝并提示去培训;分配时跳过不合格人员",
-    "priority": "P0",
-    "status": "todo"
-   }
-  },
-  {
-   "id": "A5",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 1140,
-   "y": 898,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "两池配额与并发控制",
-    "协同 工厂管理员/运营"
-   ],
-   "fontSize": 17,
-   "fill": "#e3f1ec",
-   "stroke": "#1e755d",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "A5",
-    "trigger": "领取或分配时",
-    "pre": "日配额已按 分配池/抢单池 划分",
-    "flow": "分配池、抢单池各自递减;个人并发、持有上限两池合计",
-    "alt": "超限→拒绝",
-    "priority": "P0",
-    "status": "done"
-   }
-  },
-  {
-   "id": "A7",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 340,
-   "y": 1024,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "未开工/未接受令牌超时回收"
-   ],
-   "fontSize": 17,
-   "fill": "#e3f1ec",
-   "stroke": "#1e755d",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "A7",
-    "trigger": "到期定时",
-    "pre": "令牌待开工或待接受且超过 TTL(45 分钟)",
-    "flow": "状态置为已超时回收;抢单令牌回补抢单池,分配令牌的名额转入抢单池",
-    "alt": "—",
-    "priority": "P0",
-    "status": "done"
-   }
-  },
-  {
-   "id": "A10",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 740,
-   "y": 1024,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "任务状态变化联动两池",
-    "协同 数据运营"
-   ],
-   "fontSize": 17,
-   "fill": "#e3f1ec",
-   "stroke": "#1e755d",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "A10",
-    "trigger": "需求单流转",
-    "pre": "需求单状态机",
-    "flow": "开放/限流/暂停/冻结/补采/关闭→两池按钮与配额联动",
-    "alt": "—",
-    "priority": "P0",
-    "status": "done"
-   }
-  },
-  {
-   "id": "A14",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 1140,
-   "y": 1024,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "分配池余量自动回流抢单池"
-   ],
-   "fontSize": 17,
-   "fill": "#e3f1ec",
-   "stroke": "#1e755d",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "A14",
-    "trigger": "分配未接受超时 / 被拒绝 / 分配池当日未用完",
-    "pre": "—",
-    "flow": "把名额转入抢单池,广场剩余令牌相应增加",
-    "alt": "—",
-    "priority": "P0",
-    "status": "done"
+    "status": "todo",
+    "co": "工厂管理员/运营 / 组长"
    }
   }
  ],
  "edges": [
   {
    "id": "e0",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "A2",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e1",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "A3",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e2",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "A8",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e3",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "A9",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e4",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "A11",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e5",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "A13",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e6",
-   "from": "actor1",
-   "to": "A12",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e7",
-   "from": "actor1",
-   "to": "A15",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e8",
-   "from": "actor1",
-   "to": "A17",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e9",
-   "from": "actor2",
-   "to": "A6",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e10",
-   "from": "actor3",
-   "to": "A16",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e11",
-   "from": "actor4",
-   "to": "A1",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e12",
-   "from": "actor4",
-   "to": "A4",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e13",
-   "from": "actor4",
-   "to": "A5",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e14",
-   "from": "actor4",
+   "from": "a0_1",
    "to": "A7",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
-   "id": "e15",
-   "from": "actor4",
-   "to": "A10",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e16",
-   "from": "actor4",
+   "id": "e7",
+   "from": "a0_1",
    "to": "A14",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
+  },
+  {
+   "id": "e8",
+   "from": "a0_2",
+   "to": "A6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e9",
+   "from": "a1_0",
+   "to": "A1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e10",
+   "from": "a1_0",
+   "to": "A4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e11",
+   "from": "a1_0",
+   "to": "A5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e12",
+   "from": "a1_0",
+   "to": "A10",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e13",
+   "from": "a1_1",
+   "to": "A12",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e14",
+   "from": "a1_1",
+   "to": "A15",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e15",
+   "from": "a1_1",
+   "to": "A17",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e16",
+   "from": "a1_2",
+   "to": "A16",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
   }
  ]
 }

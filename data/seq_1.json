@@ -1,0 +1,454 @@
+{
+ "meta": {
+  "id": "seq_1",
+  "title": "时序·领取令牌(抢单池)（09-02）",
+  "date": "2026-09-02",
+  "W": 2150,
+  "H": 1060,
+  "fs": {
+   "title": 22,
+   "body": 15
+  }
+ },
+ "nodes": [
+  {
+   "id": "title",
+   "kind": "text",
+   "x": 40,
+   "y": 30,
+   "w": 1500,
+   "h": 50,
+   "lines": [
+    "时序图 1 · 领取令牌(抢单池)"
+   ],
+   "fontSize": 30,
+   "bold": true,
+   "textColor": "#0b1220"
+  },
+  {
+   "id": "legend",
+   "kind": "text",
+   "x": 40,
+   "y": 82,
+   "w": 1700,
+   "h": 30,
+   "lines": [
+    "实线实心箭头 = 同步调用;虚线细箭头 = 返回;折返 = 内部处理;竖条 = 激活(处理中);虚线框 alt[…] = 分支;时间自上而下"
+   ],
+   "fontSize": 15,
+   "textColor": "#48586a"
+  },
+  {
+   "id": "L0",
+   "kind": "lifeline",
+   "shape": "lifeline",
+   "x": 220,
+   "y": 120,
+   "w": 160,
+   "h": 910,
+   "lines": [
+    "数采员 / 组长"
+   ],
+   "fontSize": 15,
+   "z": 1
+  },
+  {
+   "id": "L1",
+   "kind": "lifeline",
+   "shape": "lifeline",
+   "x": 550,
+   "y": 120,
+   "w": 160,
+   "h": 910,
+   "lines": [
+    "前端 Pudu Studio"
+   ],
+   "fontSize": 15,
+   "z": 1
+  },
+  {
+   "id": "L2",
+   "kind": "lifeline",
+   "shape": "lifeline",
+   "x": 880,
+   "y": 120,
+   "w": 160,
+   "h": 910,
+   "lines": [
+    "供数后端 :4192"
+   ],
+   "fontSize": 15,
+   "z": 1
+  },
+  {
+   "id": "L3",
+   "kind": "lifeline",
+   "shape": "lifeline",
+   "x": 1210,
+   "y": 120,
+   "w": 160,
+   "h": 910,
+   "lines": [
+    "factory-core :4198"
+   ],
+   "fontSize": 15,
+   "z": 1
+  },
+  {
+   "id": "L4",
+   "kind": "lifeline",
+   "shape": "lifeline",
+   "x": 1540,
+   "y": 120,
+   "w": 160,
+   "h": 910,
+   "lines": [
+    "SQLite"
+   ],
+   "fontSize": 15,
+   "z": 1
+  },
+  {
+   "id": "act0",
+   "kind": "activation",
+   "x": 623,
+   "y": 202,
+   "w": 14,
+   "h": 628,
+   "z": 5,
+   "fill": "#dfe7ee",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "act1",
+   "kind": "activation",
+   "x": 953,
+   "y": 278,
+   "w": 14,
+   "h": 476,
+   "z": 5,
+   "fill": "#dfe7ee",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "act2",
+   "kind": "activation",
+   "x": 1283,
+   "y": 354,
+   "w": 14,
+   "h": 324,
+   "z": 5,
+   "fill": "#dfe7ee",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "act3",
+   "kind": "activation",
+   "x": 1613,
+   "y": 430,
+   "w": 14,
+   "h": 96,
+   "z": 5,
+   "fill": "#dfe7ee",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "act5",
+   "kind": "activation",
+   "x": 1613,
+   "y": 582,
+   "w": 14,
+   "h": 24,
+   "z": 5,
+   "fill": "#dfe7ee",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "m0a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 205,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m0b",
+   "kind": "anchor",
+   "x": 625,
+   "y": 205,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m1a",
+   "kind": "anchor",
+   "x": 625,
+   "y": 281,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m1b",
+   "kind": "anchor",
+   "x": 955,
+   "y": 281,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m2a",
+   "kind": "anchor",
+   "x": 955,
+   "y": 357,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m2b",
+   "kind": "anchor",
+   "x": 1285,
+   "y": 357,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m3a",
+   "kind": "anchor",
+   "x": 1285,
+   "y": 433,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m3b",
+   "kind": "anchor",
+   "x": 1615,
+   "y": 433,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m4a",
+   "kind": "anchor",
+   "x": 1615,
+   "y": 509,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m4b",
+   "kind": "anchor",
+   "x": 1285,
+   "y": 509,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m5a",
+   "kind": "anchor",
+   "x": 1285,
+   "y": 585,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m5b",
+   "kind": "anchor",
+   "x": 1615,
+   "y": 585,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m6a",
+   "kind": "anchor",
+   "x": 1285,
+   "y": 661,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m6b",
+   "kind": "anchor",
+   "x": 955,
+   "y": 661,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m7a",
+   "kind": "anchor",
+   "x": 955,
+   "y": 737,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m7b",
+   "kind": "anchor",
+   "x": 625,
+   "y": 737,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m8a",
+   "kind": "anchor",
+   "x": 625,
+   "y": 813,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m8b",
+   "kind": "anchor",
+   "x": 295,
+   "y": 813,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m9a",
+   "kind": "anchor",
+   "x": 1285,
+   "y": 889,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m9b",
+   "kind": "anchor",
+   "x": 955,
+   "y": 889,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  }
+ ],
+ "edges": [
+  {
+   "id": "e0",
+   "from": "m0a",
+   "to": "m0b",
+   "label": "1. 点「领取令牌」→ 绑定班次/工位/机器人/监控员",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
+  },
+  {
+   "id": "e1",
+   "from": "m1a",
+   "to": "m1b",
+   "label": "2. POST /api/factory/market/claim",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
+  },
+  {
+   "id": "e2",
+   "from": "m2a",
+   "to": "m2b",
+   "label": "3. 转发(FACTORY_CORE_ORIGIN)",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
+  },
+  {
+   "id": "e3",
+   "from": "m3a",
+   "to": "m3b",
+   "label": "4. 读需求单状态 / 两池配额 / 并发持有 / 工位占用",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
+  },
+  {
+   "id": "e4",
+   "from": "m4a",
+   "to": "m4b",
+   "label": "5. 校验数据",
+   "color": "#526078",
+   "width": 1.5,
+   "arrow": "classic",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e5",
+   "from": "m5a",
+   "to": "m5b",
+   "label": "6. INSERT tokens(待开工, 45min 过期) + events",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
+  },
+  {
+   "id": "e6",
+   "from": "m6a",
+   "to": "m6b",
+   "label": "7. 201 {tokenId, recycleCountdown}",
+   "color": "#526078",
+   "width": 1.5,
+   "arrow": "classic",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e7",
+   "from": "m7a",
+   "to": "m7b",
+   "label": "8. 201",
+   "color": "#526078",
+   "width": 1.5,
+   "arrow": "classic",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e8",
+   "from": "m8a",
+   "to": "m8b",
+   "label": "9. 令牌入「我的采集令牌」",
+   "color": "#526078",
+   "width": 1.5,
+   "arrow": "classic",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e9",
+   "from": "m9a",
+   "to": "m9b",
+   "label": "10. 409:抢单池已发完 / 并发超限 / 工位被占",
+   "color": "#526078",
+   "width": 1.5,
+   "arrow": "classic",
+   "router": "normal",
+   "dash": "dashed"
+  }
+ ]
+}

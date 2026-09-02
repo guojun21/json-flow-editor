@@ -30,6 +30,21 @@ const TABS = [
     { id: 'general', name: '泛化', style: { dash: 'solid', arrow: 'hollow', label: '' } },
     { id: 'flow', name: '流程箭头', style: { dash: 'solid', arrow: 'block', label: '' } },
   ] },
+  { id: 'class', name: '类图', palette: [
+    { kind: 'classbox', name: '实体/类' }, { kind: 'package', name: '分组包' }, { kind: 'text', name: '文字' },
+  ], relations: [
+    { id: 'one2n', name: '一对多 1—n', style: { dash: 'solid', arrow: 'none', label: '1 — n' } },
+    { id: 'one2one', name: '一对一 1—1', style: { dash: 'solid', arrow: 'none', label: '1 — 1' } },
+    { id: 'inherit', name: '继承', style: { dash: 'solid', arrow: 'hollow', label: '' } },
+    { id: 'depend', name: '依赖', style: { dash: 'dashed', arrow: 'classic', label: '' } },
+  ] },
+  { id: 'seq', name: '时序图', palette: [
+    { kind: 'lifeline', name: '生命线' }, { kind: 'activation', name: '激活条' }, { kind: 'anchor', name: '消息锚点' }, { kind: 'text', name: '文字' },
+  ], relations: [
+    { id: 'sync', name: '同步消息 →', style: { dash: 'solid', arrow: 'block', label: '' } },
+    { id: 'ret', name: '返回 ⇠', style: { dash: 'dashed', arrow: 'classic', label: '' } },
+    { id: 'async', name: '异步消息', style: { dash: 'solid', arrow: 'classic', label: '' } },
+  ] },
 ];
 
 export default function Sidebar({ files, cur, collapsed,

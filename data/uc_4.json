@@ -3,8 +3,8 @@
   "id": "uc_4",
   "title": "用例·监控粗筛（09-02）",
   "date": "2026-09-02",
-  "W": 1600,
-  "H": 1238,
+  "W": 1590,
+  "H": 922,
   "fs": {
    "title": 24,
    "body": 18
@@ -17,11 +17,11 @@
    "x": 40,
    "y": 40,
    "w": 1500,
-   "h": 50,
+   "h": 52,
    "lines": [
-    "排产采集 · 监控粗筛 · 用例图（10 个用例）"
+    "排产采集 · 监控粗筛 · 用例图"
    ],
-   "fontSize": 30,
+   "fontSize": 32,
    "bold": true,
    "textColor": "#0b1220"
   },
@@ -29,11 +29,11 @@
    "id": "legend",
    "kind": "text",
    "x": 40,
-   "y": 94,
-   "w": 1600,
+   "y": 96,
+   "w": 1700,
    "h": 34,
    "lines": [
-    "左列=主责角色,实线=主责;椭圆第二行=协同角色;绿=已实现 橙=部分 白=待做 灰=不入一期;选中用例右侧看规约,双击可编辑"
+    "火柴人=真人角色 · «system»=外部系统 · «timer»=定时触发 · 实线=主责关联(一对一) · 绿=已实现 橙=部分实现 白=待做 灰=不入一期 · 协同角色/触发/前置/主流程在右侧规约面板(选中即显示)"
    ],
    "fontSize": 16,
    "textColor": "#48586a"
@@ -41,20 +41,20 @@
   {
    "id": "b",
    "kind": "boundary",
-   "x": 300,
-   "y": 144,
-   "w": 1240,
-   "h": 1064,
+   "x": 290,
+   "y": 150,
+   "w": 1010,
+   "h": 732,
    "lines": [
-    "《系统》排产采集 · 监控粗筛"
+    "«system» 排产采集 · 监控粗筛"
    ],
    "fontSize": 22
   },
   {
-   "id": "actor0",
+   "id": "a0_0",
    "kind": "actor",
    "x": 130,
-   "y": 217.0,
+   "y": 328.0,
    "w": 64,
    "h": 84,
    "lines": [
@@ -66,15 +66,15 @@
    "id": "D1",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 214,
+   "w": 400,
+   "h": 92,
    "lines": [
     "4 窗口实时查看工位",
-    "协同 工控机"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -85,22 +85,23 @@
     "flow": "看黑屏/遮挡/中断/明显违规",
     "alt": "画面断流→设备告警",
     "priority": "P0",
-    "status": "todo"
+    "status": "todo",
+    "co": "工控机"
    }
   },
   {
    "id": "D2",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 740,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 328,
+   "w": 400,
+   "h": 92,
    "lines": [
     "监控判定与原因码",
-    "协同 平台任务中心"
+    "部分实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#f8eedc",
    "stroke": "#a1691a",
    "textColor": "#17212d",
@@ -111,22 +112,23 @@
     "flow": "通过/待复核/硬失败 + 原因码,进事件流",
     "alt": "—",
     "priority": "P0",
-    "status": "part"
+    "status": "part",
+    "co": "平台任务中心"
    }
   },
   {
    "id": "D3",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 1140,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 442,
+   "w": 400,
+   "h": 92,
    "lines": [
     "现场纠正(提示数采员)",
-    "协同 数采员 / 组长"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -137,78 +139,15 @@
     "flow": "对讲/消息提示,数采员当场纠正",
     "alt": "不改→硬失败",
     "priority": "P1",
-    "status": "todo"
+    "status": "todo",
+    "co": "数采员 / 组长"
    }
   },
   {
-   "id": "actor1",
+   "id": "a0_1",
    "kind": "actor",
    "x": 130,
-   "y": 359.0,
-   "w": 64,
-   "h": 84,
-   "lines": [
-    "质检组长"
-   ],
-   "fontSize": 17
-  },
-  {
-   "id": "D6",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 340,
-   "y": 346,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "抽样复核监控误杀率",
-    "协同 监控员 / 数据运营"
-   ],
-   "fontSize": 17,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "D6",
-    "trigger": "周期",
-    "pre": "隔离区有样本",
-    "flow": "分层抽样复核硬失败,算误杀率/漏判率回填",
-    "alt": "误杀率超阈值→调整规则/培训",
-    "priority": "P0",
-    "status": "todo"
-   }
-  },
-  {
-   "id": "D9",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 740,
-   "y": 346,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "隔离区管理(查看/复核/释放/废弃)",
-    "协同 监控员 / 数采员"
-   ],
-   "fontSize": 17,
-   "fill": "#f8eedc",
-   "stroke": "#a1691a",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "D9",
-    "trigger": "随时",
-    "pre": "隔离区有包",
-    "flow": "按原因码列出,复核后释放回主链或明确废弃(带操作人理由)",
-    "alt": "没有第四种归宿",
-    "priority": "P0",
-    "status": "part"
-   }
-  },
-  {
-   "id": "actor2",
-   "kind": "actor",
-   "x": 130,
-   "y": 501.0,
+   "y": 578.0,
    "w": 64,
    "h": 84,
    "lines": [
@@ -220,15 +159,15 @@
    "id": "D8",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 488,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 578,
+   "w": 400,
+   "h": 92,
    "lines": [
     "监控员轮岗与工位分配",
-    "协同 监控员"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -239,14 +178,210 @@
     "flow": "分配监控员到工位组,交接",
     "alt": "—",
     "priority": "P1",
-    "status": "todo"
+    "status": "todo",
+    "co": "监控员"
    }
   },
   {
-   "id": "actor3",
+   "id": "a0_2",
+   "kind": "pill",
+   "x": 70,
+   "y": 726.0,
+   "w": 190,
+   "h": 68,
+   "lines": [
+    "«system»",
+    "数据平台\n(云端)"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "D5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 330,
+   "y": 714,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "Ego 线:入库侧批量门+次日补采排期",
+    "部分实现"
+   ],
+   "fontSize": 19,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "D5",
+    "trigger": "Ego 包入库",
+    "pre": "无端侧算力",
+    "flow": "入库批量跑七项体检,失败出次日补采清单",
+    "alt": "—",
+    "priority": "P0",
+    "status": "part",
+    "co": "组长 / 数采员"
+   }
+  },
+  {
+   "id": "a1_0",
    "kind": "actor",
-   "x": 130,
-   "y": 643.0,
+   "x": 1390,
+   "y": 271.0,
+   "w": 64,
+   "h": 84,
+   "lines": [
+    "质检组长"
+   ],
+   "fontSize": 17
+  },
+  {
+   "id": "D6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 214,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "抽样复核监控误杀率",
+    "待做"
+   ],
+   "fontSize": 19,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "D6",
+    "trigger": "周期",
+    "pre": "隔离区有样本",
+    "flow": "分层抽样复核硬失败,算误杀率/漏判率回填",
+    "alt": "误杀率超阈值→调整规则/培训",
+    "priority": "P0",
+    "status": "todo",
+    "co": "监控员 / 数据运营"
+   }
+  },
+  {
+   "id": "D9",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 328,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "隔离区管理(查看/复核/释放/废弃)",
+    "部分实现"
+   ],
+   "fontSize": 19,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "D9",
+    "trigger": "随时",
+    "pre": "隔离区有包",
+    "flow": "按原因码列出,复核后释放回主链或明确废弃(带操作人理由)",
+    "alt": "没有第四种归宿",
+    "priority": "P0",
+    "status": "part",
+    "co": "监控员 / 数采员"
+   }
+  },
+  {
+   "id": "a1_1",
+   "kind": "pill",
+   "x": 1330,
+   "y": 476.0,
+   "w": 190,
+   "h": 68,
+   "lines": [
+    "«system»",
+    "AI 监控"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "D7",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 464,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "AI 自动粗筛",
+    "不入一期"
+   ],
+   "fontSize": 19,
+   "fill": "#eef0f2",
+   "stroke": "#9aa4ae",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "D7",
+    "trigger": "—",
+    "pre": "—",
+    "flow": "模型判定替代人工初筛",
+    "alt": "远期,不入一期",
+    "priority": "远期",
+    "status": "out",
+    "co": "监控员"
+   }
+  },
+  {
+   "id": "a1_2",
+   "kind": "pill",
+   "x": 1330,
+   "y": 612.0,
+   "w": 190,
+   "h": 68,
+   "lines": [
+    "«system»",
+    "工控机"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "D4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 860,
+   "y": 600,
+   "w": 400,
+   "h": 92,
+   "lines": [
+    "不合格:本地隔离+原因码+立即重采(真机)",
+    "已实现"
+   ],
+   "fontSize": 19,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "D4",
+    "trigger": "预检或判定失败",
+    "pre": "真机线",
+    "flow": "包挪隔离区,原因码,数采员当场重采",
+    "alt": "—",
+    "priority": "P0",
+    "status": "done",
+    "co": "数采员 / 监控员"
+   }
+  },
+  {
+   "id": "a1_3",
+   "kind": "actor",
+   "x": 1390,
+   "y": 736.0,
    "w": 64,
    "h": 84,
    "lines": [
@@ -258,15 +393,15 @@
    "id": "D10",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 630,
-   "w": 360,
-   "h": 96,
+   "x": 860,
+   "y": 736,
+   "w": 400,
+   "h": 92,
    "lines": [
     "原因码字典维护",
-    "协同 质检组长 / 算法(需求方)"
+    "部分实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#f8eedc",
    "stroke": "#a1691a",
    "textColor": "#17212d",
@@ -277,223 +412,101 @@
     "flow": "增改原因码与判级,版本化",
     "alt": "—",
     "priority": "P0",
-    "status": "part"
-   }
-  },
-  {
-   "id": "actor4",
-   "kind": "pill",
-   "x": 60,
-   "y": 799.0,
-   "w": 200,
-   "h": 72,
-   "lines": [
-    "工控机"
-   ],
-   "fontSize": 16,
-   "fill": "#edf1f4",
-   "textColor": "#17212d",
-   "stroke": "#48586a"
-  },
-  {
-   "id": "D4",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 340,
-   "y": 772,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "不合格:本地隔离+原因码+立即重采(真机)",
-    "协同 数采员 / 监控员"
-   ],
-   "fontSize": 17,
-   "fill": "#e3f1ec",
-   "stroke": "#1e755d",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "D4",
-    "trigger": "预检或判定失败",
-    "pre": "真机线",
-    "flow": "包挪隔离区,原因码,数采员当场重采",
-    "alt": "—",
-    "priority": "P0",
-    "status": "done"
-   }
-  },
-  {
-   "id": "actor5",
-   "kind": "pill",
-   "x": 60,
-   "y": 941.0,
-   "w": 200,
-   "h": 72,
-   "lines": [
-    "数据平台\n(云端)"
-   ],
-   "fontSize": 16,
-   "fill": "#edf1f4",
-   "textColor": "#17212d",
-   "stroke": "#48586a"
-  },
-  {
-   "id": "D5",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 340,
-   "y": 914,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "Ego 线:入库侧批量门+次日补采排期",
-    "协同 组长 / 数采员"
-   ],
-   "fontSize": 17,
-   "fill": "#f8eedc",
-   "stroke": "#a1691a",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "D5",
-    "trigger": "Ego 包入库",
-    "pre": "无端侧算力",
-    "flow": "入库批量跑七项体检,失败出次日补采清单",
-    "alt": "—",
-    "priority": "P0",
-    "status": "part"
-   }
-  },
-  {
-   "id": "actor6",
-   "kind": "pill",
-   "x": 60,
-   "y": 1083.0,
-   "w": 200,
-   "h": 72,
-   "lines": [
-    "AI 监控"
-   ],
-   "fontSize": 16,
-   "fill": "#edf1f4",
-   "textColor": "#17212d",
-   "stroke": "#48586a"
-  },
-  {
-   "id": "D7",
-   "kind": "usecase",
-   "shape": "ellipse",
-   "x": 340,
-   "y": 1056,
-   "w": 360,
-   "h": 96,
-   "lines": [
-    "AI 自动粗筛",
-    "协同 监控员"
-   ],
-   "fontSize": 17,
-   "fill": "#eef0f2",
-   "stroke": "#9aa4ae",
-   "textColor": "#17212d",
-   "spec": {
-    "id": "D7",
-    "trigger": "—",
-    "pre": "—",
-    "flow": "模型判定替代人工初筛",
-    "alt": "远期,不入一期",
-    "priority": "远期",
-    "status": "out"
+    "status": "part",
+    "co": "质检组长 / 算法(需求方)"
    }
   }
  ],
  "edges": [
   {
    "id": "e0",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "D1",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e1",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "D2",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e2",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "D3",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e3",
-   "from": "actor1",
-   "to": "D6",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e4",
-   "from": "actor1",
-   "to": "D9",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e5",
-   "from": "actor2",
+   "from": "a0_1",
    "to": "D8",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
-   "id": "e6",
-   "from": "actor3",
-   "to": "D10",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e7",
-   "from": "actor4",
-   "to": "D4",
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "none",
-   "router": "manhattan"
-  },
-  {
-   "id": "e8",
-   "from": "actor5",
+   "id": "e4",
+   "from": "a0_2",
    "to": "D5",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
-   "id": "e9",
-   "from": "actor6",
+   "id": "e5",
+   "from": "a1_0",
+   "to": "D6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e6",
+   "from": "a1_0",
+   "to": "D9",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e7",
+   "from": "a1_1",
    "to": "D7",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
+  },
+  {
+   "id": "e8",
+   "from": "a1_2",
+   "to": "D4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e9",
+   "from": "a1_3",
+   "to": "D10",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
   }
  ]
 }

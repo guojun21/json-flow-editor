@@ -3,8 +3,8 @@
   "id": "uc_2",
   "title": "用例·登录扫码预检（09-02）",
   "date": "2026-09-02",
-  "W": 1600,
-  "H": 780,
+  "W": 1590,
+  "H": 1084,
   "fs": {
    "title": 24,
    "body": 18
@@ -17,11 +17,11 @@
    "x": 40,
    "y": 40,
    "w": 1500,
-   "h": 50,
+   "h": 52,
    "lines": [
-    "排产采集 · 登录扫码预检 · 用例图（10 个用例）"
+    "排产采集 · 登录扫码预检 · 用例图"
    ],
-   "fontSize": 30,
+   "fontSize": 32,
    "bold": true,
    "textColor": "#0b1220"
   },
@@ -29,11 +29,11 @@
    "id": "legend",
    "kind": "text",
    "x": 40,
-   "y": 94,
-   "w": 1600,
+   "y": 96,
+   "w": 1700,
    "h": 34,
    "lines": [
-    "左列=主责角色,实线=主责;椭圆第二行=协同角色;绿=已实现 橙=部分 白=待做 灰=不入一期;选中用例右侧看规约,双击可编辑"
+    "火柴人=真人角色 · «system»=外部系统 · «timer»=定时触发 · 实线=主责关联(一对一) · 绿=已实现 橙=部分实现 白=待做 灰=不入一期 · 协同角色/触发/前置/主流程在右侧规约面板(选中即显示)"
    ],
    "fontSize": 16,
    "textColor": "#48586a"
@@ -41,20 +41,20 @@
   {
    "id": "b",
    "kind": "boundary",
-   "x": 300,
-   "y": 144,
-   "w": 1240,
-   "h": 606,
+   "x": 290,
+   "y": 150,
+   "w": 1010,
+   "h": 894,
    "lines": [
-    "《系统》排产采集 · 登录扫码预检"
+    "«system» 排产采集 · 登录扫码预检"
    ],
    "fontSize": 22
   },
   {
-   "id": "actor0",
+   "id": "a0_0",
    "kind": "actor",
    "x": 130,
-   "y": 343.0,
+   "y": 556.0,
    "w": 64,
    "h": 84,
    "lines": [
@@ -66,15 +66,15 @@
    "id": "B1",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 214,
+   "w": 400,
+   "h": 92,
    "lines": [
     "数采员登录",
-    "协同 平台任务中心"
+    "部分实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#f8eedc",
    "stroke": "#a1691a",
    "textColor": "#17212d",
@@ -85,22 +85,23 @@
     "flow": "工牌/账号登录",
     "alt": "账号禁用→拒绝",
     "priority": "P0",
-    "status": "part"
+    "status": "part",
+    "co": "平台任务中心"
    }
   },
   {
    "id": "B2",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 740,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 328,
+   "w": 400,
+   "h": 92,
    "lines": [
     "扫码绑定工位与机器人",
-    "协同 工控机"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -111,22 +112,23 @@
     "flow": "工控机侧建立人-位-机绑定",
     "alt": "码与令牌不一致→拒绝",
     "priority": "P0",
-    "status": "todo"
+    "status": "todo",
+    "co": "工控机"
    }
   },
   {
    "id": "B5",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 1140,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 442,
+   "w": 400,
+   "h": 92,
    "lines": [
     "开工前看 Demo 与 SOP",
-    "协同 平台任务中心"
+    "部分实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#f8eedc",
    "stroke": "#a1691a",
    "textColor": "#17212d",
@@ -137,22 +139,23 @@
     "flow": "播放主 Demo/边缘案例,确认 SOP 版本",
     "alt": "Demo 缺失→提示组长",
     "priority": "P0",
-    "status": "part"
+    "status": "part",
+    "co": "平台任务中心"
    }
   },
   {
    "id": "B6",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 330,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 556,
+   "w": 400,
+   "h": 92,
    "lines": [
     "道具/场景检查清单确认",
-    "协同 组长"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -163,22 +166,23 @@
     "flow": "逐项勾选,留痕",
     "alt": "缺项→组长处置",
     "priority": "P1",
-    "status": "todo"
+    "status": "todo",
+    "co": "组长"
    }
   },
   {
    "id": "B7",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 740,
-   "y": 330,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 670,
+   "w": 400,
+   "h": 92,
    "lines": [
     "设备异常上报与处置",
-    "协同 设备运维 / 组长"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -189,22 +193,23 @@
     "flow": "生成设备工单,运维响应,恢复后重新自检",
     "alt": "不能修→换机(A11)",
     "priority": "P0",
-    "status": "todo"
+    "status": "todo",
+    "co": "设备运维 / 组长"
    }
   },
   {
    "id": "B8",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 1140,
-   "y": 330,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 784,
+   "w": 400,
+   "h": 92,
    "lines": [
     "开工(创建采集会话)",
-    "协同 工控机 / 平台任务中心"
+    "已实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#e3f1ec",
    "stroke": "#1e755d",
    "textColor": "#17212d",
@@ -215,22 +220,23 @@
     "flow": "创建会话,令牌置在采,工位置占用",
     "alt": "—",
     "priority": "P0",
-    "status": "done"
+    "status": "done",
+    "co": "工控机 / 平台任务中心"
    }
   },
   {
    "id": "B9",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 456,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 898,
+   "w": 400,
+   "h": 92,
    "lines": [
     "换班交接",
-    "协同 组长 / 平台任务中心"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -241,20 +247,22 @@
     "flow": "收工旧会话,新令牌新会话,盘/道具交接留痕",
     "alt": "—",
     "priority": "P1",
-    "status": "todo"
+    "status": "todo",
+    "co": "组长 / 平台任务中心"
    }
   },
   {
-   "id": "actor1",
+   "id": "a1_0",
    "kind": "pill",
-   "x": 60,
-   "y": 625.0,
-   "w": 200,
-   "h": 72,
+   "x": 1330,
+   "y": 340.0,
+   "w": 190,
+   "h": 68,
    "lines": [
+    "«system»",
     "工控机"
    ],
-   "fontSize": 16,
+   "fontSize": 15,
    "fill": "#edf1f4",
    "textColor": "#17212d",
    "stroke": "#48586a"
@@ -263,15 +271,15 @@
    "id": "B3",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 598,
-   "w": 360,
-   "h": 96,
+   "x": 860,
+   "y": 214,
+   "w": 400,
+   "h": 92,
    "lines": [
     "令牌核验(开工准入)",
-    "协同 平台任务中心"
+    "已实现"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#e3f1ec",
    "stroke": "#1e755d",
    "textColor": "#17212d",
@@ -282,22 +290,23 @@
     "flow": "校验令牌存在、待开工、绑定一致",
     "alt": "无令牌/过期/他人令牌→403 拒绝开工",
     "priority": "P0",
-    "status": "done"
+    "status": "done",
+    "co": "平台任务中心"
    }
   },
   {
    "id": "B4",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 740,
-   "y": 598,
-   "w": 360,
-   "h": 96,
+   "x": 860,
+   "y": 328,
+   "w": 400,
+   "h": 92,
    "lines": [
     "设备自检",
-    "协同 设备运维"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -308,21 +317,23 @@
     "flow": "相机/传感器/存储空间/时钟同步/网络逐项检",
     "alt": "任一失败→不允许开工,生成设备工单",
     "priority": "P0",
-    "status": "todo"
+    "status": "todo",
+    "co": "设备运维"
    }
   },
   {
    "id": "B10",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 1140,
-   "y": 598,
-   "w": 360,
-   "h": 96,
+   "x": 860,
+   "y": 442,
+   "w": 400,
+   "h": 92,
    "lines": [
-    "离线缓存容量检查"
+    "离线缓存容量检查",
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -333,100 +344,101 @@
     "flow": "检查本地 SSD 剩余可录时长(≥1 班)",
     "alt": "不足→告警,拒绝开工",
     "priority": "P0",
-    "status": "todo"
+    "status": "todo",
+    "co": ""
    }
   }
  ],
  "edges": [
   {
    "id": "e0",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "B1",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e1",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "B2",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e2",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "B5",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e3",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "B6",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e4",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "B7",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e5",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "B8",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e6",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "B9",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e7",
-   "from": "actor1",
+   "from": "a1_0",
    "to": "B3",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e8",
-   "from": "actor1",
+   "from": "a1_0",
    "to": "B4",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e9",
-   "from": "actor1",
+   "from": "a1_0",
    "to": "B10",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   }
  ]
 }

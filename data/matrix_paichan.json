@@ -1,0 +1,2329 @@
+{
+ "meta": {
+  "id": "matrix_paichan",
+  "title": "责任矩阵·角色×节点（09-02）",
+  "date": "2026-09-02",
+  "W": 1598,
+  "H": 1148,
+  "fs": {
+   "title": 22,
+   "body": 14
+  }
+ },
+ "nodes": [
+  {
+   "id": "title",
+   "kind": "text",
+   "x": 40,
+   "y": 30,
+   "w": 1500,
+   "h": 50,
+   "lines": [
+    "责任矩阵（R 执行 / C 协作） · 角色 × 排产采集节点（一期）"
+   ],
+   "fontSize": 30,
+   "bold": true,
+   "textColor": "#0b1220"
+  },
+  {
+   "id": "legend",
+   "kind": "text",
+   "x": 40,
+   "y": 80,
+   "w": 1700,
+   "h": 30,
+   "lines": [
+    "这是责任口径不是权限口径:深色 R = 执行/主责(括号 = 该角色在此节点主责的用例数 / 节点用例总数);浅色 C = 协作;「—」= 不参与。真正的访问权限见另一张「访问权限矩阵」。上半人员角色(RBAC),下半系统/服务身份(ACL)"
+   ],
+   "fontSize": 15,
+   "textColor": "#48586a"
+  },
+  {
+   "id": "h0",
+   "kind": "pill",
+   "x": 40,
+   "y": 130,
+   "w": 260,
+   "h": 70,
+   "lines": [
+    "角色 \\ 节点"
+   ],
+   "fontSize": 16,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h1",
+   "kind": "pill",
+   "x": 310,
+   "y": 130,
+   "w": 150,
+   "h": 70,
+   "lines": [
+    "1. 派发/领取工单"
+   ],
+   "fontSize": 14,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h2",
+   "kind": "pill",
+   "x": 466,
+   "y": 130,
+   "w": 150,
+   "h": 70,
+   "lines": [
+    "2. 登录扫码预检"
+   ],
+   "fontSize": 14,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h3",
+   "kind": "pill",
+   "x": 622,
+   "y": 130,
+   "w": 150,
+   "h": 70,
+   "lines": [
+    "3. 采集 Episode"
+   ],
+   "fontSize": 14,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h4",
+   "kind": "pill",
+   "x": 778,
+   "y": 130,
+   "w": 150,
+   "h": 70,
+   "lines": [
+    "4. 监控粗筛"
+   ],
+   "fontSize": 14,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h5",
+   "kind": "pill",
+   "x": 934,
+   "y": 130,
+   "w": 150,
+   "h": 70,
+   "lines": [
+    "5. 运营云入库"
+   ],
+   "fontSize": 14,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h6",
+   "kind": "pill",
+   "x": 1090,
+   "y": 130,
+   "w": 150,
+   "h": 70,
+   "lines": [
+    "6. 滚动复核 ≤5天"
+   ],
+   "fontSize": 14,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h7",
+   "kind": "pill",
+   "x": 1246,
+   "y": 130,
+   "w": 150,
+   "h": 70,
+   "lines": [
+    "7. 质检结果"
+   ],
+   "fontSize": 14,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h8",
+   "kind": "pill",
+   "x": 1402,
+   "y": 130,
+   "w": 150,
+   "h": 70,
+   "lines": [
+    "8. 横切·平台基础"
+   ],
+   "fontSize": 14,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "r0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 208,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "数采员"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c0_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 208,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 6/17"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c0_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 208,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 7/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c0_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 208,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 5/12"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c0_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 208,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 4/10"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c0_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 208,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 2/10"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c0_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 208,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c0_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 208,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 2/8"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c0_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 208,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 268,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "组长"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c1_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 268,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/17"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c1_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 268,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 3/10"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c1_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 268,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 3/12"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c1_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 268,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 2/10"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c1_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 268,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/10"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c1_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 268,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c1_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 268,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 3/8"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c1_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 268,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/7"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "r2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 328,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "监控员"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c2_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 328,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c2_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 328,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c2_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 328,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c2_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 328,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 3/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c2_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 328,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c2_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 328,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c2_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 328,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c2_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 328,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 388,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "质检员"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c3_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 388,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c3_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 388,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c3_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 388,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c3_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 388,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c3_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 388,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c3_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 388,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 2/6"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c3_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 388,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 2/8"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c3_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 388,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 448,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "质检组长"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c4_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 448,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c4_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 448,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c4_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 448,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c4_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 448,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 2/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c4_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 448,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c4_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 448,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 3/6"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c4_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 448,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 2/8"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c4_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 448,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 508,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "设备运维"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c5_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 508,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/17"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c5_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 508,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 2/10"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c5_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 508,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/12"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c5_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 508,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c5_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 508,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c5_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 508,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c5_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 508,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/8"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c5_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 508,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/7"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "r6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 568,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "IT/云运维"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c6_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 568,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c6_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 568,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c6_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 568,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c6_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 568,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c6_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 568,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c6_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 568,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c6_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 568,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c6_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 568,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/7"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "r7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 628,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "算法(需求方)"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c7_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 628,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/17"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c7_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 628,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c7_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 628,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c7_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 628,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/10"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c7_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 628,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c7_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 628,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/6"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c7_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 628,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/8"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c7_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 628,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 688,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "工厂管理员/运营"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c8_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 688,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 3/17"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c8_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 688,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c8_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 688,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c8_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 688,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c8_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 688,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c8_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 688,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c8_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 688,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/8"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c8_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 688,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/7"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "r9",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 748,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "数据运营"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c9_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 748,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/17"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c9_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 748,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c9_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 748,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c9_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 748,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c9_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 748,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c9_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 748,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/6"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c9_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 748,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/8"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c9_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 748,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 2/7"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "r10",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 808,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "搬运/物流"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c10_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 808,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c10_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 808,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c10_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 808,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/12"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c10_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 808,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c10_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 808,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 3/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c10_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 808,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c10_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 808,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c10_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 808,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r11",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 868,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "«service» 平台任务中心"
+   ],
+   "fontSize": 14,
+   "fill": "#edf1f4",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c11_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 868,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 6/17"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c11_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 868,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 5/10"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c11_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 868,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/12"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c11_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 868,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/10"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c11_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 868,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c11_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 868,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c11_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 868,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/8"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c11_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 868,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 2/7"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "r12",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 928,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "«service» 工控机"
+   ],
+   "fontSize": 14,
+   "fill": "#edf1f4",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c12_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 928,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c12_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 928,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 3/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c12_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 928,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 6/12"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c12_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 928,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c12_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 928,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c12_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 928,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c12_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 928,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c12_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 928,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r13",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 988,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "«service» 数据平台(云端)"
+   ],
+   "fontSize": 14,
+   "fill": "#edf1f4",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c13_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 988,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c13_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 988,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c13_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 988,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 1/12"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c13_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 988,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c13_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 988,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 5/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c13_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 988,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "C 2/6"
+   ],
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#9fc5b6"
+  },
+  {
+   "id": "c13_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 988,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 2/8"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c13_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 988,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 2/7"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "r14",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 1048,
+   "w": 260,
+   "h": 54,
+   "lines": [
+    "«service» AI 监控"
+   ],
+   "fontSize": 14,
+   "fill": "#edf1f4",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c14_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 310,
+   "y": 1048,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c14_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 466,
+   "y": 1048,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c14_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 622,
+   "y": 1048,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c14_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 778,
+   "y": 1048,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "R 1/10"
+   ],
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c14_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 934,
+   "y": 1048,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c14_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1090,
+   "y": 1048,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c14_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1246,
+   "y": 1048,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c14_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1402,
+   "y": 1048,
+   "w": 150,
+   "h": 54,
+   "fontSize": 14,
+   "lines": [
+    "—"
+   ],
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  }
+ ],
+ "edges": []
+}

@@ -21,46 +21,63 @@ def write(fid, title, W, H, nodes, edges):
     json.dump(doc, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1); open(out, "a").write("\n")
     print(f"{fid:14s} {len(nodes):3d} 节点 {len(edges):3d} 边  {W}x{H}  {title}")
 
-# ---------------- 每个节点一张 ----------------
+# ---------------- 每个节点一张(v3:按 SOL 评审重排) ----------------
+# 布局:左右两半,每半若干「角色块」;角色在左,它主责的用例在右边**单列竖排**,角色与每个用例一对一直连(router=normal)。
+# 椭圆只写动宾用例名 + 第二行状态词;协同角色进规约(右侧面板)。系统类参与者画方框标 «system»;定时/自动类用例归 «timer» 调度器。
+TIMER = "«timer» 调度器"
+def main_actor(u):
+    if re.search(r"定时|超时|自动回流|当日未用完", u[5] + u[2]) and is_sys(u[3]): return TIMER
+    return u[3]
+def clean_name(n):
+    n = re.sub(r"^【[^】]*】", "", n)           # 去掉【分配池】【抢单池】前缀
+    return n
+STATUS_WORD = {"done": "已实现", "part": "部分实现", "todo": "待做", "out": "不入一期"}
+EW, EH, GAP, FS = 400, 92, 22, 19
 for k, node in enumerate(U.NODES, 1):
     ucs = [u for u in U.UC if u[1] == node]
+    groups = {}
+    for u in ucs: groups.setdefault(main_actor(u), []).append(u)
+    order = sorted(groups, key=lambda a: (-len(groups[a]), a))
+    # 两半均衡:按用例数贪心分配
+    sides = {0: [], 1: []}; load = {0: 0, 1: 0}
+    for a in order:
+        t = 0 if load[0] <= load[1] else 1; sides[t].append(a); load[t] += len(groups[a]) + 0.6
     nodes, edges = [], []
     add = lambda **n: nodes.append({a: b for a, b in n.items() if b not in (None, "", [])}) or n["id"]
-    def link(a, b): edges.append({"id": f"e{len(edges)}", "from": a, "to": b, "color": "#1f6389", "width": 2, "arrow": "none", "router": "manhattan"})
-    # 主角色分行:真人角色按其主责用例数排序;系统角色放最后几行
-    groups = {}
-    for u in ucs: groups.setdefault(u[3], []).append(u)
-    humans = sorted([a for a in groups if not is_sys(a)], key=lambda a: -len(groups[a]))
-    systems = [a for a in groups if is_sys(a)]
-    y = 40
-    add(id="title", kind="text", x=40, y=y, w=1500, h=50, lines=[f"排产采集 · {node} · 用例图（{len(ucs)} 个用例）"], fontSize=30, bold=True, textColor="#0b1220"); y += 54
-    add(id="legend", kind="text", x=40, y=y, w=1600, h=34, lines=["左列=主责角色,实线=主责;椭圆第二行=协同角色;绿=已实现 橙=部分 白=待做 灰=不入一期;选中用例右侧看规约,双击可编辑"], fontSize=16, textColor="#48586a"); y += 50
-    BX = 300; BW = PER_ROW * EW + (PER_ROW + 1) * GX
-    top = y
-    add(id="b", kind="boundary", x=BX, y=top, w=BW, h=10, lines=[f"《系统》排产采集 · {node}"], fontSize=22)
-    y = top + 60
-    for gi, actor in enumerate(humans + systems):
-        us = groups[actor]
-        rows = math.ceil(len(us) / PER_ROW)
-        band_h = rows * (EH + GY)
-        aid = f"actor{gi}"
-        if is_sys(actor):
-            add(id=aid, kind="pill", x=60, y=y + band_h / 2 - 36, w=200, h=72, lines=[actor.replace("(", "\n(")], fontSize=16, fill="#edf1f4", textColor="#17212d", stroke="#48586a")
-        else:
-            add(id=aid, kind="actor", x=130, y=y + band_h / 2 - 50, w=64, h=84, lines=[actor], fontSize=17)
-        for i, u in enumerate(us):
-            r, c = divmod(i, PER_ROW)
-            x = BX + GX + c * (EW + GX); yy = y + r * (EH + GY)
-            co = [a for a in u[4] if a != actor]
-            lines = [u[2]] + ([f"协同 {' / '.join(co)}"] if co else [])
-            add(id=u[0], kind="usecase", shape="ellipse", x=x, y=yy, w=EW, h=EH, lines=lines, fontSize=17,
-                fill=FILL[u[10]], stroke=STROKE[u[10]], textColor="#17212d",
-                spec={"id": u[0], "trigger": u[5], "pre": u[6], "flow": u[7], "alt": u[8], "priority": u[9], "status": u[10]})
-            link(aid, u[0])
-        y += band_h + 16
+    def link(a, b): edges.append({"id": f"e{len(edges)}", "from": a, "to": b, "color": "#1f6389", "width": 2, "arrow": "none", "router": "normal"})
+    y0 = 40
+    add(id="title", kind="text", x=40, y=y0, w=1500, h=52, lines=[f"排产采集 · {node} · 用例图"], fontSize=32, bold=True, textColor="#0b1220")
+    add(id="legend", kind="text", x=40, y=y0 + 56, w=1700, h=34, lines=["火柴人=真人角色 · «system»=外部系统 · «timer»=定时触发 · 实线=主责关联(一对一) · 绿=已实现 橙=部分实现 白=待做 灰=不入一期 · 协同角色/触发/前置/主流程在右侧规约面板(选中即显示)"], fontSize=16, textColor="#48586a")
+    top = y0 + 110
+    # 参与者在边界外:左侧角色 | 边界(两列用例) | 右侧角色
+    XA_L, XU_L, XU_R, XA_R = 70, 330, 860, 1330
+    BX, BW = XU_L - 40, (XU_R + EW + 40) - (XU_L - 40)
+    add(id="b", kind="boundary", x=BX, y=top, w=BW, h=10, lines=[f"«system» 排产采集 · {node}"], fontSize=22)
+    maxy = top
+    for side in (0, 1):
+        x_actor = XA_L if side == 0 else XA_R
+        x_uc = XU_L if side == 0 else XU_R
+        y = top + 64
+        for gi, actor in enumerate(sides[side]):
+            us = groups[actor]
+            band_h = len(us) * (EH + GAP) - GAP
+            aid = f"a{side}_{gi}"
+            if actor == TIMER or is_sys(actor):
+                add(id=aid, kind="pill", x=x_actor, y=y + band_h / 2 - 34, w=190, h=68, lines=[("«timer»" if actor == TIMER else "«system»"), actor.replace("«timer» ", "").replace("(", "\n(")], fontSize=15, fill="#edf1f4", textColor="#17212d", stroke="#48586a")
+            else:
+                add(id=aid, kind="actor", x=x_actor + 60, y=y + band_h / 2 - 46, w=64, h=84, lines=[actor], fontSize=17)
+            for i, u in enumerate(us):
+                yy = y + i * (EH + GAP)
+                add(id=u[0], kind="usecase", shape="ellipse", x=x_uc, y=yy, w=EW, h=EH, lines=[clean_name(u[2]), STATUS_WORD[u[10]]], fontSize=FS,
+                    fill=FILL[u[10]], stroke=STROKE[u[10]], textColor="#17212d",
+                    spec={"id": u[0], "trigger": u[5], "pre": u[6], "flow": u[7], "alt": u[8], "priority": u[9], "status": u[10],
+                          "co": " / ".join(a for a in u[4] if a != actor)})
+                link(aid, u[0])
+            y += band_h + 44
+        maxy = max(maxy, y)
     for n in nodes:
-        if n["id"] == "b": n["h"] = y - top + 10
-    write(f"uc_{k}", f"用例·{node}（09-02）", BX + BW + 60, y + 40, nodes, edges)
+        if n["id"] == "b": n["h"] = maxy - top + 10
+    write(f"uc_{k}", f"用例·{node}（09-02）", XA_R + 260, maxy + 50, nodes, edges)
 
 # ---------------- 总览 ----------------
 from collections import Counter

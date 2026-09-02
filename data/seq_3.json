@@ -1,0 +1,665 @@
+{
+ "meta": {
+  "id": "seq_3",
+  "title": "时序·落盘后摄取子流程(入库 + 规则预检)（09-02）",
+  "date": "2026-09-02",
+  "W": 1490,
+  "H": 1440,
+  "fs": {
+   "title": 22,
+   "body": 15
+  }
+ },
+ "nodes": [
+  {
+   "id": "title",
+   "kind": "text",
+   "x": 40,
+   "y": 30,
+   "w": 1500,
+   "h": 50,
+   "lines": [
+    "时序图 3 · 落盘后摄取子流程(入库 + 规则预检)"
+   ],
+   "fontSize": 30,
+   "bold": true,
+   "textColor": "#0b1220"
+  },
+  {
+   "id": "legend",
+   "kind": "text",
+   "x": 40,
+   "y": 82,
+   "w": 1700,
+   "h": 30,
+   "lines": [
+    "实线实心箭头 = 同步调用;虚线细箭头 = 返回;折返 = 内部处理;竖条 = 激活(处理中);虚线框 alt[…] = 分支;时间自上而下"
+   ],
+   "fontSize": 15,
+   "textColor": "#48586a"
+  },
+  {
+   "id": "L3",
+   "kind": "lifeline",
+   "shape": "lifeline",
+   "x": 220,
+   "y": 120,
+   "w": 160,
+   "h": 1290,
+   "lines": [
+    "factory-core :4198"
+   ],
+   "fontSize": 15,
+   "z": 1
+  },
+  {
+   "id": "L4",
+   "kind": "lifeline",
+   "shape": "lifeline",
+   "x": 550,
+   "y": 120,
+   "w": 160,
+   "h": 1290,
+   "lines": [
+    "SQLite"
+   ],
+   "fontSize": 15,
+   "z": 1
+  },
+  {
+   "id": "L5",
+   "kind": "lifeline",
+   "shape": "lifeline",
+   "x": 880,
+   "y": 120,
+   "w": 160,
+   "h": 1290,
+   "lines": [
+    "工控机采集 Agent"
+   ],
+   "fontSize": 15,
+   "z": 1
+  },
+  {
+   "id": "frag0",
+   "kind": "package",
+   "x": 180,
+   "y": 760,
+   "w": 1050,
+   "h": 244,
+   "lines": [
+    "alt [全部通过]"
+   ],
+   "fontSize": 15,
+   "z": 2,
+   "stroke": "#a1691a",
+   "textColor": "#a1691a"
+  },
+  {
+   "id": "frag1",
+   "kind": "package",
+   "x": 180,
+   "y": 988,
+   "w": 1050,
+   "h": 320,
+   "lines": [
+    "alt [meta 冲突 / 预检失败]"
+   ],
+   "fontSize": 15,
+   "z": 2,
+   "stroke": "#a1691a",
+   "textColor": "#a1691a"
+  },
+  {
+   "id": "act1",
+   "kind": "activation",
+   "x": 293,
+   "y": 278,
+   "w": 14,
+   "h": 704,
+   "z": 5,
+   "fill": "#dfe7ee",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "act3",
+   "kind": "activation",
+   "x": 623,
+   "y": 430,
+   "w": 14,
+   "h": 96,
+   "z": 5,
+   "fill": "#dfe7ee",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "act8",
+   "kind": "activation",
+   "x": 623,
+   "y": 810,
+   "w": 14,
+   "h": 24,
+   "z": 5,
+   "fill": "#dfe7ee",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "act9",
+   "kind": "activation",
+   "x": 623,
+   "y": 886,
+   "w": 14,
+   "h": 24,
+   "z": 5,
+   "fill": "#dfe7ee",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "act11",
+   "kind": "activation",
+   "x": 623,
+   "y": 1038,
+   "w": 14,
+   "h": 24,
+   "z": 5,
+   "fill": "#dfe7ee",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "act13",
+   "kind": "activation",
+   "x": 623,
+   "y": 1190,
+   "w": 14,
+   "h": 24,
+   "z": 5,
+   "fill": "#dfe7ee",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "m0a",
+   "kind": "anchor",
+   "x": 955,
+   "y": 205,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m0b",
+   "kind": "anchor",
+   "x": 955,
+   "y": 232,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m1a",
+   "kind": "anchor",
+   "x": 955,
+   "y": 281,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m1b",
+   "kind": "anchor",
+   "x": 295,
+   "y": 281,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m2a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 357,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m2b",
+   "kind": "anchor",
+   "x": 295,
+   "y": 384,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m3a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 433,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m3b",
+   "kind": "anchor",
+   "x": 625,
+   "y": 433,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m4a",
+   "kind": "anchor",
+   "x": 625,
+   "y": 509,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m4b",
+   "kind": "anchor",
+   "x": 295,
+   "y": 509,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m5a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 585,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m5b",
+   "kind": "anchor",
+   "x": 295,
+   "y": 612,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m6a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 661,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m6b",
+   "kind": "anchor",
+   "x": 295,
+   "y": 688,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m7a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 737,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m7b",
+   "kind": "anchor",
+   "x": 295,
+   "y": 764,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m8a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 813,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m8b",
+   "kind": "anchor",
+   "x": 625,
+   "y": 813,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m9a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 889,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m9b",
+   "kind": "anchor",
+   "x": 625,
+   "y": 889,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m10a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 965,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m10b",
+   "kind": "anchor",
+   "x": 955,
+   "y": 965,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m11a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 1041,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m11b",
+   "kind": "anchor",
+   "x": 625,
+   "y": 1041,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m12a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 1117,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m12b",
+   "kind": "anchor",
+   "x": 295,
+   "y": 1144,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m13a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 1193,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m13b",
+   "kind": "anchor",
+   "x": 625,
+   "y": 1193,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m14a",
+   "kind": "anchor",
+   "x": 295,
+   "y": 1269,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "m14b",
+   "kind": "anchor",
+   "x": 955,
+   "y": 1269,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  }
+ ],
+ "edges": [
+  {
+   "id": "e0",
+   "from": "m0a",
+   "to": "m0b",
+   "label": "1. 采集完成 → 落盘包 EP-xxx/(meta.json, video.mp4, sensors/)",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal",
+   "vertices": [
+    {
+     "x": 840,
+     "y": 210
+    },
+    {
+     "x": 840,
+     "y": 237
+    }
+   ]
+  },
+  {
+   "id": "e1",
+   "from": "m1a",
+   "to": "m1b",
+   "label": "2. POST /episodes/ingest {sessionId, packageDir(仅 inbox 下包名)}",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
+  },
+  {
+   "id": "e2",
+   "from": "m2a",
+   "to": "m2b",
+   "label": "3. 校验 packageDir 白名单;Episode 号重复 → 409",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal",
+   "vertices": [
+    {
+     "x": 420,
+     "y": 362
+    },
+    {
+     "x": 420,
+     "y": 389
+    }
+   ]
+  },
+  {
+   "id": "e3",
+   "from": "m3a",
+   "to": "m3b",
+   "label": "4. SELECT 会话/令牌(事实源)",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
+  },
+  {
+   "id": "e4",
+   "from": "m4a",
+   "to": "m4b",
+   "label": "5. 令牌四项 + SOP 版本",
+   "color": "#526078",
+   "width": 1.5,
+   "arrow": "classic",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e5",
+   "from": "m5a",
+   "to": "m5b",
+   "label": "6. 包内 meta 逐字段对账 → 冲突记 RC-06",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal",
+   "vertices": [
+    {
+     "x": 420,
+     "y": 590
+    },
+    {
+     "x": 420,
+     "y": 617
+    }
+   ]
+  },
+  {
+   "id": "e6",
+   "from": "m6a",
+   "to": "m6b",
+   "label": "7. 规则预检:文件完整性 · 传感器 · ffprobe 时长/帧率 · ffmpeg blackdetect",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal",
+   "vertices": [
+    {
+     "x": 420,
+     "y": 666
+    },
+    {
+     "x": 420,
+     "y": 693
+    }
+   ]
+  },
+  {
+   "id": "e7",
+   "from": "m7a",
+   "to": "m7b",
+   "label": "8. 双写 meta.json(含预检结果) → 逐文件 sha256",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal",
+   "vertices": [
+    {
+     "x": 420,
+     "y": 742
+    },
+    {
+     "x": 420,
+     "y": 769
+    }
+   ]
+  },
+  {
+   "id": "e8",
+   "from": "m8a",
+   "to": "m8b",
+   "label": "9. BEGIN;INSERT episodes / episode_files / precheck_results",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
+  },
+  {
+   "id": "e9",
+   "from": "m9a",
+   "to": "m9b",
+   "label": "10. COMMIT",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
+  },
+  {
+   "id": "e10",
+   "from": "m10a",
+   "to": "m10b",
+   "label": "11. 201 {outcome: ACCEPTED, status: 预检通过}",
+   "color": "#526078",
+   "width": 1.5,
+   "arrow": "classic",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e11",
+   "from": "m11a",
+   "to": "m11b",
+   "label": "12. BEGIN;INSERT episodes(隔离区) … + episode_quarantines",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
+  },
+  {
+   "id": "e12",
+   "from": "m12a",
+   "to": "m12b",
+   "label": "13. rename 包 → quarantine/(失败则 ROLLBACK;提交失败挪回)",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal",
+   "vertices": [
+    {
+     "x": 420,
+     "y": 1122
+    },
+    {
+     "x": 420,
+     "y": 1149
+    }
+   ]
+  },
+  {
+   "id": "e13",
+   "from": "m13a",
+   "to": "m13b",
+   "label": "14. COMMIT",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
+  },
+  {
+   "id": "e14",
+   "from": "m14a",
+   "to": "m14b",
+   "label": "15. 201 {outcome: QUARANTINED, reasonCode: RC-0x}",
+   "color": "#526078",
+   "width": 1.5,
+   "arrow": "classic",
+   "router": "normal",
+   "dash": "dashed"
+  }
+ ]
+}

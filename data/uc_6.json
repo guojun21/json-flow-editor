@@ -3,8 +3,8 @@
   "id": "uc_6",
   "title": "用例·滚动复核 ≤5天（09-02）",
   "date": "2026-09-02",
-  "W": 1600,
-  "H": 670,
+  "W": 1590,
+  "H": 650,
   "fs": {
    "title": 24,
    "body": 18
@@ -17,11 +17,11 @@
    "x": 40,
    "y": 40,
    "w": 1500,
-   "h": 50,
+   "h": 52,
    "lines": [
-    "排产采集 · 滚动复核 ≤5天 · 用例图（6 个用例）"
+    "排产采集 · 滚动复核 ≤5天 · 用例图"
    ],
-   "fontSize": 30,
+   "fontSize": 32,
    "bold": true,
    "textColor": "#0b1220"
   },
@@ -29,11 +29,11 @@
    "id": "legend",
    "kind": "text",
    "x": 40,
-   "y": 94,
-   "w": 1600,
+   "y": 96,
+   "w": 1700,
    "h": 34,
    "lines": [
-    "左列=主责角色,实线=主责;椭圆第二行=协同角色;绿=已实现 橙=部分 白=待做 灰=不入一期;选中用例右侧看规约,双击可编辑"
+    "火柴人=真人角色 · «system»=外部系统 · «timer»=定时触发 · 实线=主责关联(一对一) · 绿=已实现 橙=部分实现 白=待做 灰=不入一期 · 协同角色/触发/前置/主流程在右侧规约面板(选中即显示)"
    ],
    "fontSize": 16,
    "textColor": "#48586a"
@@ -41,20 +41,20 @@
   {
    "id": "b",
    "kind": "boundary",
-   "x": 300,
-   "y": 144,
-   "w": 1240,
-   "h": 496,
+   "x": 290,
+   "y": 150,
+   "w": 1010,
+   "h": 460,
    "lines": [
-    "《系统》排产采集 · 滚动复核 ≤5天"
+    "«system» 排产采集 · 滚动复核 ≤5天"
    ],
    "fontSize": 22
   },
   {
-   "id": "actor0",
+   "id": "a0_0",
    "kind": "actor",
    "x": 130,
-   "y": 217.0,
+   "y": 328.0,
    "w": 64,
    "h": 84,
    "lines": [
@@ -66,15 +66,15 @@
    "id": "F1",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 214,
+   "w": 400,
+   "h": 92,
    "lines": [
     "质检任务分派",
-    "协同 质检员 / 数据平台(云端)"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -85,22 +85,23 @@
     "flow": "按批次/工位/人员分派,控制 WIP",
     "alt": "积压超 SLA→告警",
     "priority": "P0",
-    "status": "todo"
+    "status": "todo",
+    "co": "质检员 / 数据平台(云端)"
    }
   },
   {
    "id": "F3",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 740,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 328,
+   "w": 400,
+   "h": 92,
    "lines": [
     "分层抽检",
-    "协同 质检员"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -111,21 +112,23 @@
     "flow": "按场景/人员/设备分层抽样",
     "alt": "—",
     "priority": "P0",
-    "status": "todo"
+    "status": "todo",
+    "co": "质检员"
    }
   },
   {
    "id": "F5",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 1140,
-   "y": 204,
-   "w": 360,
-   "h": 96,
+   "x": 330,
+   "y": 442,
+   "w": 400,
+   "h": 92,
    "lines": [
-    "质检工作量统计"
+    "质检工作量统计",
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -136,14 +139,15 @@
     "flow": "人均条数/时长/一致性",
     "alt": "—",
     "priority": "P1",
-    "status": "todo"
+    "status": "todo",
+    "co": ""
    }
   },
   {
-   "id": "actor1",
+   "id": "a1_0",
    "kind": "actor",
-   "x": 130,
-   "y": 359.0,
+   "x": 1390,
+   "y": 271.0,
    "w": 64,
    "h": 84,
    "lines": [
@@ -155,15 +159,15 @@
    "id": "F2",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 346,
-   "w": 360,
-   "h": 96,
+   "x": 860,
+   "y": 214,
+   "w": 400,
+   "h": 92,
    "lines": [
     "逐条复核",
-    "协同 数据平台(云端)"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -174,22 +178,23 @@
     "flow": "看视频/传感器,给结论与原因码",
     "alt": "—",
     "priority": "P0",
-    "status": "todo"
+    "status": "todo",
+    "co": "数据平台(云端)"
    }
   },
   {
    "id": "F6",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 740,
-   "y": 346,
-   "w": 360,
-   "h": 96,
+   "x": 860,
+   "y": 328,
+   "w": 400,
+   "h": 92,
    "lines": [
     "争议标记",
-    "协同 算法(需求方)"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -200,14 +205,15 @@
     "flow": "标记争议,进仲裁队列(G4)",
     "alt": "—",
     "priority": "P0",
-    "status": "todo"
+    "status": "todo",
+    "co": "算法(需求方)"
    }
   },
   {
-   "id": "actor2",
+   "id": "a1_1",
    "kind": "actor",
-   "x": 130,
-   "y": 501.0,
+   "x": 1390,
+   "y": 464.0,
    "w": 64,
    "h": 84,
    "lines": [
@@ -219,15 +225,15 @@
    "id": "F4",
    "kind": "usecase",
    "shape": "ellipse",
-   "x": 340,
-   "y": 488,
-   "w": 360,
-   "h": 96,
+   "x": 860,
+   "y": 464,
+   "w": 400,
+   "h": 92,
    "lines": [
     "质检 SLA 监控(≤5 天)",
-    "协同 质检组长"
+    "待做"
    ],
-   "fontSize": 17,
+   "fontSize": 19,
    "fill": "#ffffff",
    "stroke": "#48586a",
    "textColor": "#17212d",
@@ -238,64 +244,65 @@
     "flow": "每条从入库到结论的时长,积压曲线",
     "alt": "超 5 天→升级",
     "priority": "P0",
-    "status": "todo"
+    "status": "todo",
+    "co": "质检组长"
    }
   }
  ],
  "edges": [
   {
    "id": "e0",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "F1",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e1",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "F3",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e2",
-   "from": "actor0",
+   "from": "a0_0",
    "to": "F5",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e3",
-   "from": "actor1",
+   "from": "a1_0",
    "to": "F2",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e4",
-   "from": "actor1",
+   "from": "a1_0",
    "to": "F6",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   },
   {
    "id": "e5",
-   "from": "actor2",
+   "from": "a1_1",
    "to": "F4",
    "color": "#1f6389",
    "width": 2,
    "arrow": "none",
-   "router": "manhattan"
+   "router": "normal"
   }
  ]
 }

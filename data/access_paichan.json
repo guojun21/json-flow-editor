@@ -1,0 +1,2085 @@
+{
+ "meta": {
+  "id": "access_paichan",
+  "title": "访问权限矩阵·角色×功能（09-02）",
+  "date": "2026-09-02",
+  "W": 1696,
+  "H": 1174,
+  "fs": {
+   "title": 22,
+   "body": 14
+  }
+ },
+ "nodes": [
+  {
+   "id": "title",
+   "kind": "text",
+   "x": 40,
+   "y": 30,
+   "w": 1500,
+   "h": 50,
+   "lines": [
+    "访问权限矩阵（提案） · 人员角色 × 一期功能"
+   ],
+   "fontSize": 30,
+   "bold": true,
+   "textColor": "#0b1220"
+  },
+  {
+   "id": "legend",
+   "kind": "text",
+   "x": 40,
+   "y": 80,
+   "w": 1700,
+   "h": 30,
+   "lines": [
+    "查 = 查看;操 = 发起/修改/执行;审 = 审批/终审/解除隔离;— = 无权限。职责分离:需求方不终审、物流只做交接确认、终审限质检组长/数据运营。数据范围(本班组/本批次)另定。系统/服务身份走 ACL(下表)"
+   ],
+   "fontSize": 14,
+   "textColor": "#48586a"
+  },
+  {
+   "id": "h0",
+   "kind": "pill",
+   "x": 40,
+   "y": 130,
+   "w": 220,
+   "h": 66,
+   "lines": [
+    "角色 \\ 功能"
+   ],
+   "fontSize": 15,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h1",
+   "kind": "pill",
+   "x": 270,
+   "y": 130,
+   "w": 148,
+   "h": 66,
+   "lines": [
+    "需求单"
+   ],
+   "fontSize": 13,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h2",
+   "kind": "pill",
+   "x": 424,
+   "y": 130,
+   "w": 148,
+   "h": 66,
+   "lines": [
+    "任务广场/令牌"
+   ],
+   "fontSize": 13,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h3",
+   "kind": "pill",
+   "x": 578,
+   "y": 130,
+   "w": 148,
+   "h": 66,
+   "lines": [
+    "分配(定向指派)"
+   ],
+   "fontSize": 13,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h4",
+   "kind": "pill",
+   "x": 732,
+   "y": 130,
+   "w": 148,
+   "h": 66,
+   "lines": [
+    "工位开工/收工"
+   ],
+   "fontSize": 13,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h5",
+   "kind": "pill",
+   "x": 886,
+   "y": 130,
+   "w": 148,
+   "h": 66,
+   "lines": [
+    "Episode 入库"
+   ],
+   "fontSize": 13,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h6",
+   "kind": "pill",
+   "x": 1040,
+   "y": 130,
+   "w": 148,
+   "h": 66,
+   "lines": [
+    "预检结果/隔离处置"
+   ],
+   "fontSize": 13,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h7",
+   "kind": "pill",
+   "x": 1194,
+   "y": 130,
+   "w": 148,
+   "h": 66,
+   "lines": [
+    "交付批次/对账"
+   ],
+   "fontSize": 13,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h8",
+   "kind": "pill",
+   "x": 1348,
+   "y": 130,
+   "w": 148,
+   "h": 66,
+   "lines": [
+    "验收看板"
+   ],
+   "fontSize": 13,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "h9",
+   "kind": "pill",
+   "x": 1502,
+   "y": 130,
+   "w": 148,
+   "h": 66,
+   "lines": [
+    "系统配置(两池/规则)"
+   ],
+   "fontSize": 13,
+   "fill": "#17212d",
+   "textColor": "#fff"
+  },
+  {
+   "id": "r0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 204,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "数采员"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c0_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 204,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c0_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 424,
+   "y": 204,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c0_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 578,
+   "y": 204,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c0_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 732,
+   "y": 204,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c0_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 886,
+   "y": 204,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c0_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1040,
+   "y": 204,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c0_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1194,
+   "y": 204,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c0_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1348,
+   "y": 204,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c0_8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1502,
+   "y": 204,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 260,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "组长"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c1_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 260,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c1_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 424,
+   "y": 260,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c1_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 578,
+   "y": 260,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c1_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 732,
+   "y": 260,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c1_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 886,
+   "y": 260,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c1_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1040,
+   "y": 260,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c1_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1194,
+   "y": 260,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c1_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1348,
+   "y": 260,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c1_8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1502,
+   "y": 260,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 316,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "监控员"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c2_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 316,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c2_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 424,
+   "y": 316,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c2_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 578,
+   "y": 316,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c2_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 732,
+   "y": 316,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c2_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 886,
+   "y": 316,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c2_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1040,
+   "y": 316,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c2_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1194,
+   "y": 316,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c2_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1348,
+   "y": 316,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c2_8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1502,
+   "y": 316,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 372,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "质检员"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c3_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 372,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c3_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 424,
+   "y": 372,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c3_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 578,
+   "y": 372,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c3_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 732,
+   "y": 372,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c3_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 886,
+   "y": 372,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c3_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1040,
+   "y": 372,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c3_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1194,
+   "y": 372,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c3_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1348,
+   "y": 372,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c3_8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1502,
+   "y": 372,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 428,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "质检组长"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c4_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 428,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c4_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 424,
+   "y": 428,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c4_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 578,
+   "y": 428,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c4_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 732,
+   "y": 428,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c4_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 886,
+   "y": 428,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c4_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1040,
+   "y": 428,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操 审"
+   ],
+   "fontSize": 14,
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c4_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1194,
+   "y": 428,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 审"
+   ],
+   "fontSize": 14,
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c4_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1348,
+   "y": 428,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c4_8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1502,
+   "y": 428,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 484,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "设备运维"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c5_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 484,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c5_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 424,
+   "y": 484,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c5_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 578,
+   "y": 484,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c5_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 732,
+   "y": 484,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c5_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 886,
+   "y": 484,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c5_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1040,
+   "y": 484,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c5_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1194,
+   "y": 484,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c5_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1348,
+   "y": 484,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c5_8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1502,
+   "y": 484,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 540,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "IT/云运维"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c6_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 540,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c6_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 424,
+   "y": 540,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c6_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 578,
+   "y": 540,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c6_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 732,
+   "y": 540,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c6_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 886,
+   "y": 540,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c6_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1040,
+   "y": 540,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c6_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1194,
+   "y": 540,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c6_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1348,
+   "y": 540,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c6_8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1502,
+   "y": 540,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "r7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 596,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "算法(需求方)"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c7_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 596,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c7_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 424,
+   "y": 596,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c7_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 578,
+   "y": 596,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c7_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 732,
+   "y": 596,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c7_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 886,
+   "y": 596,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c7_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1040,
+   "y": 596,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c7_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1194,
+   "y": 596,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c7_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1348,
+   "y": 596,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c7_8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1502,
+   "y": 596,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "r8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 652,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "工厂管理员/运营"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c8_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 652,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 审"
+   ],
+   "fontSize": 14,
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c8_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 424,
+   "y": 652,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c8_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 578,
+   "y": 652,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操 审"
+   ],
+   "fontSize": 14,
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c8_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 732,
+   "y": 652,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c8_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 886,
+   "y": 652,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c8_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1040,
+   "y": 652,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c8_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1194,
+   "y": 652,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c8_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1348,
+   "y": 652,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c8_8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1502,
+   "y": 652,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "r9",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 708,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "数据运营"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c9_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 708,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c9_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 424,
+   "y": 708,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c9_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 578,
+   "y": 708,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c9_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 732,
+   "y": 708,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c9_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 886,
+   "y": 708,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c9_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1040,
+   "y": 708,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c9_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1194,
+   "y": 708,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操 审"
+   ],
+   "fontSize": 14,
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "c9_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1348,
+   "y": 708,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c9_8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1502,
+   "y": 708,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操 审"
+   ],
+   "fontSize": 14,
+   "fill": "#1e755d",
+   "textColor": "#ffffff",
+   "stroke": "#1e755d"
+  },
+  {
+   "id": "r10",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 764,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "搬运/物流"
+   ],
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "c10_0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 764,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c10_1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 424,
+   "y": 764,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c10_2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 578,
+   "y": 764,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c10_3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 732,
+   "y": 764,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c10_4",
+   "kind": "step",
+   "shape": "rect",
+   "x": 886,
+   "y": 764,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c10_5",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1040,
+   "y": 764,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "c10_6",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1194,
+   "y": 764,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查 操"
+   ],
+   "fontSize": 14,
+   "fill": "#5aa085",
+   "textColor": "#ffffff",
+   "stroke": "#5aa085"
+  },
+  {
+   "id": "c10_7",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1348,
+   "y": 764,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "查"
+   ],
+   "fontSize": 14,
+   "fill": "#e3f1ec",
+   "textColor": "#17212d",
+   "stroke": "#e3f1ec"
+  },
+  {
+   "id": "c10_8",
+   "kind": "step",
+   "shape": "rect",
+   "x": 1502,
+   "y": 764,
+   "w": 148,
+   "h": 50,
+   "lines": [
+    "—"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "textColor": "#9aa4ae",
+   "stroke": "#dce3e8"
+  },
+  {
+   "id": "svc_t",
+   "kind": "text",
+   "x": 40,
+   "y": 850,
+   "w": 1500,
+   "h": 30,
+   "lines": [
+    "系统 / 服务身份（ACL，不走人员权限）"
+   ],
+   "fontSize": 18,
+   "bold": true,
+   "textColor": "#0b1220"
+  },
+  {
+   "id": "s0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 890,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "«service» 工控机采集 Agent"
+   ],
+   "fontSize": 13,
+   "fill": "#edf1f4",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "sd0",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 890,
+   "w": 1380,
+   "h": 50,
+   "lines": [
+    "开工/收工、Episode 入库(ingest) —— 设备身份"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "stroke": "#dce3e8",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "s1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 946,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "«service» 平台任务中心(factory-core)"
+   ],
+   "fontSize": 13,
+   "fill": "#edf1f4",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "sd1",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 946,
+   "w": 1380,
+   "h": 50,
+   "lines": [
+    "令牌签发/回收、状态机、预检、批次 —— 服务身份"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "stroke": "#dce3e8",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "s2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 1002,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "«service» 数据平台(云端)"
+   ],
+   "fontSize": 13,
+   "fill": "#edf1f4",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "sd2",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 1002,
+   "w": 1380,
+   "h": 50,
+   "lines": [
+    "回执、质检结论回传 —— 服务身份"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "stroke": "#dce3e8",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "s3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 40,
+   "y": 1058,
+   "w": 220,
+   "h": 50,
+   "lines": [
+    "«service» 调度器 «timer»"
+   ],
+   "fontSize": 13,
+   "fill": "#edf1f4",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "sd3",
+   "kind": "step",
+   "shape": "rect",
+   "x": 270,
+   "y": 1058,
+   "w": 1380,
+   "h": 50,
+   "lines": [
+    "超时回收、余量回流 —— 系统内部"
+   ],
+   "fontSize": 14,
+   "fill": "#ffffff",
+   "stroke": "#dce3e8",
+   "textColor": "#17212d"
+  }
+ ],
+ "edges": []
+}

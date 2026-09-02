@@ -36,6 +36,11 @@ const KIND_DEFAULTS = {
   usecase: { fill: WHITE, stroke: '#48586a', text: '#172033' },      // 椭圆
   boundary: { fill: '#fbfcfd', stroke: '#c7d1d9', text: '#17212d' }, // 系统边界(标题左上)
   package: { fill: 'none', stroke: '#9aa4ae', text: '#48586a' },     // 分组包(虚线,标题左上)
+  // 类图 / 时序图元素
+  classbox: { fill: WHITE, stroke: '#48586a', text: '#17212d' },
+  lifeline: { fill: WHITE, stroke: '#17212d', text: '#17212d' },
+  activation: { fill: '#dfe7ee', stroke: '#48586a', text: '#17212d' },   // 激活条(细长矩形)
+  anchor: { fill: 'none', stroke: '', text: '#17212d' },                 // 消息锚点:透明小方块,只用来挂线
 };
 
 /* 火柴人:一条 path 按 refD 随节点尺寸缩放;文字挂在节点下方 */
@@ -53,6 +58,36 @@ if (!_G.registerNode.__ucActor) {
       figure: { refD: 'M20 6 a6 6 0 1 0 0.01 0 M20 12 v16 M6 18 h28 M20 28 l-12 16 M20 28 l12 16',
         fill: 'none', stroke: '#172033', strokeWidth: 2, strokeLinecap: 'round' },
       label: { refX: '50%', refY: '100%', refY2: 6, textAnchor: 'middle', textVerticalAnchor: 'top', fontSize: 13 },
+    },
+  }, true);
+  // 类框:顶部标题带 + 左对齐属性行(UML 类图/实体)
+  _G.registerNode('uc-class', {
+    inherit: 'rect',
+    markup: [
+      { tagName: 'rect', selector: 'body' },
+      { tagName: 'rect', selector: 'head' },
+      { tagName: 'text', selector: 'title' },
+      { tagName: 'text', selector: 'attrs' },
+    ],
+    attrs: {
+      body: { refWidth: '100%', refHeight: '100%', fill: '#fff', stroke: '#48586a', strokeWidth: 1.5 },
+      head: { refWidth: '100%', height: 40, fill: '#edf1f4', stroke: '#48586a', strokeWidth: 1.5 },
+      title: { refX: 12, refY: 20, textAnchor: 'start', textVerticalAnchor: 'middle', fontWeight: 700, fontSize: 17, fill: '#17212d' },
+      attrs: { refX: 12, refY: 52, textAnchor: 'start', textVerticalAnchor: 'top', fontSize: 15, fill: '#17212d', lineHeight: 24 },
+    },
+  }, true);
+  // 生命线:顶部方框 + 贯穿全高的虚线(时序图)
+  _G.registerNode('uc-lifeline', {
+    inherit: 'rect',
+    markup: [
+      { tagName: 'path', selector: 'line' },
+      { tagName: 'rect', selector: 'head' },
+      { tagName: 'text', selector: 'label' },
+    ],
+    attrs: {
+      line: { refD: 'M 0.5 0 V 1', stroke: '#48586a', strokeWidth: 1.5, strokeDasharray: '6 5', fill: 'none' },
+      head: { refWidth: '100%', height: 48, fill: '#fff', stroke: '#17212d', strokeWidth: 1.5, rx: 4 },
+      label: { refX: '50%', refY: 24, textAnchor: 'middle', textVerticalAnchor: 'middle', fontSize: 16, fontWeight: 600, fill: '#17212d' },
     },
   }, true);
   _G.registerNode.__ucActor = true;
@@ -109,6 +144,7 @@ export function createFlowEngine(container, cb) {
   function sw() { return meta.W > 3000 ? 3.5 : 2; }
   function scale() { return meta.W > 3000 ? 1.6 : 1; }
   function connectable(k) { return !['band', 'pill', 'text', 'boundary', 'package'].includes(k); }
+  const NO_AUTOSIZE = ['boundary', 'package', 'actor', 'band', 'classbox', 'lifeline', 'anchor', 'activation'];
   function zOf(kind) {   // 默认层级(未显式设置 z 时):容器类在底下,元素在上面
     return kind === 'band' ? 1 : kind === 'boundary' ? 2 : kind === 'package' ? 3 : kind === 'pill' ? 2 : kind === 'text' ? 3 : 10;
   }
@@ -143,20 +179,27 @@ export function createFlowEngine(container, cb) {
   // 新连线默认样式:侧栏「关系预设」改它(关联/包含/扩展/泛化),端口拉线与右键连线都吃
   let newEdgeStyle = { dash: 'solid', arrow: 'block', label: '', color: undefined };
   function setNewEdgeStyle(st) { newEdgeStyle = { ...newEdgeStyle, ...st }; }
-  function mkLabel(text, color) {
-    return { position: 0.5, attrs: {
+  function mkLabel(text, color, position = 0.5) {
+    return { position, attrs: {
       label: { text, fill: color || '#526078', fontSize: meta.fs.body },
       body: { fill: WHITE, fillOpacity: 0.96, stroke: 'none' },
     } };
+  }
+  // 一条线可以带多个标签(类图两端基数:{text:'1',position:0.12},{text:'0..*',position:0.88});单标签 label 仍然可用
+  function labelsOf(e, color) {
+    const out = [];
+    if (e.label) out.push(mkLabel(e.label, color));
+    for (const l of (Array.isArray(e.labels) ? e.labels : [])) if (l && l.text) out.push(mkLabel(l.text, color, l.position ?? 0.5));
+    return out;
   }
 
   /* ---------- 节点外观(形状/颜色全为属性) ---------- */
   function shapeOf(n) {
     if (n.shape) return n.shape;
-    return ({ decision: 'diamond', usecase: 'ellipse', actor: 'actor' })[n.kind] || 'rounded';
+    return ({ decision: 'diamond', usecase: 'ellipse', actor: 'actor', classbox: 'classbox', lifeline: 'lifeline', anchor: 'rect', activation: 'rect' })[n.kind] || 'rounded';
   }
   // 形状归到 X6 的四类壳:rect / polygon / ellipse / uc-actor;换壳要原位重建
-  function shellOf(sh) { return sh === 'diamond' ? 'polygon' : sh === 'ellipse' ? 'ellipse' : sh === 'actor' ? 'uc-actor' : 'rect'; }
+  function shellOf(sh) { return ({ diamond: 'polygon', ellipse: 'ellipse', actor: 'uc-actor', classbox: 'uc-class', lifeline: 'uc-lifeline' })[sh] || 'rect'; }
   function defaultRx() { return Math.round(8 * scale()) + 6; }
   function nodeBody(n) {
     const kind = n.kind || 'step';
@@ -205,8 +248,16 @@ export function createFlowEngine(container, cb) {
   }
   function nodeConfig(n) {
     const sh = shapeOf(n);
+    const lines = n.lines || [];
     const attrs = sh === 'actor'
       ? { figure: { stroke: n.stroke || KIND_DEFAULTS.actor.stroke, strokeWidth: 2 * scale() }, label: nodeLabel(n) }
+      : sh === 'classbox'
+      ? { body: { fill: n.fill || WHITE, stroke: n.stroke || '#48586a' }, head: { fill: n.bodyColor || '#edf1f4', stroke: n.stroke || '#48586a' },
+          title: { text: lines[0] || '', fontSize: (n.fontSize || meta.fs.body) + 2 }, attrs: { text: lines.slice(1).join('\n'), fontSize: n.fontSize || meta.fs.body } }
+      : sh === 'lifeline'
+      ? { head: { fill: n.fill || WHITE, stroke: n.stroke || '#17212d' }, line: { stroke: n.stroke || '#48586a' }, label: { text: lines.join('\n'), fontSize: n.fontSize || meta.fs.body } }
+      : n.kind === 'anchor'
+      ? { body: { fill: 'transparent', stroke: 'none' }, label: { text: '' } }
       : { body: sh === 'diamond' ? { ...nodeBody(n), refPoints: '0,10 10,0 20,10 10,20' } : nodeBody(n), label: nodeLabel(n) };
     return clean({
       id: n.id,
@@ -219,7 +270,7 @@ export function createFlowEngine(container, cb) {
         fill: n.fill, stroke: n.stroke, textColor: n.textColor,
         bodyColor: n.bodyColor,
         spec: n.spec },   // 用例规约(编号/触发/前置/主流程/异常/优先级/状态):图上不铺开,双击看、右侧面板看
-      ports: connectable(n.kind || 'step') ? portConf() : undefined,
+      ports: connectable(n.kind || 'step') && n.kind !== 'anchor' ? portConf() : undefined,
     });
   }
   function nodeToJSON(node) {
@@ -252,8 +303,8 @@ export function createFlowEngine(container, cb) {
         vertices: e.vertices || [],
         router: { name: router },
         attrs: edgeAttrs(dash, e.color, e.width, e.arrow),
-        labels: e.label ? [mkLabel(e.label, e.color)] : [],
-        data: { dash, color: e.color, width: e.width, router, arrow: arrowOf(e.arrow) },
+        labels: labelsOf(e, e.color),
+        data: { dash, color: e.color, width: e.width, router, arrow: arrowOf(e.arrow), extraLabels: Array.isArray(e.labels) ? e.labels : undefined },
       });
     }
     graph.enableHistory();
@@ -268,15 +319,17 @@ export function createFlowEngine(container, cb) {
       if (c.isNode()) nodes.push(nodeToJSON(c));
       else if (c.isEdge()) {
         const d = c.getData() || {};
-        let label = '';
+        let label = ''; const extra = [];
         for (const l of (c.getLabels() || [])) {
           const t = l.attrs && l.attrs.label && l.attrs.label.text;
-          if (t) { label = t; break; }
+          if (!t) continue;
+          const pos = typeof l.position === 'number' ? l.position : (l.position && l.position.distance);
+          if (!label && (pos === undefined || pos === 0.5)) label = t; else extra.push({ text: t, position: pos ?? 0.5 });
         }
         const z = c.getZIndex();
         edges.push(clean({ id: c.id,
           from: c.getSourceCellId(), to: c.getTargetCellId(),
-          color: d.color, width: d.width, label,
+          color: d.color, width: d.width, label, labels: extra.length ? extra : undefined,
           dash: dashOf(d.dash !== undefined ? d.dash : d.dashed) === 'solid'
             ? undefined : dashOf(d.dash !== undefined ? d.dash : d.dashed),
           router: routerOf(d.router) === 'orth' ? undefined : routerOf(d.router),
@@ -307,7 +360,7 @@ export function createFlowEngine(container, cb) {
   }
   function autoSize(node) {
     const d = node.getData() || {};
-    if (['boundary', 'package', 'actor', 'band'].includes(d.kind)) return;   // 容器与角色不按文字撑大
+    if (NO_AUTOSIZE.includes(d.kind)) return;   // 容器/角色/类框/生命线/锚点不按文字撑大
     const s = node.getSize();
     if (d.baseW === undefined) { d.baseW = s.width; d.baseH = s.height; }
     const fsz = d.fontSize || meta.fs.body;
@@ -509,9 +562,12 @@ export function createFlowEngine(container, cb) {
   }
   function paletteNode(kind) {
     const k = scale();
-    const SIZE = { decision: [210, 100], actor: [70, 90], usecase: [200, 76], boundary: [520, 360], package: [360, 240], band: [420, 160], pill: [120, 60] };
+    const SIZE = { decision: [210, 100], actor: [70, 90], usecase: [200, 76], boundary: [520, 360], package: [360, 240], band: [420, 160], pill: [120, 60],
+      classbox: [260, 150], lifeline: [160, 520], activation: [14, 120], anchor: [10, 10] };
     const [w0, h0] = SIZE[kind] || [210, 80];
-    const LABEL = { decision: '新判定?', fail: '新异常', text: '双击编辑文字', actor: '角色', usecase: '新用例', boundary: '《系统》边界', package: '分组', band: '', pill: '标签' };
+    const LABEL = { decision: '新判定?', fail: '新异常', text: '双击编辑文字', actor: '角色', usecase: '新用例', boundary: '«system» 边界', package: '分组', band: '', pill: '标签',
+      classbox: '实体名', lifeline: '参与者', activation: '', anchor: '' };
+    if (kind === 'classbox') { const k2 = scale(); const n2 = { kind, w: 260 * k2, h: 150 * k2, x: 0, y: 0, lines: ['实体名', 'id PK', 'name', 'status'] }; return graph.createNode(nodeConfig(n2)); }
     const n = { kind, w: w0 * k, h: h0 * k, x: 0, y: 0,
       lines: LABEL[kind] !== undefined ? (LABEL[kind] ? [LABEL[kind]] : []) : ['新步骤'],
       fontSize: kind === 'text' ? meta.fs.title : undefined };
@@ -566,6 +622,8 @@ export function createFlowEngine(container, cb) {
       node.resize(Math.round(+draft.w), Math.round(+draft.h));
     }
     if (next.shape === 'actor') { node.setAttrs({ figure: { stroke: next.stroke || KIND_DEFAULTS.actor.stroke }, label: nodeLabel(next) }); autoSize(node); return; }
+    if (next.shape === 'classbox') { node.setAttrs({ title: { text: next.lines[0] || '' }, attrs: { text: next.lines.slice(1).join('\n') }, body: { fill: next.fill || WHITE, stroke: next.stroke || '#48586a' } }); return; }
+    if (next.shape === 'lifeline') { node.setAttrs({ label: { text: next.lines.join('\n') } }); return; }
     const body = willPolygon
       ? { ...nodeBody(next), refPoints: '0,10 10,0 20,10 10,20' }
       : nodeBody(next);
@@ -582,7 +640,8 @@ export function createFlowEngine(container, cb) {
     edge.setData({ ...d, dash, dashed: undefined, color, width, router, arrow },
       { deep: false });
     edge.setAttrs(edgeAttrs(dash, color, width, arrow));
-    edge.setLabels(draft.label ? [mkLabel(draft.label, color)] : []);
+    const keep = (edge.getLabels() || []).filter((l) => { const p = typeof l.position === 'number' ? l.position : (l.position && l.position.distance); return p !== undefined && p !== 0.5; });
+    edge.setLabels([...(draft.label ? [mkLabel(draft.label, color)] : []), ...keep]);
     edge.setRouter({ name: router });
     if (draft.z !== undefined && draft.z !== '') edge.setZIndex(+draft.z);
   }

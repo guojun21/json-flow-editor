@@ -136,7 +136,7 @@ export default function App() {
       textColor: (a.label && a.label.fill) || '#000000',
       fontSize: (a.label && a.label.fontSize) || 13,
       bold: !!d.bold,
-      spec: d.spec ? { ...d.spec } : (d.kind === 'usecase' ? { id: '', trigger: '', pre: '', flow: '', alt: '', priority: 'P0', status: 'todo' } : undefined),
+      spec: d.spec ? { ...d.spec } : (d.kind === 'usecase' ? { id: '', co: '', trigger: '', pre: '', flow: '', alt: '', priority: 'P0', status: 'todo' } : undefined),
       kind: d.kind,
     } });
   }
@@ -264,10 +264,9 @@ export default function App() {
                 <div className="detail-kicker">{sp.id || '用例'} · {sp.priority || ''} · {ST[sp.status] || ''}</div>
                 <div className="detail-title">{(d.lines || [])[0]}</div>
               </div>
-              {[['trigger', '触发'], ['pre', '前置条件'], ['flow', '主流程'], ['alt', '异常 / 分支']].map(([k, name]) => (
+              {[['co', '协同角色'], ['trigger', '触发'], ['pre', '前置条件'], ['flow', '主流程'], ['alt', '异常 / 分支']].map(([k, name]) => (
                 <div className="detail-row" key={k}><div className="detail-k">{name}</div><div className="detail-v">{sp[k] || '—'}</div></div>
               ))}
-              {(d.lines || []).length > 1 && <div className="detail-row"><div className="detail-k">协同</div><div className="detail-v">{(d.lines || []).slice(1).join(' ').replace(/^协同\s*/, '')}</div></div>}
               <button className="btn" onClick={() => openNodeModal(selected)}>编辑规约…</button>
             </>
           ); })()}
@@ -356,7 +355,7 @@ export default function App() {
                   </select>
                 </label>
               </div>
-              {[['trigger', '触发'], ['pre', '前置条件'], ['flow', '主流程'], ['alt', '异常 / 分支']].map(([k, name]) => (
+              {[['co', '协同角色'], ['trigger', '触发'], ['pre', '前置条件'], ['flow', '主流程'], ['alt', '异常 / 分支']].map(([k, name]) => (
                 <label className="fld" key={k}>{name}
                   <textarea rows={2} value={modal.draft.spec[k] || ''} onChange={e => upd({ spec: { ...modal.draft.spec, [k]: e.target.value } })} />
                 </label>
