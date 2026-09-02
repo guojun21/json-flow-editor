@@ -4,8 +4,8 @@
   "title": "时序·工位开工(令牌准入)（09-02）",
   "date": "2026-09-02",
   "order": 32,
-  "W": 1820,
-  "H": 832,
+  "W": 2046,
+  "H": 822,
   "fs": {
    "title": 22,
    "body": 15
@@ -46,7 +46,7 @@
    "x": 220,
    "y": 120,
    "w": 160,
-   "h": 682,
+   "h": 672,
    "lines": [
     "数采员 / 组长"
    ],
@@ -57,10 +57,10 @@
    "id": "L3",
    "kind": "lifeline",
    "shape": "lifeline",
-   "x": 550,
+   "x": 662,
    "y": 120,
    "w": 160,
-   "h": 682,
+   "h": 672,
    "lines": [
     "factory-core :4198"
    ],
@@ -71,10 +71,10 @@
    "id": "L4",
    "kind": "lifeline",
    "shape": "lifeline",
-   "x": 880,
+   "x": 1104,
    "y": 120,
    "w": 160,
-   "h": 682,
+   "h": 672,
    "lines": [
     "SQLite"
    ],
@@ -85,10 +85,10 @@
    "id": "L5",
    "kind": "lifeline",
    "shape": "lifeline",
-   "x": 1210,
+   "x": 1546,
    "y": 120,
    "w": 160,
-   "h": 682,
+   "h": 672,
    "lines": [
     "工控机采集 Agent"
    ],
@@ -98,7 +98,7 @@
   {
    "id": "act0",
    "kind": "activation",
-   "x": 1283,
+   "x": 1619,
    "y": 202,
    "w": 14,
    "h": 24,
@@ -109,7 +109,7 @@
   {
    "id": "act1",
    "kind": "activation",
-   "x": 623,
+   "x": 735,
    "y": 278,
    "w": 14,
    "h": 324,
@@ -120,7 +120,7 @@
   {
    "id": "act2",
    "kind": "activation",
-   "x": 953,
+   "x": 1177,
    "y": 354,
    "w": 14,
    "h": 96,
@@ -131,7 +131,7 @@
   {
    "id": "act4",
    "kind": "activation",
-   "x": 953,
+   "x": 1177,
    "y": 506,
    "w": 14,
    "h": 24,
@@ -151,7 +151,7 @@
   {
    "id": "m0b",
    "kind": "anchor",
-   "x": 1285,
+   "x": 1621,
    "y": 205,
    "w": 10,
    "h": 10,
@@ -160,7 +160,7 @@
   {
    "id": "m1a",
    "kind": "anchor",
-   "x": 1285,
+   "x": 1621,
    "y": 281,
    "w": 10,
    "h": 10,
@@ -169,7 +169,7 @@
   {
    "id": "m1b",
    "kind": "anchor",
-   "x": 625,
+   "x": 737,
    "y": 281,
    "w": 10,
    "h": 10,
@@ -178,7 +178,7 @@
   {
    "id": "m2a",
    "kind": "anchor",
-   "x": 625,
+   "x": 737,
    "y": 357,
    "w": 10,
    "h": 10,
@@ -187,7 +187,7 @@
   {
    "id": "m2b",
    "kind": "anchor",
-   "x": 955,
+   "x": 1179,
    "y": 357,
    "w": 10,
    "h": 10,
@@ -196,7 +196,7 @@
   {
    "id": "m3a",
    "kind": "anchor",
-   "x": 955,
+   "x": 1179,
    "y": 433,
    "w": 10,
    "h": 10,
@@ -205,7 +205,7 @@
   {
    "id": "m3b",
    "kind": "anchor",
-   "x": 625,
+   "x": 737,
    "y": 433,
    "w": 10,
    "h": 10,
@@ -214,7 +214,7 @@
   {
    "id": "m4a",
    "kind": "anchor",
-   "x": 625,
+   "x": 737,
    "y": 509,
    "w": 10,
    "h": 10,
@@ -223,7 +223,7 @@
   {
    "id": "m4b",
    "kind": "anchor",
-   "x": 955,
+   "x": 1179,
    "y": 509,
    "w": 10,
    "h": 10,
@@ -232,7 +232,7 @@
   {
    "id": "m5a",
    "kind": "anchor",
-   "x": 625,
+   "x": 737,
    "y": 585,
    "w": 10,
    "h": 10,
@@ -241,7 +241,7 @@
   {
    "id": "m5b",
    "kind": "anchor",
-   "x": 1285,
+   "x": 1621,
    "y": 585,
    "w": 10,
    "h": 10,
@@ -250,7 +250,7 @@
   {
    "id": "m6a",
    "kind": "anchor",
-   "x": 625,
+   "x": 737,
    "y": 661,
    "w": 10,
    "h": 10,
@@ -259,7 +259,7 @@
   {
    "id": "m6b",
    "kind": "anchor",
-   "x": 1285,
+   "x": 1621,
    "y": 661,
    "w": 10,
    "h": 10,
@@ -271,7 +271,18 @@
    "id": "e0",
    "from": "m0a",
    "to": "m0b",
-   "label": "1. 在工控机登录,出示令牌",
+   "labels": [
+    {
+     "text": "1. 在工控机登录,出示令牌",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#1f6389",
    "width": 2,
    "arrow": "block",
@@ -281,7 +292,18 @@
    "id": "e1",
    "from": "m1a",
    "to": "m1b",
-   "label": "2. POST /station/session/start {tokenId}",
+   "labels": [
+    {
+     "text": "2. POST /station/session/start {tokenId}",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#1f6389",
    "width": 2,
    "arrow": "block",
@@ -291,7 +313,18 @@
    "id": "e2",
    "from": "m2a",
    "to": "m2b",
-   "label": "3. 查令牌:存在?状态=待开工?分配令牌待接受→视为接受",
+   "labels": [
+    {
+     "text": "3. 查令牌:存在?状态=待开工?分配令牌待接受→视为接受",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#1f6389",
    "width": 2,
    "arrow": "block",
@@ -301,7 +334,18 @@
    "id": "e3",
    "from": "m3a",
    "to": "m3b",
-   "label": "4. 令牌行",
+   "labels": [
+    {
+     "text": "4. 令牌行",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#526078",
    "width": 1.5,
    "arrow": "classic",
@@ -312,7 +356,18 @@
    "id": "e4",
    "from": "m4a",
    "to": "m4b",
-   "label": "5. INSERT sessions(进行中);tokens→在采;events",
+   "labels": [
+    {
+     "text": "5. INSERT sessions(进行中);tokens→在采;events",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#1f6389",
    "width": 2,
    "arrow": "block",
@@ -322,7 +377,18 @@
    "id": "e5",
    "from": "m5a",
    "to": "m5b",
-   "label": "6. 201 {sessionId}",
+   "labels": [
+    {
+     "text": "6. 201 {sessionId}",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#526078",
    "width": 1.5,
    "arrow": "classic",
@@ -333,7 +399,18 @@
    "id": "e6",
    "from": "m6a",
    "to": "m6b",
-   "label": "7. 403 无令牌 / 409 令牌状态不对 → 拒绝开工",
+   "labels": [
+    {
+     "text": "7. 403 无令牌 / 409 令牌状态不对 → 拒绝开工",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#526078",
    "width": 1.5,
    "arrow": "classic",

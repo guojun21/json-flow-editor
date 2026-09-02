@@ -61,7 +61,6 @@ export default function Sidebar({ files, cur, collapsed,
             <div key={f.id}
               className={'file-row' + (f.id === cur ? ' active' : '')}
               onClick={() => onOpenFile(f.id)}>
-              <span className="fico">▣</span>
               <span className="fname">{f.title || f.id}</span>
               <span className="fmeta">{f.id}.json</span>
             </div>

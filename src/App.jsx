@@ -19,7 +19,12 @@ export default function App() {
   // URL 参数:?file=<id> 打开指定图;?embed=1 嵌入模式(给方案/文档 iframe 用:侧栏收起,不露编辑器壳)
   const params = new URLSearchParams(location.search);
   const embed = params.get('embed') === '1';
-  const initFile = /^[a-z0-9_-]{1,40}$/.test(params.get('file') || '') ? params.get('file') : 'final';
+  // 打开哪张图:URL ?file= > 这台终端上次看的(localStorage) > 列表里最新的一张。每台终端各记各的。
+  const okId = v => /^[a-z0-9_-]{1,40}$/.test(v || '');
+  const urlFile = okId(params.get('file')) ? params.get('file') : null;
+  const remembered = (() => { try { const v = localStorage.getItem('jfe:lastFile'); return okId(v) ? v : null; } catch { return null; } })();
+  const initFile = urlFile || remembered || 'final';
+  const explicitFile = !!urlFile;
   const curRef = useRef(initFile);
   const dirtyRef = useRef(false);
 
@@ -97,6 +102,7 @@ export default function App() {
       onChange: commit,
       onNodeDblclick: openNodeModal,
       onNodeSelected: node => setSelected(node),
+      onViewChange: v => { try { localStorage.setItem('jfe:view:' + curRef.current, JSON.stringify(v)); } catch {} },
       onEdgeDblclick: openEdgeModal,
       onNodeContextMenu: (node, pos) =>
         setCtxMenu({ ...pos, kind: 'node', cell: node }),
@@ -113,7 +119,12 @@ export default function App() {
     load(curRef.current);
     fetch('api/list?t=' + Date.now())
       .then(r => { if (!r.ok) throw 0; return r.json(); })
-      .then(setFiles)
+      .then(list => {
+        setFiles(list);
+        // 没在 URL 里指定文件时:记忆的文件已不存在,或根本没记忆(首次访问) → 打开列表最新的一张
+        if (!explicitFile && list.length && !list.some(f => f.id === curRef.current)) load(list[0].id);
+        else if (!explicitFile && !remembered && list.length && list[0].id !== curRef.current) load(list[0].id);
+      })
       .catch(() => {});
     const closeMenu = () => setCtxMenu(null);
     window.addEventListener('mousedown', closeMenu);
@@ -161,14 +172,19 @@ export default function App() {
     } });
   }
 
+  const savedView = id => { try { const v = JSON.parse(localStorage.getItem('jfe:view:' + id) || 'null'); return v && v.zoom ? v : null; } catch { return null; } };
   function load(id) {
     curRef.current = id;
     setCur(id);
+    try { localStorage.setItem('jfe:lastFile', id); } catch {}
+    if (!embed) { const u = new URL(location.href); u.searchParams.set('file', id); history.replaceState(null, '', u); }   // 刷新也回到这张图
     const eng = engineRef.current;
+    const view = savedView(id);
+    const build = d => { eng.buildFrom(d, { keepView: !!view }); if (view) eng.setView(view); };
     const draft = localStorage.getItem(DRAFT_V + id);
     if (draft) {
       docRef.current = JSON.parse(draft);
-      eng.buildFrom(docRef.current);
+      build(docRef.current);
       setStatus('本地草稿');
       return;
     }
@@ -176,7 +192,7 @@ export default function App() {
       .then(r => r.json())
       .then(d => {
         docRef.current = d;
-        eng.buildFrom(d);
+        build(d);
         setStatus('已加载');
       })
       .catch(() => setStatus('数据加载失败'));

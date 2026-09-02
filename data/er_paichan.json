@@ -46,7 +46,7 @@
    "kind": "classbox",
    "shape": "classbox",
    "x": 60,
-   "y": 150,
+   "y": 210,
    "w": 330,
    "h": 282,
    "fill": "#ffffff",
@@ -358,7 +358,10 @@
    "id": "r6",
    "from": "bat",
    "to": "ep",
-   "toPort": "pr",
+   "toAnchor": {
+    "x": 1,
+    "y": 0.5
+   },
    "color": "#1f6389",
    "width": 2,
    "label": "batch_id",

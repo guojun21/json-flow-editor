@@ -54,14 +54,36 @@ FLOWS = [
    (3, 0, "{ok, mismatches[]}", "ret", None),
  ]),
 ]
-X0, DX, HEAD_Y, STEP, TOP = 300, 330, 120, 76, 210
+X0, HEAD_Y, STEP, TOP, DX_MIN = 300, 120, 76, 210, 330
+def tw(t):   # 估算文字像素宽(15px 字号):中日韩 15,西文 7.5
+    return sum(15 if ord(c) > 255 else 7.5 for c in t)
+def wrap(t, maxw=440):   # 折返消息太长就在分隔符处折成两行,别横穿到下一根生命线
+    if tw(t) <= maxw: return t
+    best = None
+    for i, c in enumerate(t):
+        if c in ";,;,·→ " and abs(tw(t[:i]) - tw(t) / 2) < (abs(tw(t[:best]) - tw(t) / 2) if best is not None else 1e9): best = i
+    if best is None: return t
+    return t[:best + 1].rstrip() + "\n" + t[best + 1:].lstrip()
 for k, (name, msgs) in enumerate(FLOWS, 1):
     nodes, edges = [], []
-    H = TOP + len(msgs) * STEP + 90
-    nodes.append({"id": "title", "kind": "text", "x": 40, "y": 30, "w": 1500, "h": 50, "lines": [f"时序图 {k} · {name}"], "fontSize": 30, "bold": True, "textColor": "#0b1220"})
-    nodes.append({"id": "legend", "kind": "text", "x": 40, "y": 82, "w": 1700, "h": 30, "lines": ["实线实心箭头 = 同步调用;虚线细箭头 = 返回;折返 = 内部处理;竖条 = 激活(处理中);虚线框 alt[…] = 分支;时间自上而下"], "fontSize": 15, "textColor": "#48586a"})
     used = sorted({a for a, b, _, _, _ in msgs} | {b for a, b, _, _, _ in msgs})
     col = {li: c for c, li in enumerate(used)}
+    # 列距按最长标签算:跨 k 列的消息需要 (标签宽+60)/k;折返消息需要 折返宽 120 + 标签宽 + 40
+    labels = [wrap(f"{j+1}. {text}") if a == b else f"{j+1}. {text}" for j, (a, b, text, kind, frag) in enumerate(msgs)]
+    need = DX_MIN
+    for j, (a, b, text, kind, frag) in enumerate(msgs):
+        w = max(tw(line) for line in labels[j].split("\n"))
+        if a == b: need = max(need, 120 + w + 40) if col[a] != len(used) - 1 else need
+        else: need = max(need, (w + 60) / abs(col[a] - col[b]))
+    DX = int(need)
+    # 行距:每条消息一行;分支框前后各加 36 的空档,免得框线压住相邻消息
+    rowY, y, prev_frag = [], TOP, None
+    for j, (a, b, text, kind, frag) in enumerate(msgs):
+        if frag != prev_frag and j > 0: y += 36
+        rowY.append(y); y += STEP; prev_frag = frag
+    H = y + 80
+    nodes.append({"id": "title", "kind": "text", "x": 40, "y": 30, "w": 1500, "h": 50, "lines": [f"时序图 {k} · {name}"], "fontSize": 30, "bold": True, "textColor": "#0b1220"})
+    nodes.append({"id": "legend", "kind": "text", "x": 40, "y": 82, "w": 1700, "h": 30, "lines": ["实线实心箭头 = 同步调用;虚线细箭头 = 返回;折返 = 内部处理;竖条 = 激活(处理中);虚线框 alt[…] = 分支;时间自上而下"], "fontSize": 15, "textColor": "#48586a"})
     for li in used:
         nodes.append({"id": f"L{li}", "kind": "lifeline", "shape": "lifeline", "x": X0 + col[li] * DX - 80, "y": HEAD_Y, "w": 160, "h": H - HEAD_Y - 30, "lines": [LL[li]], "fontSize": 15, "z": 1})
     # alt 分支框:同名 frag 连续的消息圈成一个虚线分组包
@@ -69,31 +91,32 @@ for k, (name, msgs) in enumerate(FLOWS, 1):
     for j, (a, b, text, kind, frag) in enumerate(msgs):
         if frag: frag_rows.setdefault(frag, []).append(j)
     for fi, (frag, rows) in enumerate(frag_rows.items()):
-        y1 = TOP + min(rows) * STEP - 58; y2 = TOP + max(rows) * STEP + 34   # 顶部留出标题行,别压住第一条消息
-        nodes.append({"id": f"frag{fi}", "kind": "package", "x": X0 - 120, "y": y1, "w": len(used) * DX + 60, "h": y2 - y1, "lines": [frag], "fontSize": 15, "z": 2, "stroke": "#a1691a", "textColor": "#a1691a"})
+        y1 = rowY[min(rows)] - 62; y2 = rowY[max(rows)] + 40   # 顶部留出标题行,别压住第一条消息
+        nodes.append({"id": f"frag{fi}", "kind": "package", "x": X0 - 120, "y": y1, "w": (len(used) - 1) * DX + 240, "h": y2 - y1, "lines": [frag], "fontSize": 15, "z": 2, "stroke": "#a1691a", "textColor": "#a1691a"})
     # 激活条:同步消息的接收方,从该行起到下一条由它发出的返回为止
     for j, (a, b, text, kind, frag) in enumerate(msgs):
         if kind != "sync" or a == b: continue
         end = next((jj for jj in range(j + 1, len(msgs)) if msgs[jj][0] == b and msgs[jj][1] == a and msgs[jj][3] == "ret"), None)
-        y1 = TOP + j * STEP - 8; y2 = TOP + (end if end is not None else j) * STEP + 12
+        y1 = rowY[j] - 8; y2 = rowY[end if end is not None else j] + 12
         nodes.append({"id": f"act{j}", "kind": "activation", "x": X0 + col[b] * DX - 7, "y": y1, "w": 14, "h": max(24, y2 - y1), "z": 5, "fill": "#dfe7ee", "stroke": "#48586a"})
     for j, (a, b, text, kind, frag) in enumerate(msgs):
-        y = TOP + j * STEP
+        y = rowY[j]
         xa, xb = X0 + col[a] * DX, X0 + col[b] * DX
         A = f"m{j}a"; B = f"m{j}b"
-        if a == b:   # 折返:最右一根向左折
+        lab = labels[j]; lw = max(tw(line) for line in lab.split("\n")); nline = lab.count("\n") + 1
+        if a == b:   # 折返:最右一根向左折;标签放在折返框右侧(最右一根则放左侧),不压生命线
             side = -1 if col[a] == len(used) - 1 else 1
             nodes.append({"id": A, "kind": "anchor", "x": xa - 5, "y": y - 5, "w": 10, "h": 10, "z": 20})
             nodes.append({"id": B, "kind": "anchor", "x": xa - 5, "y": y + 22, "w": 10, "h": 10, "z": 20})
-            edges.append({"id": f"e{j}", "from": A, "to": B, "label": f"{j+1}. {text}", "color": "#1f6389", "width": 2, "arrow": "block", "router": "normal",
+            edges.append({"id": f"e{j}", "from": A, "to": B, "labels": [{"text": lab, "position": {"distance": 0.5, "offset": {"x": side * (lw / 2 + 14), "y": 0}}}], "color": "#1f6389", "width": 2, "arrow": "block", "router": "normal",
                           "vertices": [{"x": xa + side * 120, "y": y}, {"x": xa + side * 120, "y": y + 27}]})
             continue
         nodes.append({"id": A, "kind": "anchor", "x": xa - 5, "y": y - 5, "w": 10, "h": 10, "z": 20})
         nodes.append({"id": B, "kind": "anchor", "x": xb - 5, "y": y - 5, "w": 10, "h": 10, "z": 20})
-        e = {"id": f"e{j}", "from": A, "to": B, "label": f"{j+1}. {text}", "color": "#1f6389" if kind == "sync" else "#526078", "width": 2 if kind == "sync" else 1.5,
-             "arrow": "block" if kind == "sync" else "classic", "router": "normal"}
+        e = {"id": f"e{j}", "from": A, "to": B, "labels": [{"text": lab, "position": {"distance": 0.5, "offset": {"x": 0, "y": -13 * nline}}}], "color": "#1f6389" if kind == "sync" else "#526078", "width": 2 if kind == "sync" else 1.5,
+             "arrow": "block" if kind == "sync" else "classic", "router": "normal"}   # 标签浮在线上方,线本身完整可见
         if kind == "ret": e["dash"] = "dashed"
         edges.append(e)
-    doc = {"meta": {"id": f"seq_{k}", "title": f"时序·{name}（09-02）", "date": "2026-09-02", "order": 30 + k, "W": X0 + len(used) * DX + 200, "H": H, "fs": {"title": 22, "body": 15}}, "nodes": nodes, "edges": edges}
+    doc = {"meta": {"id": f"seq_{k}", "title": f"时序·{name}（09-02）", "date": "2026-09-02", "order": 30 + k, "W": X0 + (len(used) - 1) * DX + 420, "H": H, "fs": {"title": 22, "body": 15}}, "nodes": nodes, "edges": edges}
     out = os.path.join(ROOT, "data", f"seq_{k}.json"); json.dump(doc, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1); open(out, "a").write("\n")
     print(f"seq_{k}: {len(nodes)} 节点 {len(edges)} 消息  {name}")

@@ -4,8 +4,8 @@
   "title": "时序·交付批次 + 对账回执（09-02）",
   "date": "2026-09-02",
   "order": 34,
-  "W": 1490,
-  "H": 908,
+  "W": 1784,
+  "H": 898,
   "fs": {
    "title": 22,
    "body": 15
@@ -46,7 +46,7 @@
    "x": 220,
    "y": 120,
    "w": 160,
-   "h": 758,
+   "h": 748,
    "lines": [
     "数采员 / 组长"
    ],
@@ -57,10 +57,10 @@
    "id": "L3",
    "kind": "lifeline",
    "shape": "lifeline",
-   "x": 550,
+   "x": 752,
    "y": 120,
    "w": 160,
-   "h": 758,
+   "h": 748,
    "lines": [
     "factory-core :4198"
    ],
@@ -71,10 +71,10 @@
    "id": "L4",
    "kind": "lifeline",
    "shape": "lifeline",
-   "x": 880,
+   "x": 1284,
    "y": 120,
    "w": 160,
-   "h": 758,
+   "h": 748,
    "lines": [
     "SQLite"
    ],
@@ -84,7 +84,7 @@
   {
    "id": "act0",
    "kind": "activation",
-   "x": 623,
+   "x": 825,
    "y": 202,
    "w": 14,
    "h": 248,
@@ -95,7 +95,7 @@
   {
    "id": "act1",
    "kind": "activation",
-   "x": 953,
+   "x": 1357,
    "y": 278,
    "w": 14,
    "h": 24,
@@ -106,7 +106,7 @@
   {
    "id": "act4",
    "kind": "activation",
-   "x": 623,
+   "x": 825,
    "y": 506,
    "w": 14,
    "h": 248,
@@ -117,7 +117,7 @@
   {
    "id": "act6",
    "kind": "activation",
-   "x": 953,
+   "x": 1357,
    "y": 658,
    "w": 14,
    "h": 24,
@@ -137,7 +137,7 @@
   {
    "id": "m0b",
    "kind": "anchor",
-   "x": 625,
+   "x": 827,
    "y": 205,
    "w": 10,
    "h": 10,
@@ -146,7 +146,7 @@
   {
    "id": "m1a",
    "kind": "anchor",
-   "x": 625,
+   "x": 827,
    "y": 281,
    "w": 10,
    "h": 10,
@@ -155,7 +155,7 @@
   {
    "id": "m1b",
    "kind": "anchor",
-   "x": 955,
+   "x": 1359,
    "y": 281,
    "w": 10,
    "h": 10,
@@ -164,7 +164,7 @@
   {
    "id": "m2a",
    "kind": "anchor",
-   "x": 625,
+   "x": 827,
    "y": 357,
    "w": 10,
    "h": 10,
@@ -173,7 +173,7 @@
   {
    "id": "m2b",
    "kind": "anchor",
-   "x": 625,
+   "x": 827,
    "y": 384,
    "w": 10,
    "h": 10,
@@ -182,7 +182,7 @@
   {
    "id": "m3a",
    "kind": "anchor",
-   "x": 625,
+   "x": 827,
    "y": 433,
    "w": 10,
    "h": 10,
@@ -209,7 +209,7 @@
   {
    "id": "m4b",
    "kind": "anchor",
-   "x": 625,
+   "x": 827,
    "y": 509,
    "w": 10,
    "h": 10,
@@ -218,7 +218,7 @@
   {
    "id": "m5a",
    "kind": "anchor",
-   "x": 625,
+   "x": 827,
    "y": 585,
    "w": 10,
    "h": 10,
@@ -227,7 +227,7 @@
   {
    "id": "m5b",
    "kind": "anchor",
-   "x": 625,
+   "x": 827,
    "y": 612,
    "w": 10,
    "h": 10,
@@ -236,7 +236,7 @@
   {
    "id": "m6a",
    "kind": "anchor",
-   "x": 625,
+   "x": 827,
    "y": 661,
    "w": 10,
    "h": 10,
@@ -245,7 +245,7 @@
   {
    "id": "m6b",
    "kind": "anchor",
-   "x": 955,
+   "x": 1359,
    "y": 661,
    "w": 10,
    "h": 10,
@@ -254,7 +254,7 @@
   {
    "id": "m7a",
    "kind": "anchor",
-   "x": 625,
+   "x": 827,
    "y": 737,
    "w": 10,
    "h": 10,
@@ -275,7 +275,18 @@
    "id": "e0",
    "from": "m0a",
    "to": "m0b",
-   "label": "1. POST /delivery/batch {episodeIds?}",
+   "labels": [
+    {
+     "text": "1. POST /delivery/batch {episodeIds?}",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#1f6389",
    "width": 2,
    "arrow": "block",
@@ -285,7 +296,18 @@
    "id": "e1",
    "from": "m1a",
    "to": "m1b",
-   "label": "2. 取「预检通过」的 Episode 与逐文件 sha256",
+   "labels": [
+    {
+     "text": "2. 取「预检通过」的 Episode 与逐文件 sha256",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#1f6389",
    "width": 2,
    "arrow": "block",
@@ -295,18 +317,29 @@
    "id": "e2",
    "from": "m2a",
    "to": "m2b",
-   "label": "3. 写 outbox/B-xxx/manifest.json;Episode→待搬运",
+   "labels": [
+    {
+     "text": "3. 写 outbox/B-xxx/manifest.json;Episode→待搬运",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 194.0,
+       "y": 0
+      }
+     }
+    }
+   ],
    "color": "#1f6389",
    "width": 2,
    "arrow": "block",
    "router": "normal",
    "vertices": [
     {
-     "x": 750,
+     "x": 952,
      "y": 362
     },
     {
-     "x": 750,
+     "x": 952,
      "y": 389
     }
    ]
@@ -315,7 +348,18 @@
    "id": "e3",
    "from": "m3a",
    "to": "m3b",
-   "label": "4. 201 {batchId, bytes}",
+   "labels": [
+    {
+     "text": "4. 201 {batchId, bytes}",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#526078",
    "width": 1.5,
    "arrow": "classic",
@@ -326,7 +370,18 @@
    "id": "e4",
    "from": "m4a",
    "to": "m4b",
-   "label": "5. POST /delivery/batch/:id/verify(模拟云端接收方)",
+   "labels": [
+    {
+     "text": "5. POST /delivery/batch/:id/verify(模拟云端接收方)",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#1f6389",
    "width": 2,
    "arrow": "block",
@@ -336,18 +391,29 @@
    "id": "e5",
    "from": "m5a",
    "to": "m5b",
-   "label": "6. 按 manifest 重算 sha256 逐文件对比",
+   "labels": [
+    {
+     "text": "6. 按 manifest 重算 sha256 逐文件对比",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 152.75,
+       "y": 0
+      }
+     }
+    }
+   ],
    "color": "#1f6389",
    "width": 2,
    "arrow": "block",
    "router": "normal",
    "vertices": [
     {
-     "x": 750,
+     "x": 952,
      "y": 590
     },
     {
-     "x": 750,
+     "x": 952,
      "y": 617
     }
    ]
@@ -356,7 +422,18 @@
    "id": "e6",
    "from": "m6a",
    "to": "m6b",
-   "label": "7. 通过 → batches 通过/已确认;Episode→已上云 + 7 天清理倒计时",
+   "labels": [
+    {
+     "text": "7. 通过 → batches 通过/已确认;Episode→已上云 + 7 天清理倒计时",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#1f6389",
    "width": 2,
    "arrow": "block",
@@ -366,7 +443,18 @@
    "id": "e7",
    "from": "m7a",
    "to": "m7b",
-   "label": "8. {ok, mismatches[]}",
+   "labels": [
+    {
+     "text": "8. {ok, mismatches[]}",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
    "color": "#526078",
    "width": 1.5,
    "arrow": "classic",

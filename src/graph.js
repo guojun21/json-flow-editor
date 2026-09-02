@@ -1,6 +1,6 @@
 /* X6 引擎胶水层。编辑器壳黑白;图内元素颜色/形状全是可改属性(默认圆角矩形)。
  * 对外暴露纯函数接口,UI 层(React)不直接碰 X6。 */
-import { Graph } from '@antv/x6';
+import { Graph, EdgeView } from '@antv/x6';
 import { History } from '@antv/x6-plugin-history';
 import { Selection } from '@antv/x6-plugin-selection';
 import { Keyboard } from '@antv/x6-plugin-keyboard';
@@ -90,7 +90,7 @@ if (!_G.registerNode.__ucActor) {
       { tagName: 'text', selector: 'label' },
     ],
     attrs: {
-      line: { refD: 'M 0.5 0 V 1', stroke: '#48586a', strokeWidth: 1.5, strokeDasharray: '6 5', fill: 'none' },
+      line: { refD: 'M 0 0 h 0.001 M 1 1 h -0.001 M 0.5 0 V 1', stroke: '#48586a', strokeWidth: 1.5, strokeDasharray: '6 5', strokeLinecap: 'butt', fill: 'none' },
       head: { refWidth: '100%', height: 48, fill: '#fff', stroke: '#17212d', strokeWidth: 1.5, rx: 4 },
       label: { refX: '50%', refY: 24, textAnchor: 'middle', textVerticalAnchor: 'middle', fontSize: 16, fontWeight: 600, fill: '#17212d' },
     },
@@ -115,7 +115,7 @@ export function createFlowEngine(container, cb) {
     connecting: {
       router: { name: 'orth' },
       connector: { name: 'normal' },
-      snap: false,   // 不吸附:任意边缘落线,预览线跟指针走
+      snap: { radius: 18 },   // 开 snap 模式:X6 会走 snapArrowhead,被下面的 FreeEdgeView 接管成「轮廓任意点吸附」
       allowBlank: false, allowEdge: false, allowNode: true, allowMulti: true, allowPort: false,
       highlight: true, connectionPoint: 'boundary',
       // 任意边缘起线:元素本体就是 magnet,但只有按在「边缘带」(离轮廓 ≤ 10 屏幕像素)才算起线,按在内部照旧是拖动元素
@@ -129,7 +129,7 @@ export function createFlowEngine(container, cb) {
       },
       createEdge() {
         const st = newEdgeStyle;
-        return graph.createEdge({ zIndex: 5, router: { name: 'orth' },
+        return graph.createEdge({ view: 'free-edge', zIndex: 5, router: { name: 'orth' },
           attrs: edgeAttrs(st.dash, st.color, undefined, st.arrow),
           labels: st.label ? [mkLabel(st.label, st.color)] : [],
           data: { dash: st.dash, arrow: st.arrow, color: st.color, router: 'orth' } });
@@ -205,6 +205,13 @@ export function createFlowEngine(container, cb) {
     const f = (v) => typeof v === 'string' && v.endsWith('%') ? parseFloat(v) / 100 : undefined;
     const x = f(a.dx), y = f(a.dy); return x === undefined ? undefined : { x, y };
   };
+  const centerOf = (n) => { const b = n.getBBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
+  function facingFrac(node, ref) {   // 元素面向参考点的那一边的中点(相对坐标)
+    const b = node.getBBox(); const c = centerOf(node);
+    const dx = (ref.x - c.x) / Math.max(1, b.width), dy = (ref.y - c.y) / Math.max(1, b.height);
+    if (Math.abs(dx) >= Math.abs(dy)) return { x: dx >= 0 ? 1 : 0, y: 0.5 };
+    return { x: 0.5, y: dy >= 0 ? 1 : 0 };
+  }
   const PORT_FRAC = { pl: { x: 0, y: 0.5 }, pr: { x: 1, y: 0.5 }, pt: { x: 0.5, y: 0 }, pb: { x: 0.5, y: 1 } };   // 老数据的四个端口 → 比例锚点
   function scale() { return meta.W > 3000 ? 1.6 : 1; }
   function connectable(k) { return !['band', 'pill', 'text', 'boundary', 'package'].includes(k); }
@@ -351,7 +358,7 @@ export function createFlowEngine(container, cb) {
   }
 
   /* ---------- 构建/序列化 ---------- */
-  function buildFrom(doc) {
+  function buildFrom(doc, opts = {}) {
     loading = true;
     meta = doc.meta;
     linkFrom = null;
@@ -361,11 +368,16 @@ export function createFlowEngine(container, cb) {
     for (const e of doc.edges) {
       const dash = dashOf(e.dash !== undefined ? e.dash : e.dashed);
       const router = routerOf(e.router);
-      graph.addEdge({
+      // 老数据里没锚点/端口的线端:按「面向对方(或首/末控制点)的那一边中点」补一个显式轮廓锚点,柄才会落在轮廓上而不是元素中心
+      const nf = graph.getCellById(e.from), nt = graph.getCellById(e.to);
+      const vs = Array.isArray(e.vertices) ? e.vertices : [];
+      const fromFrac = e.fromAnchor || PORT_FRAC[e.fromPort] || (nf && nt ? facingFrac(nf, vs[0] || centerOf(nt)) : undefined);
+      const toFrac = e.toAnchor || PORT_FRAC[e.toPort] || (nf && nt ? facingFrac(nt, vs[vs.length - 1] || centerOf(nf)) : undefined);
+      graph.addEdge({ view: 'free-edge',
         id: e.id,
         zIndex: (e.z !== undefined && e.z !== null && e.z !== '') ? +e.z : 5,
-        source: terminal(e.from, e.fromAnchor || PORT_FRAC[e.fromPort]),
-        target: terminal(e.to, e.toAnchor || PORT_FRAC[e.toPort]),
+        source: terminal(e.from, fromFrac),
+        target: terminal(e.to, toFrac),
         vertices: e.vertices || [],
         router: { name: router },
         attrs: edgeAttrs(dash, e.color, e.width, e.arrow),
@@ -376,6 +388,7 @@ export function createFlowEngine(container, cb) {
     graph.enableHistory();
     graph.cleanHistory();
     loading = false;
+    if (opts.keepView) return;        // 调用方要恢复上次视口,不做自动适配
     fit();
     setTimeout(fit, 150);
   }
@@ -485,7 +498,7 @@ export function createFlowEngine(container, cb) {
   graph.on('scale', () => {
     clearTimeout(scaleTimer);
     scaleTimer = setTimeout(() => {
-      graph.getSelectedCells().forEach(c => { if (c.isEdge()) edgeTools(c); });
+      graph.getSelectedCells().forEach(c => { if (c.isEdge() && c.id !== dragActive) edgeTools(c); });
     }, 120);
   });
   /* 控制点:按图坐标插入到最近的折线段上 / 删除第 idx 个 */
@@ -527,23 +540,12 @@ export function createFlowEngine(container, cb) {
     cb.onNodeContextMenu(node, { x: e.clientX, y: e.clientY });
   });
   graph.on('blank:contextmenu', ({ e }) => e.preventDefault());
-  /* 松手落点由我们自己定:X6 在同一元素上换落点时不发 edge:connected,所以监听 window mouseup 兜底。
-     dragging = { edge, type: 'source'|'target', isNew } 在拖箭头柄 / 新线出现时记下。 */
-  let dragging = null;
-  graph.on('edge:mousedown', ({ e, edge }) => {
-    const p = graph.clientToLocal(e.clientX, e.clientY);
-    const r = 24 / Math.max(0.02, graph.zoom());
-    const sp = edge.getSourcePoint(), tp = edge.getTargetPoint();
-    if (sp && Math.hypot(p.x - sp.x, p.y - sp.y) <= r) dragging = { edge, type: 'source' };
-    else if (tp && Math.hypot(p.x - tp.x, p.y - tp.y) <= r) dragging = { edge, type: 'target' };
-  });
-  graph.on('edge:added', ({ edge }) => {
-    if (loading) return;
-    if (linkStart && !edge.getTargetCellId()) {          // 从边缘拖出来的新线:起点锚在按下的那一点
-      edge.setSource(terminal(linkStart.cell, linkStart.frac));
-      dragging = { edge, type: 'target', isNew: true };
-    }
-  });
+  /* 连线落点:接管 X6 自己的拖线流程(EdgeView.dragArrowhead → snapArrowhead / stopArrowheadDragging)。
+     X6 原版 snapArrowhead 按「到元素中心/外接框的距离」挑目标,终端只写 {cell},锚点走默认 center → 正交路由出来永远是四个中点;
+     同一元素上换落点时 equalTerminals 只比 cell+port,认为没变,锚点被丢掉 → 「弹回四个点」。
+     这里覆写 snapArrowhead:用真实轮廓几何(nodeAt/boundaryFrac)找目标,终端直接写成轮廓上的相对锚点。
+     松手后 X6 的 stopArrowheadDragging 走 validateEdge:没落在元素上 → 旧线回退、新线删除;落在元素上 → 终端已是锚点,不会再被改写。 */
+  const SNAP_PX = 18;   // 屏幕像素:指针离轮廓多近就吸上去
   function nodeAt(p, px = EDGE_BAND_PX, excludeId = null) {   // 指针下的可连元素:先找包围盒真包含的,再找 px 像素内最近的
     const band = px / Math.max(0.02, graph.zoom());
     const cands = graph.getNodes().filter((n) => n.id !== excludeId && connectable((n.getData() || {}).kind));
@@ -553,43 +555,41 @@ export function createFlowEngine(container, cb) {
       .filter((x) => x.d <= band).sort((a, b) => a.d - b.d);
     return near.length ? near[0].n : null;
   }
-  /* 拖动中的「吸附」:指针离任何元素轮廓 ≤ SNAP_PX 就把线端吸到轮廓上离指针最近的那一点(不是四个中点);离远了跟指针走 */
-  const SNAP_PX = 18;
-  const onWinMove = (e) => {
-    const d = dragging; if (!d || !d.edge || !graph.getCellById(d.edge.id)) return;
-    const p = graph.clientToLocal(e.clientX, e.clientY);
-    const other = d.type === 'source' ? d.edge.getTargetCellId() : d.edge.getSourceCellId();
-    const node = nodeAt(p, SNAP_PX, other);
-    const t = node ? terminal(node.id, boundaryFrac(node, p)) : { x: p.x, y: p.y };
-    if (window.__jfeDebug) console.log('[jfe] winmove', d.type, JSON.stringify(p), 'snap=', node && node.id);
-    if (d.type === 'source') d.edge.setSource(t); else d.edge.setTarget(t);
-  };
-  window.addEventListener('mousemove', onWinMove);
-  const onWinUp = (e) => {
-    const d = dragging; dragging = null; linkStart = null;
-    if (!d || !d.edge || !graph.getCellById(d.edge.id)) { if (window.__jfeDebug) console.log('[jfe] winup: no dragging', !!d); return; }
-    const p = graph.clientToLocal(e.clientX, e.clientY);
-    const other0 = d.type === 'source' ? d.edge.getTargetCellId() : d.edge.getSourceCellId();
-    const node = nodeAt(p, SNAP_PX, other0);
-    if (window.__jfeDebug) console.log('[jfe] winup', d.type, d.isNew ? 'new' : 'old', 'at', JSON.stringify(p), 'node=', node && node.id);
-    if (!node) return;                                    // 没落在元素上:新线由 X6 自己删,旧线保持原样
-    const other = d.type === 'source' ? d.edge.getTargetCellId() : d.edge.getSourceCellId();
-    if (other === node.id) return;                        // 不允许自环
-    const t = terminal(node.id, boundaryFrac(node, p));
-    if (d.type === 'source') d.edge.setSource(t); else d.edge.setTarget(t);
-    graph.select(d.edge);
-  };
-  window.addEventListener('mouseup', onWinUp);
-  // 连上(新线或拖箭头柄重接):把落点投到轮廓上,记成相对锚点,这样刷新/缩放后还贴在同一处
-  graph.on('edge:connected', ({ e, edge, isNew, type, currentCell }) => {
-    if (window.__jfeDebug) console.log('[jfe] edge:connected', type, isNew, currentCell && currentCell.id);
-    if (!edge || !currentCell || !currentCell.isNode()) return;
-    const p = graph.clientToLocal(e.clientX, e.clientY);
-    const frac = boundaryFrac(currentCell, p);
-    if (type === 'source') edge.setSource(terminal(currentCell.id, frac));
-    else edge.setTarget(terminal(currentCell.id, frac));
-    if (isNew && linkStart && edge.getSourceCellId() === linkStart.cell) edge.setSource(terminal(linkStart.cell, linkStart.frac));
-    linkStart = null;
+  let dragActive = null;   // 正在拖箭头柄的线 id:拖动期间禁止重挂它的工具(重挂会销毁正在拖的柄,拖动就断了)
+  class FreeEdgeView extends EdgeView {
+    dragArrowhead(e, x, y) { dragActive = this.cell.id; super.dragArrowhead(e, x, y); }
+    stopArrowheadDragging(e, x, y) { super.stopArrowheadDragging(e, x, y); dragActive = null; }
+    snapArrowhead(x, y, data) {
+      const type = data.terminalType;
+      const p = { x, y };
+      const otherId = type === 'source' ? this.cell.getTargetCellId() : this.cell.getSourceCellId();
+      const node = nodeAt(p, SNAP_PX, otherId);
+      const view = node ? graph.findViewByCell(node) : null;
+      const prevView = data.closestView || null;
+      let ok = false, term = null;
+      if (view) {
+        term = terminal(node.id, boundaryFrac(node, p));
+        ok = prevView === view || this.validateConnection(...data.getValidateConnectionArgs(view, view.container), term);
+      }
+      if (prevView && (!ok || prevView !== view)) prevView.unhighlight(prevView.container, { type: 'magnetAdsorbed' });
+      if (ok) {
+        if (prevView !== view) view.highlight(view.container, { type: 'magnetAdsorbed' });
+        data.closestView = view; data.closestMagnet = view.container;
+        this.cell.setTerminal(type, term, {}, { ...data.options, ui: true });
+      } else {
+        data.closestView = null; data.closestMagnet = null;
+        this.cell.setTerminal(type, { x, y }, {}, { ...data.options, ui: true });
+      }
+      if (window.__jfeDebug) console.log('[jfe] snap', type, JSON.stringify(p), 'node=', node && node.id, ok);
+    }
+  }
+  Graph.registerView('free-edge', FreeEdgeView, true);
+  graph.on('edge:added', ({ edge }) => {
+    if (loading) return;
+    if (linkStart && !edge.getTargetCellId()) {          // 从边缘拖出来的新线:起点锚在按下的那一点
+      edge.setSource(terminal(linkStart.cell, linkStart.frac));
+      linkStart = null;
+    }
   });
   // 鼠标靠近轮廓时给个十字光标,提示「这里能起线」
   graph.on('node:mousemove', ({ e, node, view }) => {
@@ -602,7 +602,7 @@ export function createFlowEngine(container, cb) {
   graph.on('node:click', ({ node }) => {
     if (!linkFrom) return;
     if (node.id !== linkFrom && connectable((node.getData() || {}).kind)) {
-      graph.addEdge({
+      graph.addEdge({ view: 'free-edge',
         zIndex: 5,
         source: { cell: linkFrom }, target: { cell: node.id },
         router: { name: 'orth' },   // 正交路由自动挑上下左右最优锚边
@@ -617,6 +617,9 @@ export function createFlowEngine(container, cb) {
   graph.on('blank:click', () => {
     if (linkFrom) { linkFrom = null; cb.onLinkDone(); }
   });
+  let lastViewAt = 0;
+  const viewChanged = () => { const now = Date.now(); if (now - lastViewAt < 250) return; lastViewAt = now; cb.onViewChange && cb.onViewChange({ zoom: graph.zoom(), ...graph.translate() }); };
+  graph.on('scale', viewChanged); graph.on('translate', viewChanged);
   graph.on('node:dblclick', ({ node }) => cb.onNodeDblclick(node));
   graph.on('node:selected', ({ node }) => cb.onNodeSelected && cb.onNodeSelected(node));
   graph.on('node:unselected', () => cb.onNodeSelected && cb.onNodeSelected(null));
@@ -748,7 +751,7 @@ export function createFlowEngine(container, cb) {
         h: Math.round(sizeTouched ? +draft.h : s.height) };
       const nn = graph.addNode(nodeConfig(json));
       for (const eg of edges)
-        graph.addEdge({ ...eg, zIndex: 5, router: eg.router || { name: 'orth' } });
+        graph.addEdge({ view: 'free-edge', ...eg, zIndex: 5, router: eg.router || { name: 'orth' } });
       autoSize(nn);
       return;
     }
@@ -788,6 +791,8 @@ export function createFlowEngine(container, cb) {
     buildFrom, serialize, fit,
     startDnd: (kind, e) => dnd.start(paletteNode(kind), e),
     serializeNow: serialize,
+    getView: () => ({ zoom: graph.zoom(), ...graph.translate() }),
+    setView: (v) => { if (!v || !v.zoom) return false; graph.zoom(v.zoom, { absolute: true }); graph.translate(v.tx || 0, v.ty || 0); fitTries = 99; return true; },
     applyNodeEdit, applyEdgeEdit,
     addEdgeVertex, removeEdgeVertex,
     setNewEdgeStyle,
@@ -797,6 +802,6 @@ export function createFlowEngine(container, cb) {
     removeSelected: () => graph.removeCells(graph.getSelectedCells()),
     exportSVG: name => graph.exportSVG(name, { copyStyles: true }),
     resize: () => graph.resize(),
-    dispose: () => { window.removeEventListener('mouseup', onWinUp); window.removeEventListener('mousemove', onWinMove); graph.dispose(); },
+    dispose: () => { graph.dispose(); },
   };
 }
