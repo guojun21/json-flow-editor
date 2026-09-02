@@ -50,12 +50,15 @@ if (!_G.registerNode.__ucActor) {
     inherit: 'rect',
     markup: [
       { tagName: 'rect', selector: 'hit' },
+      { tagName: 'circle', selector: 'head' },
       { tagName: 'path', selector: 'figure' },
       { tagName: 'text', selector: 'label' },
     ],
     attrs: {
       hit: { refWidth: '100%', refHeight: '100%', fill: 'transparent', stroke: 'none' },
-      figure: { refD: 'M20 1 a7 7 0 1 0 0 14 a7 7 0 1 0 0 -14 M20 15 V34 M6 22 H34 M20 34 L8 50 M20 34 L32 50',
+      // 头用独立 circle(refD 缩放圆弧时两段会画到同一侧,头闭不上);身体是一条路径按节点尺寸缩放
+      head: { refCx: '50%', refCy: '15%', refR: 0.14, fill: 'none', stroke: '#172033', strokeWidth: 2 },
+      figure: { refD: 'M20 15 V34 M6 22 H34 M20 34 L8 50 M20 34 L32 50',
         fill: 'none', stroke: '#172033', strokeWidth: 2, strokeLinecap: 'round' },
       label: { refX: '50%', refY: '100%', refY2: 6, textAnchor: 'middle', textVerticalAnchor: 'top', fontSize: 13 },
     },
@@ -250,7 +253,7 @@ export function createFlowEngine(container, cb) {
     const sh = shapeOf(n);
     const lines = n.lines || [];
     const attrs = sh === 'actor'
-      ? { figure: { stroke: n.stroke || KIND_DEFAULTS.actor.stroke, strokeWidth: 2 * scale() }, label: nodeLabel(n) }
+      ? { figure: { stroke: n.stroke || KIND_DEFAULTS.actor.stroke, strokeWidth: 2 * scale() }, head: { stroke: n.stroke || KIND_DEFAULTS.actor.stroke, strokeWidth: 2 * scale() }, label: nodeLabel(n) }
       : sh === 'classbox'
       ? { body: { fill: n.fill || WHITE, stroke: n.stroke || '#48586a' }, head: { fill: n.bodyColor || '#edf1f4', stroke: n.stroke || '#48586a' },
           title: { text: lines[0] || '', fontSize: (n.fontSize || meta.fs.body) + 2 }, attrs: { text: lines.slice(1).join('\n'), fontSize: n.fontSize || meta.fs.body } }
@@ -621,7 +624,7 @@ export function createFlowEngine(container, cb) {
       dd.baseW = Math.round(+draft.w); dd.baseH = Math.round(+draft.h);
       node.resize(Math.round(+draft.w), Math.round(+draft.h));
     }
-    if (next.shape === 'actor') { node.setAttrs({ figure: { stroke: next.stroke || KIND_DEFAULTS.actor.stroke }, label: nodeLabel(next) }); autoSize(node); return; }
+    if (next.shape === 'actor') { node.setAttrs({ figure: { stroke: next.stroke || KIND_DEFAULTS.actor.stroke }, head: { stroke: next.stroke || KIND_DEFAULTS.actor.stroke }, label: nodeLabel(next) }); autoSize(node); return; }
     if (next.shape === 'classbox') { node.setAttrs({ title: { text: next.lines[0] || '' }, attrs: { text: next.lines.slice(1).join('\n') }, body: { fill: next.fill || WHITE, stroke: next.stroke || '#48586a' } }); return; }
     if (next.shape === 'lifeline') { node.setAttrs({ label: { text: next.lines.join('\n') } }); return; }
     const body = willPolygon
