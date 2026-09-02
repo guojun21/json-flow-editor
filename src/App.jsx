@@ -119,8 +119,11 @@ export default function App() {
     engineRef.current = eng;
     window.__jfe = { graph: () => eng.graph, doc: () => docRef.current, serialize: () => eng.serializeNow(),
       autosave: v => { autosaveRef.current = v !== false; return autosaveRef.current; } };
-    Object.keys(localStorage).filter(k => k.startsWith('jfe:') && !k.startsWith(DRAFT_V))
-      .forEach(k => localStorage.removeItem(k));   // 清理上一代草稿
+    // 只清理旧版的「jfe:<图 id>」草稿。不要用宽泛的 jfe: 前缀，
+    // 否则会误删当前版本的 lastFile、view:<id> 和 sidew，刷新后终端记忆全部丢失。
+    Object.keys(localStorage)
+      .filter(k => /^jfe:[a-z0-9_-]{1,40}$/.test(k) && !k.startsWith(DRAFT_V))
+      .forEach(k => localStorage.removeItem(k));
     load(curRef.current);
     fetch('api/list?t=' + Date.now())
       .then(r => { if (!r.ok) throw 0; return r.json(); })
