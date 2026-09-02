@@ -214,7 +214,9 @@ export function createFlowEngine(container, cb) {
   }
   const PORT_FRAC = { pl: { x: 0, y: 0.5 }, pr: { x: 1, y: 0.5 }, pt: { x: 0.5, y: 0 }, pb: { x: 0.5, y: 1 } };   // 老数据的四个端口 → 比例锚点
   function scale() { return meta.W > 3000 ? 1.6 : 1; }
-  function connectable(k) { return !['band', 'pill', 'text', 'boundary', 'package'].includes(k); }
+  // 外部系统/角色等元素（包括 pill）都可以作为连线端点，在轮廓上任意位置吸附；
+  // band / boundary / package / text 仍是纯布局或说明容器，不参与连线。
+  function connectable(k) { return !['band', 'text', 'boundary', 'package'].includes(k); }
   const NO_AUTOSIZE = ['boundary', 'package', 'actor', 'band', 'classbox', 'lifeline', 'anchor', 'activation'];
   function zOf(kind) {   // 默认层级(未显式设置 z 时):容器类在底下,元素在上面
     return kind === 'band' ? 1 : kind === 'boundary' ? 2 : kind === 'package' ? 3 : kind === 'pill' ? 2 : kind === 'text' ? 3 : 10;
