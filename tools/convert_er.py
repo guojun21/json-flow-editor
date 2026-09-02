@@ -47,6 +47,6 @@ for i, (a, b, m1, m2, name) in enumerate(REL):
     if a == "req" and b == "ep": e["dash"] = "dashed"; e["labels"] = [{"text": m1, "position": 0.04}, {"text": m2, "position": 0.96}]   # 派生/快照关系用虚线,基数贴两端
     edges.append(e)
 W = X0 + 5 * (CW + GX); H = Y0 + 3 * (max(heights.values()) + GY) + 40
-doc = {"meta": {"id": "er_paichan", "title": "类图·排产采集数据模型（09-02）", "date": "2026-09-02", "W": W, "H": H, "fs": {"title": 24, "body": 17}}, "nodes": nodes, "edges": edges}
+doc = {"meta": {"id": "er_paichan", "title": "类图·排产采集数据模型（09-02）", "date": "2026-09-02", "order": 20, "W": W, "H": H, "fs": {"title": 24, "body": 17}}, "nodes": nodes, "edges": edges}
 out = os.path.join(ROOT, "data", "er_paichan.json"); json.dump(doc, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1); open(out, "a").write("\n")
 print("写出", out, len(nodes), "节点", len(edges), "边", W, "x", H)

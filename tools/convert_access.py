@@ -41,6 +41,6 @@ for i, (svc, desc) in enumerate(SVC):
     nodes.append({"id": f"s{i}", "kind": "step", "shape": "rect", "x": X0, "y": y + i * (CH + 6), "w": RW, "h": CH, "lines": ["«service» " + svc], "fontSize": 13, "fill": "#edf1f4", "stroke": "#48586a", "textColor": "#17212d"})
     nodes.append({"id": f"sd{i}", "kind": "step", "shape": "rect", "x": X0 + RW + 10, "y": y + i * (CH + 6), "w": len(FUN) * (CW + 6) - 6, "h": CH, "lines": [desc], "fontSize": 14, "fill": "#ffffff", "stroke": "#dce3e8", "textColor": "#17212d"})
 W = X0 + RW + 10 + len(FUN) * (CW + 6) + 40; H = y + len(SVC) * (CH + 6) + 60
-doc = {"meta": {"id": "access_paichan", "title": "访问权限矩阵·角色×功能（09-02）", "date": "2026-09-02", "W": W, "H": H, "fs": {"title": 22, "body": 14}}, "nodes": nodes, "edges": []}
+doc = {"meta": {"id": "access_paichan", "title": "访问权限矩阵·角色×功能（09-02）", "date": "2026-09-02", "order": 41, "W": W, "H": H, "fs": {"title": 22, "body": 14}}, "nodes": nodes, "edges": []}
 out = os.path.join(ROOT, "data", "access_paichan.json"); json.dump(doc, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1); open(out, "a").write("\n")
 print("写出", out, len(nodes), "格", W, "x", H)

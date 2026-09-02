@@ -34,6 +34,6 @@ for i, r in enumerate(roles):
             cell = {"lines": ["—"], "fill": "#ffffff", "textColor": "#9aa4ae", "stroke": "#dce3e8"}
         nodes.append({"id": f"c{i}_{j}", "kind": "step", "shape": "rect", "x": x, "y": y, "w": CW, "h": CH, "fontSize": 14, **cell})
 W = X0 + RW + 10 + len(nodes_) * (CW + 6) + 40; H = Y0 + HH + 8 + len(roles) * (CH + 6) + 40
-doc = {"meta": {"id": "matrix_paichan", "title": "责任矩阵·角色×节点（09-02）", "date": "2026-09-02", "W": W, "H": H, "fs": {"title": 22, "body": 14}}, "nodes": nodes, "edges": edges}
+doc = {"meta": {"id": "matrix_paichan", "title": "责任矩阵·角色×节点（09-02）", "date": "2026-09-02", "order": 40, "W": W, "H": H, "fs": {"title": 22, "body": 14}}, "nodes": nodes, "edges": edges}
 out = os.path.join(ROOT, "data", "matrix_paichan.json"); json.dump(doc, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1); open(out, "a").write("\n")
 print("写出", out, len(nodes), "格", W, "x", H)

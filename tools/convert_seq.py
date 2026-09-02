@@ -94,6 +94,6 @@ for k, (name, msgs) in enumerate(FLOWS, 1):
              "arrow": "block" if kind == "sync" else "classic", "router": "normal"}
         if kind == "ret": e["dash"] = "dashed"
         edges.append(e)
-    doc = {"meta": {"id": f"seq_{k}", "title": f"时序·{name}（09-02）", "date": "2026-09-02", "W": X0 + len(used) * DX + 200, "H": H, "fs": {"title": 22, "body": 15}}, "nodes": nodes, "edges": edges}
+    doc = {"meta": {"id": f"seq_{k}", "title": f"时序·{name}（09-02）", "date": "2026-09-02", "order": 30 + k, "W": X0 + len(used) * DX + 200, "H": H, "fs": {"title": 22, "body": 15}}, "nodes": nodes, "edges": edges}
     out = os.path.join(ROOT, "data", f"seq_{k}.json"); json.dump(doc, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1); open(out, "a").write("\n")
     print(f"seq_{k}: {len(nodes)} 节点 {len(edges)} 消息  {name}")

@@ -16,7 +16,8 @@ old_files = [f for f in os.listdir(os.path.join(ROOT, "data")) if f.startswith("
 for f in old_files: os.remove(os.path.join(ROOT, "data", f))
 
 def write(fid, title, W, H, nodes, edges):
-    doc = {"meta": {"id": fid, "title": title, "date": "2026-09-02", "W": W, "H": H, "fs": {"title": 24, "body": 18}}, "nodes": nodes, "edges": edges}
+    order = 10 if fid.endswith('overview') else 10 + int(fid.split('_')[1])
+    doc = {"meta": {"id": fid, "title": title, "date": "2026-09-02", "order": order, "W": W, "H": H, "fs": {"title": 24, "body": 18}}, "nodes": nodes, "edges": edges}
     out = os.path.join(ROOT, "data", fid + ".json")
     json.dump(doc, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1); open(out, "a").write("\n")
     print(f"{fid:14s} {len(nodes):3d} 节点 {len(edges):3d} 边  {W}x{H}  {title}")

@@ -46,13 +46,13 @@ class H(SimpleHTTPRequestHandler):
                 try:
                     meta = json.load(open(path)).get('meta', {})
                     out.append({'id': fid, 'title': meta.get('title', fid),
-                                'date': date_of(meta), '_m': mtime})
+                                'date': date_of(meta), 'order': meta.get('order', 999), '_m': mtime})
                 except Exception:
                     out.append({'id': fid, 'title': fid, 'date': '', '_m': mtime})
             # 最新的排最前:先按 meta.date 倒序(语义日期,重新部署不会乱),
             # 没写 date 的退回文件 mtime 倒序
             # 最新日期在最前;同一天的按 id 正序(uc_0_overview, uc_1, uc_2 …),别按修改时间乱跳
-            out.sort(key=lambda x: x['id'])
+            out.sort(key=lambda x: (x.get('order', 999), x['id']))          # 同一天:meta.order 小的在前,再按 id
             out.sort(key=lambda x: (x['date'] or ''), reverse=True)
             for x in out:
                 x.pop('_m', None)
