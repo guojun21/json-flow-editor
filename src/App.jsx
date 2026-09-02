@@ -75,6 +75,17 @@ export default function App() {
       });
   }, []);
 
+  const quickTimer = useRef(null);
+  const quickSave = useCallback(() => {
+    clearTimeout(quickTimer.current);
+    quickTimer.current = setTimeout(() => {
+      const eng = engineRef.current; if (!eng) return;
+      docRef.current = eng.serialize();
+      dirtyRef.current = false;
+      pushServer(true);
+    }, 1500);
+  }, [pushServer]);
+
   useEffect(() => {
     const flush = () => {
       if (dirtyRef.current && docRef.current) {
@@ -284,18 +295,8 @@ export default function App() {
       </div>
       {selected && (selected.getData() || {}).spec && (
         <aside className="detail" onMouseDown={e => e.stopPropagation()}>
-          {(() => { const d = selected.getData() || {}; const sp = d.spec || {}; const ST = { done: '已实现', part: '部分', todo: '待做', out: '不入一期' }; return (
-            <>
-              <div className="detail-head">
-                <div className="detail-kicker">{sp.id || '用例'} · {sp.priority || ''}</div>
-                <div className="detail-title">{(d.lines || [])[0]}</div>
-              </div>
-              {[['co', '协同角色'], ['trigger', '触发'], ['pre', '前置条件'], ['flow', '主流程'], ['alt', '异常 / 分支']].map(([k, name]) => (
-                <div className="detail-row" key={k}><div className="detail-k">{name}</div><div className="detail-v">{sp[k] || '—'}</div></div>
-              ))}
-              <button className="btn" onClick={() => openNodeModal(selected)}>编辑规约…</button>
-            </>
-          ); })()}
+          <SpecEditor key={selected.id} node={selected}
+            onChange={spec => { engineRef.current.setNodeSpec(selected, spec); quickSave(); }} />
         </aside>
       )}
       {ctxMenu && (
@@ -454,5 +455,37 @@ export default function App() {
         </Modal>
       )}
     </div>
+  );
+}
+
+/* 用例规约面板:所见即所得,字段直接改,改完自动保存(不设保存按钮)。编号/优先级也在这里改。 */
+function SpecEditor({ node, onChange }) {
+  const d = node.getData() || {};
+  const [sp, setSp] = useState(() => ({ ...(d.spec || {}) }));
+  const set = (k, v) => { const next = { ...sp, [k]: v }; setSp(next); onChange({ [k]: v }); };
+  const grow = el => { if (!el) return; el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; };
+  return (
+    <>
+      <div className="detail-head">
+        <div className="detail-kicker">
+          <input className="spec-id" value={sp.id || ''} placeholder="编号" onChange={e => set('id', e.target.value)} />
+          <span> · </span>
+          <select className="spec-pri" value={sp.priority || 'P0'} onChange={e => set('priority', e.target.value)}>
+            <option value="P0">P0</option><option value="P1">P1</option><option value="P2">P2</option>
+          </select>
+        </div>
+        <div className="detail-title">{(d.lines || [])[0]}</div>
+      </div>
+      {[['co', '协同角色'], ['trigger', '触发'], ['pre', '前置条件'], ['flow', '主流程'], ['alt', '异常 / 分支']].map(([k, name]) => (
+        <div className="detail-row" key={k}>
+          <div className="detail-k">{name}</div>
+          <div className="detail-v">
+            <textarea rows={1} value={sp[k] || ''} placeholder="—" ref={grow} onInput={e => grow(e.target)}
+              onChange={e => set(k, e.target.value)} />
+          </div>
+        </div>
+      ))}
+      <div className="detail-hint">改完自动保存</div>
+    </>
   );
 }

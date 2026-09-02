@@ -188,3 +188,12 @@ html, body, #root { height: 100%; overflow: hidden;
 .canvas-wrap { position: relative; flex: 1; min-width: 0; display: flex; }
 .canvas-wrap > .canvas { flex: 1; min-width: 0; }
 .sheet-loading { display: flex; align-items: center; justify-content: center; color: #48586a; font-size: 15px; }
+
+/* 规约面板行内编辑 */
+.detail-v textarea { width: 100%; border: none; border-bottom: 1px dashed transparent; background: transparent; font: inherit; color: inherit; line-height: 1.5; resize: none; padding: 2px 0; outline: none; overflow: hidden; }
+.detail-v textarea:hover { border-bottom-color: #c9d1d8; }
+.detail-v textarea:focus { border-bottom-color: #48586a; }
+.detail-kicker .spec-id { width: 5em; border: none; border-bottom: 1px dashed transparent; background: transparent; font: inherit; color: inherit; outline: none; }
+.detail-kicker .spec-id:focus, .detail-kicker .spec-id:hover { border-bottom-color: #48586a; }
+.detail-kicker .spec-pri { border: none; background: transparent; font: inherit; color: inherit; outline: none; }
+.detail-hint { margin-top: 10px; font-size: 12px; color: #9aa4ae; }

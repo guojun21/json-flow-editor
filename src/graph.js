@@ -367,14 +367,37 @@ export function createFlowEngine(container, cb) {
     graph.disableHistory();
     graph.clearCells();
     for (const n of doc.nodes) graph.addNode(nodeConfig(n));
+    // 无锚点线端的默认落点:先算每条线两端「面向对方(或首/末控制点)那一边」,
+    // 同一元素同一边上有多条线时沿这条边均匀铺开(按对端位置排序,不交叉),不再全挤在边中点一处
+    const AUTO = new Map();
+    const groups = new Map();
+    const sideOf = (f) => f.x === 0 ? 'left' : f.x === 1 ? 'right' : f.y === 0 ? 'top' : 'bottom';
+    const enroll = (nodeId, f, item) => { const k = nodeId + ':' + sideOf(f); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(item); };
+    for (const e of (doc.edges || [])) {
+      const nf = graph.getCellById(e.from), nt = graph.getCellById(e.to); if (!nf || !nt) continue;
+      const vs = Array.isArray(e.vertices) ? e.vertices : [];
+      const rec = {};
+      if (!e.fromAnchor && !PORT_FRAC[e.fromPort]) { const ref = vs[0] || centerOf(nt); rec.from = facingFrac(nf, ref); enroll(nf.id, rec.from, { eid: e.id, end: 'from', other: ref }); }
+      if (!e.toAnchor && !PORT_FRAC[e.toPort]) { const ref = vs[vs.length - 1] || centerOf(nf); rec.to = facingFrac(nt, ref); enroll(nt.id, rec.to, { eid: e.id, end: 'to', other: ref }); }
+      AUTO.set(e.id, rec);
+    }
+    for (const [key, list] of groups) {
+      if (list.length < 2) continue;
+      const vertical = /:(left|right)$/.test(key);
+      list.sort((a, b) => vertical ? a.other.y - b.other.y : a.other.x - b.other.x);
+      list.forEach((it, i) => {
+        const t = Math.round((i + 1) / (list.length + 1) * 1000) / 1000;
+        const rec = AUTO.get(it.eid); const f = rec[it.end];
+        rec[it.end] = vertical ? { x: f.x, y: t } : { x: t, y: f.y };
+      });
+    }
     for (const e of doc.edges) {
       const dash = dashOf(e.dash !== undefined ? e.dash : e.dashed);
       const router = routerOf(e.router);
       // 老数据里没锚点/端口的线端:按「面向对方(或首/末控制点)的那一边中点」补一个显式轮廓锚点,柄才会落在轮廓上而不是元素中心
-      const nf = graph.getCellById(e.from), nt = graph.getCellById(e.to);
-      const vs = Array.isArray(e.vertices) ? e.vertices : [];
-      const fromFrac = e.fromAnchor || PORT_FRAC[e.fromPort] || (nf && nt ? facingFrac(nf, vs[0] || centerOf(nt)) : undefined);
-      const toFrac = e.toAnchor || PORT_FRAC[e.toPort] || (nf && nt ? facingFrac(nt, vs[vs.length - 1] || centerOf(nf)) : undefined);
+      const auto = AUTO.get(e.id) || {};
+      const fromFrac = e.fromAnchor || PORT_FRAC[e.fromPort] || auto.from;
+      const toFrac = e.toAnchor || PORT_FRAC[e.toPort] || auto.to;
       graph.addEdge({ view: 'free-edge',
         id: e.id,
         zIndex: (e.z !== undefined && e.z !== null && e.z !== '') ? +e.z : 5,
@@ -796,6 +819,7 @@ export function createFlowEngine(container, cb) {
     getView: () => ({ zoom: graph.zoom(), ...graph.translate() }),
     setView: (v) => { if (!v || !v.zoom) return false; graph.zoom(v.zoom, { absolute: true }); graph.translate(v.tx || 0, v.ty || 0); fitTries = 99; return true; },
     applyNodeEdit, applyEdgeEdit,
+    setNodeSpec: (node, spec) => { const d = node.getData() || {}; node.setData({ ...d, spec: { ...(d.spec || {}), ...spec } }, { deep: false }); },
     addEdgeVertex, removeEdgeVertex,
     setNewEdgeStyle,
     startLinkFrom: node => { linkFrom = node.id; },
