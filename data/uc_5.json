@@ -34,7 +34,7 @@
    "w": 1700,
    "h": 34,
    "lines": [
-    "火柴人=真人角色 · «system»=外部系统 · «timer»=定时触发 · 实线=主责关联(一对一) · 绿=已实现 橙=部分实现 白=待做 灰=不入一期 · 协同角色/触发/前置/主流程在右侧规约面板(选中即显示)"
+    "火柴人=真人角色 · «system»=外部系统 · «timer»=定时触发 · 实线=主责关联(一对一) · 协同角色/触发/前置/主流程在右侧规约面板(选中即显示)"
    ],
    "fontSize": 16,
    "textColor": "#48586a"
@@ -76,12 +76,11 @@
    "w": 400,
    "h": 92,
    "lines": [
-    "manifest 生成与对账",
-    "已实现"
+    "manifest 生成与对账"
    ],
    "fontSize": 19,
-   "fill": "#e3f1ec",
-   "stroke": "#1e755d",
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "textColor": "#17212d",
    "spec": {
     "id": "E4",
@@ -103,12 +102,11 @@
    "w": 400,
    "h": 92,
    "lines": [
-    "云端回执与本地清理倒计时",
-    "已实现"
+    "云端回执与本地清理倒计时"
    ],
    "fontSize": 19,
-   "fill": "#e3f1ec",
-   "stroke": "#1e755d",
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "textColor": "#17212d",
    "spec": {
     "id": "E5",
@@ -130,12 +128,11 @@
    "w": 400,
    "h": 92,
    "lines": [
-    "入库校验(一致性/去重)",
-    "已实现"
+    "入库校验(一致性/去重)"
    ],
    "fontSize": 19,
-   "fill": "#e3f1ec",
-   "stroke": "#1e755d",
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "textColor": "#17212d",
    "spec": {
     "id": "E8",
@@ -157,12 +154,11 @@
    "w": 400,
    "h": 92,
    "lines": [
-    "存储水位与 TTL 告警",
-    "已实现"
+    "存储水位与 TTL 告警"
    ],
    "fontSize": 19,
-   "fill": "#e3f1ec",
-   "stroke": "#1e755d",
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "textColor": "#17212d",
    "spec": {
     "id": "E9",
@@ -184,8 +180,7 @@
    "w": 400,
    "h": 92,
    "lines": [
-    "Episode 血缘写入数据层 Registry",
-    "待做"
+    "Episode 血缘写入数据层 Registry"
    ],
    "fontSize": 19,
    "fill": "#ffffff",
@@ -223,12 +218,11 @@
    "w": 400,
    "h": 92,
    "lines": [
-    "SSD 拔盘与交接台账",
-    "部分实现"
+    "SSD 拔盘与交接台账"
    ],
    "fontSize": 19,
-   "fill": "#f8eedc",
-   "stroke": "#a1691a",
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "textColor": "#17212d",
    "spec": {
     "id": "E1",
@@ -250,8 +244,7 @@
    "w": 400,
    "h": 92,
    "lines": [
-    "物理搬运至深圳中转",
-    "待做"
+    "物理搬运至深圳中转"
    ],
    "fontSize": 19,
    "fill": "#ffffff",
@@ -277,8 +270,7 @@
    "w": 400,
    "h": 92,
    "lines": [
-    "盘损坏/丢失处置",
-    "待做"
+    "盘损坏/丢失处置"
    ],
    "fontSize": 19,
    "fill": "#ffffff",
@@ -316,12 +308,11 @@
    "w": 400,
    "h": 92,
    "lines": [
-    "上传上云",
-    "部分实现"
+    "上传上云"
    ],
    "fontSize": 19,
-   "fill": "#f8eedc",
-   "stroke": "#a1691a",
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "textColor": "#17212d",
    "spec": {
     "id": "E3",
@@ -359,12 +350,11 @@
    "w": 400,
    "h": 92,
    "lines": [
-    "本地清理与盘复用",
-    "部分实现"
+    "本地清理与盘复用"
    ],
    "fontSize": 19,
-   "fill": "#f8eedc",
-   "stroke": "#a1691a",
+   "fill": "#ffffff",
+   "stroke": "#48586a",
    "textColor": "#17212d",
    "spec": {
     "id": "E6",

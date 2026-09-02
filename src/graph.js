@@ -55,7 +55,7 @@ if (!_G.registerNode.__ucActor) {
     ],
     attrs: {
       hit: { refWidth: '100%', refHeight: '100%', fill: 'transparent', stroke: 'none' },
-      figure: { refD: 'M20 6 a6 6 0 1 0 0.01 0 M20 12 v16 M6 18 h28 M20 28 l-12 16 M20 28 l12 16',
+      figure: { refD: 'M20 1 a7 7 0 1 0 0 14 a7 7 0 1 0 0 -14 M20 15 V34 M6 22 H34 M20 34 L8 50 M20 34 L32 50',
         fill: 'none', stroke: '#172033', strokeWidth: 2, strokeLinecap: 'round' },
       label: { refX: '50%', refY: '100%', refY2: 6, textAnchor: 'middle', textVerticalAnchor: 'top', fontSize: 13 },
     },

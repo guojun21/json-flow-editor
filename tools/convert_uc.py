@@ -48,7 +48,7 @@ for k, node in enumerate(U.NODES, 1):
     def link(a, b): edges.append({"id": f"e{len(edges)}", "from": a, "to": b, "color": "#1f6389", "width": 2, "arrow": "none", "router": "normal"})
     y0 = 40
     add(id="title", kind="text", x=40, y=y0, w=1500, h=52, lines=[f"排产采集 · {node} · 用例图"], fontSize=32, bold=True, textColor="#0b1220")
-    add(id="legend", kind="text", x=40, y=y0 + 56, w=1700, h=34, lines=["火柴人=真人角色 · «system»=外部系统 · «timer»=定时触发 · 实线=主责关联(一对一) · 绿=已实现 橙=部分实现 白=待做 灰=不入一期 · 协同角色/触发/前置/主流程在右侧规约面板(选中即显示)"], fontSize=16, textColor="#48586a")
+    add(id="legend", kind="text", x=40, y=y0 + 56, w=1700, h=34, lines=["火柴人=真人角色 · «system»=外部系统 · «timer»=定时触发 · 实线=主责关联(一对一) · 协同角色/触发/前置/主流程在右侧规约面板(选中即显示)"], fontSize=16, textColor="#48586a")
     top = y0 + 110
     # 参与者在边界外:左侧角色 | 边界(两列用例) | 右侧角色
     XA_L, XU_L, XU_R, XA_R = 70, 330, 860, 1330
@@ -69,8 +69,8 @@ for k, node in enumerate(U.NODES, 1):
                 add(id=aid, kind="actor", x=x_actor + 60, y=y + band_h / 2 - 46, w=64, h=84, lines=[actor], fontSize=17)
             for i, u in enumerate(us):
                 yy = y + i * (EH + GAP)
-                add(id=u[0], kind="usecase", shape="ellipse", x=x_uc, y=yy, w=EW, h=EH, lines=[clean_name(u[2]), STATUS_WORD[u[10]]], fontSize=FS,
-                    fill=FILL[u[10]], stroke=STROKE[u[10]], textColor="#17212d",
+                add(id=u[0], kind="usecase", shape="ellipse", x=x_uc, y=yy, w=EW, h=EH, lines=[clean_name(u[2])], fontSize=FS,
+                    fill="#ffffff", stroke="#48586a", textColor="#17212d",
                     spec={"id": u[0], "trigger": u[5], "pre": u[6], "flow": u[7], "alt": u[8], "priority": u[9], "status": u[10],
                           "co": " / ".join(a for a in u[4] if a != actor)})
                 link(aid, u[0])
@@ -86,13 +86,13 @@ cnt = Counter(u[1] for u in U.UC); done = Counter(u[1] for u in U.UC if u[10] ==
 nodes, edges = [], []
 add = lambda **n: nodes.append({a: b for a, b in n.items() if b not in (None, "", [])}) or n["id"]
 add(id="title", kind="text", x=40, y=30, w=1500, h=56, lines=[f"排产采集 · 一期用例总览（{len(U.UC)} 个用例 · {len(U.ACTORS)} 类角色）"], fontSize=32, bold=True, textColor="#0b1220")
-add(id="sub", kind="text", x=40, y=90, w=1700, h=34, lines=["每个节点一张用例图,见文件列表「用例·xxx（09-02）」;数字 = 用例数(已实现 / 部分 / 待做)"], fontSize=17, textColor="#48586a")
+add(id="sub", kind="text", x=40, y=90, w=1700, h=34, lines=["每个节点一张用例图,见文件列表「用例·xxx（09-02）」;方框里是该节点的用例数"], fontSize=17, textColor="#48586a")
 add(id="ov", kind="boundary", x=40, y=140, w=1720, h=470, lines=["《系统》排产采集 = 优化版流程图第 3 泳道"], fontSize=22)
 for i, n in enumerate(U.NODES):
     r, c = divmod(i, 4); x = 80 + c * 420; yy = 210 + r * 190
     add(id=f"p{i}", kind="package", x=x, y=yy, w=390, h=160, lines=[f"{i+1}. {n}"], fontSize=20)
     add(id=f"t{i}", kind="text", x=x + 20, y=yy + 56, w=350, h=90,
-        lines=[f"{cnt[n]} 个用例", f"已实现 {done[n]} · 部分 {part[n]} · 待做 {cnt[n]-done[n]-part[n]}"], fontSize=18, textColor="#1f6389")
+        lines=[f"{cnt[n]} 个用例"], fontSize=20, textColor="#1f6389")
 # 角色总表
 add(id="actors", kind="package", x=40, y=640, w=1720, h=300, lines=["角色（真人 + 系统）"], fontSize=20)
 hum = [a for a in U.ACTORS if not is_sys(a)]; sysa = [a for a in U.ACTORS if is_sys(a)]
