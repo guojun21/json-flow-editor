@@ -544,20 +544,33 @@ export function createFlowEngine(container, cb) {
       dragging = { edge, type: 'target', isNew: true };
     }
   });
-  function nodeAt(p) {                                    // 指针下的可连元素:先找包围盒真包含的,再找边缘带内最近的
-    const band = EDGE_BAND_PX / Math.max(0.02, graph.zoom());
-    const cands = graph.getNodes().filter((n) => connectable((n.getData() || {}).kind));
+  function nodeAt(p, px = EDGE_BAND_PX, excludeId = null) {   // 指针下的可连元素:先找包围盒真包含的,再找 px 像素内最近的
+    const band = px / Math.max(0.02, graph.zoom());
+    const cands = graph.getNodes().filter((n) => n.id !== excludeId && connectable((n.getData() || {}).kind));
     const inside = cands.filter((n) => { const b = n.getBBox(); return p.x >= b.x && p.x <= b.x + b.width && p.y >= b.y && p.y <= b.y + b.height; });
     if (inside.length) return inside.sort((a, b) => (b.getZIndex() || 0) - (a.getZIndex() || 0))[0];
     const near = cands.map((n) => { const b = n.getBBox(); const dx = Math.max(b.x - p.x, 0, p.x - (b.x + b.width)); const dy = Math.max(b.y - p.y, 0, p.y - (b.y + b.height)); return { n, d: Math.hypot(dx, dy) }; })
       .filter((x) => x.d <= band).sort((a, b) => a.d - b.d);
     return near.length ? near[0].n : null;
   }
+  /* 拖动中的「吸附」:指针离任何元素轮廓 ≤ SNAP_PX 就把线端吸到轮廓上离指针最近的那一点(不是四个中点);离远了跟指针走 */
+  const SNAP_PX = 18;
+  const onWinMove = (e) => {
+    const d = dragging; if (!d || !d.edge || !graph.getCellById(d.edge.id)) return;
+    const p = graph.clientToLocal(e.clientX, e.clientY);
+    const other = d.type === 'source' ? d.edge.getTargetCellId() : d.edge.getSourceCellId();
+    const node = nodeAt(p, SNAP_PX, other);
+    const t = node ? terminal(node.id, boundaryFrac(node, p)) : { x: p.x, y: p.y };
+    if (window.__jfeDebug) console.log('[jfe] winmove', d.type, JSON.stringify(p), 'snap=', node && node.id);
+    if (d.type === 'source') d.edge.setSource(t); else d.edge.setTarget(t);
+  };
+  window.addEventListener('mousemove', onWinMove);
   const onWinUp = (e) => {
     const d = dragging; dragging = null; linkStart = null;
     if (!d || !d.edge || !graph.getCellById(d.edge.id)) { if (window.__jfeDebug) console.log('[jfe] winup: no dragging', !!d); return; }
     const p = graph.clientToLocal(e.clientX, e.clientY);
-    const node = nodeAt(p);
+    const other0 = d.type === 'source' ? d.edge.getTargetCellId() : d.edge.getSourceCellId();
+    const node = nodeAt(p, SNAP_PX, other0);
     if (window.__jfeDebug) console.log('[jfe] winup', d.type, d.isNew ? 'new' : 'old', 'at', JSON.stringify(p), 'node=', node && node.id);
     if (!node) return;                                    // 没落在元素上:新线由 X6 自己删,旧线保持原样
     const other = d.type === 'source' ? d.edge.getTargetCellId() : d.edge.getSourceCellId();
@@ -784,6 +797,6 @@ export function createFlowEngine(container, cb) {
     removeSelected: () => graph.removeCells(graph.getSelectedCells()),
     exportSVG: name => graph.exportSVG(name, { copyStyles: true }),
     resize: () => graph.resize(),
-    dispose: () => { window.removeEventListener('mouseup', onWinUp); graph.dispose(); },
+    dispose: () => { window.removeEventListener('mouseup', onWinUp); window.removeEventListener('mousemove', onWinMove); graph.dispose(); },
   };
 }
