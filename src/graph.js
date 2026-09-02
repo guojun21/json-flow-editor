@@ -115,7 +115,7 @@ export function createFlowEngine(container, cb) {
     connecting: {
       router: { name: 'orth' },
       connector: { name: 'normal' },
-      snap: { radius: 40 },
+      snap: false,   // 不吸附:任意边缘落线,预览线跟指针走
       allowBlank: false, allowEdge: false, allowNode: true, allowMulti: true, allowPort: false,
       highlight: true, connectionPoint: 'boundary',
       // 任意边缘起线:元素本体就是 magnet,但只有按在「边缘带」(离轮廓 ≤ 10 屏幕像素)才算起线,按在内部照旧是拖动元素
@@ -527,6 +527,46 @@ export function createFlowEngine(container, cb) {
     cb.onNodeContextMenu(node, { x: e.clientX, y: e.clientY });
   });
   graph.on('blank:contextmenu', ({ e }) => e.preventDefault());
+  /* 松手落点由我们自己定:X6 在同一元素上换落点时不发 edge:connected,所以监听 window mouseup 兜底。
+     dragging = { edge, type: 'source'|'target', isNew } 在拖箭头柄 / 新线出现时记下。 */
+  let dragging = null;
+  graph.on('edge:mousedown', ({ e, edge }) => {
+    const p = graph.clientToLocal(e.clientX, e.clientY);
+    const r = 24 / Math.max(0.02, graph.zoom());
+    const sp = edge.getSourcePoint(), tp = edge.getTargetPoint();
+    if (sp && Math.hypot(p.x - sp.x, p.y - sp.y) <= r) dragging = { edge, type: 'source' };
+    else if (tp && Math.hypot(p.x - tp.x, p.y - tp.y) <= r) dragging = { edge, type: 'target' };
+  });
+  graph.on('edge:added', ({ edge }) => {
+    if (loading) return;
+    if (linkStart && !edge.getTargetCellId()) {          // 从边缘拖出来的新线:起点锚在按下的那一点
+      edge.setSource(terminal(linkStart.cell, linkStart.frac));
+      dragging = { edge, type: 'target', isNew: true };
+    }
+  });
+  function nodeAt(p) {                                    // 指针下的可连元素:先找包围盒真包含的,再找边缘带内最近的
+    const band = EDGE_BAND_PX / Math.max(0.02, graph.zoom());
+    const cands = graph.getNodes().filter((n) => connectable((n.getData() || {}).kind));
+    const inside = cands.filter((n) => { const b = n.getBBox(); return p.x >= b.x && p.x <= b.x + b.width && p.y >= b.y && p.y <= b.y + b.height; });
+    if (inside.length) return inside.sort((a, b) => (b.getZIndex() || 0) - (a.getZIndex() || 0))[0];
+    const near = cands.map((n) => { const b = n.getBBox(); const dx = Math.max(b.x - p.x, 0, p.x - (b.x + b.width)); const dy = Math.max(b.y - p.y, 0, p.y - (b.y + b.height)); return { n, d: Math.hypot(dx, dy) }; })
+      .filter((x) => x.d <= band).sort((a, b) => a.d - b.d);
+    return near.length ? near[0].n : null;
+  }
+  const onWinUp = (e) => {
+    const d = dragging; dragging = null; linkStart = null;
+    if (!d || !d.edge || !graph.getCellById(d.edge.id)) { if (window.__jfeDebug) console.log('[jfe] winup: no dragging', !!d); return; }
+    const p = graph.clientToLocal(e.clientX, e.clientY);
+    const node = nodeAt(p);
+    if (window.__jfeDebug) console.log('[jfe] winup', d.type, d.isNew ? 'new' : 'old', 'at', JSON.stringify(p), 'node=', node && node.id);
+    if (!node) return;                                    // 没落在元素上:新线由 X6 自己删,旧线保持原样
+    const other = d.type === 'source' ? d.edge.getTargetCellId() : d.edge.getSourceCellId();
+    if (other === node.id) return;                        // 不允许自环
+    const t = terminal(node.id, boundaryFrac(node, p));
+    if (d.type === 'source') d.edge.setSource(t); else d.edge.setTarget(t);
+    graph.select(d.edge);
+  };
+  window.addEventListener('mouseup', onWinUp);
   // 连上(新线或拖箭头柄重接):把落点投到轮廓上,记成相对锚点,这样刷新/缩放后还贴在同一处
   graph.on('edge:connected', ({ e, edge, isNew, type, currentCell }) => {
     if (window.__jfeDebug) console.log('[jfe] edge:connected', type, isNew, currentCell && currentCell.id);
@@ -744,6 +784,6 @@ export function createFlowEngine(container, cb) {
     removeSelected: () => graph.removeCells(graph.getSelectedCells()),
     exportSVG: name => graph.exportSVG(name, { copyStyles: true }),
     resize: () => graph.resize(),
-    dispose: () => graph.dispose(),
+    dispose: () => { window.removeEventListener('mouseup', onWinUp); graph.dispose(); },
   };
 }
