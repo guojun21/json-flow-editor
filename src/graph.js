@@ -61,7 +61,7 @@ if (!_G.registerNode.__ucActor) {
       // refD 是把「路径自身的包围盒」拉伸到节点大小,所以路径里要带上整个 40×52 设计框的两个角(0.01 长的隐形小段),
       // 否则身体会被拉到占满整个节点、和头重叠
       figure: { refD: 'M0 0 h0.01 M40 52 h-0.01 M20 15 V34 M6 22 H34 M20 34 L8 50 M20 34 L32 50',
-        fill: 'none', stroke: '#172033', strokeWidth: 2, strokeLinecap: 'round' },
+        fill: 'none', stroke: '#172033', strokeWidth: 2, strokeLinecap: 'butt', strokeLinejoin: 'round' },
       label: { refX: '50%', refY: '100%', refY2: 6, textAnchor: 'middle', textVerticalAnchor: 'top', fontSize: 13 },
     },
   }, true);
