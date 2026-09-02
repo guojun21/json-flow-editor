@@ -10,6 +10,17 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 4244
 
+def date_of(meta):
+    """文件的语义日期:meta.date 优先;没有就从标题里的「（09-01）」「(2026-08-31)」抠;都没有给空串(排最后)。"""
+    d = str(meta.get('date') or '').strip()
+    if re.fullmatch(r'\d{4}-\d{2}-\d{2}', d):
+        return d
+    m = re.search(r'[（(](?:(\d{4})[-./])?(\d{1,2})[-./](\d{1,2})[)）]', str(meta.get('title') or ''))
+    if m:
+        y = m.group(1) or '2026'
+        return f"{y}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+    return ''
+
 class H(SimpleHTTPRequestHandler):
     def __init__(self, *a, **kw):
         super().__init__(*a, directory=ROOT, **kw)
@@ -35,7 +46,7 @@ class H(SimpleHTTPRequestHandler):
                 try:
                     meta = json.load(open(path)).get('meta', {})
                     out.append({'id': fid, 'title': meta.get('title', fid),
-                                'date': meta.get('date', ''), '_m': mtime})
+                                'date': date_of(meta), '_m': mtime})
                 except Exception:
                     out.append({'id': fid, 'title': fid, 'date': '', '_m': mtime})
             # 最新的排最前:先按 meta.date 倒序(语义日期,重新部署不会乱),
@@ -65,6 +76,14 @@ class H(SimpleHTTPRequestHandler):
             data = body['data']
             assert 'meta' in data and 'nodes' in data and 'edges' in data
             path = os.path.join(ROOT, 'data', did + '.json')
+            if not data['meta'].get('date'):
+                old_date = ''
+                try:
+                    old_date = json.load(open(path)).get('meta', {}).get('date', '')
+                except Exception:
+                    pass
+                import datetime as _dt
+                data['meta']['date'] = old_date or date_of(data['meta']) or _dt.date.today().isoformat()
             tmp = path + '.tmp'
             with open(tmp, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=1)

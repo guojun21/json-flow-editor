@@ -149,6 +149,7 @@ export default function App() {
       color: d.color || (a.line && a.line.stroke) || '#526078',
       width: d.width || (a.line && a.line.strokeWidth) || 2,
       dash,
+      arrow: d.arrow || 'block',
       router: d.router === 'normal' ? 'normal' : 'orth',
       z: edge.getZIndex() ?? 5,
     } });
@@ -235,7 +236,8 @@ export default function App() {
       style={{ '--side-w': sideW + 'px' }}>
       <Sidebar files={files} cur={cur} status={status} collapsed={collapsed}
         onOpenFile={id => { if (id !== cur) load(id); }}
-        onDragElement={(kind, e) => engineRef.current.startDnd(kind, e.nativeEvent || e)} />
+        onDragElement={(kind, e) => engineRef.current.startDnd(kind, e.nativeEvent || e)}
+        onRelationPreset={st => { engineRef.current.setNewEdgeStyle(st); setStatus('新连线样式:' + (st.label || (st.arrow === 'none' ? '关联' : st.arrow === 'hollow' ? '泛化' : '流程箭头'))); }} />
       <div className={'side-resizer' + (dragging ? ' dragging' : '')}
         title="左右拖动改变侧栏宽度(双击复位)" onMouseDown={startSideDrag}
         onDoubleClick={() => { setSideW(224); localStorage.setItem('jfe:sidew', '224');
@@ -280,6 +282,8 @@ export default function App() {
                 <option value="rounded">圆角矩形(默认)</option>
                 <option value="rect">直角矩形</option>
                 <option value="diamond">菱形</option>
+                <option value="ellipse">椭圆(用例)</option>
+                <option value="actor">火柴人(角色)</option>
               </select>
             </label>
             <label className="fld">圆角
@@ -340,6 +344,15 @@ export default function App() {
                 <option value="solid">实线</option>
                 <option value="dashed">虚线</option>
                 <option value="dotted">点线</option>
+              </select>
+            </label>
+            <label className="fld">箭头
+              <select value={modal.draft.arrow}
+                onChange={e => upd({ arrow: e.target.value })}>
+                <option value="block">实心(流程)</option>
+                <option value="classic">细箭头(包含/扩展)</option>
+                <option value="hollow">空心三角(泛化)</option>
+                <option value="none">无箭头(关联)</option>
               </select>
             </label>
             <label className="fld">走线

@@ -1,0 +1,4137 @@
+{
+ "meta": {
+  "id": "usecase_paichan",
+  "title": "用例图 · 排产采集（09-02）",
+  "date": "2026-09-02",
+  "W": 2200,
+  "H": 6746,
+  "fs": {
+   "title": 24,
+   "body": 17
+  }
+ },
+ "nodes": [
+  {
+   "id": "title",
+   "kind": "text",
+   "x": 60,
+   "y": 40,
+   "w": 1400,
+   "h": 60,
+   "lines": [
+    "排产采集 · 一期用例全集（优化版流程图第 3 泳道）"
+   ],
+   "fontSize": 36,
+   "bold": true,
+   "textColor": "#0b1220"
+  },
+  {
+   "id": "subtitle",
+   "kind": "text",
+   "x": 60,
+   "y": 106,
+   "w": 1800,
+   "h": 40,
+   "lines": [
+    "80 个用例 · 15 类角色 · 绿=已实现(factory-core) 橙=部分 白=待做 灰=不入一期 · 实线=主角色 虚线=协同"
+   ],
+   "fontSize": 20,
+   "textColor": "#48586a"
+  },
+  {
+   "id": "ov",
+   "kind": "boundary",
+   "x": 60,
+   "y": 176,
+   "w": 2080,
+   "h": 430,
+   "lines": [
+    "《系统》排产采集 · 总览"
+   ],
+   "fontSize": 22
+  },
+  {
+   "id": "ov0",
+   "kind": "package",
+   "x": 110,
+   "y": 236,
+   "w": 460,
+   "h": 150,
+   "lines": [
+    "派发/领取工单"
+   ],
+   "fontSize": 20
+  },
+  {
+   "id": "ovt0",
+   "kind": "text",
+   "x": 130,
+   "y": 286,
+   "w": 420,
+   "h": 80,
+   "lines": [
+    "17 个用例",
+    "已实现 10 · 部分 2 · 待做 5"
+   ],
+   "fontSize": 18,
+   "textColor": "#1f6389"
+  },
+  {
+   "id": "ov1",
+   "kind": "package",
+   "x": 615,
+   "y": 236,
+   "w": 460,
+   "h": 150,
+   "lines": [
+    "登录扫码预检"
+   ],
+   "fontSize": 20
+  },
+  {
+   "id": "ovt1",
+   "kind": "text",
+   "x": 635,
+   "y": 286,
+   "w": 420,
+   "h": 80,
+   "lines": [
+    "10 个用例",
+    "已实现 2 · 部分 2 · 待做 6"
+   ],
+   "fontSize": 18,
+   "textColor": "#1f6389"
+  },
+  {
+   "id": "ov2",
+   "kind": "package",
+   "x": 1120,
+   "y": 236,
+   "w": 460,
+   "h": 150,
+   "lines": [
+    "采集 Episode"
+   ],
+   "fontSize": 20
+  },
+  {
+   "id": "ovt2",
+   "kind": "text",
+   "x": 1140,
+   "y": 286,
+   "w": 420,
+   "h": 80,
+   "lines": [
+    "12 个用例",
+    "已实现 3 · 部分 4 · 待做 5"
+   ],
+   "fontSize": 18,
+   "textColor": "#1f6389"
+  },
+  {
+   "id": "ov3",
+   "kind": "package",
+   "x": 1625,
+   "y": 236,
+   "w": 460,
+   "h": 150,
+   "lines": [
+    "监控粗筛"
+   ],
+   "fontSize": 20
+  },
+  {
+   "id": "ovt3",
+   "kind": "text",
+   "x": 1645,
+   "y": 286,
+   "w": 420,
+   "h": 80,
+   "lines": [
+    "10 个用例",
+    "已实现 1 · 部分 4 · 待做 5"
+   ],
+   "fontSize": 18,
+   "textColor": "#1f6389"
+  },
+  {
+   "id": "ov4",
+   "kind": "package",
+   "x": 110,
+   "y": 411,
+   "w": 460,
+   "h": 150,
+   "lines": [
+    "运营云入库"
+   ],
+   "fontSize": 20
+  },
+  {
+   "id": "ovt4",
+   "kind": "text",
+   "x": 130,
+   "y": 461,
+   "w": 420,
+   "h": 80,
+   "lines": [
+    "10 个用例",
+    "已实现 4 · 部分 3 · 待做 3"
+   ],
+   "fontSize": 18,
+   "textColor": "#1f6389"
+  },
+  {
+   "id": "ov5",
+   "kind": "package",
+   "x": 615,
+   "y": 411,
+   "w": 460,
+   "h": 150,
+   "lines": [
+    "滚动复核 ≤5天"
+   ],
+   "fontSize": 20
+  },
+  {
+   "id": "ovt5",
+   "kind": "text",
+   "x": 635,
+   "y": 461,
+   "w": 420,
+   "h": 80,
+   "lines": [
+    "6 个用例",
+    "已实现 0 · 部分 0 · 待做 6"
+   ],
+   "fontSize": 18,
+   "textColor": "#1f6389"
+  },
+  {
+   "id": "ov6",
+   "kind": "package",
+   "x": 1120,
+   "y": 411,
+   "w": 460,
+   "h": 150,
+   "lines": [
+    "质检结果"
+   ],
+   "fontSize": 20
+  },
+  {
+   "id": "ovt6",
+   "kind": "text",
+   "x": 1140,
+   "y": 461,
+   "w": 420,
+   "h": 80,
+   "lines": [
+    "8 个用例",
+    "已实现 0 · 部分 3 · 待做 5"
+   ],
+   "fontSize": 18,
+   "textColor": "#1f6389"
+  },
+  {
+   "id": "ov7",
+   "kind": "package",
+   "x": 1625,
+   "y": 411,
+   "w": 460,
+   "h": 150,
+   "lines": [
+    "横切·平台基础"
+   ],
+   "fontSize": 20
+  },
+  {
+   "id": "ovt7",
+   "kind": "text",
+   "x": 1645,
+   "y": 461,
+   "w": 420,
+   "h": 80,
+   "lines": [
+    "7 个用例",
+    "已实现 3 · 部分 2 · 待做 2"
+   ],
+   "fontSize": 18,
+   "textColor": "#1f6389"
+  },
+  {
+   "id": "b0",
+   "kind": "boundary",
+   "x": 340,
+   "y": 646,
+   "w": 1230,
+   "h": 728,
+   "lines": [
+    "《系统》排产采集 · 派发/领取工单"
+   ],
+   "fontSize": 22
+  },
+  {
+   "id": "A1",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 716,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "【分配池】系统定向派发"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A2",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 716,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "浏览任务广场"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A3",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 716,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "【抢单池】自主领取工单"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 820,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "资质准入校验(两池通用)"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 820,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "两池配额与并发控制"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 820,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "【分配池】组长手工定向分配"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A7",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 924,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "未开工/未接受令牌超时回收"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A8",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 924,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "放弃/退回工单"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A9",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 924,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "查看我的令牌(含来源与接受状态)"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A10",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 1028,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "任务状态变化联动两池"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A11",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 1028,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "更换工位/机器人重新绑定"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A12",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 1028,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "定向补采工单发放"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A13",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 1132,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "【分配池】被分配人接受/拒绝"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A14",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 1132,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "分配池余量自动回流抢单池"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A15",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 1132,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "两池配额划分(运营可调)"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A16",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 1236,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "难度/优先级权重挂绩效"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "A17",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 1236,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "分配策略配置(可靠性/设备状态/资质)"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "a0_0",
+   "kind": "actor",
+   "x": 120,
+   "y": 686,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "数采员"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a0_1",
+   "kind": "actor",
+   "x": 120,
+   "y": 806,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "组长"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a0_2",
+   "kind": "actor",
+   "x": 120,
+   "y": 926,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "工厂管理员/运营"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a0_3",
+   "kind": "actor",
+   "x": 120,
+   "y": 1046,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "数据运营"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a0_4",
+   "kind": "actor",
+   "x": 120,
+   "y": 1166,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "设备运维"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a0_5",
+   "kind": "actor",
+   "x": 120,
+   "y": 1286,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "算法(需求方)"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "s0_0",
+   "kind": "pill",
+   "x": 1650,
+   "y": 686,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "平台任务中心"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "b1",
+   "kind": "boundary",
+   "x": 340,
+   "y": 1486,
+   "w": 1230,
+   "h": 520,
+   "lines": [
+    "《系统》排产采集 · 登录扫码预检"
+   ],
+   "fontSize": 22
+  },
+  {
+   "id": "B1",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 1556,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "数采员登录"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "B2",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 1556,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "扫码绑定工位与机器人"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "B3",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 1556,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "令牌核验(开工准入)"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "B4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 1660,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "设备自检"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "B5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 1660,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "开工前看 Demo 与 SOP"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "B6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 1660,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "道具/场景检查清单确认"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "B7",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 1764,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "设备异常上报与处置"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "B8",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 1764,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "开工(创建采集会话)"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "B9",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 1764,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "换班交接"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "B10",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 1868,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "离线缓存容量检查"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "a1_0",
+   "kind": "actor",
+   "x": 120,
+   "y": 1526,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "数采员"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a1_1",
+   "kind": "actor",
+   "x": 120,
+   "y": 1646,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "设备运维"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a1_2",
+   "kind": "actor",
+   "x": 120,
+   "y": 1766,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "组长"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "s1_0",
+   "kind": "pill",
+   "x": 1650,
+   "y": 1526,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "工控机"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "s1_1",
+   "kind": "pill",
+   "x": 1650,
+   "y": 1646,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "平台任务中心"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "b2",
+   "kind": "boundary",
+   "x": 340,
+   "y": 2106,
+   "w": 1230,
+   "h": 520,
+   "lines": [
+    "《系统》排产采集 · 采集 Episode"
+   ],
+   "fontSize": 22
+  },
+  {
+   "id": "C1",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 2176,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "开始/结束一条 Episode 录制"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "C2",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 2176,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "录制稳定性保障(落盘/断连恢复)"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "C3",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 2176,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "Episode 元数据双写"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "C4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 2280,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "数采员标记作废/重采"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "C5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 2280,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "暂停/恢复会话"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "C6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 2280,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "收工(结束会话与令牌)"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "C7",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 2384,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "本地存储水位告警"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "C8",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 2384,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "端侧规则预检全量"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "C9",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 2384,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "采集进度与配额消耗统计"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "C10",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 2488,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "采集端遥测上报"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "C11",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 2488,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "异常中断恢复(断电/崩溃)"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "C12",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 2488,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "Ego 线采集(无工控机)"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "a2_0",
+   "kind": "actor",
+   "x": 120,
+   "y": 2146,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "数采员"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a2_1",
+   "kind": "actor",
+   "x": 120,
+   "y": 2266,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "组长"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a2_2",
+   "kind": "actor",
+   "x": 120,
+   "y": 2386,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "搬运/物流"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a2_3",
+   "kind": "actor",
+   "x": 120,
+   "y": 2506,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "设备运维"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "s2_0",
+   "kind": "pill",
+   "x": 1650,
+   "y": 2146,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "工控机"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "s2_1",
+   "kind": "pill",
+   "x": 1650,
+   "y": 2266,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "平台任务中心"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "s2_2",
+   "kind": "pill",
+   "x": 1650,
+   "y": 2386,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "数据平台\n(云端)"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "b3",
+   "kind": "boundary",
+   "x": 340,
+   "y": 2726,
+   "w": 1230,
+   "h": 520,
+   "lines": [
+    "《系统》排产采集 · 监控粗筛"
+   ],
+   "fontSize": 22
+  },
+  {
+   "id": "D1",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 2796,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "4 窗口实时查看工位"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "D2",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 2796,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "监控判定与原因码"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "D3",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 2796,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "现场纠正(提示数采员)"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "D4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 2900,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "不合格:本地隔离+原因码+立即重采(真机)"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "D5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 2900,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "Ego 线:入库侧批量门+次日补采排期"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "D6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 2900,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "抽样复核监控误杀率"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "D7",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 3004,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "AI 自动粗筛"
+   ],
+   "fontSize": 17,
+   "fill": "#eef0f2",
+   "stroke": "#9aa4ae",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "D8",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 3004,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "监控员轮岗与工位分配"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "D9",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 3004,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "隔离区管理(查看/复核/释放/废弃)"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "D10",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 3108,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "原因码字典维护"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "a3_0",
+   "kind": "actor",
+   "x": 120,
+   "y": 2766,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "监控员"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a3_1",
+   "kind": "actor",
+   "x": 120,
+   "y": 2886,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "质检组长"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a3_2",
+   "kind": "actor",
+   "x": 120,
+   "y": 3006,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "工厂管理员/运营"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a3_3",
+   "kind": "actor",
+   "x": 120,
+   "y": 3126,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "数据运营"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a3_4",
+   "kind": "actor",
+   "x": 120,
+   "y": 3246,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "数采员"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a3_5",
+   "kind": "actor",
+   "x": 120,
+   "y": 3366,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "组长"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a3_6",
+   "kind": "actor",
+   "x": 120,
+   "y": 3486,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "算法(需求方)"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "s3_0",
+   "kind": "pill",
+   "x": 1650,
+   "y": 2766,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "工控机"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "s3_1",
+   "kind": "pill",
+   "x": 1650,
+   "y": 2886,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "数据平台\n(云端)"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "s3_2",
+   "kind": "pill",
+   "x": 1650,
+   "y": 3006,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "AI 监控"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "s3_3",
+   "kind": "pill",
+   "x": 1650,
+   "y": 3126,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "平台任务中心"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "b4",
+   "kind": "boundary",
+   "x": 340,
+   "y": 3686,
+   "w": 1230,
+   "h": 520,
+   "lines": [
+    "《系统》排产采集 · 运营云入库"
+   ],
+   "fontSize": 22
+  },
+  {
+   "id": "E1",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 3756,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "SSD 拔盘与交接台账"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "E2",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 3756,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "物理搬运至深圳中转"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "E3",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 3756,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "上传上云"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "E4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 3860,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "manifest 生成与对账"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "E5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 3860,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "云端回执与本地清理倒计时"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "E6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 3860,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "本地清理与盘复用"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "E7",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 3964,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "盘损坏/丢失处置"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "E8",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 3964,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "入库校验(一致性/去重)"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "E9",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 3964,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "存储水位与 TTL 告警"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "E10",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 4068,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "Episode 血缘写入数据层 Registry"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "a4_0",
+   "kind": "actor",
+   "x": 120,
+   "y": 3726,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "搬运/物流"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a4_1",
+   "kind": "actor",
+   "x": 120,
+   "y": 3846,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "IT/云运维"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a4_2",
+   "kind": "actor",
+   "x": 120,
+   "y": 3966,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "数采员"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a4_3",
+   "kind": "actor",
+   "x": 120,
+   "y": 4086,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "组长"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "s4_0",
+   "kind": "pill",
+   "x": 1650,
+   "y": 3726,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "数据平台\n(云端)"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "s4_1",
+   "kind": "pill",
+   "x": 1650,
+   "y": 3846,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "工控机"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "b5",
+   "kind": "boundary",
+   "x": 340,
+   "y": 4306,
+   "w": 1230,
+   "h": 312,
+   "lines": [
+    "《系统》排产采集 · 滚动复核 ≤5天"
+   ],
+   "fontSize": 22
+  },
+  {
+   "id": "F1",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 4376,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "质检任务分派"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "F2",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 4376,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "逐条复核"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "F3",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 4376,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "分层抽检"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "F4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 4480,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "质检 SLA 监控(≤5 天)"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "F5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 4480,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "质检工作量统计"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "F6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 4480,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "争议标记"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "a5_0",
+   "kind": "actor",
+   "x": 120,
+   "y": 4346,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "质检组长"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a5_1",
+   "kind": "actor",
+   "x": 120,
+   "y": 4466,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "质检员"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a5_2",
+   "kind": "actor",
+   "x": 120,
+   "y": 4586,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "数据运营"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a5_3",
+   "kind": "actor",
+   "x": 120,
+   "y": 4706,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "算法(需求方)"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "s5_0",
+   "kind": "pill",
+   "x": 1650,
+   "y": 4346,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "数据平台\n(云端)"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "b6",
+   "kind": "boundary",
+   "x": 340,
+   "y": 4906,
+   "w": 1230,
+   "h": 416,
+   "lines": [
+    "《系统》排产采集 · 质检结果"
+   ],
+   "fontSize": 22
+  },
+  {
+   "id": "G1",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 4976,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "出具质检结论"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "G2",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 4976,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "不合格→修复复检"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "G3",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 4976,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "不合格→定向补采工单"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "G4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 5080,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "争议仲裁"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "G5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 5080,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "原因回传到人员/设备/任务版本"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "G6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 5080,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "合格→移交验收(泳道 4 接口)"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "G7",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 5184,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "结果通知数采员/组长"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "G8",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 5184,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "质检统计报表"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "a6_0",
+   "kind": "actor",
+   "x": 120,
+   "y": 4946,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "质检员"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a6_1",
+   "kind": "actor",
+   "x": 120,
+   "y": 5066,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "工厂管理员/运营"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a6_2",
+   "kind": "actor",
+   "x": 120,
+   "y": 5186,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "算法(需求方)"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a6_3",
+   "kind": "actor",
+   "x": 120,
+   "y": 5306,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "数据运营"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a6_4",
+   "kind": "actor",
+   "x": 120,
+   "y": 5426,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "数采员"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a6_5",
+   "kind": "actor",
+   "x": 120,
+   "y": 5546,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "组长"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a6_6",
+   "kind": "actor",
+   "x": 120,
+   "y": 5666,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "质检组长"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a6_7",
+   "kind": "actor",
+   "x": 120,
+   "y": 5786,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "设备运维"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "s6_0",
+   "kind": "pill",
+   "x": 1650,
+   "y": 4946,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "数据平台\n(云端)"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "s6_1",
+   "kind": "pill",
+   "x": 1650,
+   "y": 5066,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "平台任务中心"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "b7",
+   "kind": "boundary",
+   "x": 340,
+   "y": 5986,
+   "w": 1230,
+   "h": 416,
+   "lines": [
+    "《系统》排产采集 · 横切·平台基础"
+   ],
+   "fontSize": 22
+  },
+  {
+   "id": "H1",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 6056,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "账号/权限/审计"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "H2",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 6056,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "事件流与操作日志"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "H3",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 6056,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "MVP 验收看板(五项指标)"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "H4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 6160,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "通知与告警(飞书)"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "H5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 790,
+   "y": 6160,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "系统配置(原因码/阈值/配额/班次)"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "H6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1180,
+   "y": 6160,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "与数据层网关/Registry 对接"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "H7",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 400,
+   "y": 6264,
+   "w": 330,
+   "h": 70,
+   "lines": [
+    "导出/交付 manifest 供验收"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d"
+  },
+  {
+   "id": "a7_0",
+   "kind": "actor",
+   "x": 120,
+   "y": 6026,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "工厂管理员/运营"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a7_1",
+   "kind": "actor",
+   "x": 120,
+   "y": 6146,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "数据运营"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a7_2",
+   "kind": "actor",
+   "x": 120,
+   "y": 6266,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "组长"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a7_3",
+   "kind": "actor",
+   "x": 120,
+   "y": 6386,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "设备运维"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "a7_4",
+   "kind": "actor",
+   "x": 120,
+   "y": 6506,
+   "w": 70,
+   "h": 90,
+   "lines": [
+    "IT/云运维"
+   ],
+   "fontSize": 16
+  },
+  {
+   "id": "s7_0",
+   "kind": "pill",
+   "x": 1650,
+   "y": 6026,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "平台任务中心"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "s7_1",
+   "kind": "pill",
+   "x": 1650,
+   "y": 6146,
+   "w": 190,
+   "h": 64,
+   "lines": [
+    "数据平台\n(云端)"
+   ],
+   "fontSize": 15,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  }
+ ],
+ "edges": [
+  {
+   "id": "e0",
+   "from": "a0_0",
+   "to": "A2",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e1",
+   "from": "a0_0",
+   "to": "A3",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e2",
+   "from": "a0_0",
+   "to": "A6",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e3",
+   "from": "a0_0",
+   "to": "A8",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e4",
+   "from": "a0_0",
+   "to": "A9",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e5",
+   "from": "a0_0",
+   "to": "A11",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e6",
+   "from": "a0_0",
+   "to": "A13",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e7",
+   "from": "a0_1",
+   "to": "A1",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e8",
+   "from": "a0_1",
+   "to": "A4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e9",
+   "from": "a0_1",
+   "to": "A6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e10",
+   "from": "a0_1",
+   "to": "A8",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e11",
+   "from": "a0_1",
+   "to": "A11",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e12",
+   "from": "a0_1",
+   "to": "A13",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e13",
+   "from": "a0_1",
+   "to": "A16",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e14",
+   "from": "a0_2",
+   "to": "A1",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e15",
+   "from": "a0_2",
+   "to": "A5",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e16",
+   "from": "a0_2",
+   "to": "A12",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e17",
+   "from": "a0_2",
+   "to": "A15",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e18",
+   "from": "a0_2",
+   "to": "A16",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e19",
+   "from": "a0_2",
+   "to": "A17",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e20",
+   "from": "a0_3",
+   "to": "A10",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e21",
+   "from": "a0_3",
+   "to": "A15",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e22",
+   "from": "a0_3",
+   "to": "A16",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e23",
+   "from": "a0_3",
+   "to": "A17",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e24",
+   "from": "a0_4",
+   "to": "A11",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e25",
+   "from": "a0_5",
+   "to": "A12",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e26",
+   "from": "s0_0",
+   "to": "A1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e27",
+   "from": "s0_0",
+   "to": "A2",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e28",
+   "from": "s0_0",
+   "to": "A3",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e29",
+   "from": "s0_0",
+   "to": "A4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e30",
+   "from": "s0_0",
+   "to": "A5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e31",
+   "from": "s0_0",
+   "to": "A6",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e32",
+   "from": "s0_0",
+   "to": "A7",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e33",
+   "from": "s0_0",
+   "to": "A8",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e34",
+   "from": "s0_0",
+   "to": "A9",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e35",
+   "from": "s0_0",
+   "to": "A10",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e36",
+   "from": "s0_0",
+   "to": "A12",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e37",
+   "from": "s0_0",
+   "to": "A13",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e38",
+   "from": "s0_0",
+   "to": "A14",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e39",
+   "from": "s0_0",
+   "to": "A15",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e40",
+   "from": "s0_0",
+   "to": "A17",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e41",
+   "from": "a1_0",
+   "to": "B1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e42",
+   "from": "a1_0",
+   "to": "B2",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e43",
+   "from": "a1_0",
+   "to": "B5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e44",
+   "from": "a1_0",
+   "to": "B6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e45",
+   "from": "a1_0",
+   "to": "B7",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e46",
+   "from": "a1_0",
+   "to": "B8",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e47",
+   "from": "a1_0",
+   "to": "B9",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e48",
+   "from": "a1_1",
+   "to": "B4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e49",
+   "from": "a1_1",
+   "to": "B7",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e50",
+   "from": "a1_2",
+   "to": "B6",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e51",
+   "from": "a1_2",
+   "to": "B7",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e52",
+   "from": "a1_2",
+   "to": "B9",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e53",
+   "from": "s1_0",
+   "to": "B2",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e54",
+   "from": "s1_0",
+   "to": "B3",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e55",
+   "from": "s1_0",
+   "to": "B4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e56",
+   "from": "s1_0",
+   "to": "B8",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e57",
+   "from": "s1_0",
+   "to": "B10",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e58",
+   "from": "s1_1",
+   "to": "B1",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e59",
+   "from": "s1_1",
+   "to": "B3",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e60",
+   "from": "s1_1",
+   "to": "B5",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e61",
+   "from": "s1_1",
+   "to": "B8",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e62",
+   "from": "s1_1",
+   "to": "B9",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e63",
+   "from": "a2_0",
+   "to": "C1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e64",
+   "from": "a2_0",
+   "to": "C4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e65",
+   "from": "a2_0",
+   "to": "C5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e66",
+   "from": "a2_0",
+   "to": "C6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e67",
+   "from": "a2_0",
+   "to": "C9",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e68",
+   "from": "a2_0",
+   "to": "C12",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e69",
+   "from": "a2_1",
+   "to": "C7",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e70",
+   "from": "a2_1",
+   "to": "C9",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e71",
+   "from": "a2_1",
+   "to": "C12",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e72",
+   "from": "a2_2",
+   "to": "C7",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e73",
+   "from": "a2_3",
+   "to": "C11",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e74",
+   "from": "s2_0",
+   "to": "C1",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e75",
+   "from": "s2_0",
+   "to": "C2",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e76",
+   "from": "s2_0",
+   "to": "C3",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e77",
+   "from": "s2_0",
+   "to": "C4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e78",
+   "from": "s2_0",
+   "to": "C5",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e79",
+   "from": "s2_0",
+   "to": "C6",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e80",
+   "from": "s2_0",
+   "to": "C7",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e81",
+   "from": "s2_0",
+   "to": "C8",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e82",
+   "from": "s2_0",
+   "to": "C10",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e83",
+   "from": "s2_0",
+   "to": "C11",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e84",
+   "from": "s2_1",
+   "to": "C6",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e85",
+   "from": "s2_1",
+   "to": "C9",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e86",
+   "from": "s2_1",
+   "to": "C10",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e87",
+   "from": "s2_2",
+   "to": "C3",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e88",
+   "from": "a3_0",
+   "to": "D1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e89",
+   "from": "a3_0",
+   "to": "D2",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e90",
+   "from": "a3_0",
+   "to": "D3",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e91",
+   "from": "a3_0",
+   "to": "D4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e92",
+   "from": "a3_0",
+   "to": "D6",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e93",
+   "from": "a3_0",
+   "to": "D7",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e94",
+   "from": "a3_0",
+   "to": "D8",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e95",
+   "from": "a3_0",
+   "to": "D9",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e96",
+   "from": "a3_1",
+   "to": "D6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e97",
+   "from": "a3_1",
+   "to": "D9",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e98",
+   "from": "a3_1",
+   "to": "D10",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e99",
+   "from": "a3_2",
+   "to": "D8",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e100",
+   "from": "a3_3",
+   "to": "D6",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e101",
+   "from": "a3_3",
+   "to": "D10",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e102",
+   "from": "a3_4",
+   "to": "D3",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e103",
+   "from": "a3_4",
+   "to": "D4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e104",
+   "from": "a3_4",
+   "to": "D5",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e105",
+   "from": "a3_4",
+   "to": "D9",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e106",
+   "from": "a3_5",
+   "to": "D3",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e107",
+   "from": "a3_5",
+   "to": "D5",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e108",
+   "from": "a3_6",
+   "to": "D10",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e109",
+   "from": "s3_0",
+   "to": "D1",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e110",
+   "from": "s3_0",
+   "to": "D4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e111",
+   "from": "s3_1",
+   "to": "D5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e112",
+   "from": "s3_2",
+   "to": "D7",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e113",
+   "from": "s3_3",
+   "to": "D2",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e114",
+   "from": "a4_0",
+   "to": "E1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e115",
+   "from": "a4_0",
+   "to": "E2",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e116",
+   "from": "a4_0",
+   "to": "E6",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e117",
+   "from": "a4_0",
+   "to": "E7",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e118",
+   "from": "a4_1",
+   "to": "E2",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e119",
+   "from": "a4_1",
+   "to": "E3",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e120",
+   "from": "a4_1",
+   "to": "E4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e121",
+   "from": "a4_1",
+   "to": "E9",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e122",
+   "from": "a4_2",
+   "to": "E1",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e123",
+   "from": "a4_2",
+   "to": "E7",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e124",
+   "from": "a4_3",
+   "to": "E7",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e125",
+   "from": "s4_0",
+   "to": "E3",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e126",
+   "from": "s4_0",
+   "to": "E4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e127",
+   "from": "s4_0",
+   "to": "E5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e128",
+   "from": "s4_0",
+   "to": "E8",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e129",
+   "from": "s4_0",
+   "to": "E9",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e130",
+   "from": "s4_0",
+   "to": "E10",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e131",
+   "from": "s4_1",
+   "to": "E1",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e132",
+   "from": "s4_1",
+   "to": "E5",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e133",
+   "from": "s4_1",
+   "to": "E6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e134",
+   "from": "a5_0",
+   "to": "F1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e135",
+   "from": "a5_0",
+   "to": "F3",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e136",
+   "from": "a5_0",
+   "to": "F4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e137",
+   "from": "a5_0",
+   "to": "F5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e138",
+   "from": "a5_1",
+   "to": "F1",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e139",
+   "from": "a5_1",
+   "to": "F2",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e140",
+   "from": "a5_1",
+   "to": "F3",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e141",
+   "from": "a5_1",
+   "to": "F6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e142",
+   "from": "a5_2",
+   "to": "F4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e143",
+   "from": "a5_3",
+   "to": "F6",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e144",
+   "from": "s5_0",
+   "to": "F1",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e145",
+   "from": "s5_0",
+   "to": "F2",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e146",
+   "from": "a6_0",
+   "to": "G1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e147",
+   "from": "a6_0",
+   "to": "G2",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e148",
+   "from": "a6_1",
+   "to": "G3",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e149",
+   "from": "a6_1",
+   "to": "G4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e150",
+   "from": "a6_1",
+   "to": "G6",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e151",
+   "from": "a6_2",
+   "to": "G3",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e152",
+   "from": "a6_2",
+   "to": "G4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e153",
+   "from": "a6_2",
+   "to": "G8",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e154",
+   "from": "a6_3",
+   "to": "G4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e155",
+   "from": "a6_3",
+   "to": "G5",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e156",
+   "from": "a6_3",
+   "to": "G8",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e157",
+   "from": "a6_4",
+   "to": "G2",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e158",
+   "from": "a6_4",
+   "to": "G7",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e159",
+   "from": "a6_5",
+   "to": "G2",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e160",
+   "from": "a6_5",
+   "to": "G5",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e161",
+   "from": "a6_5",
+   "to": "G7",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e162",
+   "from": "a6_6",
+   "to": "G4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e163",
+   "from": "a6_6",
+   "to": "G8",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e164",
+   "from": "a6_7",
+   "to": "G5",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e165",
+   "from": "s6_0",
+   "to": "G1",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e166",
+   "from": "s6_0",
+   "to": "G5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e167",
+   "from": "s6_0",
+   "to": "G6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e168",
+   "from": "s6_1",
+   "to": "G3",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e169",
+   "from": "s6_1",
+   "to": "G7",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e170",
+   "from": "a7_0",
+   "to": "H1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e171",
+   "from": "a7_0",
+   "to": "H3",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e172",
+   "from": "a7_0",
+   "to": "H5",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e173",
+   "from": "a7_0",
+   "to": "H7",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e174",
+   "from": "a7_1",
+   "to": "H3",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e175",
+   "from": "a7_1",
+   "to": "H5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e176",
+   "from": "a7_2",
+   "to": "H4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e177",
+   "from": "a7_3",
+   "to": "H4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e178",
+   "from": "a7_4",
+   "to": "H4",
+   "color": "#9aa4ae",
+   "width": 1.4,
+   "arrow": "none",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
+   "id": "e179",
+   "from": "s7_0",
+   "to": "H2",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e180",
+   "from": "s7_0",
+   "to": "H4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e181",
+   "from": "s7_1",
+   "to": "H6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  },
+  {
+   "id": "e182",
+   "from": "s7_1",
+   "to": "H7",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "normal"
+  }
+ ]
+}

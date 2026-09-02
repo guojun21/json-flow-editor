@@ -14,17 +14,30 @@ function Section({ title, tip, defaultOpen = true, children }) {
   );
 }
 
-const PALETTE = [
-  { kind: 'step', name: '步骤' },
-  { kind: 'decision', name: '判定' },
-  { kind: 'fail', name: '异常' },
-  { kind: 'text', name: '文字' },
-  { kind: 'band', name: '色块' },
-  { kind: 'pill', name: '标签块' },
+/* 元素面板按图类型分页签;每个页签一套元素,用例图页签还带「关系预设」(决定新连线的样式) */
+const TABS = [
+  { id: 'flow', name: '流程图', palette: [
+    { kind: 'step', name: '步骤' }, { kind: 'decision', name: '判定' }, { kind: 'fail', name: '异常' },
+    { kind: 'text', name: '文字' }, { kind: 'band', name: '色块' }, { kind: 'pill', name: '标签块' },
+  ] },
+  { id: 'usecase', name: '用例图', palette: [
+    { kind: 'actor', name: '角色' }, { kind: 'usecase', name: '用例' }, { kind: 'boundary', name: '系统边界' },
+    { kind: 'package', name: '分组包' }, { kind: 'text', name: '文字' }, { kind: 'pill', name: '标签块' },
+  ], relations: [
+    { id: 'assoc', name: '关联', style: { dash: 'solid', arrow: 'none', label: '' } },
+    { id: 'include', name: '包含', style: { dash: 'dashed', arrow: 'classic', label: '«include»' } },
+    { id: 'extend', name: '扩展', style: { dash: 'dashed', arrow: 'classic', label: '«extend»' } },
+    { id: 'general', name: '泛化', style: { dash: 'solid', arrow: 'hollow', label: '' } },
+    { id: 'flow', name: '流程箭头', style: { dash: 'solid', arrow: 'block', label: '' } },
+  ] },
 ];
 
 export default function Sidebar({ files, cur, status, collapsed,
-  onOpenFile, onDragElement }) {
+  onOpenFile, onDragElement, onRelationPreset }) {
+  const [tab, setTab] = useState('flow');
+  const [rel, setRel] = useState('flow');
+  const cur_tab = TABS.find(t => t.id === tab) || TABS[0];
+  const pickRel = r => { setRel(r.id); onRelationPreset && onRelationPreset(r.style); };
   return (
     <div className={'sidebar' + (collapsed ? ' collapsed' : '')}>
       <div className="sidebar-scroll">
@@ -40,17 +53,34 @@ export default function Sidebar({ files, cur, status, collapsed,
           ))}
         </Section>
         <Section title="元素" tip="拖到画布">
+          <div className="tabs">
+            {TABS.map(t => (
+              <div key={t.id} className={'tab' + (t.id === tab ? ' active' : '')} onClick={() => setTab(t.id)}>{t.name}</div>
+            ))}
+          </div>
           <div className="palette">
-            {PALETTE.map(p => (
+            {cur_tab.palette.map(p => (
               <div key={p.kind} className="pal-item"
                 onMouseDown={e => onDragElement(p.kind, e)}>
                 <div className={'pal-icon pal-' + p.kind}>
-                  {p.kind === 'text' ? '文' : ''}
+                  {p.kind === 'text' ? '文' : p.kind === 'actor' ? (
+                    <svg viewBox="0 0 40 52" width="26" height="34"><circle cx="20" cy="8" r="6" fill="none" stroke="#fff" strokeWidth="2.5"/><path d="M20 14v16M6 20h28M20 30l-12 16M20 30l12 16" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"/></svg>
+                  ) : ''}
                 </div>
                 <span>{p.name}</span>
               </div>
             ))}
           </div>
+          {cur_tab.relations && (
+            <div className="relations">
+              <div className="rel-title">关系预设 <span className="sec-tip">决定新连线样式</span></div>
+              {cur_tab.relations.map(r => (
+                <div key={r.id} className={'rel' + (r.id === rel ? ' active' : '')} onClick={() => pickRel(r)}>
+                  <span className={'rel-line rel-' + r.id} /><span>{r.name}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </Section>
       </div>
       <div className="sidebar-foot">

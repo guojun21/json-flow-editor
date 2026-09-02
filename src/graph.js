@@ -31,7 +31,32 @@ const KIND_DEFAULTS = {
   decision: { fill: '#fff5cc', stroke: '#c8952d', text: '#5c4408' },
   fail: { fill: '#fdecec', stroke: '#c74444', text: '#c74444' },
   step: { fill: WHITE, stroke: '#cbd3e1', text: '#172033' },
+  // 用例图元素
+  actor: { fill: WHITE, stroke: '#172033', text: '#172033' },        // 火柴人(真人角色)
+  usecase: { fill: WHITE, stroke: '#48586a', text: '#172033' },      // 椭圆
+  boundary: { fill: '#fbfcfd', stroke: '#c7d1d9', text: '#17212d' }, // 系统边界(标题左上)
+  package: { fill: 'none', stroke: '#9aa4ae', text: '#48586a' },     // 分组包(虚线,标题左上)
 };
+
+/* 火柴人:一条 path 按 refD 随节点尺寸缩放;文字挂在节点下方 */
+import { Graph as _G } from '@antv/x6';
+if (!_G.registerNode.__ucActor) {
+  _G.registerNode('uc-actor', {
+    inherit: 'rect',
+    markup: [
+      { tagName: 'rect', selector: 'hit' },
+      { tagName: 'path', selector: 'figure' },
+      { tagName: 'text', selector: 'label' },
+    ],
+    attrs: {
+      hit: { refWidth: '100%', refHeight: '100%', fill: 'transparent', stroke: 'none' },
+      figure: { refD: 'M20 6 a6 6 0 1 0 0.01 0 M20 12 v16 M6 18 h28 M20 28 l-12 16 M20 28 l12 16',
+        fill: 'none', stroke: '#172033', strokeWidth: 2, strokeLinecap: 'round' },
+      label: { refX: '50%', refY: '100%', refY2: 6, textAnchor: 'middle', textVerticalAnchor: 'top', fontSize: 13 },
+    },
+  }, true);
+  _G.registerNode.__ucActor = true;
+}
 
 export function createFlowEngine(container, cb) {
   // cb: { onChange, onNodeDblclick, onEdgeDblclick, onNodeContextMenu,
@@ -54,8 +79,11 @@ export function createFlowEngine(container, cb) {
       allowBlank: false, allowEdge: false, allowNode: true, allowMulti: true,
       highlight: true, connectionPoint: 'boundary',
       createEdge() {
-        return graph.createEdge({ zIndex: 5,
-          attrs: edgeAttrs(false), data: {} });
+        const st = newEdgeStyle;
+        return graph.createEdge({ zIndex: 5, router: { name: 'orth' },
+          attrs: edgeAttrs(st.dash, st.color, undefined, st.arrow),
+          labels: st.label ? [mkLabel(st.label, st.color)] : [],
+          data: { dash: st.dash, arrow: st.arrow, color: st.color, router: 'orth' } });
       },
       validateConnection({ targetCell }) {
         return !!targetCell && targetCell.isNode() &&
@@ -80,9 +108,9 @@ export function createFlowEngine(container, cb) {
 
   function sw() { return meta.W > 3000 ? 3.5 : 2; }
   function scale() { return meta.W > 3000 ? 1.6 : 1; }
-  function connectable(k) { return !['band', 'pill', 'text'].includes(k); }
-  function zOf(kind) {   // 默认层级(未显式设置 z 时)
-    return kind === 'band' ? 1 : kind === 'pill' ? 2 : kind === 'text' ? 3 : 10;
+  function connectable(k) { return !['band', 'pill', 'text', 'boundary', 'package'].includes(k); }
+  function zOf(kind) {   // 默认层级(未显式设置 z 时):容器类在底下,元素在上面
+    return kind === 'band' ? 1 : kind === 'boundary' ? 2 : kind === 'package' ? 3 : kind === 'pill' ? 2 : kind === 'text' ? 3 : 10;
   }
   function zOfNode(n) {
     return n.z !== undefined && n.z !== null && n.z !== '' ? +n.z : zOf(n.kind);
@@ -93,7 +121,15 @@ export function createFlowEngine(container, cb) {
     return (typeof v === 'string' && DASH[v] !== undefined) ? v : 'solid';
   }
   function routerOf(v) { return v === 'normal' ? 'normal' : 'orth'; }
-  function edgeAttrs(dash, color, width) {
+  const ARROW = ['block', 'classic', 'hollow', 'none'];
+  function arrowOf(v) { return ARROW.includes(v) ? v : 'block'; }
+  function marker(kind, w, c) {
+    if (kind === 'none') return null;
+    if (kind === 'hollow') return { name: 'path', d: 'M 0 0 L 14 -8 L 14 8 z', fill: WHITE, stroke: c, strokeWidth: 1.5, offsetX: -1 };   // 泛化:空心三角
+    if (kind === 'classic') return { name: 'classic', size: 7 + w * 2 };
+    return { name: 'block', size: 6 + w * 2 };
+  }
+  function edgeAttrs(dash, color, width, arrow) {
     const c = color || '#526078';
     const w = width || sw();
     const st = dashOf(dash);
@@ -101,9 +137,12 @@ export function createFlowEngine(container, cb) {
       stroke: c, strokeWidth: w, sourceMarker: null,
       strokeDasharray: DASH[st],
       strokeLinecap: st === 'dotted' ? 'round' : 'butt',
-      targetMarker: { name: 'block', size: 6 + w * 2 },
+      targetMarker: marker(arrowOf(arrow), w, c),
     } };
   }
+  // 新连线默认样式:侧栏「关系预设」改它(关联/包含/扩展/泛化),端口拉线与右键连线都吃
+  let newEdgeStyle = { dash: 'solid', arrow: 'block', label: '', color: undefined };
+  function setNewEdgeStyle(st) { newEdgeStyle = { ...newEdgeStyle, ...st }; }
   function mkLabel(text, color) {
     return { position: 0.5, attrs: {
       label: { text, fill: color || '#526078', fontSize: meta.fs.body },
@@ -113,8 +152,11 @@ export function createFlowEngine(container, cb) {
 
   /* ---------- 节点外观(形状/颜色全为属性) ---------- */
   function shapeOf(n) {
-    return n.shape || ((n.kind === 'decision') ? 'diamond' : 'rounded');
+    if (n.shape) return n.shape;
+    return ({ decision: 'diamond', usecase: 'ellipse', actor: 'actor' })[n.kind] || 'rounded';
   }
+  // 形状归到 X6 的四类壳:rect / polygon / ellipse / uc-actor;换壳要原位重建
+  function shellOf(sh) { return sh === 'diamond' ? 'polygon' : sh === 'ellipse' ? 'ellipse' : sh === 'actor' ? 'uc-actor' : 'rect'; }
   function defaultRx() { return Math.round(8 * scale()) + 6; }
   function nodeBody(n) {
     const kind = n.kind || 'step';
@@ -125,22 +167,30 @@ export function createFlowEngine(container, cb) {
       strokeWidth: kind === 'band' || kind === 'pill' ? 1 : sw(),
     };
     const sh = shapeOf(n);
-    if (sh !== 'diamond') {
+    if (sh !== 'diamond' && sh !== 'ellipse' && sh !== 'actor') {
       const rx = sh === 'rect' ? 0 : (n.rx !== undefined ? n.rx : defaultRx());
       body.rx = rx; body.ry = rx;
     }
+    if (kind === 'package') body.strokeDasharray = '6 4';
+    if (kind === 'boundary' || kind === 'package') body.strokeWidth = 1.4 * scale();
     return body;
   }
   function nodeLabel(n) {
     const kind = n.kind || 'step';
     const dfl = KIND_DEFAULTS[kind] || KIND_DEFAULTS.step;
-    return {
+    const label = {
       text: (n.lines || []).join('\n'),
       fill: n.textColor || dfl.text,
       fontSize: n.fontSize || meta.fs.body,
       fontWeight: n.bold ? 600 : 400,
       textWrap: { width: -16, height: '80%', breakWord: true, ellipsis: false },
     };
+    if (kind === 'boundary' || kind === 'package') {   // 容器类:标题贴左上角,不居中
+      Object.assign(label, { refX: 14, refY: 10, textAnchor: 'start', textVerticalAnchor: 'top', fontWeight: 600, textWrap: { width: -28, height: 40, breakWord: true, ellipsis: false } });
+    }
+    if (shapeOf(n) === 'ellipse') label.textWrap = { width: '68%', height: '70%', breakWord: true, ellipsis: false };
+    if (kind === 'actor') Object.assign(label, { refX: '50%', refY: '100%', refY2: 6, textAnchor: 'middle', textVerticalAnchor: 'top', textWrap: { width: 140, height: 60, breakWord: true, ellipsis: false } });
+    return label;
   }
   function portConf() {
     const r = Math.round(6 * scale()) + 2;
@@ -155,17 +205,15 @@ export function createFlowEngine(container, cb) {
   }
   function nodeConfig(n) {
     const sh = shapeOf(n);
+    const attrs = sh === 'actor'
+      ? { figure: { stroke: n.stroke || KIND_DEFAULTS.actor.stroke, strokeWidth: 2 * scale() }, label: nodeLabel(n) }
+      : { body: sh === 'diamond' ? { ...nodeBody(n), refPoints: '0,10 10,0 20,10 10,20' } : nodeBody(n), label: nodeLabel(n) };
     return clean({
       id: n.id,
-      shape: sh === 'diamond' ? 'polygon' : 'rect',
+      shape: shellOf(sh),
       x: n.x, y: n.y, width: n.w, height: n.h,
       zIndex: zOfNode(n),
-      attrs: {
-        body: sh === 'diamond'
-          ? { ...nodeBody(n), refPoints: '0,10 10,0 20,10 10,20' }
-          : nodeBody(n),
-        label: nodeLabel(n),
-      },
+      attrs,
       data: { kind: n.kind || 'step', shape: sh, lines: n.lines || [],
         z: n.z, fontSize: n.fontSize, bold: n.bold, vertical: n.vertical, rx: n.rx,
         fill: n.fill, stroke: n.stroke, textColor: n.textColor,
@@ -201,9 +249,9 @@ export function createFlowEngine(container, cb) {
         source: { cell: e.from }, target: { cell: e.to },
         vertices: e.vertices || [],
         router: { name: router },
-        attrs: edgeAttrs(dash, e.color, e.width),
+        attrs: edgeAttrs(dash, e.color, e.width, e.arrow),
         labels: e.label ? [mkLabel(e.label, e.color)] : [],
-        data: { dash, color: e.color, width: e.width, router },
+        data: { dash, color: e.color, width: e.width, router, arrow: arrowOf(e.arrow) },
       });
     }
     graph.enableHistory();
@@ -230,6 +278,7 @@ export function createFlowEngine(container, cb) {
           dash: dashOf(d.dash !== undefined ? d.dash : d.dashed) === 'solid'
             ? undefined : dashOf(d.dash !== undefined ? d.dash : d.dashed),
           router: routerOf(d.router) === 'normal' ? 'normal' : undefined,
+          arrow: arrowOf(d.arrow) === 'block' ? undefined : arrowOf(d.arrow),
           z: (z !== undefined && z !== null && z !== 5) ? z : undefined,
           vertices: (c.getVertices() || []).map(v =>
             ({ x: Math.round(v.x), y: Math.round(v.y) })) }));
@@ -256,16 +305,18 @@ export function createFlowEngine(container, cb) {
   }
   function autoSize(node) {
     const d = node.getData() || {};
+    if (['boundary', 'package', 'actor', 'band'].includes(d.kind)) return;   // 容器与角色不按文字撑大
     const s = node.getSize();
     if (d.baseW === undefined) { d.baseW = s.width; d.baseH = s.height; }
     const fsz = d.fontSize || meta.fs.body;
     const isD = (d.shape || '') === 'diamond';
+    const isE = (d.shape || '') === 'ellipse';
     const MAXW = meta.W * 0.42;
     let w = Math.max(s.width, d.baseW), needH = 0;
     for (let i = 0; i < 10; i++) {
-      const availW = isD ? w * 0.55 : w - 24;
+      const availW = isD ? w * 0.55 : isE ? w * 0.68 : w - 24;
       const textH = measure(d.lines || [], availW, fsz);
-      needH = isD ? textH / 0.55 : textH + 24;
+      needH = isD ? textH / 0.55 : isE ? textH / 0.7 : textH + 24;
       if (needH <= Math.max(d.baseH, w * 0.85) || w >= MAXW) break;
       w = Math.min(MAXW, Math.round(w * 1.4));
     }
@@ -362,7 +413,9 @@ export function createFlowEngine(container, cb) {
         zIndex: 5,
         source: { cell: linkFrom }, target: { cell: node.id },
         router: { name: 'orth' },   // 正交路由自动挑上下左右最优锚边
-        attrs: edgeAttrs(false), data: {},
+        attrs: edgeAttrs(newEdgeStyle.dash, newEdgeStyle.color, undefined, newEdgeStyle.arrow),
+        labels: newEdgeStyle.label ? [mkLabel(newEdgeStyle.label, newEdgeStyle.color)] : [],
+        data: { dash: newEdgeStyle.dash, arrow: newEdgeStyle.arrow, color: newEdgeStyle.color, router: 'orth' },
       });
     }
     linkFrom = null;
@@ -451,10 +504,11 @@ export function createFlowEngine(container, cb) {
   }
   function paletteNode(kind) {
     const k = scale();
-    const n = { kind, w: 210 * k, h: kind === 'decision' ? 100 * k : 80 * k,
-      x: 0, y: 0,
-      lines: [kind === 'decision' ? '新判定?' : kind === 'fail' ? '新异常'
-              : kind === 'text' ? '双击编辑文字' : '新步骤'],
+    const SIZE = { decision: [210, 100], actor: [70, 90], usecase: [200, 76], boundary: [520, 360], package: [360, 240], band: [420, 160], pill: [120, 60] };
+    const [w0, h0] = SIZE[kind] || [210, 80];
+    const LABEL = { decision: '新判定?', fail: '新异常', text: '双击编辑文字', actor: '角色', usecase: '新用例', boundary: '《系统》边界', package: '分组', band: '', pill: '标签' };
+    const n = { kind, w: w0 * k, h: h0 * k, x: 0, y: 0,
+      lines: LABEL[kind] !== undefined ? (LABEL[kind] ? [LABEL[kind]] : []) : ['新步骤'],
       fontSize: kind === 'text' ? meta.fs.title : undefined };
     return graph.createNode(nodeConfig(n));
   }
@@ -477,7 +531,8 @@ export function createFlowEngine(container, cb) {
        Math.round(+draft.h) !== Math.round(node.getSize().height));
     const wasPolygon = (d.shape === 'diamond');
     const willPolygon = (next.shape === 'diamond');
-    if (wasPolygon !== willPolygon) {
+    const shellChanged = shellOf(next.shape) !== shellOf(d.shape || shapeOf(d));
+    if (shellChanged) {
       // X6 的 shape 不能原位切换:摘下相关连线→删旧建新(同 id)→接回连线
       const p = node.getPosition(), s = node.getSize();
       const edges = (graph.getConnectedEdges(node) || []).map(eg => ({
@@ -504,6 +559,7 @@ export function createFlowEngine(container, cb) {
       dd.baseW = Math.round(+draft.w); dd.baseH = Math.round(+draft.h);
       node.resize(Math.round(+draft.w), Math.round(+draft.h));
     }
+    if (next.shape === 'actor') { node.setAttrs({ figure: { stroke: next.stroke || KIND_DEFAULTS.actor.stroke }, label: nodeLabel(next) }); autoSize(node); return; }
     const body = willPolygon
       ? { ...nodeBody(next), refPoints: '0,10 10,0 20,10 10,20' }
       : nodeBody(next);
@@ -516,9 +572,10 @@ export function createFlowEngine(container, cb) {
     const width = draft.width ? +draft.width : undefined;
     const dash = dashOf(draft.dash);
     const router = routerOf(draft.router);
-    edge.setData({ ...d, dash, dashed: undefined, color, width, router },
+    const arrow = arrowOf(draft.arrow !== undefined ? draft.arrow : d.arrow);
+    edge.setData({ ...d, dash, dashed: undefined, color, width, router, arrow },
       { deep: false });
-    edge.setAttrs(edgeAttrs(dash, color, width));
+    edge.setAttrs(edgeAttrs(dash, color, width, arrow));
     edge.setLabels(draft.label ? [mkLabel(draft.label, color)] : []);
     edge.setRouter({ name: router });
     if (draft.z !== undefined && draft.z !== '') edge.setZIndex(+draft.z);
@@ -529,6 +586,7 @@ export function createFlowEngine(container, cb) {
     startDnd: (kind, e) => dnd.start(paletteNode(kind), e),
     applyNodeEdit, applyEdgeEdit,
     addEdgeVertex, removeEdgeVertex,
+    setNewEdgeStyle,
     startLinkFrom: node => { linkFrom = node.id; },
     removeCell: cell => graph.removeCells([cell]),
     undo: () => graph.undo(), redo: () => graph.redo(),
