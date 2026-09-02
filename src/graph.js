@@ -116,8 +116,17 @@ export function createFlowEngine(container, cb) {
       router: { name: 'orth' },
       connector: { name: 'normal' },
       snap: { radius: 40 },
-      allowBlank: false, allowEdge: false, allowNode: true, allowMulti: true,
+      allowBlank: false, allowEdge: false, allowNode: true, allowMulti: true, allowPort: false,
       highlight: true, connectionPoint: 'boundary',
+      // 任意边缘起线:元素本体就是 magnet,但只有按在「边缘带」(离轮廓 ≤ 10 屏幕像素)才算起线,按在内部照旧是拖动元素
+      validateMagnet({ e, cell }) {
+        if (!cell || !cell.isNode()) return false;
+        const p = graph.clientToLocal(e.clientX, e.clientY);
+        const hit = nearBoundary(cell, p);
+        if (window.__jfeDebug) console.log('[jfe] validateMagnet', cell.id, JSON.stringify(p), 'hit=', hit);
+        if (hit) linkStart = { cell: cell.id, frac: boundaryFrac(cell, p) };
+        return !!hit;
+      },
       createEdge() {
         const st = newEdgeStyle;
         return graph.createEdge({ zIndex: 5, router: { name: 'orth' },
@@ -147,6 +156,56 @@ export function createFlowEngine(container, cb) {
     getDropNode: node => node.clone({ keepId: false }) });
 
   function sw() { return meta.W > 3000 ? 3.5 : 2; }
+  /* ---------- 任意边缘连线 ---------- */
+  let linkStart = null;    // 起线时按下的位置(元素 id + 相对边界的比例坐标)
+  const EDGE_BAND_PX = 10; // 屏幕像素:离轮廓多近算「按在边上」
+  function nearBoundary(node, p) {
+    const b = node.getBBox(); if (!b.width || !b.height) return false;
+    const band = EDGE_BAND_PX / Math.max(0.02, graph.zoom());
+    const d = node.getData() || {}; const sh = d.shape || shapeOf(d);
+    const cx = b.x + b.width / 2, cy = b.y + b.height / 2;
+    if (sh === 'ellipse') {        // 归一化径向距离 ≈ 1 即在轮廓上
+      const nx = (p.x - cx) / (b.width / 2), ny = (p.y - cy) / (b.height / 2);
+      const r = Math.hypot(nx, ny); const tol = band / Math.min(b.width, b.height) * 2;
+      return Math.abs(r - 1) <= tol;
+    }
+    if (sh === 'diamond') {        // 菱形:|dx|/a + |dy|/b ≈ 1
+      const nx = Math.abs(p.x - cx) / (b.width / 2), ny = Math.abs(p.y - cy) / (b.height / 2);
+      const tol = band / Math.min(b.width, b.height) * 2;
+      return Math.abs(nx + ny - 1) <= tol;
+    }
+    const inX = p.x >= b.x - band && p.x <= b.x + b.width + band;
+    const inY = p.y >= b.y - band && p.y <= b.y + b.height + band;
+    const nearV = Math.min(Math.abs(p.x - b.x), Math.abs(p.x - (b.x + b.width))) <= band;
+    const nearH = Math.min(Math.abs(p.y - b.y), Math.abs(p.y - (b.y + b.height))) <= band;
+    return inX && inY && (nearV || nearH);
+  }
+  /* 把点投到元素轮廓上,返回相对包围盒的比例坐标(0~1);随元素缩放/移动仍贴在同一相对位置 */
+  function boundaryFrac(node, p) {
+    const b = node.getBBox(); const d = node.getData() || {}; const sh = d.shape || shapeOf(d);
+    const cx = b.x + b.width / 2, cy = b.y + b.height / 2;
+    let fx, fy;
+    if (sh === 'ellipse' || sh === 'diamond') {
+      const ang = Math.atan2((p.y - cy) / (b.height / 2), (p.x - cx) / (b.width / 2));
+      if (sh === 'ellipse') { fx = 0.5 + Math.cos(ang) / 2; fy = 0.5 + Math.sin(ang) / 2; }
+      else { const c = Math.cos(ang), sn = Math.sin(ang); const k = 1 / (Math.abs(c) + Math.abs(sn)); fx = 0.5 + c * k / 2; fy = 0.5 + sn * k / 2; }
+    } else {
+      const dl = Math.abs(p.x - b.x), dr = Math.abs(p.x - (b.x + b.width)), dt = Math.abs(p.y - b.y), db = Math.abs(p.y - (b.y + b.height));
+      const m = Math.min(dl, dr, dt, db);
+      fx = Math.min(1, Math.max(0, (p.x - b.x) / b.width)); fy = Math.min(1, Math.max(0, (p.y - b.y) / b.height));
+      if (m === dl) fx = 0; else if (m === dr) fx = 1; else if (m === dt) fy = 0; else fy = 1;
+    }
+    return { x: Math.round(fx * 1000) / 1000, y: Math.round(fy * 1000) / 1000 };
+  }
+  const terminal = (cellId, frac) => frac
+    ? { cell: cellId, anchor: { name: 'topLeft', args: { dx: `${frac.x * 100}%`, dy: `${frac.y * 100}%` } }, connectionPoint: { name: 'anchor' } }
+    : { cell: cellId };
+  const fracOf = (t) => {   // 从终端配置里读回比例坐标
+    const a = t && t.anchor && t.anchor.args; if (!a || a.dx === undefined) return undefined;
+    const f = (v) => typeof v === 'string' && v.endsWith('%') ? parseFloat(v) / 100 : undefined;
+    const x = f(a.dx), y = f(a.dy); return x === undefined ? undefined : { x, y };
+  };
+  const PORT_FRAC = { pl: { x: 0, y: 0.5 }, pr: { x: 1, y: 0.5 }, pt: { x: 0.5, y: 0 }, pb: { x: 0.5, y: 1 } };   // 老数据的四个端口 → 比例锚点
   function scale() { return meta.W > 3000 ? 1.6 : 1; }
   function connectable(k) { return !['band', 'pill', 'text', 'boundary', 'package'].includes(k); }
   const NO_AUTOSIZE = ['boundary', 'package', 'actor', 'band', 'classbox', 'lifeline', 'anchor', 'activation'];
@@ -254,16 +313,17 @@ export function createFlowEngine(container, cb) {
   function nodeConfig(n) {
     const sh = shapeOf(n);
     const lines = n.lines || [];
+    const mag = connectable(n.kind || 'step');
     const attrs = sh === 'actor'
-      ? { figure: { stroke: n.stroke || KIND_DEFAULTS.actor.stroke, strokeWidth: 2 * scale() }, head: { stroke: n.stroke || KIND_DEFAULTS.actor.stroke, strokeWidth: 2 * scale() }, label: nodeLabel(n) }
+      ? { hit: { magnet: mag }, figure: { stroke: n.stroke || KIND_DEFAULTS.actor.stroke, strokeWidth: 2 * scale() }, head: { stroke: n.stroke || KIND_DEFAULTS.actor.stroke, strokeWidth: 2 * scale() }, label: nodeLabel(n) }
       : sh === 'classbox'
-      ? { body: { fill: n.fill || WHITE, stroke: n.stroke || '#48586a' }, head: { fill: n.bodyColor || '#edf1f4', stroke: n.stroke || '#48586a' },
+      ? { body: { magnet: mag, fill: n.fill || WHITE, stroke: n.stroke || '#48586a' }, head: { fill: n.bodyColor || '#edf1f4', stroke: n.stroke || '#48586a' },
           title: { text: lines[0] || '', fontSize: (n.fontSize || meta.fs.body) + 2 }, attrs: { text: lines.slice(1).join('\n'), fontSize: n.fontSize || meta.fs.body } }
       : sh === 'lifeline'
-      ? { head: { fill: n.fill || WHITE, stroke: n.stroke || '#17212d' }, line: { stroke: n.stroke || '#48586a' }, label: { text: lines.join('\n'), fontSize: n.fontSize || meta.fs.body } }
+      ? { head: { magnet: mag, fill: n.fill || WHITE, stroke: n.stroke || '#17212d' }, line: { stroke: n.stroke || '#48586a' }, label: { text: lines.join('\n'), fontSize: n.fontSize || meta.fs.body } }
       : n.kind === 'anchor'
-      ? { body: { fill: 'transparent', stroke: 'none' }, label: { text: '' } }
-      : { body: sh === 'diamond' ? { ...nodeBody(n), refPoints: '0,10 10,0 20,10 10,20' } : nodeBody(n), label: nodeLabel(n) };
+      ? { body: { magnet: true, fill: 'transparent', stroke: 'none' }, label: { text: '' } }
+      : { body: { magnet: mag, ...(sh === 'diamond' ? { ...nodeBody(n), refPoints: '0,10 10,0 20,10 10,20' } : nodeBody(n)) }, label: nodeLabel(n) };
     return clean({
       id: n.id,
       shape: shellOf(sh),
@@ -275,7 +335,7 @@ export function createFlowEngine(container, cb) {
         fill: n.fill, stroke: n.stroke, textColor: n.textColor,
         bodyColor: n.bodyColor,
         spec: n.spec },   // 用例规约(编号/触发/前置/主流程/异常/优先级/状态):图上不铺开,双击看、右侧面板看
-      ports: connectable(n.kind || 'step') && n.kind !== 'anchor' ? portConf() : undefined,
+      // 四个端口废弃:任意边缘都能连(本体即 magnet,起线与否由 validateMagnet 按边缘带判定)
     });
   }
   function nodeToJSON(node) {
@@ -304,8 +364,8 @@ export function createFlowEngine(container, cb) {
       graph.addEdge({
         id: e.id,
         zIndex: (e.z !== undefined && e.z !== null && e.z !== '') ? +e.z : 5,
-        source: e.fromPort ? { cell: e.from, port: e.fromPort } : { cell: e.from },
-        target: e.toPort ? { cell: e.to, port: e.toPort } : { cell: e.to },
+        source: terminal(e.from, e.fromAnchor || PORT_FRAC[e.fromPort]),
+        target: terminal(e.to, e.toAnchor || PORT_FRAC[e.toPort]),
         vertices: e.vertices || [],
         router: { name: router },
         attrs: edgeAttrs(dash, e.color, e.width, e.arrow),
@@ -335,7 +395,7 @@ export function createFlowEngine(container, cb) {
         const z = c.getZIndex();
         edges.push(clean({ id: c.id,
           from: c.getSourceCellId(), to: c.getTargetCellId(),
-          fromPort: c.getSourcePortId() || undefined, toPort: c.getTargetPortId() || undefined,
+          fromAnchor: fracOf(c.getSource()), toAnchor: fracOf(c.getTarget()),
           color: d.color, width: d.width, label, labels: extra.length ? extra : undefined,
           dash: dashOf(d.dash !== undefined ? d.dash : d.dashed) === 'solid'
             ? undefined : dashOf(d.dash !== undefined ? d.dash : d.dashed),
@@ -467,6 +527,24 @@ export function createFlowEngine(container, cb) {
     cb.onNodeContextMenu(node, { x: e.clientX, y: e.clientY });
   });
   graph.on('blank:contextmenu', ({ e }) => e.preventDefault());
+  // 连上(新线或拖箭头柄重接):把落点投到轮廓上,记成相对锚点,这样刷新/缩放后还贴在同一处
+  graph.on('edge:connected', ({ e, edge, isNew, type, currentCell }) => {
+    if (window.__jfeDebug) console.log('[jfe] edge:connected', type, isNew, currentCell && currentCell.id);
+    if (!edge || !currentCell || !currentCell.isNode()) return;
+    const p = graph.clientToLocal(e.clientX, e.clientY);
+    const frac = boundaryFrac(currentCell, p);
+    if (type === 'source') edge.setSource(terminal(currentCell.id, frac));
+    else edge.setTarget(terminal(currentCell.id, frac));
+    if (isNew && linkStart && edge.getSourceCellId() === linkStart.cell) edge.setSource(terminal(linkStart.cell, linkStart.frac));
+    linkStart = null;
+  });
+  // 鼠标靠近轮廓时给个十字光标,提示「这里能起线」
+  graph.on('node:mousemove', ({ e, node, view }) => {
+    if (!connectable((node.getData() || {}).kind)) return;
+    const p = graph.clientToLocal(e.clientX, e.clientY);
+    view.container.style.cursor = nearBoundary(node, p) ? 'crosshair' : 'move';
+  });
+  graph.on('node:mouseleave', ({ view }) => { view.container.style.cursor = ''; });
   // 连线模式:点目标节点完成;点空白/Esc 取消
   graph.on('node:click', ({ node }) => {
     if (!linkFrom) return;
@@ -617,7 +695,7 @@ export function createFlowEngine(container, cb) {
         h: Math.round(sizeTouched ? +draft.h : s.height) };
       const nn = graph.addNode(nodeConfig(json));
       for (const eg of edges)
-        graph.addEdge({ ...eg, zIndex: 5, router: { name: 'orth' } });
+        graph.addEdge({ ...eg, zIndex: 5, router: eg.router || { name: 'orth' } });
       autoSize(nn);
       return;
     }
