@@ -71,7 +71,7 @@ for k, node in enumerate(U.NODES, 1):
                 yy = y + i * (EH + GAP)
                 add(id=u[0], kind="usecase", shape="ellipse", x=x_uc, y=yy, w=EW, h=EH, lines=[clean_name(u[2])], fontSize=FS,
                     fill="#ffffff", stroke="#48586a", textColor="#17212d",
-                    spec={"id": u[0], "trigger": u[5], "pre": u[6], "flow": u[7], "alt": u[8], "priority": u[9], "status": u[10],
+                    spec={"id": u[0], "trigger": u[5], "pre": u[6], "flow": u[7], "alt": u[8], "priority": u[9],
                           "co": " / ".join(a for a in u[4] if a != actor)})
                 link(aid, u[0])
             y += band_h + 44

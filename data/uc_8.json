@@ -89,7 +89,6 @@
     "flow": "每个状态变化一条事件,可追溯",
     "alt": "—",
     "priority": "P0",
-    "status": "done",
     "co": ""
    }
   },
@@ -115,7 +114,6 @@
     "flow": "水位/离线/积压/SLA 推送",
     "alt": "—",
     "priority": "P1",
-    "status": "todo",
     "co": "组长 / 设备运维 / IT/云运维"
    }
   },
@@ -153,7 +151,6 @@
     "flow": "落盘成功率/软件丢帧/断连恢复/会话失败率/废因归因",
     "alt": "只读、单角色、不做控制塔",
     "priority": "P0",
-    "status": "done",
     "co": "工厂管理员/运营"
    }
   },
@@ -179,7 +176,6 @@
     "flow": "版本化配置,变更留痕",
     "alt": "—",
     "priority": "P0",
-    "status": "part",
     "co": "工厂管理员/运营"
    }
   },
@@ -221,7 +217,6 @@
     "flow": "走他的 STS 分片上传、三点对账、Registry",
     "alt": "—",
     "priority": "P0",
-    "status": "todo",
     "co": ""
    }
   },
@@ -247,7 +242,6 @@
     "flow": "manifest + 四关验收脚本",
     "alt": "—",
     "priority": "P0",
-    "status": "done",
     "co": "工厂管理员/运营"
    }
   },
@@ -285,7 +279,6 @@
     "flow": "角色与权限、操作审计",
     "alt": "—",
     "priority": "P0",
-    "status": "part",
     "co": ""
    }
   }

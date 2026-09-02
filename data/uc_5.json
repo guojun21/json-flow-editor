@@ -89,7 +89,6 @@
     "flow": "生成 manifest,云端重算比对",
     "alt": "不一致→该文件重传/重采",
     "priority": "P0",
-    "status": "done",
     "co": "IT/云运维"
    }
   },
@@ -115,7 +114,6 @@
     "flow": "回执后启动 7 天倒计时",
     "alt": "无回执→不启动,宁可占盘",
     "priority": "P0",
-    "status": "done",
     "co": "工控机"
    }
   },
@@ -141,7 +139,6 @@
     "flow": "比对包内 meta 与库,去重",
     "alt": "不一致→隔离区",
     "priority": "P0",
-    "status": "done",
     "co": ""
    }
   },
@@ -167,7 +164,6 @@
     "flow": "热区/隔离区/已上云水位,超期对象告警",
     "alt": "—",
     "priority": "P0",
-    "status": "done",
     "co": "IT/云运维"
    }
   },
@@ -193,7 +189,6 @@
     "flow": "写稳定 ID、需求/任务/SOP 版本血缘",
     "alt": "Registry 不可达→本地队列重试",
     "priority": "P0",
-    "status": "todo",
     "co": ""
    }
   },
@@ -231,7 +226,6 @@
     "flow": "登记盘 ID、Episode 清单、校验和,签字交接",
     "alt": "清单对不上→不出厂",
     "priority": "P0",
-    "status": "part",
     "co": "数采员 / 工控机"
    }
   },
@@ -257,7 +251,6 @@
     "flow": "T+1/T+2 往返,签收",
     "alt": "盘损坏/丢失→按台账重采(E7)",
     "priority": "P0",
-    "status": "todo",
     "co": "IT/云运维"
    }
   },
@@ -283,7 +276,6 @@
     "flow": "按台账列出受影响 Episode,发补采工单(A12)",
     "alt": "—",
     "priority": "P0",
-    "status": "todo",
     "co": "组长 / 数采员"
    }
   },
@@ -321,7 +313,6 @@
     "flow": "分片上传、断点续传、checksum",
     "alt": "失败分片重传",
     "priority": "P0",
-    "status": "part",
     "co": "数据平台(云端)"
    }
   },
@@ -363,7 +354,6 @@
     "flow": "清本地副本,盘格式化复用",
     "alt": "—",
     "priority": "P0",
-    "status": "part",
     "co": "搬运/物流"
    }
   }

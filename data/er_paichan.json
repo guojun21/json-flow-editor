@@ -4,8 +4,8 @@
   "title": "类图·排产采集数据模型（09-02）",
   "date": "2026-09-02",
   "order": 20,
-  "W": 2110,
-  "H": 1510,
+  "W": 2310,
+  "H": 1296,
   "fs": {
    "title": 24,
    "body": 17
@@ -15,90 +15,90 @@
   {
    "id": "title",
    "kind": "text",
-   "shape": "rounded",
    "x": 40,
    "y": 30,
    "w": 1500,
    "h": 52,
-   "textColor": "#0b1220",
    "lines": [
-    "排产采集 · 一期数据模型（类图 / 实体关系）v4"
+    "排产采集 · 一期数据模型（类图 / 实体关系）v5"
    ],
    "fontSize": 32,
-   "bold": true
+   "bold": true,
+   "textColor": "#0b1220"
   },
   {
    "id": "legend",
    "kind": "text",
-   "shape": "rounded",
    "x": 40,
    "y": 86,
    "w": 1600,
    "h": 34,
-   "textColor": "#48586a",
    "lines": [
-    "方框 = 实体(表):标题带为实体名,下面是字段 [PK 主键 | FK→表 外键 | NN 非空];两端标基数(1 / 0..1 / 0..* / 1..*);实线 = 外键关系,虚线 = 血缘快照(派生);清理前置 = 云端回执 + 批次对账通过 + 无未关闭隔离;来源 = factory-core/db.mjs,与线上库一致"
+    "方框 = 实体(表):标题带为实体名,下面是字段 [PK 主键 | FK→表 外键 | NN 非空];两端标基数(1 / 0..1 / 0..* / 1..*);实线 = 外键关系,虚线 = 血缘快照(派生);清理前置 = 云端回执 + 批次对账通过 + 无未关闭隔离"
    ],
-   "fontSize": 16
+   "fontSize": 15,
+   "textColor": "#48586a"
   },
   {
    "id": "req",
    "kind": "classbox",
    "shape": "classbox",
    "x": 60,
-   "y": 210,
-   "w": 330,
-   "h": 282,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
+   "y": 150,
+   "w": 360,
+   "h": 306,
    "lines": [
     "需求单  «requirements»",
     "id PK 需求单号",
     "name NN 任务名",
     "requester 需求人",
     "target_hours / target_episodes 目标",
-    "status NN 状态机(草稿→待评审→试采→Demo待确认→开放…)",
+    "status NN 状态机(草稿→待评审→试采→",
+    "    Demo待确认→开放…)",
     "sop_version 冻结的 SOP 版本",
     "daily_quota / assign_quota 日配额 / 分配池",
     "concurrent_limit 并发上限",
     "version 需求版本"
    ],
-   "fontSize": 15
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a"
   },
   {
    "id": "tok",
    "kind": "classbox",
    "shape": "classbox",
-   "x": 470,
+   "x": 510,
    "y": 150,
-   "w": 330,
-   "h": 282,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
+   "w": 360,
+   "h": 354,
    "lines": [
     "任务令牌  «tokens»",
     "id PK 令牌号",
     "requirement_id FK→requirements NN",
-    "collector / shift / station / robot_id NN 四项绑定,领取后不可变",
+    "collector / shift / station / robot_id",
+    "    NN 四项绑定,领取后不可变",
     "monitor 监控员",
     "sop_version 冻结版本",
     "source NN claim|assign",
-    "accept_status 待接受|已接受|已拒绝(仅 assign)",
-    "status NN 待开工|在采|已收工|已超时回收|已拒绝",
+    "accept_status 待接受|已接受|已拒绝(仅",
+    "    assign)",
+    "status NN 待开工|在采|已收工|已超时回收|",
+    "    已拒绝",
     "expires_at 过期时间"
    ],
-   "fontSize": 15
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a"
   },
   {
    "id": "ses",
    "kind": "classbox",
    "shape": "classbox",
-   "x": 880,
+   "x": 960,
    "y": 150,
-   "w": 330,
+   "w": 360,
    "h": 210,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
    "lines": [
     "采集会话  «sessions»",
     "id PK 会话号",
@@ -108,18 +108,18 @@
     "reconnects / max_reconnect_seconds",
     "started_at / ended_at"
    ],
-   "fontSize": 15
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a"
   },
   {
    "id": "ep",
    "kind": "classbox",
    "shape": "classbox",
-   "x": 1290,
+   "x": 1410,
    "y": 150,
-   "w": 330,
-   "h": 330,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
+   "w": 360,
+   "h": 378,
    "lines": [
     "Episode  «episodes»",
     "id PK Episode 号(包内 meta 同值)",
@@ -128,24 +128,26 @@
     "collector/station/robot/shift/sop 快照",
     "disk_id 盘号 · package_dir 落盘目录",
     "bytes / duration_seconds / fps",
-    "status NN 主状态(已落盘→预检通过|隔离区→待搬运→已上云→…)",
+    "status NN 主状态(已落盘→预检通过|隔离区→",
+    "    待搬运→已上云→…)",
     "reason_code 原因码",
     "meta_json 双写元数据",
-    "cloud_receipt_at · cleanup_deadline(回执+对账通过+非隔离才置)",
+    "cloud_receipt_at · cleanup_deadline(",
+    "    回执+对账通过+非隔离才置)",
     "batch_id FK→batches 0..1"
    ],
-   "fontSize": 15
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a"
   },
   {
    "id": "file",
    "kind": "classbox",
    "shape": "classbox",
-   "x": 1700,
+   "x": 1860,
    "y": 150,
-   "w": 330,
+   "w": 360,
    "h": 186,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
    "lines": [
     "Episode 文件  «episode_files»",
     "PK(episode_id, rel_path)",
@@ -154,18 +156,18 @@
     "bytes",
     "sha256 NN"
    ],
-   "fontSize": 15
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a"
   },
   {
    "id": "pc",
    "kind": "classbox",
    "shape": "classbox",
-   "x": 1700,
-   "y": 934,
-   "w": 330,
+   "x": 1860,
+   "y": 1002,
+   "w": 360,
    "h": 234,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
    "lines": [
     "预检结果  «precheck_results»",
     "PK(episode_id, rule)",
@@ -176,18 +178,18 @@
     "reason_code",
     "detail · checked_at"
    ],
-   "fontSize": 15
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a"
   },
   {
    "id": "q",
    "kind": "classbox",
    "shape": "classbox",
-   "x": 1700,
-   "y": 590,
-   "w": 330,
+   "x": 1860,
+   "y": 648,
+   "w": 360,
    "h": 234,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
    "lines": [
     "隔离记录  «episode_quarantines»",
     "id PK",
@@ -198,18 +200,18 @@
     "released_at(未关闭不得进批次/清理)",
     "reviewer / disposition 复核人 / 处置"
    ],
-   "fontSize": 15
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a"
   },
   {
    "id": "bat",
    "kind": "classbox",
    "shape": "classbox",
-   "x": 1290,
-   "y": 590,
-   "w": 330,
+   "x": 1410,
+   "y": 648,
+   "w": 360,
    "h": 210,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
    "lines": [
     "交付批次  «batches»",
     "id PK 批次号",
@@ -219,18 +221,18 @@
     "cloud_receipt NN 未确认|已确认",
     "created_at / verified_at"
    ],
-   "fontSize": 15
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a"
   },
   {
    "id": "ev",
    "kind": "classbox",
    "shape": "classbox",
-   "x": 880,
-   "y": 590,
-   "w": 330,
+   "x": 960,
+   "y": 648,
+   "w": 360,
    "h": 210,
-   "fill": "#ffffff",
-   "stroke": "#48586a",
    "lines": [
     "事件流  «events»",
     "seq PK",
@@ -240,7 +242,9 @@
     "actor 操作人",
     "detail 明细"
    ],
-   "fontSize": 15
+   "fontSize": 15,
+   "fill": "#ffffff",
+   "stroke": "#48586a"
   }
  ],
  "edges": [
@@ -248,175 +252,335 @@
    "id": "r0",
    "from": "req",
    "to": "tok",
+   "fromAnchor": {
+    "x": 1.0,
+    "y": 0.118
+   },
+   "toAnchor": {
+    "x": 0.0,
+    "y": 0.102
+   },
    "color": "#1f6389",
    "width": 2,
+   "arrow": "none",
+   "router": "normal",
    "labels": [
     {
      "text": "1",
-     "position": 0.12
+     "position": 0.07
     },
     {
      "text": "0..*",
-     "position": 0.88
+     "position": 0.93
     }
-   ],
-   "arrow": "none"
+   ]
   },
   {
    "id": "r1",
    "from": "tok",
    "to": "ses",
+   "fromAnchor": {
+    "x": 1.0,
+    "y": 0.102
+   },
+   "toAnchor": {
+    "x": 0.0,
+    "y": 0.171
+   },
    "color": "#1f6389",
    "width": 2,
+   "arrow": "none",
+   "router": "normal",
    "labels": [
     {
      "text": "1",
-     "position": 0.12
+     "position": 0.07
     },
     {
      "text": "0..*",
-     "position": 0.88
+     "position": 0.93
     }
-   ],
-   "arrow": "none"
+   ]
   },
   {
    "id": "r2",
    "from": "ses",
    "to": "ep",
+   "fromAnchor": {
+    "x": 1.0,
+    "y": 0.171
+   },
+   "toAnchor": {
+    "x": 0.0,
+    "y": 0.095
+   },
    "color": "#1f6389",
    "width": 2,
+   "arrow": "none",
+   "router": "normal",
    "labels": [
     {
      "text": "1",
-     "position": 0.12
+     "position": 0.07
     },
     {
      "text": "0..*",
-     "position": 0.88
+     "position": 0.93
     }
-   ],
-   "arrow": "none"
+   ]
   },
   {
    "id": "r3",
    "from": "ep",
    "to": "file",
+   "fromAnchor": {
+    "x": 1.0,
+    "y": 0.095
+   },
+   "toAnchor": {
+    "x": 0.0,
+    "y": 0.194
+   },
    "color": "#1f6389",
    "width": 2,
+   "arrow": "none",
+   "router": "normal",
    "labels": [
     {
      "text": "1",
-     "position": 0.12
+     "position": 0.07
     },
     {
      "text": "1..*",
-     "position": 0.88
+     "position": 0.93
     }
-   ],
-   "arrow": "none"
+   ]
   },
   {
    "id": "r4",
    "from": "ep",
    "to": "pc",
+   "fromAnchor": {
+    "x": 1.0,
+    "y": 0.466
+   },
+   "toAnchor": {
+    "x": 0.0,
+    "y": 0.154
+   },
    "color": "#1f6389",
    "width": 2,
+   "arrow": "none",
+   "router": "normal",
    "labels": [
     {
      "text": "1",
-     "position": 0.12
+     "position": 0.07
     },
     {
      "text": "1..*",
-     "position": 0.88
+     "position": 0.93
     }
    ],
-   "router": "manhattan",
-   "arrow": "none"
+   "vertices": [
+    {
+     "x": 1800,
+     "y": 326
+    },
+    {
+     "x": 1800,
+     "y": 1038
+    }
+   ]
   },
   {
    "id": "r5",
    "from": "ep",
    "to": "q",
+   "fromAnchor": {
+    "x": 1.0,
+    "y": 0.28
+   },
+   "toAnchor": {
+    "x": 0.0,
+    "y": 0.154
+   },
    "color": "#1f6389",
    "width": 2,
-   "label": "隔离",
+   "arrow": "none",
+   "router": "normal",
    "labels": [
     {
      "text": "1",
-     "position": 0.12
+     "position": 0.07
     },
     {
      "text": "0..*",
-     "position": 0.88
+     "position": 0.93
+    },
+    {
+     "text": "隔离",
+     "position": {
+      "distance": 0.82,
+      "offset": {
+       "x": 0,
+       "y": -14
+      }
+     }
     }
    ],
-   "arrow": "none"
+   "vertices": [
+    {
+     "x": 1835,
+     "y": 256
+    },
+    {
+     "x": 1835,
+     "y": 684
+    }
+   ]
   },
   {
    "id": "r6",
    "from": "bat",
    "to": "ep",
+   "fromAnchor": {
+    "x": 0.5,
+    "y": 0.0
+   },
    "toAnchor": {
-    "x": 1,
-    "y": 0.5
+    "x": 0.5,
+    "y": 1.0
    },
    "color": "#1f6389",
    "width": 2,
-   "label": "batch_id",
+   "arrow": "none",
+   "router": "normal",
    "labels": [
     {
      "text": "0..1",
-     "position": 0.12
+     "position": 0.07
     },
     {
      "text": "0..*",
-     "position": 0.88
+     "position": 0.93
+    },
+    {
+     "text": "batch_id",
+     "position": {
+      "distance": 0.82,
+      "offset": {
+       "x": 0,
+       "y": -14
+      }
+     }
     }
-   ],
-   "arrow": "none"
+   ]
   },
   {
    "id": "r7",
    "from": "req",
    "to": "ep",
+   "fromAnchor": {
+    "x": 0.5,
+    "y": 1.0
+   },
+   "toAnchor": {
+    "x": 0.25,
+    "y": 1.0
+   },
    "color": "#1f6389",
    "width": 2,
-   "label": "血缘快照(虚线)",
+   "arrow": "none",
+   "router": "normal",
    "labels": [
     {
      "text": "1",
-     "position": 0.04
+     "position": 0.07
     },
     {
      "text": "0..*",
-     "position": 0.96
+     "position": 0.93
+    },
+    {
+     "text": "血缘快照(虚线)",
+     "position": {
+      "distance": 0.82,
+      "offset": {
+       "x": 0,
+       "y": -14
+      }
+     }
     }
    ],
-   "dash": "dashed",
-   "router": "manhattan",
-   "arrow": "none"
+   "vertices": [
+    {
+     "x": 240.0,
+     "y": 588
+    },
+    {
+     "x": 1500.0,
+     "y": 588
+    }
+   ],
+   "dash": "dashed"
   },
   {
    "id": "r8",
    "from": "ev",
    "to": "ep",
+   "fromAnchor": {
+    "x": 1.0,
+    "y": 0.171
+   },
+   "toAnchor": {
+    "x": 0.0,
+    "y": 0.894
+   },
    "color": "#1f6389",
    "width": 2,
-   "label": "ref_type=episode",
+   "arrow": "none",
+   "router": "normal",
    "labels": [
     {
      "text": "0..*",
-     "position": 0.12
+     "position": 0.07
     },
     {
      "text": "1",
-     "position": 0.88
+     "position": 0.93
+    },
+    {
+     "text": "ref_type=episode",
+     "position": {
+      "distance": 0.82,
+      "offset": {
+       "x": 0,
+       "y": -14
+      }
+     }
+    },
+    {
+     "text": "ref_type=episode",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": -64,
+       "y": 28
+      }
+     }
     }
    ],
-   "router": "manhattan",
-   "arrow": "none"
+   "vertices": [
+    {
+     "x": 1365,
+     "y": 684
+    },
+    {
+     "x": 1365,
+     "y": 488
+    }
+   ]
   }
  ]
 }

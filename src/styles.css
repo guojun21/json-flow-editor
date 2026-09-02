@@ -182,3 +182,9 @@ html, body, #root { height: 100%; overflow: hidden;
 .pal-lifeline::after { content: ''; position: absolute; left: 12px; top: 0; bottom: 0; border-left: 2px dashed #fff; }
 .pal-activation { width: 10px; height: 32px; background: #fff; }
 .pal-anchor { width: 10px; height: 10px; border: 2px solid #fff; }
+
+/* Excel 文档(Univer)铺满画布区 */
+.sheet-host { position: absolute; inset: 0; z-index: 6; background: #fff; }
+.canvas-wrap { position: relative; flex: 1; min-width: 0; display: flex; }
+.canvas-wrap > .canvas { flex: 1; min-width: 0; }
+.sheet-loading { display: flex; align-items: center; justify-content: center; color: #48586a; font-size: 15px; }

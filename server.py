@@ -38,17 +38,27 @@ class H(SimpleHTTPRequestHandler):
             out = []
             ddir = os.path.join(ROOT, 'data')
             for f in sorted(os.listdir(ddir)):
-                if not f.endswith('.json'):
-                    continue
-                fid = f[:-5]
                 path = os.path.join(ddir, f)
                 mtime = os.path.getmtime(path)
+                if f.endswith('.xlsx'):                      # Excel 文档:元数据在 sidecar <id>.xlsx.json 里
+                    fid = f[:-5]
+                    meta = {}
+                    try:
+                        meta = json.load(open(path + '.json'))
+                    except Exception:
+                        pass
+                    out.append({'id': fid, 'type': 'xlsx', 'title': meta.get('title', fid),
+                                'date': meta.get('date', ''), 'order': meta.get('order', 999), '_m': mtime})
+                    continue
+                if not f.endswith('.json') or f.endswith('.xlsx.json'):
+                    continue
+                fid = f[:-5]
                 try:
                     meta = json.load(open(path)).get('meta', {})
-                    out.append({'id': fid, 'title': meta.get('title', fid),
+                    out.append({'id': fid, 'type': 'json', 'title': meta.get('title', fid),
                                 'date': date_of(meta), 'order': meta.get('order', 999), '_m': mtime})
                 except Exception:
-                    out.append({'id': fid, 'title': fid, 'date': '', '_m': mtime})
+                    out.append({'id': fid, 'type': 'json', 'title': fid, 'date': '', '_m': mtime})
             # 最新的排最前:先按 meta.date 倒序(语义日期,重新部署不会乱),
             # 没写 date 的退回文件 mtime 倒序
             # 最新日期在最前;同一天的按 id 正序(uc_0_overview, uc_1, uc_2 …),别按修改时间乱跳
@@ -66,7 +76,34 @@ class H(SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self):
-        if self.path.rstrip('/') != '/api/save':
+        p0 = self.path.split('?')[0].rstrip('/')
+        if p0 == '/api/save-xlsx':                            # Excel 文档实时回存:整个 .xlsx 二进制原样落盘(原子替换)
+            try:
+                from urllib.parse import parse_qs
+                did = parse_qs(self.path.split('?', 1)[1] if '?' in self.path else '').get('id', [''])[0]
+                if not re.fullmatch(r'[a-z0-9_-]{1,40}', did):
+                    raise ValueError('bad id')
+                n = int(self.headers.get('Content-Length', 0))
+                if n <= 0 or n > 30 * 1024 * 1024:
+                    raise ValueError('bad size')
+                blob = self.rfile.read(n)
+                if blob[:2] != b'PK':
+                    raise ValueError('not xlsx')
+                path = os.path.join(ROOT, 'data', did + '.xlsx')
+                tmp = path + '.tmp'
+                with open(tmp, 'wb') as f:
+                    f.write(blob)
+                os.replace(tmp, path)
+                out = json.dumps({'ok': True, 'bytes': n}).encode()
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Content-Length', str(len(out)))
+                self.end_headers()
+                self.wfile.write(out)
+            except Exception as e:
+                self.send_error(400, str(e))
+            return
+        if p0 != '/api/save':
             self.send_error(404)
             return
         try:

@@ -4,8 +4,9 @@
   "description": "**一个 JSON 完整表达一张流程图；渲染吃 JSON，一切编辑实时写回 JSON。**",
   "main": "app.js",
   "scripts": {
-    "build": "esbuild src/main.jsx --bundle --minify --jsx=automatic --outfile=dist/app.js && python3 tools/stamp.py",
-    "dev": "esbuild src/main.jsx --bundle --jsx=automatic --outfile=dist/app.js --watch"
+    "build": "rm -f dist/chunk-*.js && esbuild src/main.jsx --bundle --minify --jsx=automatic --format=esm --splitting --outdir=dist --entry-names=app --chunk-names=chunk-[hash] && python3 tools/stamp.py",
+    "dev": "esbuild src/main.jsx --bundle --jsx=automatic --outfile=dist/app.js --watch",
+    "postinstall": "patch-package"
   },
   "repository": {
     "type": "git",
@@ -27,11 +28,16 @@
     "@antv/x6-plugin-selection": "^2.2.2",
     "@antv/x6-plugin-snapline": "^2.1.7",
     "@antv/x6-plugin-transform": "^2.1.8",
+    "@mertdeveci55/univer-import-export": "^0.2.1",
+    "@univerjs/preset-sheets-core": "^0.25.1",
+    "@univerjs/presets": "^0.25.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",
+    "patch-package": "^8.0.1",
     "playwright": "^1.62.1"
   },
   "private": true

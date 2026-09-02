@@ -4,11 +4,11 @@
   "title": "时序·领取令牌(抢单池)（09-02）",
   "date": "2026-09-02",
   "order": 31,
-  "W": 2400,
-  "H": 1050,
+  "W": 1905,
+  "H": 1272,
   "fs": {
    "title": 22,
-   "body": 15
+   "body": 16
   }
  },
  "nodes": [
@@ -34,9 +34,9 @@
    "w": 1700,
    "h": 30,
    "lines": [
-    "实线实心箭头 = 同步调用;虚线细箭头 = 返回;折返 = 内部处理;竖条 = 激活(处理中);虚线框 alt[…] = 分支;时间自上而下"
+    "实线实心箭头 = 同步调用;虚线细箭头 = 返回;折返 = 内部处理;竖条 = 激活(处理中);虚线框 = 互斥分支(上半成功 / 下半失败);时间自上而下"
    ],
-   "fontSize": 15,
+   "fontSize": 16,
    "textColor": "#48586a"
   },
   {
@@ -46,7 +46,7 @@
    "x": 220,
    "y": 120,
    "w": 160,
-   "h": 900,
+   "h": 1122,
    "lines": [
     "数采员 / 组长"
    ],
@@ -57,12 +57,12 @@
    "id": "L1",
    "kind": "lifeline",
    "shape": "lifeline",
-   "x": 640,
+   "x": 655,
    "y": 120,
    "w": 160,
-   "h": 900,
+   "h": 1122,
    "lines": [
-    "前端 Pudu Studio"
+    "前端"
    ],
    "fontSize": 15,
    "z": 1
@@ -71,12 +71,12 @@
    "id": "L2",
    "kind": "lifeline",
    "shape": "lifeline",
-   "x": 1060,
+   "x": 1090,
    "y": 120,
    "w": 160,
-   "h": 900,
+   "h": 1122,
    "lines": [
-    "供数后端 :4192"
+    "后端"
    ],
    "fontSize": 15,
    "z": 1
@@ -85,37 +85,70 @@
    "id": "L3",
    "kind": "lifeline",
    "shape": "lifeline",
-   "x": 1480,
+   "x": 1525,
    "y": 120,
    "w": 160,
-   "h": 900,
+   "h": 1122,
    "lines": [
-    "factory-core :4198"
+    "数据库"
    ],
    "fontSize": 15,
    "z": 1
   },
   {
-   "id": "L4",
-   "kind": "lifeline",
-   "shape": "lifeline",
-   "x": 1900,
-   "y": 120,
-   "w": 160,
-   "h": 900,
+   "id": "frag0",
+   "kind": "package",
+   "x": 180,
+   "y": 538,
+   "w": 1545,
+   "h": 610,
    "lines": [
-    "SQLite"
+    "alt [校验通过]"
    ],
    "fontSize": 15,
-   "z": 1
+   "z": 2,
+   "stroke": "#a1691a",
+   "textColor": "#a1691a"
+  },
+  {
+   "id": "div0_1a",
+   "kind": "anchor",
+   "x": 175,
+   "y": 957,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "div0_1b",
+   "kind": "anchor",
+   "x": 1720,
+   "y": 957,
+   "w": 10,
+   "h": 10,
+   "z": 20
+  },
+  {
+   "id": "divlab0_1",
+   "kind": "text",
+   "x": 188,
+   "y": 965,
+   "w": 151.5,
+   "h": 24,
+   "lines": [
+    "else [校验不通过]"
+   ],
+   "fontSize": 15,
+   "bold": true,
+   "textColor": "#a1691a"
   },
   {
    "id": "act0",
    "kind": "activation",
-   "x": 713,
-   "y": 202,
+   "x": 728,
+   "y": 192,
    "w": 14,
-   "h": 628,
+   "h": 24,
    "z": 5,
    "fill": "#dfe7ee",
    "stroke": "#48586a"
@@ -123,10 +156,10 @@
   {
    "id": "act1",
    "kind": "activation",
-   "x": 1133,
-   "y": 278,
+   "x": 1163,
+   "y": 276,
    "w": 14,
-   "h": 476,
+   "h": 760,
    "z": 5,
    "fill": "#dfe7ee",
    "stroke": "#48586a"
@@ -134,30 +167,41 @@
   {
    "id": "act2",
    "kind": "activation",
-   "x": 1553,
-   "y": 354,
+   "x": 1598,
+   "y": 360,
    "w": 14,
-   "h": 324,
+   "h": 104,
    "z": 5,
    "fill": "#dfe7ee",
    "stroke": "#48586a"
   },
   {
-   "id": "act3",
+   "id": "act4",
    "kind": "activation",
-   "x": 1973,
-   "y": 430,
+   "x": 1598,
+   "y": 604,
    "w": 14,
-   "h": 96,
+   "h": 104,
    "z": 5,
    "fill": "#dfe7ee",
    "stroke": "#48586a"
   },
   {
-   "id": "act5",
+   "id": "act7",
    "kind": "activation",
-   "x": 1973,
-   "y": 582,
+   "x": 293,
+   "y": 856,
+   "w": 14,
+   "h": 24,
+   "z": 5,
+   "fill": "#dfe7ee",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "act9",
+   "kind": "activation",
+   "x": 293,
+   "y": 1100,
    "w": 14,
    "h": 24,
    "z": 5,
@@ -168,7 +212,7 @@
    "id": "m0a",
    "kind": "anchor",
    "x": 295,
-   "y": 205,
+   "y": 195,
    "w": 10,
    "h": 10,
    "z": 20
@@ -176,8 +220,8 @@
   {
    "id": "m0b",
    "kind": "anchor",
-   "x": 715,
-   "y": 205,
+   "x": 730,
+   "y": 195,
    "w": 10,
    "h": 10,
    "z": 20
@@ -185,8 +229,8 @@
   {
    "id": "m1a",
    "kind": "anchor",
-   "x": 715,
-   "y": 281,
+   "x": 730,
+   "y": 279,
    "w": 10,
    "h": 10,
    "z": 20
@@ -194,8 +238,8 @@
   {
    "id": "m1b",
    "kind": "anchor",
-   "x": 1135,
-   "y": 281,
+   "x": 1165,
+   "y": 279,
    "w": 10,
    "h": 10,
    "z": 20
@@ -203,8 +247,8 @@
   {
    "id": "m2a",
    "kind": "anchor",
-   "x": 1135,
-   "y": 357,
+   "x": 1165,
+   "y": 363,
    "w": 10,
    "h": 10,
    "z": 20
@@ -212,8 +256,8 @@
   {
    "id": "m2b",
    "kind": "anchor",
-   "x": 1555,
-   "y": 357,
+   "x": 1600,
+   "y": 363,
    "w": 10,
    "h": 10,
    "z": 20
@@ -221,8 +265,8 @@
   {
    "id": "m3a",
    "kind": "anchor",
-   "x": 1555,
-   "y": 433,
+   "x": 1600,
+   "y": 447,
    "w": 10,
    "h": 10,
    "z": 20
@@ -230,8 +274,8 @@
   {
    "id": "m3b",
    "kind": "anchor",
-   "x": 1975,
-   "y": 433,
+   "x": 1165,
+   "y": 447,
    "w": 10,
    "h": 10,
    "z": 20
@@ -239,8 +283,8 @@
   {
    "id": "m4a",
    "kind": "anchor",
-   "x": 1975,
-   "y": 509,
+   "x": 1165,
+   "y": 607,
    "w": 10,
    "h": 10,
    "z": 20
@@ -248,8 +292,8 @@
   {
    "id": "m4b",
    "kind": "anchor",
-   "x": 1555,
-   "y": 509,
+   "x": 1600,
+   "y": 607,
    "w": 10,
    "h": 10,
    "z": 20
@@ -257,8 +301,8 @@
   {
    "id": "m5a",
    "kind": "anchor",
-   "x": 1555,
-   "y": 585,
+   "x": 1600,
+   "y": 691,
    "w": 10,
    "h": 10,
    "z": 20
@@ -266,8 +310,8 @@
   {
    "id": "m5b",
    "kind": "anchor",
-   "x": 1975,
-   "y": 585,
+   "x": 1165,
+   "y": 691,
    "w": 10,
    "h": 10,
    "z": 20
@@ -275,8 +319,8 @@
   {
    "id": "m6a",
    "kind": "anchor",
-   "x": 1555,
-   "y": 661,
+   "x": 1165,
+   "y": 775,
    "w": 10,
    "h": 10,
    "z": 20
@@ -284,8 +328,8 @@
   {
    "id": "m6b",
    "kind": "anchor",
-   "x": 1135,
-   "y": 661,
+   "x": 730,
+   "y": 775,
    "w": 10,
    "h": 10,
    "z": 20
@@ -293,8 +337,8 @@
   {
    "id": "m7a",
    "kind": "anchor",
-   "x": 1135,
-   "y": 737,
+   "x": 730,
+   "y": 859,
    "w": 10,
    "h": 10,
    "z": 20
@@ -302,8 +346,8 @@
   {
    "id": "m7b",
    "kind": "anchor",
-   "x": 715,
-   "y": 737,
+   "x": 295,
+   "y": 859,
    "w": 10,
    "h": 10,
    "z": 20
@@ -311,8 +355,8 @@
   {
    "id": "m8a",
    "kind": "anchor",
-   "x": 715,
-   "y": 813,
+   "x": 1165,
+   "y": 1019,
    "w": 10,
    "h": 10,
    "z": 20
@@ -320,8 +364,8 @@
   {
    "id": "m8b",
    "kind": "anchor",
-   "x": 295,
-   "y": 813,
+   "x": 730,
+   "y": 1019,
    "w": 10,
    "h": 10,
    "z": 20
@@ -329,8 +373,8 @@
   {
    "id": "m9a",
    "kind": "anchor",
-   "x": 1555,
-   "y": 889,
+   "x": 730,
+   "y": 1103,
    "w": 10,
    "h": 10,
    "z": 20
@@ -338,14 +382,24 @@
   {
    "id": "m9b",
    "kind": "anchor",
-   "x": 1135,
-   "y": 889,
+   "x": 295,
+   "y": 1103,
    "w": 10,
    "h": 10,
    "z": 20
   }
  ],
  "edges": [
+  {
+   "id": "div0_1",
+   "from": "div0_1a",
+   "to": "div0_1b",
+   "color": "#a1691a",
+   "width": 1.5,
+   "arrow": "none",
+   "dash": "dashed",
+   "router": "normal"
+  },
   {
    "id": "e0",
    "from": "m0a",
@@ -373,7 +427,7 @@
    "to": "m1b",
    "labels": [
     {
-     "text": "2. POST /api/factory/market/claim",
+     "text": "2. 请求领取令牌(抢单池)",
      "position": {
       "distance": 0.5,
       "offset": {
@@ -394,7 +448,7 @@
    "to": "m2b",
    "labels": [
     {
-     "text": "3. 转发(FACTORY_CORE_ORIGIN)",
+     "text": "3. 读需求单状态 / 两池配额 / 并发持有 / 工位占用",
      "position": {
       "distance": 0.5,
       "offset": {
@@ -415,28 +469,7 @@
    "to": "m3b",
    "labels": [
     {
-     "text": "4. 读需求单状态 / 两池配额 / 并发持有 / 工位占用",
-     "position": {
-      "distance": 0.5,
-      "offset": {
-       "x": 0,
-       "y": -13
-      }
-     }
-    }
-   ],
-   "color": "#1f6389",
-   "width": 2,
-   "arrow": "block",
-   "router": "normal"
-  },
-  {
-   "id": "e4",
-   "from": "m4a",
-   "to": "m4b",
-   "labels": [
-    {
-     "text": "5. 校验数据",
+     "text": "4. 校验数据",
      "position": {
       "distance": 0.5,
       "offset": {
@@ -453,12 +486,12 @@
    "dash": "dashed"
   },
   {
-   "id": "e5",
-   "from": "m5a",
-   "to": "m5b",
+   "id": "e4",
+   "from": "m4a",
+   "to": "m4b",
    "labels": [
     {
-     "text": "6. INSERT tokens(待开工, 45min 过期) + events",
+     "text": "5. 写入令牌(待开工, 45 分钟未开工回收) + 事件",
      "position": {
       "distance": 0.5,
       "offset": {
@@ -474,12 +507,34 @@
    "router": "normal"
   },
   {
+   "id": "e5",
+   "from": "m5a",
+   "to": "m5b",
+   "labels": [
+    {
+     "text": "6. ok",
+     "position": {
+      "distance": 0.5,
+      "offset": {
+       "x": 0,
+       "y": -13
+      }
+     }
+    }
+   ],
+   "color": "#526078",
+   "width": 1.5,
+   "arrow": "classic",
+   "router": "normal",
+   "dash": "dashed"
+  },
+  {
    "id": "e6",
    "from": "m6a",
    "to": "m6b",
    "labels": [
     {
-     "text": "7. 201 {tokenId, recycleCountdown}",
+     "text": "7. 成功 {令牌号, 回收倒计时}",
      "position": {
       "distance": 0.5,
       "offset": {
@@ -501,7 +556,7 @@
    "to": "m7b",
    "labels": [
     {
-     "text": "8. 201",
+     "text": "8. 令牌入「我的采集令牌」",
      "position": {
       "distance": 0.5,
       "offset": {
@@ -511,11 +566,10 @@
      }
     }
    ],
-   "color": "#526078",
-   "width": 1.5,
-   "arrow": "classic",
-   "router": "normal",
-   "dash": "dashed"
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
   },
   {
    "id": "e8",
@@ -523,7 +577,7 @@
    "to": "m8b",
    "labels": [
     {
-     "text": "9. 令牌入「我的采集令牌」",
+     "text": "9. 失败 {原因: 抢单池已发完 / 并发超限 / 工位被占}",
      "position": {
       "distance": 0.5,
       "offset": {
@@ -545,7 +599,7 @@
    "to": "m9b",
    "labels": [
     {
-     "text": "10. 409:抢单池已发完 / 并发超限 / 工位被占",
+     "text": "10. 提示失败原因,令牌不入列表",
      "position": {
       "distance": 0.5,
       "offset": {
@@ -555,11 +609,10 @@
      }
     }
    ],
-   "color": "#526078",
-   "width": 1.5,
-   "arrow": "classic",
-   "router": "normal",
-   "dash": "dashed"
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "block",
+   "router": "normal"
   }
  ]
 }

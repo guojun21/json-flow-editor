@@ -62,7 +62,7 @@ export default function Sidebar({ files, cur, collapsed,
               className={'file-row' + (f.id === cur ? ' active' : '')}
               onClick={() => onOpenFile(f.id)}>
               <span className="fname">{f.title || f.id}</span>
-              <span className="fmeta">{f.id}.json</span>
+              <span className="fmeta">{f.id}.{f.type === 'xlsx' ? 'xlsx' : 'json'}</span>
             </div>
           ))}
         </Section>

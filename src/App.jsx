@@ -1,7 +1,9 @@
 /* 主应用:文件加载/保存(10s 自动+兜底) + 画布(X6) + 弹窗改一切属性 + 右键菜单 + JSON 面板。 */
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { createFlowEngine } from './graph.js';
 import Sidebar from './Sidebar.jsx';
+import '../node_modules/@univerjs/preset-sheets-core/lib/index.css';   // Univer 样式随主包;脚本按需加载
+const SheetView = lazy(() => import('./SheetView.jsx'));
 import Modal from './Modal.jsx';
 
 const DRAFT_V = 'jfe:v2:';   // 改版即失效旧草稿(黑白版草稿丢了颜色)
@@ -31,6 +33,8 @@ export default function App() {
   const [files, setFiles] = useState(FALLBACK_FILES);
   const [cur, setCur] = useState(initFile);
   const [status, setStatus] = useState('');
+  const [sheet, setSheet] = useState(null);      // 当前打开的是 Excel 文档(xlsx)时 = 文件 id
+  const sheetRef = useRef(null);
   const [collapsed, setCollapsed] = useState(embed);
   const [sideW, setSideW] = useState(() => {
     const v = +localStorage.getItem('jfe:sidew');
@@ -51,7 +55,8 @@ export default function App() {
       const eng = engineRef.current;
       if (!eng) return;
       docRef.current = eng.serialize();
-      localStorage.setItem(DRAFT_V + curRef.current, JSON.stringify(docRef.current));
+      if (sheetRef.current) return;   // Excel 文档不走图草稿
+      localStorage.setItem(DRAFT_V + curRef.current, JSON.stringify({ savedAt: Date.now(), doc: docRef.current }));
       dirtyRef.current = true;
       setStatus('已改(本地,待自动保存)');
     }, 120);
@@ -147,7 +152,7 @@ export default function App() {
       textColor: (a.label && a.label.fill) || '#000000',
       fontSize: (a.label && a.label.fontSize) || 13,
       bold: !!d.bold,
-      spec: d.spec ? { ...d.spec } : (d.kind === 'usecase' ? { id: '', co: '', trigger: '', pre: '', flow: '', alt: '', priority: 'P0', status: 'todo' } : undefined),
+      spec: d.spec ? { ...d.spec } : (d.kind === 'usecase' ? { id: '', co: '', trigger: '', pre: '', flow: '', alt: '', priority: 'P0' } : undefined),
       kind: d.kind,
     } });
   }
@@ -181,21 +186,22 @@ export default function App() {
     const eng = engineRef.current;
     const view = savedView(id);
     const build = d => { eng.buildFrom(d, { keepView: !!view }); if (view) eng.setView(view); };
-    const draft = localStorage.getItem(DRAFT_V + id);
-    if (draft) {
-      docRef.current = JSON.parse(draft);
-      build(docRef.current);
-      setStatus('本地草稿');
-      return;
-    }
+    sheetRef.current = null; setSheet(null);
+    let draft = null;
+    try { const p = JSON.parse(localStorage.getItem(DRAFT_V + id)); draft = p && p.doc ? p : (p && p.nodes ? { savedAt: 0, doc: p } : null); } catch { draft = null; }
     fetch('data/' + id + '.json?t=' + Date.now())
-      .then(r => r.json())
-      .then(d => {
-        docRef.current = d;
-        build(d);
-        setStatus('已加载');
+      .then(r => { if (!r.ok) throw new Error(String(r.status)); return r.json().then(d => ({ d, lm: Date.parse(r.headers.get('Last-Modified') || '') || 0 })); })
+      .then(({ d, lm }) => {
+        // 本地草稿只在比服务器文件新的时候才用;服务器文件更新过(重新生成 / 别的终端改过)就丢掉旧草稿,别把旧稿倒灌回服务器
+        if (draft && draft.savedAt > lm) { docRef.current = draft.doc; build(draft.doc); setStatus('本地草稿'); return; }
+        if (draft) localStorage.removeItem(DRAFT_V + id);
+        docRef.current = d; build(d); setStatus('已加载');
       })
-      .catch(() => setStatus('数据加载失败'));
+      .catch(err => {
+        if (String(err && err.message) === '404') { sheetRef.current = id; setSheet(id); setStatus('Excel'); return; }   // 没有 .json 的是 Excel 文档
+        if (draft) { docRef.current = draft.doc; build(draft.doc); setStatus('本地草稿(离线)'); return; }
+        setStatus('数据加载失败');
+      });
   }
 
   function modalOk() {
@@ -205,9 +211,6 @@ export default function App() {
     if (m.type === 'node') {
       const lines = m.draft.text.split('\n').map(x => x.trim()).filter(Boolean);
       const draft = { ...m.draft };
-      if (draft.spec && draft.spec.status && STATUS_COLOR[draft.spec.status]) {   // 用例状态决定底色/描边
-        [draft.fill, draft.stroke] = STATUS_COLOR[draft.spec.status];
-      }
       if (lines.length) eng.applyNodeEdit(m.cell, { ...draft, lines });
       forceTick(t => t + 1);
     } else {
@@ -271,13 +274,16 @@ export default function App() {
           if (engineRef.current) engineRef.current.resize(); }} />
       <div className="sidebar-toggle" title="收起/展开侧栏 (⌘B)"
         onClick={() => setCollapsed(v => !v)}>{collapsed ? '⟩' : '⟨'}</div>
-      <div className={'canvas' + (linking ? ' linking' : '')} ref={canvasRef} />
+      <div className="canvas-wrap">
+        <div className={'canvas' + (linking ? ' linking' : '')} ref={canvasRef} />
+        {sheet && <Suspense fallback={<div className="sheet-host sheet-loading">正在加载 Excel 组件…</div>}><SheetView id={sheet} onStatus={setStatus} /></Suspense>}
+      </div>
       {selected && (selected.getData() || {}).spec && (
         <aside className="detail" onMouseDown={e => e.stopPropagation()}>
           {(() => { const d = selected.getData() || {}; const sp = d.spec || {}; const ST = { done: '已实现', part: '部分', todo: '待做', out: '不入一期' }; return (
             <>
               <div className="detail-head">
-                <div className="detail-kicker">{sp.id || '用例'} · {sp.priority || ''} · {ST[sp.status] || ''}</div>
+                <div className="detail-kicker">{sp.id || '用例'} · {sp.priority || ''}</div>
                 <div className="detail-title">{(d.lines || [])[0]}</div>
               </div>
               {[['co', '协同角色'], ['trigger', '触发'], ['pre', '前置条件'], ['flow', '主流程'], ['alt', '异常 / 分支']].map(([k, name]) => (
@@ -363,11 +369,6 @@ export default function App() {
                 <label className="fld">优先级
                   <select value={modal.draft.spec.priority || 'P0'} onChange={e => upd({ spec: { ...modal.draft.spec, priority: e.target.value } })}>
                     <option value="P0">P0</option><option value="P1">P1</option><option value="P2">P2</option>
-                  </select>
-                </label>
-                <label className="fld">实现状态
-                  <select value={modal.draft.spec.status || 'todo'} onChange={e => upd({ spec: { ...modal.draft.spec, status: e.target.value } })}>
-                    <option value="done">已实现</option><option value="part">部分</option><option value="todo">待做</option><option value="out">不入一期</option>
                   </select>
                 </label>
               </div>
