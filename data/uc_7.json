@@ -1,0 +1,414 @@
+{
+ "meta": {
+  "id": "uc_7",
+  "title": "用例·质检结果（09-02）",
+  "date": "2026-09-02",
+  "W": 1600,
+  "H": 1096,
+  "fs": {
+   "title": 24,
+   "body": 18
+  }
+ },
+ "nodes": [
+  {
+   "id": "title",
+   "kind": "text",
+   "x": 40,
+   "y": 40,
+   "w": 1500,
+   "h": 50,
+   "lines": [
+    "排产采集 · 质检结果 · 用例图（8 个用例）"
+   ],
+   "fontSize": 30,
+   "bold": true,
+   "textColor": "#0b1220"
+  },
+  {
+   "id": "legend",
+   "kind": "text",
+   "x": 40,
+   "y": 94,
+   "w": 1600,
+   "h": 34,
+   "lines": [
+    "左列=主责角色,实线=主责;椭圆第二行=协同角色;绿=已实现 橙=部分 白=待做 灰=不入一期;选中用例右侧看规约,双击可编辑"
+   ],
+   "fontSize": 16,
+   "textColor": "#48586a"
+  },
+  {
+   "id": "b",
+   "kind": "boundary",
+   "x": 300,
+   "y": 144,
+   "w": 1240,
+   "h": 922,
+   "lines": [
+    "《系统》排产采集 · 质检结果"
+   ],
+   "fontSize": 22
+  },
+  {
+   "id": "actor0",
+   "kind": "actor",
+   "x": 130,
+   "y": 217.0,
+   "w": 64,
+   "h": 84,
+   "lines": [
+    "质检员"
+   ],
+   "fontSize": 17
+  },
+  {
+   "id": "G1",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 204,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "出具质检结论",
+    "协同 数据平台(云端)"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "G1",
+    "trigger": "复核完成",
+    "pre": "—",
+    "flow": "合格/不合格 + 原因码,写事件流",
+    "alt": "—",
+    "priority": "P0",
+    "status": "todo"
+   }
+  },
+  {
+   "id": "G2",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 740,
+   "y": 204,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "不合格→修复复检",
+    "协同 数采员 / 组长"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "G2",
+    "trigger": "可修复类问题",
+    "pre": "—",
+    "flow": "退回修复(元数据/剪辑)后复检",
+    "alt": "—",
+    "priority": "P0",
+    "status": "todo"
+   }
+  },
+  {
+   "id": "actor1",
+   "kind": "actor",
+   "x": 130,
+   "y": 359.0,
+   "w": 64,
+   "h": 84,
+   "lines": [
+    "工厂管理员/运营"
+   ],
+   "fontSize": 17
+  },
+  {
+   "id": "G3",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 346,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "不合格→定向补采工单",
+    "协同 平台任务中心 / 算法(需求方)"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "G3",
+    "trigger": "不可修复",
+    "pre": "—",
+    "flow": "生成补采工单,只放缺口分桶(A12)",
+    "alt": "—",
+    "priority": "P0",
+    "status": "part"
+   }
+  },
+  {
+   "id": "actor2",
+   "kind": "actor",
+   "x": 130,
+   "y": 501.0,
+   "w": 64,
+   "h": 84,
+   "lines": [
+    "算法(需求方)"
+   ],
+   "fontSize": 17
+  },
+  {
+   "id": "G4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 488,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "争议仲裁",
+    "协同 工厂管理员/运营 / 数据运营 / 质检组长"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "G4",
+    "trigger": "有争议",
+    "pre": "—",
+    "flow": "三方仲裁,结论回写",
+    "alt": "—",
+    "priority": "P0",
+    "status": "todo"
+   }
+  },
+  {
+   "id": "actor3",
+   "kind": "actor",
+   "x": 130,
+   "y": 643.0,
+   "w": 64,
+   "h": 84,
+   "lines": [
+    "数据运营"
+   ],
+   "fontSize": 17
+  },
+  {
+   "id": "G8",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 630,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "质检统计报表",
+    "协同 质检组长 / 算法(需求方)"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "G8",
+    "trigger": "周期",
+    "pre": "—",
+    "flow": "通过率、原因码 TOP、按人/机/版本分布",
+    "alt": "—",
+    "priority": "P0",
+    "status": "part"
+   }
+  },
+  {
+   "id": "actor4",
+   "kind": "pill",
+   "x": 60,
+   "y": 799.0,
+   "w": 200,
+   "h": 72,
+   "lines": [
+    "数据平台\n(云端)"
+   ],
+   "fontSize": 16,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "G5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 772,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "原因回传到人员/设备/任务版本",
+    "协同 组长 / 设备运维 / 数据运营"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "G5",
+    "trigger": "结论出具",
+    "pre": "血缘齐全",
+    "flow": "按血缘把原因码归因到人/机/SOP 版本",
+    "alt": "血缘缺失→归因失败告警",
+    "priority": "P0",
+    "status": "part"
+   }
+  },
+  {
+   "id": "G6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 740,
+   "y": 772,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "合格→移交验收(泳道 4 接口)",
+    "协同 工厂管理员/运营"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "G6",
+    "trigger": "合格",
+    "pre": "—",
+    "flow": "状态置待验收,通知验收方",
+    "alt": "—",
+    "priority": "P0",
+    "status": "todo"
+   }
+  },
+  {
+   "id": "actor5",
+   "kind": "pill",
+   "x": 60,
+   "y": 941.0,
+   "w": 200,
+   "h": 72,
+   "lines": [
+    "平台任务中心"
+   ],
+   "fontSize": 16,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "G7",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 914,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "结果通知数采员/组长",
+    "协同 数采员 / 组长"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "G7",
+    "trigger": "结论出具",
+    "pre": "—",
+    "flow": "飞书/站内通知,带原因码",
+    "alt": "—",
+    "priority": "P1",
+    "status": "todo"
+   }
+  }
+ ],
+ "edges": [
+  {
+   "id": "e0",
+   "from": "actor0",
+   "to": "G1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e1",
+   "from": "actor0",
+   "to": "G2",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e2",
+   "from": "actor1",
+   "to": "G3",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e3",
+   "from": "actor2",
+   "to": "G4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e4",
+   "from": "actor3",
+   "to": "G8",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e5",
+   "from": "actor4",
+   "to": "G5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e6",
+   "from": "actor4",
+   "to": "G6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e7",
+   "from": "actor5",
+   "to": "G7",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  }
+ ]
+}

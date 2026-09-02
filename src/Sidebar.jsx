@@ -32,7 +32,7 @@ const TABS = [
   ] },
 ];
 
-export default function Sidebar({ files, cur, status, collapsed,
+export default function Sidebar({ files, cur, collapsed,
   onOpenFile, onDragElement, onRelationPreset }) {
   const [tab, setTab] = useState('flow');
   const [rel, setRel] = useState('flow');
@@ -83,9 +83,7 @@ export default function Sidebar({ files, cur, status, collapsed,
           )}
         </Section>
       </div>
-      <div className="sidebar-foot">
-        <div className="status">{status}</div>
-      </div>
+
     </div>
   );
 }

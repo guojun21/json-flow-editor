@@ -1,0 +1,458 @@
+{
+ "meta": {
+  "id": "uc_5",
+  "title": "用例·运营云入库（09-02）",
+  "date": "2026-09-02",
+  "W": 1600,
+  "H": 938,
+  "fs": {
+   "title": 24,
+   "body": 18
+  }
+ },
+ "nodes": [
+  {
+   "id": "title",
+   "kind": "text",
+   "x": 40,
+   "y": 40,
+   "w": 1500,
+   "h": 50,
+   "lines": [
+    "排产采集 · 运营云入库 · 用例图（10 个用例）"
+   ],
+   "fontSize": 30,
+   "bold": true,
+   "textColor": "#0b1220"
+  },
+  {
+   "id": "legend",
+   "kind": "text",
+   "x": 40,
+   "y": 94,
+   "w": 1600,
+   "h": 34,
+   "lines": [
+    "左列=主责角色,实线=主责;椭圆第二行=协同角色;绿=已实现 橙=部分 白=待做 灰=不入一期;选中用例右侧看规约,双击可编辑"
+   ],
+   "fontSize": 16,
+   "textColor": "#48586a"
+  },
+  {
+   "id": "b",
+   "kind": "boundary",
+   "x": 300,
+   "y": 144,
+   "w": 1240,
+   "h": 764,
+   "lines": [
+    "《系统》排产采集 · 运营云入库"
+   ],
+   "fontSize": 22
+  },
+  {
+   "id": "actor0",
+   "kind": "actor",
+   "x": 130,
+   "y": 217.0,
+   "w": 64,
+   "h": 84,
+   "lines": [
+    "搬运/物流"
+   ],
+   "fontSize": 17
+  },
+  {
+   "id": "E1",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 204,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "SSD 拔盘与交接台账",
+    "协同 数采员 / 工控机"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "E1",
+    "trigger": "水位告警/班末",
+    "pre": "—",
+    "flow": "登记盘 ID、Episode 清单、校验和,签字交接",
+    "alt": "清单对不上→不出厂",
+    "priority": "P0",
+    "status": "part"
+   }
+  },
+  {
+   "id": "E2",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 740,
+   "y": 204,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "物理搬运至深圳中转",
+    "协同 IT/云运维"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "E2",
+    "trigger": "每日",
+    "pre": "三套盘周转",
+    "flow": "T+1/T+2 往返,签收",
+    "alt": "盘损坏/丢失→按台账重采(E7)",
+    "priority": "P0",
+    "status": "todo"
+   }
+  },
+  {
+   "id": "E7",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1140,
+   "y": 204,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "盘损坏/丢失处置",
+    "协同 组长 / 数采员"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "E7",
+    "trigger": "签收异常",
+    "pre": "台账存在",
+    "flow": "按台账列出受影响 Episode,发补采工单(A12)",
+    "alt": "—",
+    "priority": "P0",
+    "status": "todo"
+   }
+  },
+  {
+   "id": "actor1",
+   "kind": "actor",
+   "x": 130,
+   "y": 359.0,
+   "w": 64,
+   "h": 84,
+   "lines": [
+    "IT/云运维"
+   ],
+   "fontSize": 17
+  },
+  {
+   "id": "E3",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 346,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "上传上云",
+    "协同 数据平台(云端)"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "E3",
+    "trigger": "盘到中转",
+    "pre": "上行链路可用",
+    "flow": "分片上传、断点续传、checksum",
+    "alt": "失败分片重传",
+    "priority": "P0",
+    "status": "part"
+   }
+  },
+  {
+   "id": "actor2",
+   "kind": "pill",
+   "x": 60,
+   "y": 578.0,
+   "w": 200,
+   "h": 72,
+   "lines": [
+    "数据平台\n(云端)"
+   ],
+   "fontSize": 16,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "E4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 488,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "manifest 生成与对账",
+    "协同 IT/云运维"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "E4",
+    "trigger": "批次形成",
+    "pre": "逐文件 sha256 已算",
+    "flow": "生成 manifest,云端重算比对",
+    "alt": "不一致→该文件重传/重采",
+    "priority": "P0",
+    "status": "done"
+   }
+  },
+  {
+   "id": "E5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 740,
+   "y": 488,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "云端回执与本地清理倒计时",
+    "协同 工控机"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "E5",
+    "trigger": "对账通过",
+    "pre": "—",
+    "flow": "回执后启动 7 天倒计时",
+    "alt": "无回执→不启动,宁可占盘",
+    "priority": "P0",
+    "status": "done"
+   }
+  },
+  {
+   "id": "E8",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1140,
+   "y": 488,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "入库校验(一致性/去重)"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "E8",
+    "trigger": "入库",
+    "pre": "双写元数据",
+    "flow": "比对包内 meta 与库,去重",
+    "alt": "不一致→隔离区",
+    "priority": "P0",
+    "status": "done"
+   }
+  },
+  {
+   "id": "E9",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 614,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "存储水位与 TTL 告警",
+    "协同 IT/云运维"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "E9",
+    "trigger": "周期",
+    "pre": "—",
+    "flow": "热区/隔离区/已上云水位,超期对象告警",
+    "alt": "—",
+    "priority": "P0",
+    "status": "done"
+   }
+  },
+  {
+   "id": "E10",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 740,
+   "y": 614,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "Episode 血缘写入数据层 Registry"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "E10",
+    "trigger": "入库通过",
+    "pre": "嘉涛 Registry 就绪",
+    "flow": "写稳定 ID、需求/任务/SOP 版本血缘",
+    "alt": "Registry 不可达→本地队列重试",
+    "priority": "P0",
+    "status": "todo"
+   }
+  },
+  {
+   "id": "actor3",
+   "kind": "pill",
+   "x": 60,
+   "y": 783.0,
+   "w": 200,
+   "h": 72,
+   "lines": [
+    "工控机"
+   ],
+   "fontSize": 16,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "E6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 756,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "本地清理与盘复用",
+    "协同 搬运/物流"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "E6",
+    "trigger": "倒计时到期",
+    "pre": "已上云",
+    "flow": "清本地副本,盘格式化复用",
+    "alt": "—",
+    "priority": "P0",
+    "status": "part"
+   }
+  }
+ ],
+ "edges": [
+  {
+   "id": "e0",
+   "from": "actor0",
+   "to": "E1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e1",
+   "from": "actor0",
+   "to": "E2",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e2",
+   "from": "actor0",
+   "to": "E7",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e3",
+   "from": "actor1",
+   "to": "E3",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e4",
+   "from": "actor2",
+   "to": "E4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e5",
+   "from": "actor2",
+   "to": "E5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e6",
+   "from": "actor2",
+   "to": "E8",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e7",
+   "from": "actor2",
+   "to": "E9",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e8",
+   "from": "actor2",
+   "to": "E10",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e9",
+   "from": "actor3",
+   "to": "E6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  }
+ ]
+}

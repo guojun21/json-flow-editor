@@ -120,7 +120,7 @@ export function createFlowEngine(container, cb) {
     if (v === true) return 'dashed';
     return (typeof v === 'string' && DASH[v] !== undefined) ? v : 'solid';
   }
-  function routerOf(v) { return v === 'normal' ? 'normal' : 'orth'; }
+  function routerOf(v) { return v === 'normal' ? 'normal' : v === 'manhattan' ? 'manhattan' : 'orth'; }   // manhattan=避障(绕开路上的节点)
   const ARROW = ['block', 'classic', 'hollow', 'none'];
   function arrowOf(v) { return ARROW.includes(v) ? v : 'block'; }
   function marker(kind, w, c) {
@@ -217,7 +217,8 @@ export function createFlowEngine(container, cb) {
       data: { kind: n.kind || 'step', shape: sh, lines: n.lines || [],
         z: n.z, fontSize: n.fontSize, bold: n.bold, vertical: n.vertical, rx: n.rx,
         fill: n.fill, stroke: n.stroke, textColor: n.textColor,
-        bodyColor: n.bodyColor },
+        bodyColor: n.bodyColor,
+        spec: n.spec },   // 用例规约(编号/触发/前置/主流程/异常/优先级/状态):图上不铺开,双击看、右侧面板看
       ports: connectable(n.kind || 'step') ? portConf() : undefined,
     });
   }
@@ -229,7 +230,8 @@ export function createFlowEngine(container, cb) {
       w: Math.round(s.width), h: Math.round(s.height),
       fill: d.fill, stroke: d.stroke, textColor: d.textColor,
       bodyColor: d.bodyColor, lines: d.lines, fontSize: d.fontSize,
-      bold: d.bold, vertical: d.vertical, rx: d.rx });
+      bold: d.bold, vertical: d.vertical, rx: d.rx,
+      spec: d.spec && Object.keys(d.spec).length ? d.spec : undefined });
   }
 
   /* ---------- 构建/序列化 ---------- */
@@ -277,7 +279,7 @@ export function createFlowEngine(container, cb) {
           color: d.color, width: d.width, label,
           dash: dashOf(d.dash !== undefined ? d.dash : d.dashed) === 'solid'
             ? undefined : dashOf(d.dash !== undefined ? d.dash : d.dashed),
-          router: routerOf(d.router) === 'normal' ? 'normal' : undefined,
+          router: routerOf(d.router) === 'orth' ? undefined : routerOf(d.router),
           arrow: arrowOf(d.arrow) === 'block' ? undefined : arrowOf(d.arrow),
           z: (z !== undefined && z !== null && z !== 5) ? z : undefined,
           vertices: (c.getVertices() || []).map(v =>
@@ -425,6 +427,9 @@ export function createFlowEngine(container, cb) {
     if (linkFrom) { linkFrom = null; cb.onLinkDone(); }
   });
   graph.on('node:dblclick', ({ node }) => cb.onNodeDblclick(node));
+  graph.on('node:selected', ({ node }) => cb.onNodeSelected && cb.onNodeSelected(node));
+  graph.on('node:unselected', () => cb.onNodeSelected && cb.onNodeSelected(null));
+  graph.on('blank:click', () => cb.onNodeSelected && cb.onNodeSelected(null));
   graph.on('edge:dblclick', ({ edge }) => cb.onEdgeDblclick(edge));
   graph.bindKey(['meta+z', 'ctrl+z'], () => { graph.undo(); return false; });
   graph.bindKey(['meta+shift+z', 'ctrl+shift+z', 'ctrl+y'],
@@ -518,6 +523,7 @@ export function createFlowEngine(container, cb) {
     const next = { ...d,
       lines: draft.lines,
       shape: draft.shape,
+      spec: draft.spec !== undefined ? draft.spec : d.spec,
       z: draft.z === '' || draft.z === undefined ? undefined : +draft.z,
       rx: draft.rx === '' || draft.rx === undefined ? undefined : +draft.rx,
       fill: draft.fill || undefined,

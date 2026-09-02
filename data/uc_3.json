@@ -1,0 +1,516 @@
+{
+ "meta": {
+  "id": "uc_3",
+  "title": "用例·采集 Episode（09-02）",
+  "date": "2026-09-02",
+  "W": 1600,
+  "H": 922,
+  "fs": {
+   "title": 24,
+   "body": 18
+  }
+ },
+ "nodes": [
+  {
+   "id": "title",
+   "kind": "text",
+   "x": 40,
+   "y": 40,
+   "w": 1500,
+   "h": 50,
+   "lines": [
+    "排产采集 · 采集 Episode · 用例图（12 个用例）"
+   ],
+   "fontSize": 30,
+   "bold": true,
+   "textColor": "#0b1220"
+  },
+  {
+   "id": "legend",
+   "kind": "text",
+   "x": 40,
+   "y": 94,
+   "w": 1600,
+   "h": 34,
+   "lines": [
+    "左列=主责角色,实线=主责;椭圆第二行=协同角色;绿=已实现 橙=部分 白=待做 灰=不入一期;选中用例右侧看规约,双击可编辑"
+   ],
+   "fontSize": 16,
+   "textColor": "#48586a"
+  },
+  {
+   "id": "b",
+   "kind": "boundary",
+   "x": 300,
+   "y": 144,
+   "w": 1240,
+   "h": 748,
+   "lines": [
+    "《系统》排产采集 · 采集 Episode"
+   ],
+   "fontSize": 22
+  },
+  {
+   "id": "actor0",
+   "kind": "actor",
+   "x": 130,
+   "y": 280.0,
+   "w": 64,
+   "h": 84,
+   "lines": [
+    "数采员"
+   ],
+   "fontSize": 17
+  },
+  {
+   "id": "C1",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 204,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "开始/结束一条 Episode 录制",
+    "协同 工控机"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "C1",
+    "trigger": "按 SOP 执行",
+    "pre": "会话进行中",
+    "flow": "开始录制→执行任务→结束,生成 Episode 包",
+    "alt": "中途放弃→标记作废(C4)",
+    "priority": "P0",
+    "status": "part"
+   }
+  },
+  {
+   "id": "C4",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 740,
+   "y": 204,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "数采员标记作废/重采",
+    "协同 工控机"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "C4",
+    "trigger": "自评不合格",
+    "pre": "本条已落盘",
+    "flow": "标记作废带原因码,立即重采",
+    "alt": "作废也进事件流,不静默丢",
+    "priority": "P0",
+    "status": "todo"
+   }
+  },
+  {
+   "id": "C5",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1140,
+   "y": 204,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "暂停/恢复会话",
+    "协同 工控机"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "C5",
+    "trigger": "休息/换道具",
+    "pre": "会话进行中",
+    "flow": "暂停计时,恢复继续",
+    "alt": "超时未恢复→提醒组长",
+    "priority": "P1",
+    "status": "todo"
+   }
+  },
+  {
+   "id": "C6",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 330,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "收工(结束会话与令牌)",
+    "协同 工控机 / 平台任务中心"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "C6",
+    "trigger": "班次结束/任务完成",
+    "pre": "会话进行中",
+    "flow": "结束会话,令牌置已收工,统计本会话产出",
+    "alt": "—",
+    "priority": "P0",
+    "status": "done"
+   }
+  },
+  {
+   "id": "C12",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 740,
+   "y": 330,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "Ego 线采集(无工控机)",
+    "协同 组长"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "C12",
+    "trigger": "Ego 任务",
+    "pre": "佩戴设备",
+    "flow": "按 SOP 采集,落到便携存储",
+    "alt": "预检在入库侧(D5)",
+    "priority": "P0",
+    "status": "todo"
+   }
+  },
+  {
+   "id": "actor1",
+   "kind": "pill",
+   "x": 60,
+   "y": 562.0,
+   "w": 200,
+   "h": 72,
+   "lines": [
+    "工控机"
+   ],
+   "fontSize": 16,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "C2",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 472,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "录制稳定性保障(落盘/断连恢复)"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "C2",
+    "trigger": "录制中",
+    "pre": "—",
+    "flow": "写盘校验;断连 <30s 自动续采;崩溃后恢复现场",
+    "alt": "无法恢复→会话失败,原因码",
+    "priority": "P0",
+    "status": "part"
+   }
+  },
+  {
+   "id": "C3",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 740,
+   "y": 472,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "Episode 元数据双写",
+    "协同 数据平台(云端)"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "C3",
+    "trigger": "每条落盘",
+    "pre": "令牌/会话信息可得",
+    "flow": "meta.json 写包内 + 写库,入库比对",
+    "alt": "不一致→隔离区 RC-06",
+    "priority": "P0",
+    "status": "done"
+   }
+  },
+  {
+   "id": "C7",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1140,
+   "y": 472,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "本地存储水位告警",
+    "协同 组长 / 搬运/物流"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "C7",
+    "trigger": "周期",
+    "pre": "—",
+    "flow": "SSD 剩余低于阈值告警,触发拔盘",
+    "alt": "满盘→停止录制",
+    "priority": "P0",
+    "status": "part"
+   }
+  },
+  {
+   "id": "C8",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 598,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "端侧规则预检全量"
+   ],
+   "fontSize": 17,
+   "fill": "#e3f1ec",
+   "stroke": "#1e755d",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "C8",
+    "trigger": "每条落盘后",
+    "pre": "规则集与阈值随任务版本冻结",
+    "flow": "文件完整性/传感器/时长/帧率/黑屏",
+    "alt": "失败→本地隔离+原因码(D4)",
+    "priority": "P0",
+    "status": "done"
+   }
+  },
+  {
+   "id": "C10",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 740,
+   "y": 598,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "采集端遥测上报",
+    "协同 平台任务中心"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "C10",
+    "trigger": "心跳",
+    "pre": "控制面可达",
+    "flow": "状态/心跳/水位/异常上报",
+    "alt": "失联→工位离线告警",
+    "priority": "P0",
+    "status": "todo"
+   }
+  },
+  {
+   "id": "C11",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 1140,
+   "y": 598,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "异常中断恢复(断电/崩溃)",
+    "协同 设备运维"
+   ],
+   "fontSize": 17,
+   "fill": "#ffffff",
+   "stroke": "#48586a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "C11",
+    "trigger": "重启后",
+    "pre": "—",
+    "flow": "扫描未闭合包,补元数据或标为损坏",
+    "alt": "损坏→隔离区 RC-01",
+    "priority": "P0",
+    "status": "todo"
+   }
+  },
+  {
+   "id": "actor2",
+   "kind": "pill",
+   "x": 60,
+   "y": 767.0,
+   "w": 200,
+   "h": 72,
+   "lines": [
+    "平台任务中心"
+   ],
+   "fontSize": 16,
+   "fill": "#edf1f4",
+   "textColor": "#17212d",
+   "stroke": "#48586a"
+  },
+  {
+   "id": "C9",
+   "kind": "usecase",
+   "shape": "ellipse",
+   "x": 340,
+   "y": 740,
+   "w": 360,
+   "h": 96,
+   "lines": [
+    "采集进度与配额消耗统计",
+    "协同 数采员 / 组长"
+   ],
+   "fontSize": 17,
+   "fill": "#f8eedc",
+   "stroke": "#a1691a",
+   "textColor": "#17212d",
+   "spec": {
+    "id": "C9",
+    "trigger": "实时",
+    "pre": "—",
+    "flow": "有效条数/时长/配额剩余/保守预计",
+    "alt": "—",
+    "priority": "P0",
+    "status": "part"
+   }
+  }
+ ],
+ "edges": [
+  {
+   "id": "e0",
+   "from": "actor0",
+   "to": "C1",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e1",
+   "from": "actor0",
+   "to": "C4",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e2",
+   "from": "actor0",
+   "to": "C5",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e3",
+   "from": "actor0",
+   "to": "C6",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e4",
+   "from": "actor0",
+   "to": "C12",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e5",
+   "from": "actor1",
+   "to": "C2",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e6",
+   "from": "actor1",
+   "to": "C3",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e7",
+   "from": "actor1",
+   "to": "C7",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e8",
+   "from": "actor1",
+   "to": "C8",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e9",
+   "from": "actor1",
+   "to": "C10",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e10",
+   "from": "actor1",
+   "to": "C11",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  },
+  {
+   "id": "e11",
+   "from": "actor2",
+   "to": "C9",
+   "color": "#1f6389",
+   "width": 2,
+   "arrow": "none",
+   "router": "manhattan"
+  }
+ ]
+}

@@ -34,6 +34,8 @@ export default function App() {
   const [modal, setModal] = useState(null);     // {type, cell, draft}
   const [ctxMenu, setCtxMenu] = useState(null); // {x,y,kind,cell,gx,gy,hitIdx}
   const [linking, setLinking] = useState(false);
+  const [selected, setSelected] = useState(null);   // 选中的节点(右侧面板显示用例规约)
+  const [, forceTick] = useState(0);
   const modalRef = useRef(null);
   modalRef.current = modal;
 
@@ -94,6 +96,7 @@ export default function App() {
     const eng = createFlowEngine(canvasRef.current, {
       onChange: commit,
       onNodeDblclick: openNodeModal,
+      onNodeSelected: node => setSelected(node),
       onEdgeDblclick: openEdgeModal,
       onNodeContextMenu: (node, pos) =>
         setCtxMenu({ ...pos, kind: 'node', cell: node }),
@@ -133,8 +136,11 @@ export default function App() {
       textColor: (a.label && a.label.fill) || '#000000',
       fontSize: (a.label && a.label.fontSize) || 13,
       bold: !!d.bold,
+      spec: d.spec ? { ...d.spec } : (d.kind === 'usecase' ? { id: '', trigger: '', pre: '', flow: '', alt: '', priority: 'P0', status: 'todo' } : undefined),
+      kind: d.kind,
     } });
   }
+  const STATUS_COLOR = { done: ['#e3f1ec', '#1e755d'], part: ['#f8eedc', '#a1691a'], todo: ['#ffffff', '#48586a'], out: ['#eef0f2', '#9aa4ae'] };
   function openEdgeModal(edge) {
     const d = edge.getData() || {};
     const a = edge.getAttrs() || {};
@@ -150,7 +156,7 @@ export default function App() {
       width: d.width || (a.line && a.line.strokeWidth) || 2,
       dash,
       arrow: d.arrow || 'block',
-      router: d.router === 'normal' ? 'normal' : 'orth',
+      router: d.router === 'normal' || d.router === 'manhattan' ? d.router : 'orth',
       z: edge.getZIndex() ?? 5,
     } });
   }
@@ -182,7 +188,12 @@ export default function App() {
     const eng = engineRef.current;
     if (m.type === 'node') {
       const lines = m.draft.text.split('\n').map(x => x.trim()).filter(Boolean);
-      if (lines.length) eng.applyNodeEdit(m.cell, { ...m.draft, lines });
+      const draft = { ...m.draft };
+      if (draft.spec && draft.spec.status && STATUS_COLOR[draft.spec.status]) {   // 用例状态决定底色/描边
+        [draft.fill, draft.stroke] = STATUS_COLOR[draft.spec.status];
+      }
+      if (lines.length) eng.applyNodeEdit(m.cell, { ...draft, lines });
+      forceTick(t => t + 1);
     } else {
       eng.applyEdgeEdit(m.cell, { ...m.draft, label: m.draft.label.trim() });
     }
@@ -234,7 +245,7 @@ export default function App() {
   return (
     <div className={'app' + (collapsed ? ' side-collapsed' : '') + (dragging ? ' resizing' : '') + (embed ? ' embed' : '')}
       style={{ '--side-w': sideW + 'px' }}>
-      <Sidebar files={files} cur={cur} status={status} collapsed={collapsed}
+      <Sidebar files={files} cur={cur} collapsed={collapsed}
         onOpenFile={id => { if (id !== cur) load(id); }}
         onDragElement={(kind, e) => engineRef.current.startDnd(kind, e.nativeEvent || e)}
         onRelationPreset={st => { engineRef.current.setNewEdgeStyle(st); setStatus('新连线样式:' + (st.label || (st.arrow === 'none' ? '关联' : st.arrow === 'hollow' ? '泛化' : '流程箭头'))); }} />
@@ -245,6 +256,23 @@ export default function App() {
       <div className="sidebar-toggle" title="收起/展开侧栏 (⌘B)"
         onClick={() => setCollapsed(v => !v)}>{collapsed ? '⟩' : '⟨'}</div>
       <div className={'canvas' + (linking ? ' linking' : '')} ref={canvasRef} />
+      {selected && (selected.getData() || {}).spec && (
+        <aside className="detail" onMouseDown={e => e.stopPropagation()}>
+          {(() => { const d = selected.getData() || {}; const sp = d.spec || {}; const ST = { done: '已实现', part: '部分', todo: '待做', out: '不入一期' }; return (
+            <>
+              <div className="detail-head">
+                <div className="detail-kicker">{sp.id || '用例'} · {sp.priority || ''} · {ST[sp.status] || ''}</div>
+                <div className="detail-title">{(d.lines || [])[0]}</div>
+              </div>
+              {[['trigger', '触发'], ['pre', '前置条件'], ['flow', '主流程'], ['alt', '异常 / 分支']].map(([k, name]) => (
+                <div className="detail-row" key={k}><div className="detail-k">{name}</div><div className="detail-v">{sp[k] || '—'}</div></div>
+              ))}
+              {(d.lines || []).length > 1 && <div className="detail-row"><div className="detail-k">协同</div><div className="detail-v">{(d.lines || []).slice(1).join(' ').replace(/^协同\s*/, '')}</div></div>}
+              <button className="btn" onClick={() => openNodeModal(selected)}>编辑规约…</button>
+            </>
+          ); })()}
+        </aside>
+      )}
       {ctxMenu && (
         <div className="ctx-menu" style={{ left: ctxMenu.x, top: ctxMenu.y }}
           onMouseDown={e => e.stopPropagation()}>
@@ -310,6 +338,31 @@ export default function App() {
                 onChange={e => upd({ z: e.target.value })} />
             </label>
           </div>
+          {modal.draft.spec && (
+            <div className="spec-fields">
+              <div className="spec-title">用例规约（图上不铺开，选中节点在右侧看）</div>
+              <div className="fld-row">
+                <label className="fld">编号
+                  <input value={modal.draft.spec.id || ''} onChange={e => upd({ spec: { ...modal.draft.spec, id: e.target.value } })} />
+                </label>
+                <label className="fld">优先级
+                  <select value={modal.draft.spec.priority || 'P0'} onChange={e => upd({ spec: { ...modal.draft.spec, priority: e.target.value } })}>
+                    <option value="P0">P0</option><option value="P1">P1</option><option value="P2">P2</option>
+                  </select>
+                </label>
+                <label className="fld">实现状态
+                  <select value={modal.draft.spec.status || 'todo'} onChange={e => upd({ spec: { ...modal.draft.spec, status: e.target.value } })}>
+                    <option value="done">已实现</option><option value="part">部分</option><option value="todo">待做</option><option value="out">不入一期</option>
+                  </select>
+                </label>
+              </div>
+              {[['trigger', '触发'], ['pre', '前置条件'], ['flow', '主流程'], ['alt', '异常 / 分支']].map(([k, name]) => (
+                <label className="fld" key={k}>{name}
+                  <textarea rows={2} value={modal.draft.spec[k] || ''} onChange={e => upd({ spec: { ...modal.draft.spec, [k]: e.target.value } })} />
+                </label>
+              ))}
+            </div>
+          )}
           <div className="fld-row">
             <label className="fld">填充色
               <input type="color" value={modal.draft.fill}
@@ -360,6 +413,7 @@ export default function App() {
                 onChange={e => upd({ router: e.target.value })}>
                 <option value="orth">正交折线(默认)</option>
                 <option value="normal">直连</option>
+                <option value="manhattan">避障折线(绕开挡路的元素)</option>
               </select>
             </label>
           </div>
